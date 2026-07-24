@@ -150,6 +150,17 @@ button{font-family:inherit;cursor:pointer}
 <script>
 (function(){
   var t0 = Date.now();
+  // Dynamic height reporting — eliminates double-scroll in TimeBack iframe
+  function notifyResize() {
+    var h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    window.parent.postMessage({ type: 'RESIZE', height: h }, '*');
+  }
+  // Fire on load and on any DOM size change
+  document.addEventListener('DOMContentLoaded', notifyResize);
+  window.addEventListener('load', notifyResize);
+  if (window.ResizeObserver) {
+    new ResizeObserver(function() { notifyResize(); }).observe(document.body);
+  }
   function post(msg){
     try { if (window.parent && window.parent !== window) window.parent.postMessage(msg, '*'); } catch(e) {}
   }
