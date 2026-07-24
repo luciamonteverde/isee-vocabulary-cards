@@ -4,7 +4,7 @@
 <title>Vocabulary: Lofty</title>
 <style>
 :root{--paper:#0e1420;--surface:#151d2b;--surface-2:#1b2333;--ink:#e9edf4;--muted:#9aa6ba;
---line:#2a3446;--accent:#46cdbb;--accent-ink:#bdeee7;--ok:#55c283;--no:#e58686;
+--line:#2a3446;--accent:#46cdbb;--accent-ink:#bdeee7;--ok:#55c283;--no:#e58686;--warn:#e8b45a;
 --serif:"Iowan Old Style",Georgia,"Times New Roman",serif;
 --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
@@ -14,205 +14,452 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);l
 padding:clamp(16px,4vw,36px) 16px;display:flex;justify-content:center}
 .lesson{width:100%;max-width:640px;background:var(--surface);border:1px solid var(--line);
 border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
-.lesson > div:first-child{border-radius:var(--r) var(--r) 0 0}
+.card{background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0}
+.card:last-child{margin-bottom:0}
+.lbl{color:var(--accent);font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0}
+.lbl .sub{color:var(--muted);font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none}
 button{font-family:inherit;cursor:pointer}
 .gated[hidden]{display:none}
 .continue-wrap{display:flex;justify-content:center;padding:16px 20px}
 .continue-btn{font:inherit;font-weight:700;font-size:1rem;color:#04231e;background:var(--accent);border:0;border-radius:12px;padding:13px 32px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3)}
-.continue-btn:hover{filter:brightness(1.08)}
-.continue-btn[hidden]{display:none}
+.continue-btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
+.continue-btn:not(:disabled):hover{filter:brightness(1.08)}
 .done-wrap{display:flex;justify-content:center;padding:6px 20px 22px}
 .done-btn{font:inherit;font-weight:800;font-size:1.05rem;color:#04231e;background:var(--accent);border:0;border-radius:12px;padding:14px 30px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3)}
 .done-msg{text-align:center;font-weight:700;color:var(--ok);font-size:1.05rem;margin:0}
 .foot{padding:14px 22px;font-size:.76rem;color:var(--muted);background:var(--surface-2);border-top:1px solid var(--line);text-align:center}
+
+.mcq-opt{display:block;width:100%;text-align:left;background:#232941;border:1px solid #3a4155;border-radius:10px;padding:12px 14px;margin:6px 0;color:var(--ink);font-size:.95rem}
+.mcq-opt:hover{border-color:var(--accent)}
+.mcq-opt.correct{background:#1e3a2c;border-color:var(--ok)}
+.mcq-opt.wrong{background:#3a2020;border-color:var(--no)}
+.mcq-opt[disabled]{cursor:default}
+.mcq-feedback{margin:8px 0 0 0;font-weight:600;font-size:.92rem}
+.mcq-feedback.ok{color:var(--ok)}
+.mcq-feedback.no{color:var(--no)}
+@keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
+.shake{animation:shake .5s}
+
+.chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink);text-transform:lowercase}
+.chip.tappable{cursor:pointer}
+.chip.tappable:hover{border-color:var(--accent)}
+.chip.tappable.open{background:var(--accent);color:#04231e;border-color:var(--accent)}
+.chip.static{opacity:.95}
+.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:10px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout[hidden]{display:none}
+
+.scale-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0}
+.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent;text-transform:lowercase}
+.scale-word:hover{border-color:var(--accent)}
+.scale-word.active{border-color:var(--accent)}
+.scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
+.scale-arrow{color:var(--muted)}
+
+.sort-activity{margin:0}
+.sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
+.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);text-transform:lowercase}
+.sort-chip.selected{border-color:var(--accent);background:#1e3a35}
+.sort-chip.locked{cursor:default;opacity:.85}
+.sort-columns{display:flex;gap:12px;margin:10px 0}
+.sort-col{flex:1;background:#232941;border:2px dashed #3a4155;border-radius:10px;padding:10px;min-height:80px}
+.sort-col-label{font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:0 0 8px 0}
+.sort-col .sort-chip{display:block;margin:4px 0;width:fit-content}
+.check-btn{font:inherit;font-weight:700;background:var(--accent);color:#04231e;border:0;border-radius:10px;padding:10px 24px;margin-top:10px;cursor:pointer}
+.sort-status{margin:8px 0 0 0;font-weight:600;font-size:.9rem}
+.sort-status.ok{color:var(--ok)}
+.sort-status.no{color:var(--no)}
+
+.morph-row{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 12px 0}
+.morph-chip{background:#12324a;border:1px solid #7cc7ff;border-radius:10px;padding:10px 16px;cursor:pointer;min-width:90px;text-align:center}
+.morph-chip .form{font-family:var(--mono);color:#7cc7ff;font-weight:bold;display:block}
+.morph-chip .type{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:2px}
+.morph-chip .meaning{display:none;color:var(--ink);font-size:.85rem;margin-top:6px;font-weight:normal}
+.morph-chip.open .meaning{display:block}
+.morph-chip.open{background:#1a3a52}
+.synthesis{background:#232941;border-radius:10px;padding:14px;margin-top:10px;color:var(--accent-ink)}
+.synthesis[hidden]{display:none}
+
+.accordion-header{cursor:pointer;background:#232941;border-radius:10px;padding:12px 16px;font-weight:600;border:1px solid #3a4155}
+.accordion-header:hover{border-color:var(--accent)}
+.accordion-body{padding:10px 16px 2px 16px;color:var(--muted);font-style:italic}
+.accordion-body[hidden]{display:none}
+
+.tag{background:#2a3040;border-radius:10px;padding:2px 10px;font-size:12px;display:inline-block}
 </style></head>
 <body>
 <main class="lesson" aria-label="Vocabulary lesson: Lofty">
-  <div data-block-id="html-1GksaZ46MkEJ" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
+
+  <div class="card">
     <div style="font-size:32px;font-weight:bold;font-family:Georgia,serif;">Lofty</div>
-    <p style="color:#9aa3b5;margin:4px 0 0 0;">/LOF-tee/ — rhymes with softy &#183; <span style="background:#2a3040;border-radius:10px;padding:2px 10px;font-size:12px;">adjective</span></p>
-    
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;margin-top:14px;">Hear It</div>
-     <audio controls="controls" src="https://commons.wikimedia.org/wiki/Special:FilePath/En-us-lofty.ogg">Audio not available</audio>
+    <p style="color:var(--muted);margin:4px 0 0 0;">/LOF-tee/ — rhymes with softy <span class="tag">adjective</span></p>
+    <div class="lbl" style="margin-top:14px;">Hear It</div>
+    <audio controls="controls" src="https://commons.wikimedia.org/wiki/Special:FilePath/En-us-lofty.ogg">Audio not available</audio>
   </div>
-  <div data-block-id="html-ffM5Cvh1XcHT" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;border:1px solid #34406b;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">What It Means</div>
-    <p style="margin:0;"><strong style="color:#4fd1c5;">Lofty</strong> describes something that rises to an impressively great height.</p>
+
+  <div class="card">
+    <div class="lbl">What It Means</div>
+    <p style="margin:0;"><strong style="color:var(--accent);">Lofty</strong> describes something that rises to an impressively great height.</p>
     <details>
-      <summary style="cursor:pointer;color:#4fd1c5;border:1px solid #4fd1c5;border-radius:10px;padding:8px 14px;display:inline-block;margin-top:8px;">Show it in context</summary>
-      <p style="font-style:italic;margin:10px 0 0 0;">From the <strong style="color:#4fd1c5;">lofty</strong> balcony, the whole valley lay below us.</p>
+      <summary style="cursor:pointer;color:var(--accent);border:1px solid var(--accent);border-radius:10px;padding:8px 14px;display:inline-block;margin-top:8px;">Show it in context</summary>
+      <p style="font-style:italic;margin:10px 0 0 0;">From the <strong style="color:var(--accent);">lofty</strong> balcony, the whole valley lay below us.</p>
     </details>
   </div>
-  <div id="works-block">
-  <div data-block-id="html-eYntt7QVsyCd" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">See How It Works <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; follow the thinking, then try one</span></div>
-    <p style="margin:0;">Here's how to decide when <strong style="color:#4fd1c5;">lofty</strong> is the exact word.</p>
+
+  <div id="works-block" class="card">
+    <div class="lbl">See How It Works <span class="sub">&#183; a worked example, then try one yourself</span></div>
     <div style="background:#232941;border-radius:10px;padding:14px;margin:10px 0 0 0;">
-      <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Worked Example</div>
-      <p style="font-style:italic;margin:0 0 8px 0;">The cathedral&apos;s lofty spire pierced the clouds, visible from ten miles away.</p>
-      <p style="color:#9aa3b5;margin:0;"><strong style="color:#4fd1c5;">Lofty</strong> captures both the physical height AND the sense of impressiveness—it&apos;s more than just &apos;tall.&apos; It suggests something grand and majestic. &apos;Tall&apos; would be flatter, missing the sense of majesty that makes lofty the precise word.</p>
+      <div class="lbl" style="margin-bottom:6px;">Worked Example</div>
+      <p style="font-style:italic;margin:0 0 8px 0;">The cathedral&#x27;s lofty spire pierced the clouds, visible from ten miles away.</p>
+      <p style="color:var(--muted);margin:0;">Lofty captures both the physical height AND the sense of impressiveness—it&#x27;s more than just &#x27;tall.&#x27; It suggests something grand and majestic. &#x27;Tall&#x27; would be flatter, missing the sense of majesty that makes lofty the precise word.</p>
     </div>
     <div style="background:#232941;border-radius:10px;padding:14px;margin:10px 0 0 0;">
-      <div style="color:#e8b45a;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Your Turn</div>
-      <p style="font-style:italic;margin:0 0 6px 0;">The office building is 40 stories high, made of glass and steel.</p>
-      <p style="margin:0 0 8px 0;"><strong>Is <strong style="color:#4fd1c5;">lofty</strong> the right word for this modern building?</strong></p>
-      <div style="margin-top:8px;">
-        <details style="margin:6px 0;">
-          <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>Tall</strong></span></summary>
-          <p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#6fcf97;">Correct</strong> &#8212; The building is 40 stories of glass and steel, so tall (or high-rise) captures its height plainly. It reports the fact of the height without adding the nobility or majesty that lofty would imply.</p>
-        </details>
-        <details style="margin:6px 0;">
-          <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>Lofty</strong></span></summary>
-          <p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#f08080;">Not quite</strong> &#8212; The glass tower is impressive in scale, but lofty carries a sense of dignity and grandeur. A modern office block is structurally high without that majestic, awe-inspiring quality, so lofty overstates what this building actually feels like.</p>
-        </details>
+      <div class="lbl" style="color:var(--warn);margin-bottom:6px;">Your Turn</div>
+      <p style="margin:0 0 10px 0;">Which sentence uses lofty correctly?</p>
+      <div id="yourturn-mcq">
+        <button class="mcq-opt" type="button" data-letter="A">A. She kept her voice lofty so no one in the library could hear her.</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. From the plane window we could see the lofty peaks of the Andes rising above the clouds.</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. The lofty basement stretched two full floors below the street.</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. The puddle was so lofty that it barely covered the soles of our shoes.</button>
       </div>
+      <p class="mcq-feedback" id="yourturn-feedback" hidden></p>
     </div>
-  </div>
   </div>
   <div class="continue-wrap" id="continue1-wrap">
-    <button class="continue-btn" id="continue1" type="button" hidden>Continue &rarr;</button>
+    <button class="continue-btn" id="continue1" type="button" disabled>Continue &rarr;</button>
   </div>
 
   <div class="gated" id="gated1" hidden>
-  <div id="synonyms-block">
-  <div data-block-id="html-nQZTIh9JTU8Y" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Synonyms <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
-    
-    <details style="margin:6px 0;">
-      <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>high</strong></span></summary>
-      <p style="color:#9aa3b5;margin:6px 0 4px 4px;">Raised or topmost. Lofty adds the sense of majesty and inspiring impressiveness.</p>
-    </details>
-    <details style="margin:6px 0;">
-      <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>elevated</strong></span></summary>
-      <p style="color:#9aa3b5;margin:6px 0 4px 4px;">Refined, formal, exalted. Lofty combines height with the sense of worthy grandeur and awe.</p>
-    </details>
-    <details style="margin:6px 0;">
-      <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>grand</strong></span></summary>
-      <p style="color:#9aa3b5;margin:6px 0 4px 4px;">Impressive in scale and dignity. Lofty specifically conveys rising majestically and inspiring awe.</p>
-    </details>
-  </div>
-  </div>
-  <div id="antonyms-block">
-  <div data-block-id="html-nQZTIh9JTU8Y" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-<div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;margin-top:14px;">Antonyms <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; opposites</span></div>
-    <p style="margin:0;"><strong>humble</strong> &#8212; Modest and understated—the opposite of lofty&apos;s sense of grandeur and majesty.</p>
-  </div>
-  </div>
-  <div id="strength-block">
-  <div data-block-id="html-At3bKv3IazU7" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">How Strong Is It?</div>
-    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0;"><span style="background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;">high</span><span style="color:#9aa3b5;">&#8594;</span><span style="background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;">elevated</span><span style="color:#9aa3b5;">&#8594;</span><span style="background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;">grand</span><span style="color:#9aa3b5;">&#8594;</span><span style="background:#4fd1c5;color:#0b1020;border-radius:8px;padding:6px 12px;font-weight:bold;">lofty</span></div>
-    <p style="color:#9aa3b5;margin:6px 0 0 0;"><strong style="color:#4fd1c5;">Lofty</strong>—the grandest of the group: height combined with majesty and inspiration. (our word)</p>
-  </div>
-  </div>
-    <div id="build-block">
-    <div data-block-id="html-eKghFpAivtAM" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-<div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Build the Word</div>
-<p style="margin:0 0 6px 0;"><span style="font-family:monospace;color:#4fd1c5;border:1px solid #4fd1c5;border-radius:8px;padding:4px 10px;display:inline-block;margin-right:6px;">lopt</span> Old Norse: 'air, sky'</p>
-<p style="margin:0;">From the Norse word for air and sky—originally meant something high enough to be in the air. Later used for rooms high up in buildings (attics), then any impressively tall or majestic thing.</p>
-<div style="margin-top:8px;">
-<p style="font-style:italic;margin:10px 0 6px 0;">The loft above the barn was a perfect place to store grain.</p>
-<p style="margin:0 0 6px 0;">Same root, new word — what does <strong style="color:#4fd1c5;">loft</strong> mean here?</p>
-<details style="margin:6px 0;">
-<summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>an upper room or upper floor of a building, especially an attic</strong></span></summary>
-<p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#6fcf97;">Correct</strong> — Correct. Loft comes from the Old Norse root lopt, meaning air or sky, which is why it names the high, upper part of a building like a barn's grain store.</p>
-</details><details style="margin:6px 0;">
-<summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>an underground room used for storing food and drink</strong></span></summary>
-<p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#f08080;">Not quite</strong> — That describes a cellar, which sits below ground. The lopt root points upward toward air and sky, so a loft is the high, upper space of a building, not a buried one.</p>
-</details>
-
-<details style="margin:10px 0 0 0;"><summary style="cursor:pointer;color:#4fd1c5;border:1px solid #4fd1c5;border-radius:10px;padding:8px 14px;display:inline-block;margin-top:8px;">The root connection →</summary><p style="margin:8px 0 0 0;color:#9aa3b5;">Both lofty and loft trace back to lopt (Old Norse for air or sky). That shared root is why both words point upward, one toward grand height and the other toward an upper floor.</p></details>
-</div>
-</div>
+    <div class="card">
+      <div class="lbl">Synonyms <span class="sub">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="synonym-chips">
+        <span class="chip tappable" tabindex="0" data-key="high">high</span>
+        <span class="chip tappable" tabindex="0" data-key="elevated">elevated</span>
+        <span class="chip tappable" tabindex="0" data-key="grand">grand</span>
+      </div>
+      <p class="callout" id="synonym-callout" hidden></p>
+    </div>
+    <div class="card">
+      <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="antonym-chips">
+        <span class="chip tappable" tabindex="0" data-key="humble">humble</span>
+        <span class="chip tappable" tabindex="0" data-key="low">low</span>
+      </div>
+      <p class="callout" id="antonym-callout" hidden></p>
+    </div>
+    <div class="card">
+      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to lofty</span></div>
+      <div class="scale-row" id="strength-scale">
+        <span class="scale-word tappable" data-key="high">high</span><span class="scale-arrow">&#8594;</span>
+        <span class="scale-word tappable" data-key="elevated">elevated</span><span class="scale-arrow">&#8594;</span>
+        <span class="scale-word tappable" data-key="grand">grand</span><span class="scale-arrow">&#8594;</span>
+        <span class="scale-word target">lofty</span>
+      </div>
+      <p class="callout" id="strength-callout" hidden></p>
+    </div>
+    <div class="card sort-activity" id="sort-activity-root">
+      <div class="lbl">Sort It Out <span class="sub">&#183; tap a word, then tap a column to place it</span></div>
+      <div class="sort-pool" id="sort-pool">
+        <span class="sort-chip" data-word="elevated">elevated</span>
+        <span class="sort-chip" data-word="high">high</span>
+        <span class="sort-chip" data-word="low">low</span>
+        <span class="sort-chip" data-word="humble">humble</span>
+      </div>
+      <div class="sort-columns">
+        <div class="sort-col" data-col="synonym"><p class="sort-col-label">Synonym</p></div>
+        <div class="sort-col" data-col="antonym"><p class="sort-col-label">Antonym</p></div>
+      </div>
+      <button class="check-btn" id="sort-check-btn" type="button" hidden>Check</button>
+      <p class="sort-status" id="sort-status" hidden></p>
     </div>
     <div class="continue-wrap" id="continue2-wrap">
-      <button class="continue-btn" id="continue2" type="button" hidden>Continue &rarr;</button>
+      <button class="continue-btn" id="continue2" type="button" disabled>Continue &rarr;</button>
     </div>
   </div>
 
   <div class="gated" id="gated2" hidden>
-    <div data-block-id="html-YOW6Xb8wVzYz" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Word Choice <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; its tone, and when to use it</span></div>
-    <p style="margin:0 0 6px 0;"><span style="background:#2a3040;border-radius:10px;padding:2px 10px;font-size:12px;">formal / literary</span></p>
-    <p style="margin:0;"><strong style="color:#4fd1c5;">Lofty</strong> is the word for impressive, majestic height—think cathedrals, mountains, noble ideas, and inspiring ambitions. For ordinary tallness (a skyscraper, a fence), &apos;tall&apos; is better and simpler.</p>
+    <div class="card">
+      <div class="lbl">Build the Word <span class="sub">&#183; tap each piece to reveal its meaning</span></div>
+      <div class="morph-row" id="morpheme-chips">
+        <div class="morph-chip"><span class="type">Root</span><span class="form">loft</span><span class="meaning">air, sky; an upper room (Old Norse (lopt))</span></div>
+        <div class="morph-chip"><span class="type">Suffix</span><span class="form">-y</span><span class="meaning">full of; characterized by (Old English (-ig))</span></div>
+      </div>
+      <p class="synthesis" id="morpheme-synthesis" hidden>Loft originally named the air or sky itself, and later the highest room in a building. Add -y, &#x27;characterized by,&#x27; and lofty literally means &#x27;like the sky&#x27; — rising to an impressively great height.</p>
+    </div>
+    <div class="card">
+      <div class="accordion-header" id="newword-header">Use the root in a new word: <strong>hayloft</strong></div>
+      <p class="accordion-body" id="newword-body" hidden>The kittens hid in the hayloft, the storage space high above the barn stalls.</p>
+    </div>
+    <div class="card">
+      <div class="lbl">Root Check</div>
+      <p style="margin:0 0 10px 0;">Lofty is built on the root loft, from an Old Norse word for &#x27;air&#x27; or &#x27;sky.&#x27; Which word uses this same root to mean &#x27;high up in the air&#x27;?</p>
+      <div id="root-mcq">
+        <button class="mcq-opt" type="button" data-letter="A">A. aloft</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. afloat</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. abroad</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. aboard</button>
+      </div>
+      <p class="mcq-feedback" id="root-mcq-feedback" hidden></p>
+    </div>
+    <div class="continue-wrap" id="continue3-wrap">
+      <button class="continue-btn" id="continue3" type="button" disabled>Continue &rarr;</button>
+    </div>
   </div>
+
+  <div class="gated" id="gated3" hidden>
+    <div class="card">
+      <div class="lbl">Word Choice <span class="sub">&#183; its tone, and when to use it</span></div>
+      <p style="margin:0 0 6px 0;"><span class="tag">formal / literary</span></p>
+      <p style="margin:0;">Lofty is the word for impressive, majestic height—think cathedrals, mountains, noble ideas, and inspiring ambitions. For ordinary tallness (a skyscraper, a fence), &#x27;tall&#x27; is better and simpler.</p>
+    </div>
     <div class="done-wrap">
       <button class="done-btn" id="done-btn" type="button">Done</button>
     </div>
   </div>
 
-  <p class="foot">ISEE Upper Vocabulary &middot; Unit 30: Scale, Position & Rank &middot; Lofty</p>
+  <p class="foot">ISEE Upper Vocabulary &middot; Unit 30 · Scale, Position &amp; Rank &middot; Lofty</p>
 </main>
 <script>
 (function(){
-  var t0 = Date.now();
-  // Dynamic height reporting — eliminates double-scroll in TimeBack iframe
-  function notifyResize() {
-    var h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-    window.parent.postMessage({ type: 'RESIZE', height: h }, '*');
+  function post(pct){
+    try { if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'progress', percent: pct }, '*'); } catch(e) {}
   }
-  document.addEventListener('DOMContentLoaded', notifyResize);
-  window.addEventListener('load', notifyResize);
-  if (window.ResizeObserver) {
-    new ResizeObserver(function() { notifyResize(); }).observe(document.body);
-  }
-  function post(msg){
-    try { if (window.parent && window.parent !== window) window.parent.postMessage(msg, '*'); } catch(e) {}
-  }
-  function runningTime(){ return Math.round((Date.now() - t0) / 1000); }
-  function sendState(pct, completed, ready){
-    post({ type: 'CONTENT_STATE_CHANGE', contentSummary: {
-      isCompleted: completed, isReadyToAdvance: ready,
-      progressPercentage: pct, runningTimeSeconds: runningTime()
-    }});
-  }
+  post(0);
 
-  post({ type: 'CONTENT_READY' });
-  sendState(0, false, false);
-
-  function wireGate(containerId, continueBtnId){
-    var box = document.getElementById(containerId);
-    var btn = document.getElementById(continueBtnId);
-    if (!box || !btn) return;
-    var unlocked = false;
-    var quizDetails = [];
-    box.querySelectorAll('details').forEach(function(det){
-      var summary = det.querySelector('summary');
-      if (!summary || !summary.querySelector('span')) return; // skip non-quiz reveals (e.g. context toggle, root-connection)
-      quizDetails.push(det);
+  (function(){
+    var container = document.getElementById('yourturn-mcq');
+    var feedback = document.getElementById('yourturn-feedback');
+    var continueBtn = document.getElementById('continue1');
+    var correctLetter = "B";
+    var solved = false;
+    container.querySelectorAll('.mcq-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if (solved) return;
+        var letter = btn.getAttribute('data-letter');
+        if (letter === correctLetter){
+          btn.classList.add('correct');
+          feedback.textContent = 'Correct!';
+          feedback.className = 'mcq-feedback ok';
+          feedback.hidden = false;
+          solved = true;
+          continueBtn.disabled = false;
+          container.querySelectorAll('.mcq-opt').forEach(function(b){ b.disabled = true; });
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          feedback.textContent = 'Not quite — try again.';
+          feedback.className = 'mcq-feedback no';
+          feedback.hidden = false;
+        }
+      });
     });
-    if (quizDetails.length === 0){ btn.hidden = false; return; } // no quiz in this section (e.g. morpheme-unit Build the Word) — don't strand the student
-    quizDetails.forEach(function(det){
-      det.addEventListener('toggle', function(){
-        if (det.open && !unlocked){ unlocked = true; btn.hidden = false; }
+  })();
+
+  document.getElementById('continue1').addEventListener('click', function(){
+    document.getElementById('continue1-wrap').style.display = 'none';
+    var g = document.getElementById('gated1');
+    g.hidden = false;
+    g.scrollIntoView({behavior:'smooth', block:'start'});
+    post(25);
+  });
+
+  function wireChipRow(rowId, calloutId, meanings){
+    var row = document.getElementById(rowId);
+    var callout = document.getElementById(calloutId);
+    var openChip = null;
+    row.querySelectorAll('.chip.tappable').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        var key = chip.getAttribute('data-key');
+        if (openChip === chip){
+          chip.classList.remove('open');
+          callout.hidden = true;
+          openChip = null;
+        } else {
+          row.querySelectorAll('.chip.tappable').forEach(function(c){ c.classList.remove('open'); });
+          chip.classList.add('open');
+          callout.textContent = meanings[key] || '';
+          callout.hidden = false;
+          openChip = chip;
+        }
       });
     });
   }
-  wireGate('works-block', 'continue1');
-  wireGate('build-block', 'continue2');
+  wireChipRow('synonym-chips', 'synonym-callout', {"high": "far above the ground; plain, everyday word", "elevated": "raised up above the usual level", "grand": "impressively large, splendid, and dignified"});
+  wireChipRow('antonym-chips', 'antonym-callout', {"humble": "modest, plain, and unassuming", "low": "close to the ground; not tall"});
 
-  var c1 = document.getElementById('continue1');
-  if (c1) c1.addEventListener('click', function(){
-    document.getElementById('continue1-wrap').style.display = 'none';
-    var g1 = document.getElementById('gated1');
-    g1.hidden = false;
-    g1.scrollIntoView({behavior:'smooth', block:'start'});
-    sendState(33, false, false);
-  });
+  (function(){
+    var callout = document.getElementById('strength-callout');
+    var sentences = {"high": "A treehouse is high, but a peak that makes you crane your neck in awe is truly lofty.", "elevated": "An elevated stage lifts a speaker a few feet up, while lofty suggests height so great it feels majestic.", "grand": "A grand staircase impresses with size and style, but lofty adds the sense of soaring, sky-reaching height."};
+    document.querySelectorAll('#strength-scale .scale-word.tappable').forEach(function(w){
+      w.addEventListener('click', function(){
+        document.querySelectorAll('#strength-scale .scale-word').forEach(function(x){ x.classList.remove('active'); });
+        w.classList.add('active');
+        var key = w.getAttribute('data-key');
+        callout.textContent = sentences[key] || '';
+        callout.hidden = false;
+      });
+    });
+  })();
 
-  var c2 = document.getElementById('continue2');
-  if (c2) c2.addEventListener('click', function(){
+  // ---------- Sorting activity (event delegation — no per-chip listener re-attachment) ----------
+  (function(){
+    var root = document.getElementById('sort-activity-root');
+    var pool = document.getElementById('sort-pool');
+    var checkBtn = document.getElementById('sort-check-btn');
+    var status = document.getElementById('sort-status');
+    var continue2 = document.getElementById('continue2');
+    var selectedChip = null;
+    var correctMap = {"high": "synonym", "elevated": "synonym", "humble": "antonym", "low": "antonym"};
+
+    function allPlaced(){
+      return pool.querySelectorAll('.sort-chip').length === 0;
+    }
+    function updateCheckVisibility(){
+      checkBtn.hidden = !allPlaced();
+    }
+    function selectChip(chip){
+      if (chip.classList.contains('locked')) return;
+      if (selectedChip && selectedChip !== chip){ selectedChip.classList.remove('selected'); }
+      if (selectedChip === chip){
+        chip.classList.remove('selected');
+        selectedChip = null;
+      } else {
+        chip.classList.add('selected');
+        selectedChip = chip;
+      }
+    }
+
+    root.addEventListener('click', function(e){
+      var chip = e.target.closest('.sort-chip');
+      var col = e.target.closest('.sort-col');
+      if (col){
+        if (chip){
+          selectChip(chip);
+        } else if (selectedChip){
+          col.appendChild(selectedChip);
+          selectedChip.classList.remove('selected');
+          selectedChip = null;
+          updateCheckVisibility();
+        }
+        return;
+      }
+      if (chip){
+        selectChip(chip);
+      }
+    });
+
+    checkBtn.addEventListener('click', function(){
+      var allCorrect = true;
+      document.querySelectorAll('.sort-col').forEach(function(col){
+        var colName = col.getAttribute('data-col');
+        col.querySelectorAll('.sort-chip').forEach(function(chip){
+          var word = chip.getAttribute('data-word');
+          if (correctMap[word] === colName){
+            chip.style.borderColor = 'var(--ok)';
+            chip.classList.add('locked');
+            chip.classList.remove('selected');
+          } else {
+            allCorrect = false;
+            chip.classList.add('shake');
+            if (selectedChip === chip) selectedChip = null;
+            chip.classList.remove('selected');
+            setTimeout(function(){
+              chip.classList.remove('shake');
+              chip.style.borderColor = '';
+              pool.appendChild(chip);
+              updateCheckVisibility();
+            }, 500);
+          }
+        });
+      });
+      if (allCorrect){
+        status.textContent = 'All correct!';
+        status.className = 'sort-status ok';
+        status.hidden = false;
+        checkBtn.hidden = true;
+        continue2.disabled = false;
+      } else {
+        status.textContent = 'Not quite — the highlighted words went back to the pool. Try again.';
+        status.className = 'sort-status no';
+        status.hidden = false;
+      }
+    });
+  })();
+
+  document.getElementById('continue2').addEventListener('click', function(){
     document.getElementById('continue2-wrap').style.display = 'none';
-    var g2 = document.getElementById('gated2');
-    g2.hidden = false;
-    g2.scrollIntoView({behavior:'smooth', block:'start'});
-    sendState(66, false, false);
+    var g = document.getElementById('gated2');
+    g.hidden = false;
+    g.scrollIntoView({behavior:'smooth', block:'start'});
+    post(50);
   });
 
-  var doneBtn = document.getElementById('done-btn');
-  if (doneBtn) doneBtn.addEventListener('click', function(){
-    sendState(100, true, true);
-    var wrap = doneBtn.closest('.done-wrap');
+  (function(){
+    var chips = document.querySelectorAll('#morpheme-chips .morph-chip');
+    var synthesis = document.getElementById('morpheme-synthesis');
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        chip.classList.add('open');
+        var allOpen = true;
+        chips.forEach(function(c){ if (!c.classList.contains('open')) allOpen = false; });
+        if (allOpen) synthesis.hidden = false;
+      });
+    });
+  })();
+
+  var accordionOpened = false;
+  document.getElementById('newword-header').addEventListener('click', function(){
+    var body = document.getElementById('newword-body');
+    body.hidden = !body.hidden;
+    accordionOpened = true;
+    maybeUnlockContinue3();
+  });
+
+  var rootIsProductive = true;
+  var continue3 = document.getElementById('continue3');
+  function maybeUnlockContinue3(){
+    if (!rootIsProductive && accordionOpened) continue3.disabled = false;
+  }
+
+  (function(){
+    var container = document.getElementById('root-mcq');
+    var feedback = document.getElementById('root-mcq-feedback');
+    var correctLetter = "A";
+    var solved = false;
+    container.querySelectorAll('.mcq-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if (solved) return;
+        var letter = btn.getAttribute('data-letter');
+        if (letter === correctLetter){
+          btn.classList.add('correct');
+          feedback.textContent = 'Correct!';
+          feedback.className = 'mcq-feedback ok';
+          feedback.hidden = false;
+          solved = true;
+          continue3.disabled = false;
+          container.querySelectorAll('.mcq-opt').forEach(function(b){ b.disabled = true; });
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          feedback.textContent = 'Not quite — try again.';
+          feedback.className = 'mcq-feedback no';
+          feedback.hidden = false;
+        }
+      });
+    });
+  })();
+
+  document.getElementById('continue3').addEventListener('click', function(){
+    document.getElementById('continue3-wrap').style.display = 'none';
+    var g = document.getElementById('gated3');
+    g.hidden = false;
+    g.scrollIntoView({behavior:'smooth', block:'start'});
+    post(75);
+  });
+
+  document.getElementById('done-btn').addEventListener('click', function(){
+    post(100);
+    var wrap = document.getElementById('done-btn').closest('.done-wrap');
     wrap.innerHTML = '<p class="done-msg">&#10003; Complete</p>';
   });
 })();
