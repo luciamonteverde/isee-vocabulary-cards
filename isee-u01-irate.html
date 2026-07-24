@@ -29,7 +29,6 @@ button{font-family:inherit;cursor:pointer}
 .done-msg{text-align:center;font-weight:700;color:var(--ok);font-size:1.05rem;margin:0}
 .foot{padding:14px 22px;font-size:.76rem;color:var(--muted);background:var(--surface-2);border-top:1px solid var(--line);text-align:center}
 
-/* MCQ (Your Turn / Root MCQ) */
 .mcq-opt{display:block;width:100%;text-align:left;background:#232941;border:1px solid #3a4155;border-radius:10px;padding:12px 14px;margin:6px 0;color:var(--ink);font-size:.95rem}
 .mcq-opt:hover{border-color:var(--accent)}
 .mcq-opt.correct{background:#1e3a2c;border-color:var(--ok)}
@@ -41,7 +40,6 @@ button{font-family:inherit;cursor:pointer}
 @keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
 .shake{animation:shake .5s}
 
-/* Synonym/antonym chips — shared callout below the row (Fix 5) */
 .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
 .chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink);text-transform:lowercase}
 .chip.tappable{cursor:pointer}
@@ -51,7 +49,6 @@ button{font-family:inherit;cursor:pointer}
 .callout{background:#232941;border-radius:10px;padding:12px 14px;margin:10px 0 0 0;color:var(--muted);font-size:.92rem}
 .callout[hidden]{display:none}
 
-/* How Strong scale */
 .scale-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0}
 .scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent;text-transform:lowercase}
 .scale-word:hover{border-color:var(--accent)}
@@ -59,13 +56,14 @@ button{font-family:inherit;cursor:pointer}
 .scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
 .scale-arrow{color:var(--muted)}
 
-/* Sorting activity */
+/* Sorting activity — event-delegated (Fix 1: no per-chip listener re-attachment) */
+.sort-activity{margin:0}
 .sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
 .sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);text-transform:lowercase}
 .sort-chip.selected{border-color:var(--accent);background:#1e3a35}
+.sort-chip.locked{cursor:default;opacity:.85}
 .sort-columns{display:flex;gap:12px;margin:10px 0}
 .sort-col{flex:1;background:#232941;border:2px dashed #3a4155;border-radius:10px;padding:10px;min-height:80px}
-.sort-col.droppable{border-color:var(--accent)}
 .sort-col-label{font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:0 0 8px 0}
 .sort-col .sort-chip{display:block;margin:4px 0;width:fit-content}
 .check-btn{font:inherit;font-weight:700;background:var(--accent);color:#04231e;border:0;border-radius:10px;padding:10px 24px;margin-top:10px;cursor:pointer}
@@ -73,7 +71,6 @@ button{font-family:inherit;cursor:pointer}
 .sort-status.ok{color:var(--ok)}
 .sort-status.no{color:var(--no)}
 
-/* Morphemes (Build the Word) */
 .morph-row{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 12px 0}
 .morph-chip{background:#12324a;border:1px solid #7cc7ff;border-radius:10px;padding:10px 16px;cursor:pointer;min-width:90px;text-align:center}
 .morph-chip .form{font-family:var(--mono);color:#7cc7ff;font-weight:bold;display:block}
@@ -84,7 +81,6 @@ button{font-family:inherit;cursor:pointer}
 .synthesis{background:#232941;border-radius:10px;padding:14px;margin-top:10px;color:var(--accent-ink)}
 .synthesis[hidden]{display:none}
 
-/* New word accordion */
 .accordion-header{cursor:pointer;background:#232941;border-radius:10px;padding:12px 16px;font-weight:600;border:1px solid #3a4155}
 .accordion-header:hover{border-color:var(--accent)}
 .accordion-body{padding:10px 16px 2px 16px;color:var(--muted);font-style:italic}
@@ -162,7 +158,7 @@ button{font-family:inherit;cursor:pointer}
       </div>
       <p class="callout" id="strength-callout" hidden></p>
     </div>
-    <div class="card">
+    <div class="card sort-activity" id="sort-activity-root">
       <div class="lbl">Sort It Out <span class="sub">&#183; tap a word, then tap a column to place it</span></div>
       <div class="sort-pool" id="sort-pool">
         <span class="sort-chip" data-word="furious">furious</span>
@@ -231,7 +227,6 @@ button{font-family:inherit;cursor:pointer}
   }
   post(0);
 
-  // ---------- Your Turn MCQ (4 options, gates Continue 1) ----------
   (function(){
     var container = document.getElementById('yourturn-mcq');
     var feedback = document.getElementById('yourturn-feedback');
@@ -269,7 +264,6 @@ button{font-family:inherit;cursor:pointer}
     post(25);
   });
 
-  // ---------- Shared-callout chip row helper (Fix 5) ----------
   function wireChipRow(rowId, calloutId, meanings){
     var row = document.getElementById(rowId);
     var callout = document.getElementById(calloutId);
@@ -294,7 +288,6 @@ button{font-family:inherit;cursor:pointer}
   wireChipRow('synonym-chips', 'synonym-callout', {"furious": "wildly angry, bursting with stormy energy", "livid": "so angry your face changes color", "incensed": "burning with anger over an insult"});
   wireChipRow('antonym-chips', 'antonym-callout', {"calm": "peaceful and completely free of anger", "placid": "even-tempered, not easily stirred to anger"});
 
-  // ---------- How Strong scale ----------
   (function(){
     var callout = document.getElementById('strength-callout');
     var sentences = {"annoyed": "Annoyed is only a mild flicker of irritation, far weaker than irate, which means anger has boiled over completely.", "angry": "Angry is the ordinary, middle level of the scale \u2014 noticeably weaker than irate, where a person is seething and out of patience.", "enraged": "Enraged climbs near the top of the scale, but on this ladder it is still a step weaker than irate, the extreme, seething peak of anger."};
@@ -309,10 +302,10 @@ button{font-family:inherit;cursor:pointer}
     });
   })();
 
-  // ---------- Sorting activity ----------
+  // ---------- Sorting activity (Fix 1: event delegation — no per-chip listener re-attachment) ----------
   (function(){
+    var root = document.getElementById('sort-activity-root');
     var pool = document.getElementById('sort-pool');
-    var cols = document.querySelectorAll('.sort-col');
     var checkBtn = document.getElementById('sort-check-btn');
     var status = document.getElementById('sort-status');
     var continue2 = document.getElementById('continue2');
@@ -320,34 +313,43 @@ button{font-family:inherit;cursor:pointer}
     var correctMap = {"furious": "synonym", "livid": "synonym", "calm": "antonym", "placid": "antonym"};
 
     function allPlaced(){
-      return document.querySelectorAll('#sort-pool .sort-chip').length === 0;
+      return pool.querySelectorAll('.sort-chip').length === 0;
     }
     function updateCheckVisibility(){
       checkBtn.hidden = !allPlaced();
     }
-    function wireChip(chip){
-      chip.addEventListener('click', function(){
-        if (selectedChip && selectedChip !== chip){ selectedChip.classList.remove('selected'); }
-        if (selectedChip === chip){
-          chip.classList.remove('selected');
-          selectedChip = null;
-        } else {
-          chip.classList.add('selected');
-          selectedChip = chip;
-        }
-      });
-    }
-    pool.querySelectorAll('.sort-chip').forEach(wireChip);
-
-    cols.forEach(function(col){
-      col.addEventListener('click', function(e){
-        if (!selectedChip) return;
-        if (e.target !== col && col.contains(e.target) && e.target.classList.contains('sort-chip')) return;
-        col.appendChild(selectedChip);
-        selectedChip.classList.remove('selected');
+    function selectChip(chip){
+      if (chip.classList.contains('locked')) return;
+      if (selectedChip && selectedChip !== chip){ selectedChip.classList.remove('selected'); }
+      if (selectedChip === chip){
+        chip.classList.remove('selected');
         selectedChip = null;
-        updateCheckVisibility();
-      });
+      } else {
+        chip.classList.add('selected');
+        selectedChip = chip;
+      }
+    }
+
+    // Single delegated listener covers the pool AND both columns for the life of the page —
+    // chips moved between them (via pool.appendChild / col.appendChild) stay interactive
+    // because we never attach or remove per-chip listeners.
+    root.addEventListener('click', function(e){
+      var chip = e.target.closest('.sort-chip');
+      var col = e.target.closest('.sort-col');
+      if (col){
+        if (chip){
+          selectChip(chip);
+        } else if (selectedChip){
+          col.appendChild(selectedChip);
+          selectedChip.classList.remove('selected');
+          selectedChip = null;
+          updateCheckVisibility();
+        }
+        return;
+      }
+      if (chip){
+        selectChip(chip);
+      }
     });
 
     checkBtn.addEventListener('click', function(){
@@ -358,14 +360,17 @@ button{font-family:inherit;cursor:pointer}
           var word = chip.getAttribute('data-word');
           if (correctMap[word] === colName){
             chip.style.borderColor = 'var(--ok)';
+            chip.classList.add('locked');
+            chip.classList.remove('selected');
           } else {
             allCorrect = false;
             chip.classList.add('shake');
+            if (selectedChip === chip) selectedChip = null;
+            chip.classList.remove('selected');
             setTimeout(function(){
               chip.classList.remove('shake');
               chip.style.borderColor = '';
               pool.appendChild(chip);
-              wireChip(chip);
               updateCheckVisibility();
             }, 500);
           }
@@ -393,7 +398,6 @@ button{font-family:inherit;cursor:pointer}
     post(50);
   });
 
-  // ---------- Morpheme chips ----------
   (function(){
     var chips = document.querySelectorAll('#morpheme-chips .morph-chip');
     var synthesis = document.getElementById('morpheme-synthesis');
@@ -407,7 +411,6 @@ button{font-family:inherit;cursor:pointer}
     });
   })();
 
-  // ---------- New word accordion ----------
   var accordionOpened = false;
   document.getElementById('newword-header').addEventListener('click', function(){
     var body = document.getElementById('newword-body');
