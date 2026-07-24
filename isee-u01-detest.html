@@ -4,7 +4,7 @@
 <title>Vocabulary: Detest</title>
 <style>
 :root{--paper:#0e1420;--surface:#151d2b;--surface-2:#1b2333;--ink:#e9edf4;--muted:#9aa6ba;
---line:#2a3446;--accent:#46cdbb;--accent-ink:#bdeee7;--ok:#55c283;--no:#e58686;
+--line:#2a3446;--accent:#46cdbb;--accent-ink:#bdeee7;--ok:#55c283;--no:#e58686;--warn:#e8b45a;
 --serif:"Iowan Old Style",Georgia,"Times New Roman",serif;
 --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
@@ -14,131 +14,205 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);l
 padding:clamp(16px,4vw,36px) 16px;display:flex;justify-content:center}
 .lesson{width:100%;max-width:640px;background:var(--surface);border:1px solid var(--line);
 border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
-.lesson > div:first-child{border-radius:var(--r) var(--r) 0 0}
+.card{background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0}
+.card:last-child{margin-bottom:0}
+.lbl{color:var(--accent);font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0}
+.lbl .sub{color:var(--muted);font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none}
 button{font-family:inherit;cursor:pointer}
 .gated[hidden]{display:none}
 .continue-wrap{display:flex;justify-content:center;padding:16px 20px}
 .continue-btn{font:inherit;font-weight:700;font-size:1rem;color:#04231e;background:var(--accent);border:0;border-radius:12px;padding:13px 32px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3)}
-.continue-btn:hover{filter:brightness(1.08)}
-.continue-btn[hidden]{display:none}
+.continue-btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
+.continue-btn:not(:disabled):hover{filter:brightness(1.08)}
 .done-wrap{display:flex;justify-content:center;padding:6px 20px 22px}
 .done-btn{font:inherit;font-weight:800;font-size:1.05rem;color:#04231e;background:var(--accent);border:0;border-radius:12px;padding:14px 30px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3)}
 .done-msg{text-align:center;font-weight:700;color:var(--ok);font-size:1.05rem;margin:0}
 .foot{padding:14px 22px;font-size:.76rem;color:var(--muted);background:var(--surface-2);border-top:1px solid var(--line);text-align:center}
+
+/* MCQ (Your Turn / Root MCQ) */
+.mcq-opt{display:block;width:100%;text-align:left;background:#232941;border:1px solid #3a4155;border-radius:10px;padding:12px 14px;margin:6px 0;color:var(--ink);font-size:.95rem}
+.mcq-opt:hover{border-color:var(--accent)}
+.mcq-opt.correct{background:#1e3a2c;border-color:var(--ok)}
+.mcq-opt.wrong{background:#3a2020;border-color:var(--no)}
+.mcq-opt[disabled]{cursor:default}
+.mcq-feedback{margin:8px 0 0 0;font-weight:600;font-size:.92rem}
+.mcq-feedback.ok{color:var(--ok)}
+.mcq-feedback.no{color:var(--no)}
+@keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
+.shake{animation:shake .5s}
+
+/* Synonym/antonym chips */
+.chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink)}
+.chip.tappable{cursor:pointer}
+.chip.tappable:hover{border-color:var(--accent)}
+.chip.tappable.open{background:var(--accent);color:#04231e;border-color:var(--accent)}
+.chip.static{opacity:.95}
+.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:8px 0 0 0;color:var(--muted);font-size:.92rem}
+
+/* How Strong scale */
+.scale-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0}
+.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent}
+.scale-word:hover{border-color:var(--accent)}
+.scale-word.active{border-color:var(--accent)}
+.scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
+.scale-arrow{color:var(--muted)}
+
+/* Sorting activity */
+.sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
+.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.sort-chip.selected{border-color:var(--accent);background:#1e3a35}
+.sort-columns{display:flex;gap:12px;margin:10px 0}
+.sort-col{flex:1;background:#232941;border:2px dashed #3a4155;border-radius:10px;padding:10px;min-height:80px}
+.sort-col.droppable{border-color:var(--accent)}
+.sort-col-label{font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:0 0 8px 0}
+.sort-col .sort-chip{display:block;margin:4px 0;width:fit-content}
+.check-btn{font:inherit;font-weight:700;background:var(--accent);color:#04231e;border:0;border-radius:10px;padding:10px 24px;margin-top:10px;cursor:pointer}
+.sort-status{margin:8px 0 0 0;font-weight:600;font-size:.9rem}
+.sort-status.ok{color:var(--ok)}
+.sort-status.no{color:var(--no)}
+
+/* Morphemes (Build the Word) */
+.morph-row{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 12px 0}
+.morph-chip{background:#12324a;border:1px solid #7cc7ff;border-radius:10px;padding:10px 16px;cursor:pointer;min-width:90px;text-align:center}
+.morph-chip .form{font-family:var(--mono);color:#7cc7ff;font-weight:bold;display:block}
+.morph-chip .type{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:2px}
+.morph-chip .meaning{display:none;color:var(--ink);font-size:.85rem;margin-top:6px;font-weight:normal}
+.morph-chip.open .meaning{display:block}
+.morph-chip.open{background:#1a3a52}
+.synthesis{background:#232941;border-radius:10px;padding:14px;margin-top:10px;color:var(--accent-ink)}
+.synthesis[hidden]{display:none}
+
+/* New word accordion */
+.accordion-header{cursor:pointer;background:#232941;border-radius:10px;padding:12px 16px;font-weight:600;border:1px solid #3a4155}
+.accordion-header:hover{border-color:var(--accent)}
+.accordion-body{padding:10px 16px 2px 16px;color:var(--muted);font-style:italic}
+.accordion-body[hidden]{display:none}
+
+.tag{background:#2a3040;border-radius:10px;padding:2px 10px;font-size:12px;display:inline-block}
 </style></head>
 <body>
 <main class="lesson" aria-label="Vocabulary lesson: Detest">
-  <div data-block-id="html-2ac45jTFx6qV" data-block-id="html-kc_OWaZUsCF2" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
+
+  <div class="card">
     <div style="font-size:32px;font-weight:bold;font-family:Georgia,serif;">Detest</div>
-    <p style="color:#9aa3b5;margin:4px 0 0 0;">/dih-TEST/ — rhymes with protest &#183; <span style="background:#2a3040;border-radius:10px;padding:2px 10px;font-size:12px;">verb</span></p>
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;margin-top:14px;">Hear It</div>
-     <audio controls="controls" src="https://commons.wikimedia.org/wiki/Special:FilePath/En-us-detest.ogg">Audio not available</audio>
+    <p style="color:var(--muted);margin:4px 0 0 0;">/dih-TEST/ — rhymes with protest <span class="tag">verb</span></p>
+    <div class="lbl" style="margin-top:14px;">Hear It</div>
+    <audio controls="controls" src="">Audio not available</audio>
   </div>
-  <div data-block-id="html-k_BoBjY31SLo" data-block-id="html-nsFPzsQp0_mR" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;border:1px solid #34406b;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">What It Means</div>
-    <p style="margin:0;">To <strong style="color:#4fd1c5;">detest</strong> something is to feel intense dislike or hatred toward it.</p>
+
+  <div class="card">
+    <div class="lbl">What It Means</div>
+    <p style="margin:0;">To detest something is to feel intense dislike or hatred toward it.</p>
     <details>
-      <summary style="cursor:pointer;color:#4fd1c5;border:1px solid #4fd1c5;border-radius:10px;padding:8px 14px;display:inline-block;margin-top:8px;">Show it in context</summary>
-      <p style="font-style:italic;margin:10px 0 0 0;">He <strong style="color:#4fd1c5;">detested</strong> being talked down to in front of his coworkers.</p>
+      <summary style="cursor:pointer;color:var(--accent);border:1px solid var(--accent);border-radius:10px;padding:8px 14px;display:inline-block;margin-top:8px;">Show it in context</summary>
+      <p style="font-style:italic;margin:10px 0 0 0;">He <strong style="color:var(--accent);">detest</strong>ed being talked down to in front of his coworkers.</p>
     </details>
   </div>
-  <div id="works-block">
-  <div data-block-id="html-zqi_gQJ6ZbUF" data-block-id="html-BpG_jrrskID2" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">See How It Works <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; follow the thinking, then try one</span></div>
-    <p style="margin:0;">Here's how to decide when <strong style="color:#4fd1c5;">detest</strong> is the exact word.</p>
+
+  <div id="works-block" class="card">
+    <div class="lbl">See How It Works <span class="sub">&#183; a worked example, then try one yourself</span></div>
     <div style="background:#232941;border-radius:10px;padding:14px;margin:10px 0 0 0;">
-      <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Worked Example</div>
-      <p style="font-style:italic;margin:0 0 8px 0;">After years of office politics, she detested the very sound of her boss&apos;s voice.</p>
-      <p style="color:#9aa3b5;margin:0;"><strong style="color:#4fd1c5;">Detest</strong> shows not just disagreement or mild dislike, but intense, visceral hatred. The word captures an emotional strength and often a sense of disgust that simple &apos;dislike&apos; cannot express. Detest makes the strength of her feelings precise and powerful.</p>
+      <div class="lbl" style="margin-bottom:6px;">Worked Example</div>
+      <p style="font-style:italic;margin:0 0 8px 0;">After years of office politics, she detested the very sound of her boss&#x27;s voice.</p>
+      <p style="color:var(--muted);margin:0;">Detest shows not just disagreement or mild dislike, but intense, visceral hatred. The word captures an emotional strength and often a sense of disgust that simple &#x27;dislike&#x27; cannot express. Detest makes the strength of her feelings precise and powerful.</p>
     </div>
     <div style="background:#232941;border-radius:10px;padding:14px;margin:10px 0 0 0;">
-      <div style="color:#e8b45a;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Your Turn</div>
-      <p style="font-style:italic;margin:0 0 6px 0;">I don&apos;t really like cold pizza.</p>
-      <p style="margin:0 0 8px 0;"><strong>Should we say &apos;I <strong style="color:#4fd1c5;">detest</strong> cold pizza&apos;?</strong></p>
-      <div style="margin-top:8px;">
-        <details style="margin:6px 0;">
-          <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>Detest</strong></span></summary>
-          <p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#f08080;">Not quite</strong> &#8212; Detest is far too strong and intense for a mild food preference.</p>
-        </details>
-        <details style="margin:6px 0;">
-          <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>Dislike</strong></span></summary>
-          <p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#6fcf97;">Correct</strong> &#8212; Not really liking cold pizza is just a preference, so the plainer word fits.</p>
-        </details>
+      <div class="lbl" style="color:var(--warn);margin-bottom:6px;">Your Turn</div>
+      <p style="margin:0 0 10px 0;">Which sentence uses detest correctly?</p>
+      <div id="yourturn-mcq">
+        <button class="mcq-opt" type="button" data-letter="A">A. Many critics detest movies that rely too heavily on special effects instead of story.</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. He detested the screwdriver into the wall to hang the picture.</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. She detested her hair before the party.</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. They detested the trophy on the top shelf.</button>
       </div>
+      <p class="mcq-feedback" id="yourturn-feedback" hidden></p>
     </div>
-  </div>
   </div>
   <div class="continue-wrap" id="continue1-wrap">
-    <button class="continue-btn" id="continue1" type="button" hidden>Continue &rarr;</button>
+    <button class="continue-btn" id="continue1" type="button" disabled>Continue &rarr;</button>
   </div>
 
   <div class="gated" id="gated1" hidden>
-  <div id="synonyms-block">
-  <div data-block-id="html-J4GKmDUV1Lss" data-block-id="html-E8uCajxNebmw" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Synonyms <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
-    
-    <details style="margin:6px 0;">
-      <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>hate</strong></span></summary>
-      <p style="color:#9aa3b5;margin:6px 0 4px 4px;">Strong dislike. Detest is even more intense and often includes a flavor of disgust or revulsion.</p>
-    </details>
-    <details style="margin:6px 0;">
-      <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>abhor</strong></span></summary>
-      <p style="color:#9aa3b5;margin:6px 0 4px 4px;">To hate with strong disgust. Very close to detest, though abhor may focus more on the disgust element.</p>
-    </details>
-    <details style="margin:6px 0;">
-      <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>loathe</strong></span></summary>
-      <p style="color:#9aa3b5;margin:6px 0 4px 4px;">To hate with contempt and disgust. Nearly identical to detest — both express deep, visceral hatred.</p>
-    </details>
-  </div>
-  </div>
-  <div id="antonyms-block">
-  <div data-block-id="html-J4GKmDUV1Lss" data-block-id="html-E8uCajxNebmw" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-<div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;margin-top:14px;">Antonyms <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; opposites</span></div>
-    <p style="margin:0;"> <strong>cherish</strong> &#8212; To hold dear and value — the opposite of detest&apos;s intense hatred and revulsion.</p>
-  </div>
-  </div>
-  <div id="strength-block">
-  <div data-block-id="html-vQcD4A3NPvHQ" data-block-id="html-DcfWrwNYlcEY" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">How Strong Is It?</div>
-    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0;"><span style="background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;">dislike</span><span style="color:#9aa3b5;">&#8594;</span><span style="background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;">despise</span><span style="color:#9aa3b5;">&#8594;</span><span style="background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;">abhor</span><span style="color:#9aa3b5;">&#8594;</span><span style="background:#4fd1c5;color:#0b1020;border-radius:8px;padding:6px 12px;font-weight:bold;">detest</span></div>
-    <p style="color:#9aa3b5;margin:6px 0 0 0;"><strong style="color:#4fd1c5;">Detest</strong> — the strongest: intense hatred with a flavor of disgust and revulsion. (our word)</p>
-  </div>
-  </div>
-    <div id="build-block">
-    <div data-block-id="html-PYJsWX2WgJl5" data-block-id="html-F-a3yH3-4zct" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Build the Word</div>
-    <p style="margin:0 0 6px 0;"><span style="font-family:monospace;color:#4fd1c5;border:1px solid #4fd1c5;border-radius:8px;padding:4px 10px;display:inline-block;margin-right:6px;">detestari</span> Latin: &apos;to curse, call as a witness against&apos; (de- &apos;away&apos; + testari &apos;to witness&apos;)</p>
-    <p style="margin:0;"><strong style="color:#4fd1c5;">Detest</strong> comes from Latin testari, meaning &apos;to call as a witness.&apos; When you detest something, it&apos;s as if you&apos;re calling upon all witnesses to confirm how much you hate it. The same root gives us testify.</p>
-    <div style="margin-top:8px;">
-      <p style="font-style:italic;margin:10px 0 6px 0;">Several coworkers who had known her for years were willing to attest to her honesty in court.</p>
-      <p style="margin:0 0 6px 0;">Same root, new word &#8212; what does <strong style="color:#4fd1c5;">attest</strong> mean here?</p>
-      <details style="margin:6px 0;">
-        <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>to strongly object to or argue against a claim</strong></span></summary>
-        <p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#f08080;">Not quite</strong> &#8212; This sounds like &apos;protest,&apos; so it is a natural guess, but the root testari means &apos;to witness.&apos; To attest is to bear witness in favor of something, not to argue against it.</p>
-      </details>
-      <details style="margin:6px 0;">
-        <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>to test or examine something carefully before approving it</strong></span></summary>
-        <p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#f08080;">Not quite</strong> &#8212; The visible letters &apos;test&apos; tempt you toward &apos;examine,&apos; but the Latin root testari means &apos;to witness,&apos; not &apos;to inspect.&apos; Attesting is vouching that something is true, not checking it over.</p>
-      </details>
-      <details style="margin:6px 0;">
-        <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>to declare or confirm that something is true, especially in a formal way</strong></span></summary>
-        <p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#6fcf97;">Correct</strong> &#8212; You traced the Latin root testari (&apos;to witness&apos;) from detest into attest. Where detest is like calling every witness to confirm your hatred, attest is bearing witness that something, here her honesty, is true.</p>
-      </details>
-      <details style="margin:10px 0 0 0;"><summary style="cursor:pointer;color:#4fd1c5;border:1px solid #4fd1c5;border-radius:10px;padding:8px 14px;display:inline-block;margin-top:8px;">The root connection &#8594;</summary><p style="margin:8px 0 0 0;color:#9aa3b5;">Detest and attest both come from the Latin root testari, &apos;to witness&apos; (the same root as testify). Detest is like summoning witnesses to how much you hate something, while attest is formally witnessing that something is true.</p></details>
+    <div class="card">
+      <div class="lbl">Synonyms <span class="sub">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="synonym-chips">
+        <span class="chip tappable" tabindex="0">hate</span><p class="callout" hidden>the everyday, general word for strong dislike</p>
+        <span class="chip tappable" tabindex="0">abhor</span><p class="callout" hidden>to shrink back from in moral disgust</p>
+        <span class="chip tappable" tabindex="0">loathe</span><p class="callout" hidden>to feel deep, almost physical disgust toward</p>
+      </div>
     </div>
-  </div>
+    <div class="card">
+      <div class="lbl">Antonyms <span class="sub">&#183; opposites</span></div>
+      <div class="chip-row">
+        <span class="chip static">Adore</span>
+        <span class="chip static">Cherish</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to Detest</span></div>
+      <div class="scale-row" id="strength-scale">
+        <span class="scale-word tappable" data-key="dislike">dislike</span><span class="scale-arrow">&#8594;</span>
+        <span class="scale-word tappable" data-key="despise">despise</span><span class="scale-arrow">&#8594;</span>
+        <span class="scale-word tappable" data-key="abhor">abhor</span><span class="scale-arrow">&#8594;</span>
+        <span class="scale-word target">Detest</span>
+      </div>
+      <p class="callout" id="strength-callout" hidden></p>
+    </div>
+    <div class="card">
+      <div class="lbl">Sort It Out <span class="sub">&#183; drag each word into Synonym or Antonym</span></div>
+      <div class="sort-pool" id="sort-pool">
+        <span class="sort-chip" data-word="hate">hate</span>
+        <span class="sort-chip" data-word="Adore">Adore</span>
+        <span class="sort-chip" data-word="abhor">abhor</span>
+        <span class="sort-chip" data-word="Cherish">Cherish</span>
+      </div>
+      <div class="sort-columns">
+        <div class="sort-col" data-col="synonym"><p class="sort-col-label">Synonym</p></div>
+        <div class="sort-col" data-col="antonym"><p class="sort-col-label">Antonym</p></div>
+      </div>
+      <button class="check-btn" id="sort-check-btn" type="button" hidden>Check</button>
+      <p class="sort-status" id="sort-status" hidden></p>
     </div>
     <div class="continue-wrap" id="continue2-wrap">
-      <button class="continue-btn" id="continue2" type="button" hidden>Continue &rarr;</button>
+      <button class="continue-btn" id="continue2" type="button" disabled>Continue &rarr;</button>
     </div>
   </div>
 
   <div class="gated" id="gated2" hidden>
-    <div data-block-id="html-3M0OHfPAZHH3" data-block-id="html-Gp0aiztsWrII" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Word Choice <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; its tone, and when to use it</span></div>
-    <p style="margin:0 0 6px 0;"><span style="background:#2a3040;border-radius:10px;padding:2px 10px;font-size:12px;">neutral / formal</span></p>
-    <p style="margin:0;"><strong style="color:#4fd1c5;">Detest</strong> is stronger and more visceral than &apos;dislike&apos; or even &apos;hate.&apos; It often includes a sense of disgust or revulsion. Save it for genuine, intense aversion — not casual preferences.</p>
+    <div class="card">
+      <div class="lbl">Build the Word <span class="sub">&#183; tap each piece to reveal its meaning</span></div>
+      <div class="morph-row" id="morpheme-chips">
+        <div class="morph-chip"><span class="type">Prefix</span><span class="form">de-</span><span class="meaning">down; away, against</span></div>
+        <div class="morph-chip"><span class="type">Root</span><span class="form">test</span><span class="meaning">witness; to bear witness (Latin)</span></div>
+      </div>
+      <p class="synthesis" id="morpheme-synthesis" hidden>In Latin, detestari meant to call down curses on something while solemnly bearing witness against it — de- (down, against) plus test (witness). Denouncing something as if under sworn testimony gradually softened into today&#x27;s meaning: to feel intense dislike or hatred toward it.</p>
+    </div>
+    <div class="card">
+      <div class="accordion-header" id="newword-header">Use the root in a new word: <strong>testify</strong></div>
+      <p class="accordion-body" id="newword-body" hidden>The engineer was called to testify in court, standing before the judge as a witness and swearing that everything she reported was true.</p>
+    </div>
+    <div class="card">
+      <div class="lbl">Root Check</div>
+      <p style="margin:0 0 10px 0;">The Latin root &#x27;test&#x27; means &#x27;witness.&#x27; Based on this root, what does it most likely mean to &#x27;attest&#x27; to something?</p>
+      <div id="root-mcq">
+        <button class="mcq-opt" type="button" data-letter="A">A. To confirm it is true, as if bearing witness to it</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. To measure it with careful instruments</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. To hide it away from public view</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. To break it down into smaller parts</button>
+      </div>
+      <p class="mcq-feedback" id="root-mcq-feedback" hidden></p>
+    </div>
+    <div class="continue-wrap" id="continue3-wrap">
+      <button class="continue-btn" id="continue3" type="button" disabled>Continue &rarr;</button>
+    </div>
+  </div>
+
+  <div class="gated" id="gated3" hidden>
+    <div class="card">
+      <div class="lbl">Word Choice <span class="sub">&#183; its tone, and when to use it</span></div>
+      <p style="margin:0 0 6px 0;"><span class="tag">neutral / formal</span></p>
+      <p style="margin:0;">Detest is stronger and more visceral than &#x27;dislike&#x27; or even &#x27;hate.&#x27; It often includes a sense of disgust or revulsion. Save it for genuine, intense aversion — not casual preferences.</p>
     </div>
     <div class="done-wrap">
       <button class="done-btn" id="done-btn" type="button">Done</button>
@@ -149,70 +223,234 @@ button{font-family:inherit;cursor:pointer}
 </main>
 <script>
 (function(){
-  var t0 = Date.now();
-  // Dynamic height reporting — eliminates double-scroll in TimeBack iframe
-  function notifyResize() {
-    var h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-    window.parent.postMessage({ type: 'RESIZE', height: h }, '*');
+  function post(pct){
+    try { if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'progress', percent: pct }, '*'); } catch(e) {}
   }
-  // Fire on load and on any DOM size change
-  document.addEventListener('DOMContentLoaded', notifyResize);
-  window.addEventListener('load', notifyResize);
-  if (window.ResizeObserver) {
-    new ResizeObserver(function() { notifyResize(); }).observe(document.body);
-  }
-  function post(msg){
-    try { if (window.parent && window.parent !== window) window.parent.postMessage(msg, '*'); } catch(e) {}
-  }
-  function runningTime(){ return Math.round((Date.now() - t0) / 1000); }
-  function sendState(pct, completed, ready){
-    post({ type: 'CONTENT_STATE_CHANGE', contentSummary: {
-      isCompleted: completed, isReadyToAdvance: ready,
-      progressPercentage: pct, runningTimeSeconds: runningTime()
-    }});
-  }
+  post(0);
 
-  post({ type: 'CONTENT_READY' });
-  sendState(0, false, false);
-
-  function wireGate(containerId, continueBtnId){
-    var box = document.getElementById(containerId);
-    var btn = document.getElementById(continueBtnId);
-    if (!box || !btn) return;
-    var unlocked = false;
-    box.querySelectorAll('details').forEach(function(det){
-      var summary = det.querySelector('summary');
-      if (!summary || !summary.querySelector('span')) return; // skip non-quiz reveals (e.g. context toggle, root-connection)
-      det.addEventListener('toggle', function(){
-        if (det.open && !unlocked){ unlocked = true; btn.hidden = false; }
+  // ---------- Your Turn MCQ (4 options, gates Continue 1) ----------
+  (function(){
+    var container = document.getElementById('yourturn-mcq');
+    var feedback = document.getElementById('yourturn-feedback');
+    var continueBtn = document.getElementById('continue1');
+    var correctLetter = "A";
+    var solved = false;
+    container.querySelectorAll('.mcq-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if (solved) return;
+        var letter = btn.getAttribute('data-letter');
+        if (letter === correctLetter){
+          btn.classList.add('correct');
+          feedback.textContent = 'Correct!';
+          feedback.className = 'mcq-feedback ok';
+          feedback.hidden = false;
+          solved = true;
+          continueBtn.disabled = false;
+          container.querySelectorAll('.mcq-opt').forEach(function(b){ b.disabled = true; });
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          feedback.textContent = 'Not quite — try again.';
+          feedback.className = 'mcq-feedback no';
+          feedback.hidden = false;
+        }
       });
     });
-  }
-  wireGate('works-block', 'continue1');
-  wireGate('build-block', 'continue2');
+  })();
 
-  var c1 = document.getElementById('continue1');
-  if (c1) c1.addEventListener('click', function(){
+  document.getElementById('continue1').addEventListener('click', function(){
     document.getElementById('continue1-wrap').style.display = 'none';
-    var g1 = document.getElementById('gated1');
-    g1.hidden = false;
-    g1.scrollIntoView({behavior:'smooth', block:'start'});
-    sendState(33, false, false);
+    var g = document.getElementById('gated1');
+    g.hidden = false;
+    g.scrollIntoView({behavior:'smooth', block:'start'});
+    post(25);
   });
 
-  var c2 = document.getElementById('continue2');
-  if (c2) c2.addEventListener('click', function(){
+  // ---------- Synonym chips (tap to reveal/collapse) ----------
+  document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var callout = chip.nextElementSibling;
+      var isOpen = chip.classList.contains('open');
+      // collapse all others
+      document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(c){
+        c.classList.remove('open');
+        var cc = c.nextElementSibling;
+        if (cc && cc.classList.contains('callout')) cc.hidden = true;
+      });
+      if (!isOpen){
+        chip.classList.add('open');
+        if (callout && callout.classList.contains('callout')) callout.hidden = false;
+      }
+    });
+  });
+
+  // ---------- How Strong scale ----------
+  (function(){
+    var callout = document.getElementById('strength-callout');
+    var sentences = {"dislike": "Dislike is far weaker than detest \u2014 you might dislike rainy mornings, but detest is reserved for things that stir genuine hatred.", "despise": "Despise is stronger than plain dislike because it adds a layer of scorn, yet it still sits below detest on the intensity scale.", "abhor": "Abhor comes very close, but on this scale it lands just beneath detest, which marks the fullest, most intense level of hatred."};
+    document.querySelectorAll('#strength-scale .scale-word.tappable').forEach(function(w){
+      w.addEventListener('click', function(){
+        document.querySelectorAll('#strength-scale .scale-word').forEach(function(x){ x.classList.remove('active'); });
+        w.classList.add('active');
+        var key = w.getAttribute('data-key');
+        callout.textContent = sentences[key] || '';
+        callout.hidden = false;
+      });
+    });
+  })();
+
+  // ---------- Sorting activity ----------
+  (function(){
+    var pool = document.getElementById('sort-pool');
+    var cols = document.querySelectorAll('.sort-col');
+    var checkBtn = document.getElementById('sort-check-btn');
+    var status = document.getElementById('sort-status');
+    var continue2 = document.getElementById('continue2');
+    var selectedChip = null;
+    var correctMap = {"hate": "synonym", "abhor": "synonym", "Adore": "antonym", "Cherish": "antonym"};
+
+    function allPlaced(){
+      return document.querySelectorAll('#sort-pool .sort-chip').length === 0;
+    }
+    function updateCheckVisibility(){
+      checkBtn.hidden = !allPlaced();
+    }
+    function wireChip(chip){
+      chip.addEventListener('click', function(){
+        if (selectedChip && selectedChip !== chip){ selectedChip.classList.remove('selected'); }
+        if (selectedChip === chip){
+          chip.classList.remove('selected');
+          selectedChip = null;
+        } else {
+          chip.classList.add('selected');
+          selectedChip = chip;
+        }
+      });
+    }
+    pool.querySelectorAll('.sort-chip').forEach(wireChip);
+
+    cols.forEach(function(col){
+      col.addEventListener('click', function(e){
+        if (!selectedChip) return;
+        if (e.target !== col && col.contains(e.target) && e.target.classList.contains('sort-chip')) return;
+        col.appendChild(selectedChip);
+        selectedChip.classList.remove('selected');
+        selectedChip = null;
+        updateCheckVisibility();
+      });
+    });
+
+    checkBtn.addEventListener('click', function(){
+      var allCorrect = true;
+      document.querySelectorAll('.sort-col').forEach(function(col){
+        var colName = col.getAttribute('data-col');
+        col.querySelectorAll('.sort-chip').forEach(function(chip){
+          var word = chip.getAttribute('data-word');
+          if (correctMap[word] === colName){
+            chip.style.borderColor = 'var(--ok)';
+          } else {
+            allCorrect = false;
+            chip.classList.add('shake');
+            setTimeout(function(){
+              chip.classList.remove('shake');
+              chip.style.borderColor = '';
+              pool.appendChild(chip);
+              wireChip(chip);
+              updateCheckVisibility();
+            }, 500);
+          }
+        });
+      });
+      if (allCorrect){
+        status.textContent = 'All correct!';
+        status.className = 'sort-status ok';
+        status.hidden = false;
+        checkBtn.hidden = true;
+        continue2.disabled = false;
+      } else {
+        status.textContent = 'Not quite — the highlighted words went back to the pool. Try again.';
+        status.className = 'sort-status no';
+        status.hidden = false;
+      }
+    });
+  })();
+
+  document.getElementById('continue2').addEventListener('click', function(){
     document.getElementById('continue2-wrap').style.display = 'none';
-    var g2 = document.getElementById('gated2');
-    g2.hidden = false;
-    g2.scrollIntoView({behavior:'smooth', block:'start'});
-    sendState(66, false, false);
+    var g = document.getElementById('gated2');
+    g.hidden = false;
+    g.scrollIntoView({behavior:'smooth', block:'start'});
+    post(50);
   });
 
-  var doneBtn = document.getElementById('done-btn');
-  if (doneBtn) doneBtn.addEventListener('click', function(){
-    sendState(100, true, true);
-    var wrap = doneBtn.closest('.done-wrap');
+  // ---------- Morpheme chips ----------
+  (function(){
+    var chips = document.querySelectorAll('#morpheme-chips .morph-chip');
+    var synthesis = document.getElementById('morpheme-synthesis');
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        chip.classList.add('open');
+        var allOpen = true;
+        chips.forEach(function(c){ if (!c.classList.contains('open')) allOpen = false; });
+        if (allOpen) synthesis.hidden = false;
+      });
+    });
+  })();
+
+  // ---------- New word accordion ----------
+  var accordionOpened = false;
+  document.getElementById('newword-header').addEventListener('click', function(){
+    var body = document.getElementById('newword-body');
+    body.hidden = !body.hidden;
+    accordionOpened = true;
+    maybeUnlockContinue3();
+  });
+
+  var rootIsProductive = true;
+  var continue3 = document.getElementById('continue3');
+  function maybeUnlockContinue3(){
+    if (!rootIsProductive && accordionOpened) continue3.disabled = false;
+  }
+
+  (function(){
+    var container = document.getElementById('root-mcq');
+    var feedback = document.getElementById('root-mcq-feedback');
+    var correctLetter = "A";
+    var solved = false;
+    container.querySelectorAll('.mcq-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if (solved) return;
+        var letter = btn.getAttribute('data-letter');
+        if (letter === correctLetter){
+          btn.classList.add('correct');
+          feedback.textContent = 'Correct!';
+          feedback.className = 'mcq-feedback ok';
+          feedback.hidden = false;
+          solved = true;
+          continue3.disabled = false;
+          container.querySelectorAll('.mcq-opt').forEach(function(b){ b.disabled = true; });
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          feedback.textContent = 'Not quite — try again.';
+          feedback.className = 'mcq-feedback no';
+          feedback.hidden = false;
+        }
+      });
+    });
+  })();
+
+  document.getElementById('continue3').addEventListener('click', function(){
+    document.getElementById('continue3-wrap').style.display = 'none';
+    var g = document.getElementById('gated3');
+    g.hidden = false;
+    g.scrollIntoView({behavior:'smooth', block:'start'});
+    post(75);
+  });
+
+  document.getElementById('done-btn').addEventListener('click', function(){
+    post(100);
+    var wrap = document.getElementById('done-btn').closest('.done-wrap');
     wrap.innerHTML = '<p class="done-msg">&#10003; Complete</p>';
   });
 })();
