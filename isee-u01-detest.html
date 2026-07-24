@@ -56,7 +56,6 @@ button{font-family:inherit;cursor:pointer}
 .scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
 .scale-arrow{color:var(--muted)}
 
-/* Sorting activity — event-delegated (Fix 1: no per-chip listener re-attachment) */
 .sort-activity{margin:0}
 .sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
 .sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);text-transform:lowercase}
@@ -118,9 +117,9 @@ button{font-family:inherit;cursor:pointer}
       <div class="lbl" style="color:var(--warn);margin-bottom:6px;">Your Turn</div>
       <p style="margin:0 0 10px 0;">Which sentence uses detest correctly?</p>
       <div id="yourturn-mcq">
-        <button class="mcq-opt" type="button" data-letter="A">A. After months of rehearsal, Jordan detested the difficult violin solo flawlessly at the spring recital.</button>
-        <button class="mcq-opt" type="button" data-letter="B">B. Elena detested her grandmother&#x27;s advice, following it faithfully whenever she faced a hard decision.</button>
-        <button class="mcq-opt" type="button" data-letter="C">C. Maya detests the taste of mushrooms, so she picks them off her pizza slice by slice before taking a bite.</button>
+        <button class="mcq-opt" type="button" data-letter="A">A. Elena detested her grandmother&#x27;s advice, following it faithfully whenever she faced a hard decision.</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. Maya detests the taste of mushrooms, so she picks them off her pizza slice by slice before taking a bite.</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. After months of rehearsal, Jordan detested the difficult violin solo flawlessly at the spring recital.</button>
         <button class="mcq-opt" type="button" data-letter="D">D. The volunteers detested the animal shelter by walking the dogs and cleaning the kennels every weekend.</button>
       </div>
       <p class="mcq-feedback" id="yourturn-feedback" hidden></p>
@@ -231,7 +230,7 @@ button{font-family:inherit;cursor:pointer}
     var container = document.getElementById('yourturn-mcq');
     var feedback = document.getElementById('yourturn-feedback');
     var continueBtn = document.getElementById('continue1');
-    var correctLetter = "C";
+    var correctLetter = "B";
     var solved = false;
     container.querySelectorAll('.mcq-opt').forEach(function(btn){
       btn.addEventListener('click', function(){
@@ -302,7 +301,7 @@ button{font-family:inherit;cursor:pointer}
     });
   })();
 
-  // ---------- Sorting activity (Fix 1: event delegation — no per-chip listener re-attachment) ----------
+  // ---------- Sorting activity (event delegation — no per-chip listener re-attachment) ----------
   (function(){
     var root = document.getElementById('sort-activity-root');
     var pool = document.getElementById('sort-pool');
@@ -330,9 +329,6 @@ button{font-family:inherit;cursor:pointer}
       }
     }
 
-    // Single delegated listener covers the pool AND both columns for the life of the page —
-    // chips moved between them (via pool.appendChild / col.appendChild) stay interactive
-    // because we never attach or remove per-chip listeners.
     root.addEventListener('click', function(e){
       var chip = e.target.closest('.sort-chip');
       var col = e.target.closest('.sort-col');

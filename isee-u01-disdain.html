@@ -56,7 +56,6 @@ button{font-family:inherit;cursor:pointer}
 .scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
 .scale-arrow{color:var(--muted)}
 
-/* Sorting activity — event-delegated (Fix 1: no per-chip listener re-attachment) */
 .sort-activity{margin:0}
 .sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
 .sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);text-transform:lowercase}
@@ -118,10 +117,10 @@ button{font-family:inherit;cursor:pointer}
       <div class="lbl" style="color:var(--warn);margin-bottom:6px;">Your Turn</div>
       <p style="margin:0 0 10px 0;">Which sentence uses disdain correctly?</p>
       <div id="yourturn-mcq">
-        <button class="mcq-opt" type="button" data-letter="A">A. Marcus felt a deep disdain for his grandmother&#x27;s stories and begged her to tell them again every night.</button>
-        <button class="mcq-opt" type="button" data-letter="B">B. The volunteers watched with disdain as the rescued sea turtles they had cared for finally swam out to freedom.</button>
-        <button class="mcq-opt" type="button" data-letter="C">C. The food critic pushed the microwaved appetizer aside with disdain, declaring it unworthy of a serious restaurant.</button>
-        <button class="mcq-opt" type="button" data-letter="D">D. Filled with disdain, the young violinist thanked her teacher for believing in her when no one else did.</button>
+        <button class="mcq-opt" type="button" data-letter="A">A. The food critic pushed the microwaved appetizer aside with disdain, declaring it unworthy of a serious restaurant.</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. Filled with disdain, the young violinist thanked her teacher for believing in her when no one else did.</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. Marcus felt a deep disdain for his grandmother&#x27;s stories and begged her to tell them again every night.</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. The volunteers watched with disdain as the rescued sea turtles they had cared for finally swam out to freedom.</button>
       </div>
       <p class="mcq-feedback" id="yourturn-feedback" hidden></p>
     </div>
@@ -231,7 +230,7 @@ button{font-family:inherit;cursor:pointer}
     var container = document.getElementById('yourturn-mcq');
     var feedback = document.getElementById('yourturn-feedback');
     var continueBtn = document.getElementById('continue1');
-    var correctLetter = "C";
+    var correctLetter = "A";
     var solved = false;
     container.querySelectorAll('.mcq-opt').forEach(function(btn){
       btn.addEventListener('click', function(){
@@ -302,7 +301,7 @@ button{font-family:inherit;cursor:pointer}
     });
   })();
 
-  // ---------- Sorting activity (Fix 1: event delegation — no per-chip listener re-attachment) ----------
+  // ---------- Sorting activity (event delegation — no per-chip listener re-attachment) ----------
   (function(){
     var root = document.getElementById('sort-activity-root');
     var pool = document.getElementById('sort-pool');
@@ -330,9 +329,6 @@ button{font-family:inherit;cursor:pointer}
       }
     }
 
-    // Single delegated listener covers the pool AND both columns for the life of the page —
-    // chips moved between them (via pool.appendChild / col.appendChild) stay interactive
-    // because we never attach or remove per-chip listeners.
     root.addEventListener('click', function(e){
       var chip = e.target.closest('.sort-chip');
       var col = e.target.closest('.sort-col');

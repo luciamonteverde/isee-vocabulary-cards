@@ -56,7 +56,6 @@ button{font-family:inherit;cursor:pointer}
 .scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
 .scale-arrow{color:var(--muted)}
 
-/* Sorting activity — event-delegated (Fix 1: no per-chip listener re-attachment) */
 .sort-activity{margin:0}
 .sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
 .sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);text-transform:lowercase}
@@ -118,10 +117,10 @@ button{font-family:inherit;cursor:pointer}
       <div class="lbl" style="color:var(--warn);margin-bottom:6px;">Your Turn</div>
       <p style="margin:0 0 10px 0;">Which sentence uses animosity correctly?</p>
       <div id="yourturn-mcq">
-        <button class="mcq-opt" type="button" data-letter="A">A. The volunteers were praised for the animosity they showed while rebuilding the flooded library.</button>
-        <button class="mcq-opt" type="button" data-letter="B">B. His animosity for astronomy led him to spend every clear night outside with his telescope.</button>
+        <button class="mcq-opt" type="button" data-letter="A">A. The coach thanked the players for their animosity after they helped an injured opponent off the field.</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. The volunteers were praised for the animosity they showed while rebuilding the flooded library.</button>
         <button class="mcq-opt" type="button" data-letter="C">C. The animosity between the two families ran so deep that they refused to sit near each other at town meetings.</button>
-        <button class="mcq-opt" type="button" data-letter="D">D. The coach thanked the players for their animosity after they helped an injured opponent off the field.</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. His animosity for astronomy led him to spend every clear night outside with his telescope.</button>
       </div>
       <p class="mcq-feedback" id="yourturn-feedback" hidden></p>
     </div>
@@ -302,7 +301,7 @@ button{font-family:inherit;cursor:pointer}
     });
   })();
 
-  // ---------- Sorting activity (Fix 1: event delegation — no per-chip listener re-attachment) ----------
+  // ---------- Sorting activity (event delegation — no per-chip listener re-attachment) ----------
   (function(){
     var root = document.getElementById('sort-activity-root');
     var pool = document.getElementById('sort-pool');
@@ -330,9 +329,6 @@ button{font-family:inherit;cursor:pointer}
       }
     }
 
-    // Single delegated listener covers the pool AND both columns for the life of the page —
-    // chips moved between them (via pool.appendChild / col.appendChild) stay interactive
-    // because we never attach or remove per-chip listeners.
     root.addEventListener('click', function(e){
       var chip = e.target.closest('.sort-chip');
       var col = e.target.closest('.sort-col');
