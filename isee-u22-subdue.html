@@ -4,7 +4,7 @@
 <title>Vocabulary: Subdue</title>
 <style>
 :root{--paper:#0e1420;--surface:#151d2b;--surface-2:#1b2333;--ink:#e9edf4;--muted:#9aa6ba;
---line:#2a3446;--accent:#46cdbb;--accent-ink:#bdeee7;--ok:#55c283;--no:#e58686;
+--line:#2a3446;--accent:#46cdbb;--accent-ink:#bdeee7;--ok:#55c283;--no:#e58686;--warn:#e8b45a;
 --serif:"Iowan Old Style",Georgia,"Times New Roman",serif;
 --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
@@ -14,205 +14,452 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);l
 padding:clamp(16px,4vw,36px) 16px;display:flex;justify-content:center}
 .lesson{width:100%;max-width:640px;background:var(--surface);border:1px solid var(--line);
 border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
-.lesson > div:first-child{border-radius:var(--r) var(--r) 0 0}
+.card{background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0}
+.card:last-child{margin-bottom:0}
+.lbl{color:var(--accent);font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0}
+.lbl .sub{color:var(--muted);font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none}
 button{font-family:inherit;cursor:pointer}
 .gated[hidden]{display:none}
 .continue-wrap{display:flex;justify-content:center;padding:16px 20px}
 .continue-btn{font:inherit;font-weight:700;font-size:1rem;color:#04231e;background:var(--accent);border:0;border-radius:12px;padding:13px 32px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3)}
-.continue-btn:hover{filter:brightness(1.08)}
-.continue-btn[hidden]{display:none}
+.continue-btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
+.continue-btn:not(:disabled):hover{filter:brightness(1.08)}
 .done-wrap{display:flex;justify-content:center;padding:6px 20px 22px}
 .done-btn{font:inherit;font-weight:800;font-size:1.05rem;color:#04231e;background:var(--accent);border:0;border-radius:12px;padding:14px 30px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3)}
 .done-msg{text-align:center;font-weight:700;color:var(--ok);font-size:1.05rem;margin:0}
 .foot{padding:14px 22px;font-size:.76rem;color:var(--muted);background:var(--surface-2);border-top:1px solid var(--line);text-align:center}
+
+.mcq-opt{display:block;width:100%;text-align:left;background:#232941;border:1px solid #3a4155;border-radius:10px;padding:12px 14px;margin:6px 0;color:var(--ink);font-size:.95rem}
+.mcq-opt:hover{border-color:var(--accent)}
+.mcq-opt.correct{background:#1e3a2c;border-color:var(--ok)}
+.mcq-opt.wrong{background:#3a2020;border-color:var(--no)}
+.mcq-opt[disabled]{cursor:default}
+.mcq-feedback{margin:8px 0 0 0;font-weight:600;font-size:.92rem}
+.mcq-feedback.ok{color:var(--ok)}
+.mcq-feedback.no{color:var(--no)}
+@keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
+.shake{animation:shake .5s}
+
+.chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink);text-transform:lowercase}
+.chip.tappable{cursor:pointer}
+.chip.tappable:hover{border-color:var(--accent)}
+.chip.tappable.open{background:var(--accent);color:#04231e;border-color:var(--accent)}
+.chip.static{opacity:.95}
+.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:10px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout[hidden]{display:none}
+
+.scale-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0}
+.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent;text-transform:lowercase}
+.scale-word:hover{border-color:var(--accent)}
+.scale-word.active{border-color:var(--accent)}
+.scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
+.scale-arrow{color:var(--muted)}
+
+.sort-activity{margin:0}
+.sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
+.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);text-transform:lowercase}
+.sort-chip.selected{border-color:var(--accent);background:#1e3a35}
+.sort-chip.locked{cursor:default;opacity:.85}
+.sort-columns{display:flex;gap:12px;margin:10px 0}
+.sort-col{flex:1;background:#232941;border:2px dashed #3a4155;border-radius:10px;padding:10px;min-height:80px}
+.sort-col-label{font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:0 0 8px 0}
+.sort-col .sort-chip{display:block;margin:4px 0;width:fit-content}
+.check-btn{font:inherit;font-weight:700;background:var(--accent);color:#04231e;border:0;border-radius:10px;padding:10px 24px;margin-top:10px;cursor:pointer}
+.sort-status{margin:8px 0 0 0;font-weight:600;font-size:.9rem}
+.sort-status.ok{color:var(--ok)}
+.sort-status.no{color:var(--no)}
+
+.morph-row{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 12px 0}
+.morph-chip{background:#12324a;border:1px solid #7cc7ff;border-radius:10px;padding:10px 16px;cursor:pointer;min-width:90px;text-align:center}
+.morph-chip .form{font-family:var(--mono);color:#7cc7ff;font-weight:bold;display:block}
+.morph-chip .type{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:2px}
+.morph-chip .meaning{display:none;color:var(--ink);font-size:.85rem;margin-top:6px;font-weight:normal}
+.morph-chip.open .meaning{display:block}
+.morph-chip.open{background:#1a3a52}
+.synthesis{background:#232941;border-radius:10px;padding:14px;margin-top:10px;color:var(--accent-ink)}
+.synthesis[hidden]{display:none}
+
+.accordion-header{cursor:pointer;background:#232941;border-radius:10px;padding:12px 16px;font-weight:600;border:1px solid #3a4155}
+.accordion-header:hover{border-color:var(--accent)}
+.accordion-body{padding:10px 16px 2px 16px;color:var(--muted);font-style:italic}
+.accordion-body[hidden]{display:none}
+
+.tag{background:#2a3040;border-radius:10px;padding:2px 10px;font-size:12px;display:inline-block}
 </style></head>
 <body>
 <main class="lesson" aria-label="Vocabulary lesson: Subdue">
-  <div data-block-id="html-g_CNhLNk1VTc" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
+
+  <div class="card">
     <div style="font-size:32px;font-weight:bold;font-family:Georgia,serif;">Subdue</div>
-    <p style="color:#9aa3b5;margin:4px 0 0 0;">/sub-DYOO/ — rhymes with subdue &#183; <span style="background:#2a3040;border-radius:10px;padding:2px 10px;font-size:12px;">verb</span></p>
-    
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;margin-top:14px;">Hear It</div>
-     <audio controls="controls" src="https://commons.wikimedia.org/wiki/Special:FilePath/LL-Q1860%20(eng)-Vealhurl-subdue.wav">Audio not available</audio>
+    <p style="color:var(--muted);margin:4px 0 0 0;">/sub-DYOO/ — rhymes with subdue <span class="tag">verb</span></p>
+    <div class="lbl" style="margin-top:14px;">Hear It</div>
+    <audio controls="controls" src="https://commons.wikimedia.org/wiki/Special:FilePath/LL-Q1860%20(eng)-Vealhurl-subdue.wav">Audio not available</audio>
   </div>
-  <div data-block-id="html-Tj8vVOgHouqD" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;border:1px solid #34406b;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">What It Means</div>
-    <p style="margin:0;">To <strong style="color:#4fd1c5;">subdue</strong> someone or something is to overpower it and bring it under control.</p>
+
+  <div class="card">
+    <div class="lbl">What It Means</div>
+    <p style="margin:0;">To subdue someone or something is to overpower it and bring it under control.</p>
     <details>
-      <summary style="cursor:pointer;color:#4fd1c5;border:1px solid #4fd1c5;border-radius:10px;padding:8px 14px;display:inline-block;margin-top:8px;">Show it in context</summary>
-      <p style="font-style:italic;margin:10px 0 0 0;">Rangers finally <strong style="color:#4fd1c5;">subdued</strong> the escaped bull with ropes and patience.</p>
+      <summary style="cursor:pointer;color:var(--accent);border:1px solid var(--accent);border-radius:10px;padding:8px 14px;display:inline-block;margin-top:8px;">Show it in context</summary>
+      <p style="font-style:italic;margin:10px 0 0 0;">Rangers finally <strong style="color:var(--accent);">subdue</strong>d the escaped bull with ropes and patience.</p>
     </details>
   </div>
-  <div id="works-block">
-  <div data-block-id="html-Fb7aAlGgqT5F" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">See How It Works <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; follow the thinking, then try one</span></div>
-    <p style="margin:0;">Here's how to decide when <strong style="color:#4fd1c5;">subdue</strong> is the exact word.</p>
+
+  <div id="works-block" class="card">
+    <div class="lbl">See How It Works <span class="sub">&#183; a worked example, then try one yourself</span></div>
     <div style="background:#232941;border-radius:10px;padding:14px;margin:10px 0 0 0;">
-      <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Worked Example</div>
+      <div class="lbl" style="margin-bottom:6px;">Worked Example</div>
       <p style="font-style:italic;margin:0 0 8px 0;">The firefighters finally subdued the raging wildfire after three days.</p>
-      <p style="color:#9aa3b5;margin:0;"><strong style="color:#4fd1c5;">Subdue</strong> is precise because it emphasizes overcoming active resistance and bringing the fire under control — not just managing something stable, but conquering what&apos;s wild and defiant. Plain &apos;controlled&apos; would miss the sense of struggle and triumph.</p>
+      <p style="color:var(--muted);margin:0;">Subdue is precise because it emphasizes overcoming active resistance and bringing the fire under control — not just managing something stable, but conquering what&#x27;s wild and defiant. Plain &#x27;controlled&#x27; would miss the sense of struggle and triumph.</p>
     </div>
     <div style="background:#232941;border-radius:10px;padding:14px;margin:10px 0 0 0;">
-      <div style="color:#e8b45a;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Your Turn</div>
-      <p style="font-style:italic;margin:0 0 6px 0;">The mother asked her son to quiet down during the movie.</p>
-      <p style="margin:0 0 8px 0;"><strong>Is <strong style="color:#4fd1c5;">subdue</strong> the precise word here, or should it be something gentler?</strong></p>
-      <div style="margin-top:8px;">
-        <details style="margin:6px 0;">
-          <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>Subdue</strong></span></summary>
-          <p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#f08080;">Not quite</strong> &#8212; Subdue suggests forcefully overpowering someone who is resisting. A mother politely asking her child to be quiet during a movie is a gentle everyday request, not a struggle to overcome resistance, so it is far too forceful here.</p>
-        </details>
-        <details style="margin:6px 0;">
-          <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>Quiet down</strong></span></summary>
-          <p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#6fcf97;">Correct</strong> &#8212; This matches the mild, polite tone of a parent's request during a movie. It asks the child to lower his noise without implying any force or battle of wills.</p>
-        </details>
+      <div class="lbl" style="color:var(--warn);margin-bottom:6px;">Your Turn</div>
+      <p style="margin:0 0 10px 0;">Which sentence uses subdue correctly?</p>
+      <div id="yourturn-mcq">
+        <button class="mcq-opt" type="button" data-letter="A">A. The coach subdued the team with an inspiring speech before the championship game.</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. Firefighters worked for nearly an hour to subdue the blaze before it could spread to the neighboring rooftops.</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. We subdued our tickets at the gate and hurried to find our seats before the show began.</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. Maya subdued her math homework in twenty minutes and moved on to her science project.</button>
       </div>
+      <p class="mcq-feedback" id="yourturn-feedback" hidden></p>
     </div>
-  </div>
   </div>
   <div class="continue-wrap" id="continue1-wrap">
-    <button class="continue-btn" id="continue1" type="button" hidden>Continue &rarr;</button>
+    <button class="continue-btn" id="continue1" type="button" disabled>Continue &rarr;</button>
   </div>
 
   <div class="gated" id="gated1" hidden>
-  <div id="synonyms-block">
-  <div data-block-id="html-NpnJI8-LKlcV" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Synonyms <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
-    
-    <details style="margin:6px 0;">
-      <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>control</strong></span></summary>
-      <p style="color:#9aa3b5;margin:6px 0 4px 4px;">To manage or direct. Subdue specifically implies conquering resistance or overcoming something defiant.</p>
-    </details>
-    <details style="margin:6px 0;">
-      <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>overcome</strong></span></summary>
-      <p style="color:#9aa3b5;margin:6px 0 4px 4px;">To defeat or get past something difficult. Subdue adds the sense of bringing under lasting control, not just winning one moment.</p>
-    </details>
-    <details style="margin:6px 0;">
-      <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>tame</strong></span></summary>
-      <p style="color:#9aa3b5;margin:6px 0 4px 4px;">To make docile and manageable. Subdue is more forceful and can suggest sudden overpowering, while taming is often gradual.</p>
-    </details>
-  </div>
-  </div>
-  <div id="antonyms-block">
-  <div data-block-id="html-NpnJI8-LKlcV" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-<div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;margin-top:14px;">Antonyms <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; opposites</span></div>
-    <p style="margin:0;"><strong>liberate</strong> &#8212; To set free — the opposite of subdue&apos;s control.</p>
-  </div>
-  </div>
-  <div id="strength-block">
-  <div data-block-id="html-_ZMByDVMTD8V" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">How Strong Is It?</div>
-    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0;"><span style="background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;">manage</span><span style="color:#9aa3b5;">&#8594;</span><span style="background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;">suppress</span><span style="color:#9aa3b5;">&#8594;</span><span style="background:#4fd1c5;color:#0b1020;border-radius:8px;padding:6px 12px;font-weight:bold;">subdue</span><span style="color:#9aa3b5;">&#8594;</span><span style="background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;">dominate</span></div>
-    <p style="color:#9aa3b5;margin:6px 0 0 0;"><strong style="color:#4fd1c5;">Subdue</strong> — stronger than merely suppressing, but stopping short of total domination. (our word)</p>
-  </div>
-  </div>
-    <div id="build-block">
-    <div data-block-id="html-R-x7ZXW--TND" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-<div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Build the Word</div>
-<p style="margin:0 0 6px 0;"><span style="font-family:monospace;color:#4fd1c5;border:1px solid #4fd1c5;border-radius:8px;padding:4px 10px;display:inline-block;margin-right:6px;">subduc-</span> Latin: sub- 'under' + ducere 'to lead'</p>
-<p style="margin:0;">To <strong style="color:#4fd1c5;">subdue</strong> something is literally to lead it beneath your control — to put it under your authority.</p>
-<div style="margin-top:8px;">
-<p style="font-style:italic;margin:10px 0 6px 0;">The tour guide conducted us through the museum with expertise.</p>
-<p style="margin:0 0 6px 0;">Same root, new word — what does <strong style="color:#4fd1c5;">conduct</strong> mean here?</p>
-<details style="margin:6px 0;">
-<summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>to lead or guide</strong></span></summary>
-<p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#6fcf97;">Correct</strong> — Correct. 'Conduct' keeps the ducere 'to lead' root of 'subdue' (sub- 'under' plus ducere 'to lead'): a guide who conducts a tour leads people through it.</p>
-</details><details style="margin:6px 0;">
-<summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>to end or shut down</strong></span></summary>
-<p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#f08080;">Not quite</strong> — Not quite. 'Conduct' shares the ducere 'to lead' root with 'subdue,' so it means to lead or guide people along, not to end or close something.</p>
-</details>
-
-<details style="margin:10px 0 0 0;"><summary style="cursor:pointer;color:#4fd1c5;border:1px solid #4fd1c5;border-radius:10px;padding:8px 14px;display:inline-block;margin-top:8px;">The root connection →</summary><p style="margin:8px 0 0 0;color:#9aa3b5;">Both 'subdue' and 'conduct' come from the Latin ducere, 'to lead.' To subdue is literally to lead someone under your control, while to conduct is to lead a group along.</p></details>
-</div>
-</div>
+    <div class="card">
+      <div class="lbl">Synonyms <span class="sub">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="synonym-chips">
+        <span class="chip tappable" tabindex="0" data-key="control">control</span>
+        <span class="chip tappable" tabindex="0" data-key="overcome">overcome</span>
+        <span class="chip tappable" tabindex="0" data-key="tame">tame</span>
+      </div>
+      <p class="callout" id="synonym-callout" hidden></p>
+    </div>
+    <div class="card">
+      <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="antonym-chips">
+        <span class="chip tappable" tabindex="0" data-key="liberate">liberate</span>
+        <span class="chip tappable" tabindex="0" data-key="unleash">unleash</span>
+      </div>
+      <p class="callout" id="antonym-callout" hidden></p>
+    </div>
+    <div class="card">
+      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to subdue</span></div>
+      <div class="scale-row" id="strength-scale">
+        <span class="scale-word tappable" data-key="manage">manage</span><span class="scale-arrow">&#8594;</span>
+        <span class="scale-word tappable" data-key="suppress">suppress</span><span class="scale-arrow">&#8594;</span>
+        <span class="scale-word tappable" data-key="dominate">dominate</span><span class="scale-arrow">&#8594;</span>
+        <span class="scale-word target">subdue</span>
+      </div>
+      <p class="callout" id="strength-callout" hidden></p>
+    </div>
+    <div class="card sort-activity" id="sort-activity-root">
+      <div class="lbl">Sort It Out <span class="sub">&#183; tap a word, then tap a column to place it</span></div>
+      <div class="sort-pool" id="sort-pool">
+        <span class="sort-chip" data-word="unleash">unleash</span>
+        <span class="sort-chip" data-word="liberate">liberate</span>
+        <span class="sort-chip" data-word="control">control</span>
+        <span class="sort-chip" data-word="overcome">overcome</span>
+      </div>
+      <div class="sort-columns">
+        <div class="sort-col" data-col="synonym"><p class="sort-col-label">Synonym</p></div>
+        <div class="sort-col" data-col="antonym"><p class="sort-col-label">Antonym</p></div>
+      </div>
+      <button class="check-btn" id="sort-check-btn" type="button" hidden>Check</button>
+      <p class="sort-status" id="sort-status" hidden></p>
     </div>
     <div class="continue-wrap" id="continue2-wrap">
-      <button class="continue-btn" id="continue2" type="button" hidden>Continue &rarr;</button>
+      <button class="continue-btn" id="continue2" type="button" disabled>Continue &rarr;</button>
     </div>
   </div>
 
   <div class="gated" id="gated2" hidden>
-    <div data-block-id="html-YLy1qrnaFm1C" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Word Choice <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; its tone, and when to use it</span></div>
-    <p style="margin:0 0 6px 0;"><span style="background:#2a3040;border-radius:10px;padding:2px 10px;font-size:12px;">formal / literary</span></p>
-    <p style="margin:0;"><strong style="color:#4fd1c5;">Subdue</strong> is formal and suggests bringing something wild, rebellious, or resistant under control by force or strong effort. Use it when the struggle or the overcoming is the point. For calming a child or settling a minor issue, the plainer words &apos;calm&apos; or &apos;quiet&apos; are better and more natural.</p>
+    <div class="card">
+      <div class="lbl">Build the Word <span class="sub">&#183; tap each piece to reveal its meaning</span></div>
+      <div class="morph-row" id="morpheme-chips">
+        <div class="morph-chip"><span class="type">Prefix</span><span class="form">sub-</span><span class="meaning">under, below (Latin)</span></div>
+        <div class="morph-chip"><span class="type">Root</span><span class="form">-due (from dūcere)</span><span class="meaning">to lead, to draw (Latin)</span></div>
+      </div>
+      <p class="synthesis" id="morpheme-synthesis" hidden>Sub- means &#x27;under&#x27; and the root traces to Latin dūcere, &#x27;to lead&#x27; — so to subdue is literally to &#x27;lead under&#x27;: to draw someone or something down under your power. A second Latin verb, subdere (&#x27;to place under&#x27;), shaped the meaning too, which is why subduing means overpowering something and bringing it under control.</p>
+    </div>
+    <div class="card">
+      <div class="accordion-header" id="newword-header">Use the root in a new word: <strong>conduct</strong></div>
+      <p class="accordion-body" id="newword-body" hidden>A conductor leads an orchestra through a symphony — the same Latin root dūcere, &#x27;to lead,&#x27; hides inside subdue, which literally means to lead something under your control.</p>
+    </div>
+    <div class="card">
+      <div class="lbl">Root Check</div>
+      <p style="margin:0 0 10px 0;">The root duc/due in subdue comes from Latin dūcere, meaning &#x27;to lead.&#x27; Which of these words also comes from this root?</p>
+      <div id="root-mcq">
+        <button class="mcq-opt" type="button" data-letter="A">A. conduct</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. dungeon</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. endure</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. dusk</button>
+      </div>
+      <p class="mcq-feedback" id="root-mcq-feedback" hidden></p>
+    </div>
+    <div class="continue-wrap" id="continue3-wrap">
+      <button class="continue-btn" id="continue3" type="button" disabled>Continue &rarr;</button>
+    </div>
   </div>
+
+  <div class="gated" id="gated3" hidden>
+    <div class="card">
+      <div class="lbl">Word Choice <span class="sub">&#183; its tone, and when to use it</span></div>
+      <p style="margin:0 0 6px 0;"><span class="tag">formal / literary</span></p>
+      <p style="margin:0;">Subdue is formal and suggests bringing something wild, rebellious, or resistant under control by force or strong effort. Use it when the struggle or the overcoming is the point. For calming a child or settling a minor issue, the plainer words &#x27;calm&#x27; or &#x27;quiet&#x27; are better and more natural.</p>
+    </div>
     <div class="done-wrap">
       <button class="done-btn" id="done-btn" type="button">Done</button>
     </div>
   </div>
 
-  <p class="foot">ISEE Upper Vocabulary &middot; Unit 22: Provocation, Control & Suppression &middot; Subdue</p>
+  <p class="foot">ISEE Upper Vocabulary &middot; Unit 22: Provocation, Control &amp; Suppression &middot; Subdue</p>
 </main>
 <script>
 (function(){
-  var t0 = Date.now();
-  // Dynamic height reporting — eliminates double-scroll in TimeBack iframe
-  function notifyResize() {
-    var h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-    window.parent.postMessage({ type: 'RESIZE', height: h }, '*');
+  function post(pct){
+    try { if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'progress', percent: pct }, '*'); } catch(e) {}
   }
-  document.addEventListener('DOMContentLoaded', notifyResize);
-  window.addEventListener('load', notifyResize);
-  if (window.ResizeObserver) {
-    new ResizeObserver(function() { notifyResize(); }).observe(document.body);
-  }
-  function post(msg){
-    try { if (window.parent && window.parent !== window) window.parent.postMessage(msg, '*'); } catch(e) {}
-  }
-  function runningTime(){ return Math.round((Date.now() - t0) / 1000); }
-  function sendState(pct, completed, ready){
-    post({ type: 'CONTENT_STATE_CHANGE', contentSummary: {
-      isCompleted: completed, isReadyToAdvance: ready,
-      progressPercentage: pct, runningTimeSeconds: runningTime()
-    }});
-  }
+  post(0);
 
-  post({ type: 'CONTENT_READY' });
-  sendState(0, false, false);
-
-  function wireGate(containerId, continueBtnId){
-    var box = document.getElementById(containerId);
-    var btn = document.getElementById(continueBtnId);
-    if (!box || !btn) return;
-    var unlocked = false;
-    var quizDetails = [];
-    box.querySelectorAll('details').forEach(function(det){
-      var summary = det.querySelector('summary');
-      if (!summary || !summary.querySelector('span')) return; // skip non-quiz reveals (e.g. context toggle, root-connection)
-      quizDetails.push(det);
+  (function(){
+    var container = document.getElementById('yourturn-mcq');
+    var feedback = document.getElementById('yourturn-feedback');
+    var continueBtn = document.getElementById('continue1');
+    var correctLetter = "B";
+    var solved = false;
+    container.querySelectorAll('.mcq-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if (solved) return;
+        var letter = btn.getAttribute('data-letter');
+        if (letter === correctLetter){
+          btn.classList.add('correct');
+          feedback.textContent = 'Correct!';
+          feedback.className = 'mcq-feedback ok';
+          feedback.hidden = false;
+          solved = true;
+          continueBtn.disabled = false;
+          container.querySelectorAll('.mcq-opt').forEach(function(b){ b.disabled = true; });
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          feedback.textContent = 'Not quite — try again.';
+          feedback.className = 'mcq-feedback no';
+          feedback.hidden = false;
+        }
+      });
     });
-    if (quizDetails.length === 0){ btn.hidden = false; return; } // no quiz in this section (e.g. morpheme-unit Build the Word) — don't strand the student
-    quizDetails.forEach(function(det){
-      det.addEventListener('toggle', function(){
-        if (det.open && !unlocked){ unlocked = true; btn.hidden = false; }
+  })();
+
+  document.getElementById('continue1').addEventListener('click', function(){
+    document.getElementById('continue1-wrap').style.display = 'none';
+    var g = document.getElementById('gated1');
+    g.hidden = false;
+    g.scrollIntoView({behavior:'smooth', block:'start'});
+    post(25);
+  });
+
+  function wireChipRow(rowId, calloutId, meanings){
+    var row = document.getElementById(rowId);
+    var callout = document.getElementById(calloutId);
+    var openChip = null;
+    row.querySelectorAll('.chip.tappable').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        var key = chip.getAttribute('data-key');
+        if (openChip === chip){
+          chip.classList.remove('open');
+          callout.hidden = true;
+          openChip = null;
+        } else {
+          row.querySelectorAll('.chip.tappable').forEach(function(c){ c.classList.remove('open'); });
+          chip.classList.add('open');
+          callout.textContent = meanings[key] || '';
+          callout.hidden = false;
+          openChip = chip;
+        }
       });
     });
   }
-  wireGate('works-block', 'continue1');
-  wireGate('build-block', 'continue2');
+  wireChipRow('synonym-chips', 'synonym-callout', {"control": "to direct or manage something's behavior", "overcome": "to defeat or get the better of", "tame": "to make a wild creature gentle and obedient"});
+  wireChipRow('antonym-chips', 'antonym-callout', {"liberate": "to set someone or something completely free", "unleash": "to release something from restraint or control"});
 
-  var c1 = document.getElementById('continue1');
-  if (c1) c1.addEventListener('click', function(){
-    document.getElementById('continue1-wrap').style.display = 'none';
-    var g1 = document.getElementById('gated1');
-    g1.hidden = false;
-    g1.scrollIntoView({behavior:'smooth', block:'start'});
-    sendState(33, false, false);
-  });
+  (function(){
+    var callout = document.getElementById('strength-callout');
+    var sentences = {"manage": "Manage is much weaker than subdue: managing a rowdy class means keeping it on track, while subduing it means overpowering resistance completely.", "suppress": "Suppress is a step below subdue \u2014 to suppress is to hold something down, but to subdue is to overpower it and bring it fully under your control.", "dominate": "Dominate is stronger than subdue: subduing brings someone or something under control in the moment, while dominating means holding total, ongoing power over it."};
+    document.querySelectorAll('#strength-scale .scale-word.tappable').forEach(function(w){
+      w.addEventListener('click', function(){
+        document.querySelectorAll('#strength-scale .scale-word').forEach(function(x){ x.classList.remove('active'); });
+        w.classList.add('active');
+        var key = w.getAttribute('data-key');
+        callout.textContent = sentences[key] || '';
+        callout.hidden = false;
+      });
+    });
+  })();
 
-  var c2 = document.getElementById('continue2');
-  if (c2) c2.addEventListener('click', function(){
+  // ---------- Sorting activity (event delegation — no per-chip listener re-attachment) ----------
+  (function(){
+    var root = document.getElementById('sort-activity-root');
+    var pool = document.getElementById('sort-pool');
+    var checkBtn = document.getElementById('sort-check-btn');
+    var status = document.getElementById('sort-status');
+    var continue2 = document.getElementById('continue2');
+    var selectedChip = null;
+    var correctMap = {"control": "synonym", "overcome": "synonym", "liberate": "antonym", "unleash": "antonym"};
+
+    function allPlaced(){
+      return pool.querySelectorAll('.sort-chip').length === 0;
+    }
+    function updateCheckVisibility(){
+      checkBtn.hidden = !allPlaced();
+    }
+    function selectChip(chip){
+      if (chip.classList.contains('locked')) return;
+      if (selectedChip && selectedChip !== chip){ selectedChip.classList.remove('selected'); }
+      if (selectedChip === chip){
+        chip.classList.remove('selected');
+        selectedChip = null;
+      } else {
+        chip.classList.add('selected');
+        selectedChip = chip;
+      }
+    }
+
+    root.addEventListener('click', function(e){
+      var chip = e.target.closest('.sort-chip');
+      var col = e.target.closest('.sort-col');
+      if (col){
+        if (chip){
+          selectChip(chip);
+        } else if (selectedChip){
+          col.appendChild(selectedChip);
+          selectedChip.classList.remove('selected');
+          selectedChip = null;
+          updateCheckVisibility();
+        }
+        return;
+      }
+      if (chip){
+        selectChip(chip);
+      }
+    });
+
+    checkBtn.addEventListener('click', function(){
+      var allCorrect = true;
+      document.querySelectorAll('.sort-col').forEach(function(col){
+        var colName = col.getAttribute('data-col');
+        col.querySelectorAll('.sort-chip').forEach(function(chip){
+          var word = chip.getAttribute('data-word');
+          if (correctMap[word] === colName){
+            chip.style.borderColor = 'var(--ok)';
+            chip.classList.add('locked');
+            chip.classList.remove('selected');
+          } else {
+            allCorrect = false;
+            chip.classList.add('shake');
+            if (selectedChip === chip) selectedChip = null;
+            chip.classList.remove('selected');
+            setTimeout(function(){
+              chip.classList.remove('shake');
+              chip.style.borderColor = '';
+              pool.appendChild(chip);
+              updateCheckVisibility();
+            }, 500);
+          }
+        });
+      });
+      if (allCorrect){
+        status.textContent = 'All correct!';
+        status.className = 'sort-status ok';
+        status.hidden = false;
+        checkBtn.hidden = true;
+        continue2.disabled = false;
+      } else {
+        status.textContent = 'Not quite — the highlighted words went back to the pool. Try again.';
+        status.className = 'sort-status no';
+        status.hidden = false;
+      }
+    });
+  })();
+
+  document.getElementById('continue2').addEventListener('click', function(){
     document.getElementById('continue2-wrap').style.display = 'none';
-    var g2 = document.getElementById('gated2');
-    g2.hidden = false;
-    g2.scrollIntoView({behavior:'smooth', block:'start'});
-    sendState(66, false, false);
+    var g = document.getElementById('gated2');
+    g.hidden = false;
+    g.scrollIntoView({behavior:'smooth', block:'start'});
+    post(50);
   });
 
-  var doneBtn = document.getElementById('done-btn');
-  if (doneBtn) doneBtn.addEventListener('click', function(){
-    sendState(100, true, true);
-    var wrap = doneBtn.closest('.done-wrap');
+  (function(){
+    var chips = document.querySelectorAll('#morpheme-chips .morph-chip');
+    var synthesis = document.getElementById('morpheme-synthesis');
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        chip.classList.add('open');
+        var allOpen = true;
+        chips.forEach(function(c){ if (!c.classList.contains('open')) allOpen = false; });
+        if (allOpen) synthesis.hidden = false;
+      });
+    });
+  })();
+
+  var accordionOpened = false;
+  document.getElementById('newword-header').addEventListener('click', function(){
+    var body = document.getElementById('newword-body');
+    body.hidden = !body.hidden;
+    accordionOpened = true;
+    maybeUnlockContinue3();
+  });
+
+  var rootIsProductive = true;
+  var continue3 = document.getElementById('continue3');
+  function maybeUnlockContinue3(){
+    if (!rootIsProductive && accordionOpened) continue3.disabled = false;
+  }
+
+  (function(){
+    var container = document.getElementById('root-mcq');
+    var feedback = document.getElementById('root-mcq-feedback');
+    var correctLetter = "A";
+    var solved = false;
+    container.querySelectorAll('.mcq-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if (solved) return;
+        var letter = btn.getAttribute('data-letter');
+        if (letter === correctLetter){
+          btn.classList.add('correct');
+          feedback.textContent = 'Correct!';
+          feedback.className = 'mcq-feedback ok';
+          feedback.hidden = false;
+          solved = true;
+          continue3.disabled = false;
+          container.querySelectorAll('.mcq-opt').forEach(function(b){ b.disabled = true; });
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          feedback.textContent = 'Not quite — try again.';
+          feedback.className = 'mcq-feedback no';
+          feedback.hidden = false;
+        }
+      });
+    });
+  })();
+
+  document.getElementById('continue3').addEventListener('click', function(){
+    document.getElementById('continue3-wrap').style.display = 'none';
+    var g = document.getElementById('gated3');
+    g.hidden = false;
+    g.scrollIntoView({behavior:'smooth', block:'start'});
+    post(75);
+  });
+
+  document.getElementById('done-btn').addEventListener('click', function(){
+    post(100);
+    var wrap = document.getElementById('done-btn').closest('.done-wrap');
     wrap.innerHTML = '<p class="done-msg">&#10003; Complete</p>';
   });
 })();
