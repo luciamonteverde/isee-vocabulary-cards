@@ -41,18 +41,19 @@ button{font-family:inherit;cursor:pointer}
 @keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
 .shake{animation:shake .5s}
 
-/* Synonym/antonym chips */
+/* Synonym/antonym chips — shared callout below the row (Fix 5) */
 .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
-.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink)}
+.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink);text-transform:lowercase}
 .chip.tappable{cursor:pointer}
 .chip.tappable:hover{border-color:var(--accent)}
 .chip.tappable.open{background:var(--accent);color:#04231e;border-color:var(--accent)}
 .chip.static{opacity:.95}
-.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:8px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:10px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout[hidden]{display:none}
 
 /* How Strong scale */
 .scale-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0}
-.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent}
+.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent;text-transform:lowercase}
 .scale-word:hover{border-color:var(--accent)}
 .scale-word.active{border-color:var(--accent)}
 .scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
@@ -60,7 +61,7 @@ button{font-family:inherit;cursor:pointer}
 
 /* Sorting activity */
 .sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
-.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);text-transform:lowercase}
 .sort-chip.selected{border-color:var(--accent);background:#1e3a35}
 .sort-columns{display:flex;gap:12px;margin:10px 0}
 .sort-col{flex:1;background:#232941;border:2px dashed #3a4155;border-radius:10px;padding:10px;min-height:80px}
@@ -98,7 +99,7 @@ button{font-family:inherit;cursor:pointer}
     <div style="font-size:32px;font-weight:bold;font-family:Georgia,serif;">Nemesis</div>
     <p style="color:var(--muted);margin:4px 0 0 0;">/NEM-uh-sis/ — stress on the first syllable <span class="tag">noun</span></p>
     <div class="lbl" style="margin-top:14px;">Hear It</div>
-    <audio controls="controls" src="">Audio not available</audio>
+    <audio controls="controls" src="https://commons.wikimedia.org/wiki/Special:FilePath/LL-Q1860%20(eng)-Vealhurl-nemesis.wav">Audio not available</audio>
   </div>
 
   <div class="card">
@@ -121,10 +122,10 @@ button{font-family:inherit;cursor:pointer}
       <div class="lbl" style="color:var(--warn);margin-bottom:6px;">Your Turn</div>
       <p style="margin:0 0 10px 0;">Which sentence uses nemesis correctly?</p>
       <div id="yourturn-mcq">
-        <button class="mcq-opt" type="button" data-letter="A">A. For years, that debate team was our team&#x27;s nemesis.</button>
-        <button class="mcq-opt" type="button" data-letter="B">B. She planted the nemesis along the garden path.</button>
-        <button class="mcq-opt" type="button" data-letter="C">C. He charged the nemesis overnight before the trip.</button>
-        <button class="mcq-opt" type="button" data-letter="D">D. The bakery sold nemesis by the slice.</button>
+        <button class="mcq-opt" type="button" data-letter="A">A. Winning first place at the science fair filled Dana with a quiet sense of nemesis.</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. The two neighbors shared a warm nemesis that had lasted since childhood.</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. After losing to the same chess player in five straight tournaments, Marcus finally admitted she was his nemesis.</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. Thanks to her natural nemesis, Priya quickly won the trust of everyone at her new school.</button>
       </div>
       <p class="mcq-feedback" id="yourturn-feedback" hidden></p>
     </div>
@@ -137,35 +138,37 @@ button{font-family:inherit;cursor:pointer}
     <div class="card">
       <div class="lbl">Synonyms <span class="sub">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
       <div class="chip-row" id="synonym-chips">
-        <span class="chip tappable" tabindex="0">rival</span><p class="callout" hidden>someone competing with you for the same prize</p>
-        <span class="chip tappable" tabindex="0">opponent</span><p class="callout" hidden>the person you face in a contest</p>
-        <span class="chip tappable" tabindex="0">scourge</span><p class="callout" hidden>a cause of great suffering or trouble</p>
+        <span class="chip tappable" tabindex="0" data-key="rival">rival</span>
+        <span class="chip tappable" tabindex="0" data-key="opponent">opponent</span>
+        <span class="chip tappable" tabindex="0" data-key="scourge">scourge</span>
       </div>
+      <p class="callout" id="synonym-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">Antonyms <span class="sub">&#183; opposites</span></div>
-      <div class="chip-row">
-        <span class="chip static">Friend</span>
-        <span class="chip static">Ally</span>
+      <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="antonym-chips">
+        <span class="chip tappable" tabindex="0" data-key="friend">friend</span>
+        <span class="chip tappable" tabindex="0" data-key="ally">ally</span>
       </div>
+      <p class="callout" id="antonym-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to Nemesis</span></div>
+      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to nemesis</span></div>
       <div class="scale-row" id="strength-scale">
         <span class="scale-word tappable" data-key="rival">rival</span><span class="scale-arrow">&#8594;</span>
         <span class="scale-word tappable" data-key="opponent">opponent</span><span class="scale-arrow">&#8594;</span>
         <span class="scale-word tappable" data-key="foe">foe</span><span class="scale-arrow">&#8594;</span>
-        <span class="scale-word target">Nemesis</span>
+        <span class="scale-word target">nemesis</span>
       </div>
       <p class="callout" id="strength-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">Sort It Out <span class="sub">&#183; drag each word into Synonym or Antonym</span></div>
+      <div class="lbl">Sort It Out <span class="sub">&#183; tap a word, then tap a column to place it</span></div>
       <div class="sort-pool" id="sort-pool">
         <span class="sort-chip" data-word="rival">rival</span>
-        <span class="sort-chip" data-word="Friend">Friend</span>
+        <span class="sort-chip" data-word="friend">friend</span>
         <span class="sort-chip" data-word="opponent">opponent</span>
-        <span class="sort-chip" data-word="Ally">Ally</span>
+        <span class="sort-chip" data-word="ally">ally</span>
       </div>
       <div class="sort-columns">
         <div class="sort-col" data-col="synonym"><p class="sort-col-label">Synonym</p></div>
@@ -183,10 +186,9 @@ button{font-family:inherit;cursor:pointer}
     <div class="card">
       <div class="lbl">Build the Word <span class="sub">&#183; tap each piece to reveal its meaning</span></div>
       <div class="morph-row" id="morpheme-chips">
-        <div class="morph-chip"><span class="type">Root</span><span class="form">nem-</span><span class="meaning">to distribute, allot, or give out what is due (Greek)</span></div>
-        <div class="morph-chip"><span class="type">Suffix</span><span class="form">-sis</span><span class="meaning">the act, process, or result of (forms abstract nouns from verbs)</span></div>
+        <div class="morph-chip"><span class="type">Root</span><span class="form">nemesis</span><span class="meaning">retribution; the dealing out of what someone deserves (from Greek nemein, &#x27;to distribute, allot&#x27;) (Greek)</span></div>
       </div>
-      <p class="synthesis" id="morpheme-synthesis" hidden>Nem- (&#x27;to give out what is due&#x27;) plus -sis (&#x27;the act or result of&#x27;) literally meant &#x27;the handing out of exactly what someone deserves&#x27; — in Greek myth, the goddess Nemesis delivered that payback. That is why a nemesis today is the rival or enemy who keeps delivering the defeat you seem to deserve and cannot escape.</p>
+      <p class="synthesis" id="morpheme-synthesis" hidden>In English, nemesis works as one single unit: it is the name of the Greek goddess Nemesis, who handed every person exactly the fortune — good or bad — that they deserved. Her name comes from the Greek verb nemein, &#x27;to distribute or allot what is due.&#x27; Because the goddess delivered payback no one could escape, a nemesis today is the rival or enemy who keeps delivering the defeat you cannot seem to avoid.</p>
     </div>
     <div class="card">
       <div class="accordion-header" id="newword-header">Use the root in a new word: <strong>economy</strong></div>
@@ -233,7 +235,7 @@ button{font-family:inherit;cursor:pointer}
     var container = document.getElementById('yourturn-mcq');
     var feedback = document.getElementById('yourturn-feedback');
     var continueBtn = document.getElementById('continue1');
-    var correctLetter = "A";
+    var correctLetter = "C";
     var solved = false;
     container.querySelectorAll('.mcq-opt').forEach(function(btn){
       btn.addEventListener('click', function(){
@@ -266,23 +268,30 @@ button{font-family:inherit;cursor:pointer}
     post(25);
   });
 
-  // ---------- Synonym chips (tap to reveal/collapse) ----------
-  document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(chip){
-    chip.addEventListener('click', function(){
-      var callout = chip.nextElementSibling;
-      var isOpen = chip.classList.contains('open');
-      // collapse all others
-      document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(c){
-        c.classList.remove('open');
-        var cc = c.nextElementSibling;
-        if (cc && cc.classList.contains('callout')) cc.hidden = true;
+  // ---------- Shared-callout chip row helper (Fix 5) ----------
+  function wireChipRow(rowId, calloutId, meanings){
+    var row = document.getElementById(rowId);
+    var callout = document.getElementById(calloutId);
+    var openChip = null;
+    row.querySelectorAll('.chip.tappable').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        var key = chip.getAttribute('data-key');
+        if (openChip === chip){
+          chip.classList.remove('open');
+          callout.hidden = true;
+          openChip = null;
+        } else {
+          row.querySelectorAll('.chip.tappable').forEach(function(c){ c.classList.remove('open'); });
+          chip.classList.add('open');
+          callout.textContent = meanings[key] || '';
+          callout.hidden = false;
+          openChip = chip;
+        }
       });
-      if (!isOpen){
-        chip.classList.add('open');
-        if (callout && callout.classList.contains('callout')) callout.hidden = false;
-      }
     });
-  });
+  }
+  wireChipRow('synonym-chips', 'synonym-callout', {"rival": "someone competing with you for the same prize", "opponent": "the person you face in a contest", "scourge": "a cause of great suffering or trouble"});
+  wireChipRow('antonym-chips', 'antonym-callout', {"friend": "someone who likes and supports you warmly", "ally": "a partner who fights on your side"});
 
   // ---------- How Strong scale ----------
   (function(){
@@ -307,7 +316,7 @@ button{font-family:inherit;cursor:pointer}
     var status = document.getElementById('sort-status');
     var continue2 = document.getElementById('continue2');
     var selectedChip = null;
-    var correctMap = {"rival": "synonym", "opponent": "synonym", "Friend": "antonym", "Ally": "antonym"};
+    var correctMap = {"rival": "synonym", "opponent": "synonym", "friend": "antonym", "ally": "antonym"};
 
     function allPlaced(){
       return document.querySelectorAll('#sort-pool .sort-chip').length === 0;

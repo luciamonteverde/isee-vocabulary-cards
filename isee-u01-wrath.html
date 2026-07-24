@@ -41,18 +41,19 @@ button{font-family:inherit;cursor:pointer}
 @keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
 .shake{animation:shake .5s}
 
-/* Synonym/antonym chips */
+/* Synonym/antonym chips — shared callout below the row (Fix 5) */
 .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
-.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink)}
+.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink);text-transform:lowercase}
 .chip.tappable{cursor:pointer}
 .chip.tappable:hover{border-color:var(--accent)}
 .chip.tappable.open{background:var(--accent);color:#04231e;border-color:var(--accent)}
 .chip.static{opacity:.95}
-.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:8px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:10px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout[hidden]{display:none}
 
 /* How Strong scale */
 .scale-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0}
-.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent}
+.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent;text-transform:lowercase}
 .scale-word:hover{border-color:var(--accent)}
 .scale-word.active{border-color:var(--accent)}
 .scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
@@ -60,7 +61,7 @@ button{font-family:inherit;cursor:pointer}
 
 /* Sorting activity */
 .sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
-.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);text-transform:lowercase}
 .sort-chip.selected{border-color:var(--accent);background:#1e3a35}
 .sort-columns{display:flex;gap:12px;margin:10px 0}
 .sort-col{flex:1;background:#232941;border:2px dashed #3a4155;border-radius:10px;padding:10px;min-height:80px}
@@ -98,7 +99,7 @@ button{font-family:inherit;cursor:pointer}
     <div style="font-size:32px;font-weight:bold;font-family:Georgia,serif;">Wrath</div>
     <p style="color:var(--muted);margin:4px 0 0 0;">/rath/ — rhymes with math <span class="tag">noun</span></p>
     <div class="lbl" style="margin-top:14px;">Hear It</div>
-    <audio controls="controls" src="">Audio not available</audio>
+    <audio controls="controls" src="https://upload.wikimedia.org/wikipedia/commons/e/e0/En-us-wrath.ogg">Audio not available</audio>
   </div>
 
   <div class="card">
@@ -121,10 +122,10 @@ button{font-family:inherit;cursor:pointer}
       <div class="lbl" style="color:var(--warn);margin-bottom:6px;">Your Turn</div>
       <p style="margin:0 0 10px 0;">Which sentence uses wrath correctly?</p>
       <div id="yourturn-mcq">
-        <button class="mcq-opt" type="button" data-letter="A">A. The king&#x27;s wrath was so great that his advisors feared even mentioning the failed harvest.</button>
-        <button class="mcq-opt" type="button" data-letter="B">B. She stirred a spoonful of wrath into her morning tea.</button>
-        <button class="mcq-opt" type="button" data-letter="C">C. He parked his wrath in the driveway overnight.</button>
-        <button class="mcq-opt" type="button" data-letter="D">D. The teacher graded the wrath and returned it the next day.</button>
+        <button class="mcq-opt" type="button" data-letter="A">A. The retiring librarian was honored for her wrath, having guided three generations of students to the books they loved.</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. Overcome with wrath at the surprise party, the birthday girl laughed and hugged each of her friends in turn.</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. When the coach learned that a rival team had secretly filmed his players&#x27; practices, his wrath drove him to demand the league punish the cheaters.</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. The climbers paused at the summit to take in the wrath of the valley below, photographing the winding river and golden fields.</button>
       </div>
       <p class="mcq-feedback" id="yourturn-feedback" hidden></p>
     </div>
@@ -137,35 +138,37 @@ button{font-family:inherit;cursor:pointer}
     <div class="card">
       <div class="lbl">Synonyms <span class="sub">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
       <div class="chip-row" id="synonym-chips">
-        <span class="chip tappable" tabindex="0">anger</span><p class="callout" hidden>the ordinary, everyday feeling of being upset</p>
-        <span class="chip tappable" tabindex="0">fury</span><p class="callout" hidden>wild, explosive anger that feels out of control</p>
-        <span class="chip tappable" tabindex="0">indignation</span><p class="callout" hidden>anger sparked by something unfair or insulting</p>
+        <span class="chip tappable" tabindex="0" data-key="anger">anger</span>
+        <span class="chip tappable" tabindex="0" data-key="fury">fury</span>
+        <span class="chip tappable" tabindex="0" data-key="indignation">indignation</span>
       </div>
+      <p class="callout" id="synonym-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">Antonyms <span class="sub">&#183; opposites</span></div>
-      <div class="chip-row">
-        <span class="chip static">Serenity</span>
-        <span class="chip static">Forbearance</span>
+      <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="antonym-chips">
+        <span class="chip tappable" tabindex="0" data-key="serenity">serenity</span>
+        <span class="chip tappable" tabindex="0" data-key="forbearance">forbearance</span>
       </div>
+      <p class="callout" id="antonym-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to Wrath</span></div>
+      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to wrath</span></div>
       <div class="scale-row" id="strength-scale">
         <span class="scale-word tappable" data-key="annoyance">annoyance</span><span class="scale-arrow">&#8594;</span>
         <span class="scale-word tappable" data-key="anger">anger</span><span class="scale-arrow">&#8594;</span>
         <span class="scale-word tappable" data-key="fury">fury</span><span class="scale-arrow">&#8594;</span>
-        <span class="scale-word target">Wrath</span>
+        <span class="scale-word target">wrath</span>
       </div>
       <p class="callout" id="strength-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">Sort It Out <span class="sub">&#183; drag each word into Synonym or Antonym</span></div>
+      <div class="lbl">Sort It Out <span class="sub">&#183; tap a word, then tap a column to place it</span></div>
       <div class="sort-pool" id="sort-pool">
         <span class="sort-chip" data-word="anger">anger</span>
-        <span class="sort-chip" data-word="Serenity">Serenity</span>
+        <span class="sort-chip" data-word="serenity">serenity</span>
         <span class="sort-chip" data-word="fury">fury</span>
-        <span class="sort-chip" data-word="Forbearance">Forbearance</span>
+        <span class="sort-chip" data-word="forbearance">forbearance</span>
       </div>
       <div class="sort-columns">
         <div class="sort-col" data-col="synonym"><p class="sort-col-label">Synonym</p></div>
@@ -183,10 +186,9 @@ button{font-family:inherit;cursor:pointer}
     <div class="card">
       <div class="lbl">Build the Word <span class="sub">&#183; tap each piece to reveal its meaning</span></div>
       <div class="morph-row" id="morpheme-chips">
-        <div class="morph-chip"><span class="type">Root</span><span class="form">wroth (Old English wrāþ)</span><span class="meaning">angry, furious — originally &#x27;twisted, wrung out of shape&#x27; (Old English)</span></div>
-        <div class="morph-chip"><span class="type">Suffix</span><span class="form">-th</span><span class="meaning">state or condition of (forms abstract nouns, as in strength, warmth, width)</span></div>
+        <div class="morph-chip"><span class="type">Root</span><span class="form">wrāþ</span><span class="meaning">angry, furious (Old English)</span></div>
       </div>
-      <p class="synthesis" id="morpheme-synthesis" hidden>The Old English root wrāþ meant &#x27;angry&#x27; — at its deepest layer, &#x27;twisted&#x27; out of shape, from an ancient root meaning &#x27;to twist.&#x27; Add the noun-making suffix -th (as in strong → strength or warm → warmth) and you get wrath: the state of being twisted up with intense, often vengeful anger.</p>
+      <p class="synthesis" id="morpheme-synthesis" hidden>Wrath comes down to us as one solid piece: Old English wrāþ, meaning &#x27;angry, furious.&#x27; Dig to its deepest layer and the ancient root meant &#x27;to twist or bend&#x27; — so wrath is anger that twists a person out of shape, bending them toward revenge. There is no prefix or suffix to peel off here; the whole word, all on its own, carries the fury.</p>
     </div>
     <div class="card">
       <div class="accordion-header" id="newword-header">Use the root in a new word: <strong>writhe</strong></div>
@@ -233,7 +235,7 @@ button{font-family:inherit;cursor:pointer}
     var container = document.getElementById('yourturn-mcq');
     var feedback = document.getElementById('yourturn-feedback');
     var continueBtn = document.getElementById('continue1');
-    var correctLetter = "A";
+    var correctLetter = "C";
     var solved = false;
     container.querySelectorAll('.mcq-opt').forEach(function(btn){
       btn.addEventListener('click', function(){
@@ -266,23 +268,30 @@ button{font-family:inherit;cursor:pointer}
     post(25);
   });
 
-  // ---------- Synonym chips (tap to reveal/collapse) ----------
-  document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(chip){
-    chip.addEventListener('click', function(){
-      var callout = chip.nextElementSibling;
-      var isOpen = chip.classList.contains('open');
-      // collapse all others
-      document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(c){
-        c.classList.remove('open');
-        var cc = c.nextElementSibling;
-        if (cc && cc.classList.contains('callout')) cc.hidden = true;
+  // ---------- Shared-callout chip row helper (Fix 5) ----------
+  function wireChipRow(rowId, calloutId, meanings){
+    var row = document.getElementById(rowId);
+    var callout = document.getElementById(calloutId);
+    var openChip = null;
+    row.querySelectorAll('.chip.tappable').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        var key = chip.getAttribute('data-key');
+        if (openChip === chip){
+          chip.classList.remove('open');
+          callout.hidden = true;
+          openChip = null;
+        } else {
+          row.querySelectorAll('.chip.tappable').forEach(function(c){ c.classList.remove('open'); });
+          chip.classList.add('open');
+          callout.textContent = meanings[key] || '';
+          callout.hidden = false;
+          openChip = chip;
+        }
       });
-      if (!isOpen){
-        chip.classList.add('open');
-        if (callout && callout.classList.contains('callout')) callout.hidden = false;
-      }
     });
-  });
+  }
+  wireChipRow('synonym-chips', 'synonym-callout', {"anger": "the ordinary, everyday feeling of being upset", "fury": "wild, explosive anger that feels out of control", "indignation": "anger sparked by something unfair or insulting"});
+  wireChipRow('antonym-chips', 'antonym-callout', {"serenity": "calm, untroubled peace of mind", "forbearance": "patiently holding back anger or revenge"});
 
   // ---------- How Strong scale ----------
   (function(){
@@ -307,7 +316,7 @@ button{font-family:inherit;cursor:pointer}
     var status = document.getElementById('sort-status');
     var continue2 = document.getElementById('continue2');
     var selectedChip = null;
-    var correctMap = {"anger": "synonym", "fury": "synonym", "Serenity": "antonym", "Forbearance": "antonym"};
+    var correctMap = {"anger": "synonym", "fury": "synonym", "serenity": "antonym", "forbearance": "antonym"};
 
     function allPlaced(){
       return document.querySelectorAll('#sort-pool .sort-chip').length === 0;

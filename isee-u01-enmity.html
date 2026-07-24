@@ -41,18 +41,19 @@ button{font-family:inherit;cursor:pointer}
 @keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
 .shake{animation:shake .5s}
 
-/* Synonym/antonym chips */
+/* Synonym/antonym chips — shared callout below the row (Fix 5) */
 .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
-.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink)}
+.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink);text-transform:lowercase}
 .chip.tappable{cursor:pointer}
 .chip.tappable:hover{border-color:var(--accent)}
 .chip.tappable.open{background:var(--accent);color:#04231e;border-color:var(--accent)}
 .chip.static{opacity:.95}
-.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:8px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:10px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout[hidden]{display:none}
 
 /* How Strong scale */
 .scale-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0}
-.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent}
+.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent;text-transform:lowercase}
 .scale-word:hover{border-color:var(--accent)}
 .scale-word.active{border-color:var(--accent)}
 .scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
@@ -60,7 +61,7 @@ button{font-family:inherit;cursor:pointer}
 
 /* Sorting activity */
 .sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
-.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);text-transform:lowercase}
 .sort-chip.selected{border-color:var(--accent);background:#1e3a35}
 .sort-columns{display:flex;gap:12px;margin:10px 0}
 .sort-col{flex:1;background:#232941;border:2px dashed #3a4155;border-radius:10px;padding:10px;min-height:80px}
@@ -98,7 +99,7 @@ button{font-family:inherit;cursor:pointer}
     <div style="font-size:32px;font-weight:bold;font-family:Georgia,serif;">Enmity</div>
     <p style="color:var(--muted);margin:4px 0 0 0;">/EN-muh-tee/ — stress on first syllable <span class="tag">noun</span></p>
     <div class="lbl" style="margin-top:14px;">Hear It</div>
-    <audio controls="controls" src="">Audio not available</audio>
+    <audio controls="controls" src="https://commons.wikimedia.org/wiki/Special:FilePath/En-us-enmity.ogg">Audio not available</audio>
   </div>
 
   <div class="card">
@@ -121,10 +122,10 @@ button{font-family:inherit;cursor:pointer}
       <div class="lbl" style="color:var(--warn);margin-bottom:6px;">Your Turn</div>
       <p style="margin:0 0 10px 0;">Which sentence uses enmity correctly?</p>
       <div id="yourturn-mcq">
-        <button class="mcq-opt" type="button" data-letter="A">A. Centuries of enmity between the two nations made peace talks difficult.</button>
-        <button class="mcq-opt" type="button" data-letter="B">B. She spread a thin layer of enmity on her toast.</button>
-        <button class="mcq-opt" type="button" data-letter="C">C. He tuned the enmity before the concert began.</button>
-        <button class="mcq-opt" type="button" data-letter="D">D. The store sold enmity by the pound in the produce aisle.</button>
+        <button class="mcq-opt" type="button" data-letter="A">A. Maria felt deep enmity toward her teammates when they threw her a surprise party to celebrate her recovery.</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. The coach praised the players&#x27; enmity, saying their habit of encouraging one another had carried them to the championship.</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. The enmity between the two families ran so deep that their children were forbidden even to speak to one another at school.</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. With quiet enmity, the volunteers gave up their weekend to rebuild the elderly widow&#x27;s storm-damaged fence.</button>
       </div>
       <p class="mcq-feedback" id="yourturn-feedback" hidden></p>
     </div>
@@ -137,35 +138,37 @@ button{font-family:inherit;cursor:pointer}
     <div class="card">
       <div class="lbl">Synonyms <span class="sub">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
       <div class="chip-row" id="synonym-chips">
-        <span class="chip tappable" tabindex="0">rivalry</span><p class="callout" hidden>ongoing competition to beat someone, not hatred</p>
-        <span class="chip tappable" tabindex="0">hostility</span><p class="callout" hidden>open unfriendliness or aggressive behavior shown outwardly</p>
-        <span class="chip tappable" tabindex="0">rancor</span><p class="callout" hidden>bitter resentment held over past wrongs</p>
+        <span class="chip tappable" tabindex="0" data-key="rivalry">rivalry</span>
+        <span class="chip tappable" tabindex="0" data-key="hostility">hostility</span>
+        <span class="chip tappable" tabindex="0" data-key="rancor">rancor</span>
       </div>
+      <p class="callout" id="synonym-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">Antonyms <span class="sub">&#183; opposites</span></div>
-      <div class="chip-row">
-        <span class="chip static">Friendship</span>
-        <span class="chip static">Amity</span>
+      <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="antonym-chips">
+        <span class="chip tappable" tabindex="0" data-key="friendship">friendship</span>
+        <span class="chip tappable" tabindex="0" data-key="amity">amity</span>
       </div>
+      <p class="callout" id="antonym-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to Enmity</span></div>
+      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to enmity</span></div>
       <div class="scale-row" id="strength-scale">
         <span class="scale-word tappable" data-key="disagreement">disagreement</span><span class="scale-arrow">&#8594;</span>
         <span class="scale-word tappable" data-key="rivalry">rivalry</span><span class="scale-arrow">&#8594;</span>
         <span class="scale-word tappable" data-key="hostility">hostility</span><span class="scale-arrow">&#8594;</span>
-        <span class="scale-word target">Enmity</span>
+        <span class="scale-word target">enmity</span>
       </div>
       <p class="callout" id="strength-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">Sort It Out <span class="sub">&#183; drag each word into Synonym or Antonym</span></div>
+      <div class="lbl">Sort It Out <span class="sub">&#183; tap a word, then tap a column to place it</span></div>
       <div class="sort-pool" id="sort-pool">
         <span class="sort-chip" data-word="rivalry">rivalry</span>
-        <span class="sort-chip" data-word="Friendship">Friendship</span>
+        <span class="sort-chip" data-word="friendship">friendship</span>
         <span class="sort-chip" data-word="hostility">hostility</span>
-        <span class="sort-chip" data-word="Amity">Amity</span>
+        <span class="sort-chip" data-word="amity">amity</span>
       </div>
       <div class="sort-columns">
         <div class="sort-col" data-col="synonym"><p class="sort-col-label">Synonym</p></div>
@@ -183,24 +186,23 @@ button{font-family:inherit;cursor:pointer}
     <div class="card">
       <div class="lbl">Build the Word <span class="sub">&#183; tap each piece to reveal its meaning</span></div>
       <div class="morph-row" id="morpheme-chips">
-        <div class="morph-chip"><span class="type">Prefix</span><span class="form">en- (from Latin in-)</span><span class="meaning">not</span></div>
-        <div class="morph-chip"><span class="type">Root</span><span class="form">am / amic (Latin amicus)</span><span class="meaning">friend (from amare, &#x27;to love&#x27;) (Latin)</span></div>
+        <div class="morph-chip"><span class="type">Root</span><span class="form">enem- / inimic- (Latin inimicus)</span><span class="meaning">hostile, enemy (Latin)</span></div>
         <div class="morph-chip"><span class="type">Suffix</span><span class="form">-ity</span><span class="meaning">state or condition of</span></div>
       </div>
-      <p class="synthesis" id="morpheme-synthesis" hidden>Put the pieces together and you get &#x27;the state of being not-friends&#x27;: Latin in- (&#x27;not&#x27;) plus amicus (&#x27;friend&#x27;) made inimicus, an enemy, and -ity turns it into the condition itself. Enmity is literally un-friendship — a deep, long-lasting hostility between people.</p>
+      <p class="synthesis" id="morpheme-synthesis" hidden>Put the pieces together and you get &#x27;the state of being enemies&#x27;: the root enem- comes from Latin inimicus (&#x27;enemy, hostile&#x27;) — the same word that gives us &#x27;enemy&#x27; — and -ity turns it into the condition itself. Deep in its Latin history, inimicus was built from in- (&#x27;not&#x27;) plus amicus (&#x27;friend&#x27;), so enmity is, at its heart, un-friendship: a deep, long-lasting hostility between people.</p>
     </div>
     <div class="card">
-      <div class="accordion-header" id="newword-header">Use the root in a new word: <strong>amicable</strong></div>
-      <p class="accordion-body" id="newword-body" hidden>After the argument, the neighbors reached an amicable agreement, ending the dispute like true friends.</p>
+      <div class="accordion-header" id="newword-header">Use the root in a new word: <strong>inimical</strong></div>
+      <p class="accordion-body" id="newword-body" hidden>The desert&#x27;s scorching days and freezing nights are inimical to most crops, so few farmers ever settle there.</p>
     </div>
     <div class="card">
       <div class="lbl">Root Check</div>
-      <p style="margin:0 0 10px 0;">The Latin root am/amic means &#x27;friend&#x27; or &#x27;love.&#x27; If two countries sign an amicable treaty, how do they most likely feel about each other?</p>
+      <p style="margin:0 0 10px 0;">The root enem-/inimic- means &#x27;enemy&#x27; or &#x27;hostile.&#x27; If a scientist warns that polluted water is inimical to the river&#x27;s fish, what is the water doing to the fish?</p>
       <div id="root-mcq">
-        <button class="mcq-opt" type="button" data-letter="A">A. Friendly and cooperative</button>
-        <button class="mcq-opt" type="button" data-letter="B">B. Suspicious and guarded</button>
-        <button class="mcq-opt" type="button" data-letter="C">C. Confused and uncertain</button>
-        <button class="mcq-opt" type="button" data-letter="D">D. Jealous and competitive</button>
+        <button class="mcq-opt" type="button" data-letter="A">A. Attracting more of them to the river</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. Harming them or working against their survival</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. Slowly changing their color</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. Making them easier for researchers to count</button>
       </div>
       <p class="mcq-feedback" id="root-mcq-feedback" hidden></p>
     </div>
@@ -234,7 +236,7 @@ button{font-family:inherit;cursor:pointer}
     var container = document.getElementById('yourturn-mcq');
     var feedback = document.getElementById('yourturn-feedback');
     var continueBtn = document.getElementById('continue1');
-    var correctLetter = "A";
+    var correctLetter = "C";
     var solved = false;
     container.querySelectorAll('.mcq-opt').forEach(function(btn){
       btn.addEventListener('click', function(){
@@ -267,23 +269,30 @@ button{font-family:inherit;cursor:pointer}
     post(25);
   });
 
-  // ---------- Synonym chips (tap to reveal/collapse) ----------
-  document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(chip){
-    chip.addEventListener('click', function(){
-      var callout = chip.nextElementSibling;
-      var isOpen = chip.classList.contains('open');
-      // collapse all others
-      document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(c){
-        c.classList.remove('open');
-        var cc = c.nextElementSibling;
-        if (cc && cc.classList.contains('callout')) cc.hidden = true;
+  // ---------- Shared-callout chip row helper (Fix 5) ----------
+  function wireChipRow(rowId, calloutId, meanings){
+    var row = document.getElementById(rowId);
+    var callout = document.getElementById(calloutId);
+    var openChip = null;
+    row.querySelectorAll('.chip.tappable').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        var key = chip.getAttribute('data-key');
+        if (openChip === chip){
+          chip.classList.remove('open');
+          callout.hidden = true;
+          openChip = null;
+        } else {
+          row.querySelectorAll('.chip.tappable').forEach(function(c){ c.classList.remove('open'); });
+          chip.classList.add('open');
+          callout.textContent = meanings[key] || '';
+          callout.hidden = false;
+          openChip = chip;
+        }
       });
-      if (!isOpen){
-        chip.classList.add('open');
-        if (callout && callout.classList.contains('callout')) callout.hidden = false;
-      }
     });
-  });
+  }
+  wireChipRow('synonym-chips', 'synonym-callout', {"rivalry": "ongoing competition to beat someone, not hatred", "hostility": "open unfriendliness or aggressive behavior shown outwardly", "rancor": "bitter resentment held over past wrongs"});
+  wireChipRow('antonym-chips', 'antonym-callout', {"friendship": "warm, lasting bond of mutual trust and affection", "amity": "peaceful, friendly relations, especially between groups or nations"});
 
   // ---------- How Strong scale ----------
   (function(){
@@ -308,7 +317,7 @@ button{font-family:inherit;cursor:pointer}
     var status = document.getElementById('sort-status');
     var continue2 = document.getElementById('continue2');
     var selectedChip = null;
-    var correctMap = {"rivalry": "synonym", "hostility": "synonym", "Friendship": "antonym", "Amity": "antonym"};
+    var correctMap = {"rivalry": "synonym", "hostility": "synonym", "friendship": "antonym", "amity": "antonym"};
 
     function allPlaced(){
       return document.querySelectorAll('#sort-pool .sort-chip').length === 0;
@@ -416,7 +425,7 @@ button{font-family:inherit;cursor:pointer}
   (function(){
     var container = document.getElementById('root-mcq');
     var feedback = document.getElementById('root-mcq-feedback');
-    var correctLetter = "A";
+    var correctLetter = "B";
     var solved = false;
     container.querySelectorAll('.mcq-opt').forEach(function(btn){
       btn.addEventListener('click', function(){

@@ -41,18 +41,19 @@ button{font-family:inherit;cursor:pointer}
 @keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
 .shake{animation:shake .5s}
 
-/* Synonym/antonym chips */
+/* Synonym/antonym chips — shared callout below the row (Fix 5) */
 .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
-.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink)}
+.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink);text-transform:lowercase}
 .chip.tappable{cursor:pointer}
 .chip.tappable:hover{border-color:var(--accent)}
 .chip.tappable.open{background:var(--accent);color:#04231e;border-color:var(--accent)}
 .chip.static{opacity:.95}
-.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:8px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:10px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout[hidden]{display:none}
 
 /* How Strong scale */
 .scale-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0}
-.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent}
+.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent;text-transform:lowercase}
 .scale-word:hover{border-color:var(--accent)}
 .scale-word.active{border-color:var(--accent)}
 .scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
@@ -60,7 +61,7 @@ button{font-family:inherit;cursor:pointer}
 
 /* Sorting activity */
 .sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
-.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);text-transform:lowercase}
 .sort-chip.selected{border-color:var(--accent);background:#1e3a35}
 .sort-columns{display:flex;gap:12px;margin:10px 0}
 .sort-col{flex:1;background:#232941;border:2px dashed #3a4155;border-radius:10px;padding:10px;min-height:80px}
@@ -98,7 +99,7 @@ button{font-family:inherit;cursor:pointer}
     <div style="font-size:32px;font-weight:bold;font-family:Georgia,serif;">Temper</div>
     <p style="color:var(--muted);margin:4px 0 0 0;">/TEM-per/ — rhymes with remember <span class="tag">noun</span></p>
     <div class="lbl" style="margin-top:14px;">Hear It</div>
-    <audio controls="controls" src="">Audio not available</audio>
+    <audio controls="controls" src="https://commons.wikimedia.org/wiki/Special:FilePath/En-us-temper.ogg">Audio not available</audio>
   </div>
 
   <div class="card">
@@ -121,10 +122,10 @@ button{font-family:inherit;cursor:pointer}
       <div class="lbl" style="color:var(--warn);margin-bottom:6px;">Your Turn</div>
       <p style="margin:0 0 10px 0;">Which sentence uses temper correctly?</p>
       <div id="yourturn-mcq">
-        <button class="mcq-opt" type="button" data-letter="A">A. He lost his temper when the referee made an unfair call.</button>
-        <button class="mcq-opt" type="button" data-letter="B">B. She whisked the temper into the batter before baking.</button>
-        <button class="mcq-opt" type="button" data-letter="C">C. They planted the temper in rows along the garden fence.</button>
-        <button class="mcq-opt" type="button" data-letter="D">D. The mechanic replaced the temper under the hood of the car.</button>
+        <button class="mcq-opt" type="button" data-letter="A">A. Marcus wrote a long note to express his temper to the neighbors who had watered his plants all summer.</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. Scoring the winning goal filled Priya with temper as her teammates rushed over to celebrate.</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. Elena struggled to control her temper when her little brother scribbled all over the art project she had spent weeks finishing.</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. The tour guide&#x27;s deep temper of the city&#x27;s history made even the shortest walk fascinating.</button>
       </div>
       <p class="mcq-feedback" id="yourturn-feedback" hidden></p>
     </div>
@@ -137,35 +138,37 @@ button{font-family:inherit;cursor:pointer}
     <div class="card">
       <div class="lbl">Synonyms <span class="sub">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
       <div class="chip-row" id="synonym-chips">
-        <span class="chip tappable" tabindex="0">Anger</span><p class="callout" hidden>the hot feeling of displeasure itself</p>
-        <span class="chip tappable" tabindex="0">Irritability</span><p class="callout" hidden>being easily annoyed by small things</p>
-        <span class="chip tappable" tabindex="0">Volatility</span><p class="callout" hidden>tendency to shift moods suddenly, explosively</p>
+        <span class="chip tappable" tabindex="0" data-key="anger">anger</span>
+        <span class="chip tappable" tabindex="0" data-key="irritability">irritability</span>
+        <span class="chip tappable" tabindex="0" data-key="volatility">volatility</span>
       </div>
+      <p class="callout" id="synonym-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">Antonyms <span class="sub">&#183; opposites</span></div>
-      <div class="chip-row">
-        <span class="chip static">Composure</span>
-        <span class="chip static">Equanimity</span>
+      <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="antonym-chips">
+        <span class="chip tappable" tabindex="0" data-key="composure">composure</span>
+        <span class="chip tappable" tabindex="0" data-key="equanimity">equanimity</span>
       </div>
+      <p class="callout" id="antonym-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to Temper</span></div>
+      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to temper</span></div>
       <div class="scale-row" id="strength-scale">
         <span class="scale-word tappable" data-key="impatience">impatience</span><span class="scale-arrow">&#8594;</span>
         <span class="scale-word tappable" data-key="irritability">irritability</span><span class="scale-arrow">&#8594;</span>
         <span class="scale-word tappable" data-key="testiness">testiness</span><span class="scale-arrow">&#8594;</span>
-        <span class="scale-word target">Temper</span>
+        <span class="scale-word target">temper</span>
       </div>
       <p class="callout" id="strength-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">Sort It Out <span class="sub">&#183; drag each word into Synonym or Antonym</span></div>
+      <div class="lbl">Sort It Out <span class="sub">&#183; tap a word, then tap a column to place it</span></div>
       <div class="sort-pool" id="sort-pool">
-        <span class="sort-chip" data-word="Anger">Anger</span>
-        <span class="sort-chip" data-word="Composure">Composure</span>
-        <span class="sort-chip" data-word="Irritability">Irritability</span>
-        <span class="sort-chip" data-word="Equanimity">Equanimity</span>
+        <span class="sort-chip" data-word="anger">anger</span>
+        <span class="sort-chip" data-word="composure">composure</span>
+        <span class="sort-chip" data-word="irritability">irritability</span>
+        <span class="sort-chip" data-word="equanimity">equanimity</span>
       </div>
       <div class="sort-columns">
         <div class="sort-col" data-col="synonym"><p class="sort-col-label">Synonym</p></div>
@@ -232,7 +235,7 @@ button{font-family:inherit;cursor:pointer}
     var container = document.getElementById('yourturn-mcq');
     var feedback = document.getElementById('yourturn-feedback');
     var continueBtn = document.getElementById('continue1');
-    var correctLetter = "A";
+    var correctLetter = "C";
     var solved = false;
     container.querySelectorAll('.mcq-opt').forEach(function(btn){
       btn.addEventListener('click', function(){
@@ -265,23 +268,30 @@ button{font-family:inherit;cursor:pointer}
     post(25);
   });
 
-  // ---------- Synonym chips (tap to reveal/collapse) ----------
-  document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(chip){
-    chip.addEventListener('click', function(){
-      var callout = chip.nextElementSibling;
-      var isOpen = chip.classList.contains('open');
-      // collapse all others
-      document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(c){
-        c.classList.remove('open');
-        var cc = c.nextElementSibling;
-        if (cc && cc.classList.contains('callout')) cc.hidden = true;
+  // ---------- Shared-callout chip row helper (Fix 5) ----------
+  function wireChipRow(rowId, calloutId, meanings){
+    var row = document.getElementById(rowId);
+    var callout = document.getElementById(calloutId);
+    var openChip = null;
+    row.querySelectorAll('.chip.tappable').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        var key = chip.getAttribute('data-key');
+        if (openChip === chip){
+          chip.classList.remove('open');
+          callout.hidden = true;
+          openChip = null;
+        } else {
+          row.querySelectorAll('.chip.tappable').forEach(function(c){ c.classList.remove('open'); });
+          chip.classList.add('open');
+          callout.textContent = meanings[key] || '';
+          callout.hidden = false;
+          openChip = chip;
+        }
       });
-      if (!isOpen){
-        chip.classList.add('open');
-        if (callout && callout.classList.contains('callout')) callout.hidden = false;
-      }
     });
-  });
+  }
+  wireChipRow('synonym-chips', 'synonym-callout', {"anger": "the hot feeling of displeasure itself", "irritability": "being easily annoyed by small things", "volatility": "tendency to shift moods suddenly, explosively"});
+  wireChipRow('antonym-chips', 'antonym-callout', {"composure": "calm self-control kept under pressure", "equanimity": "steady, even-minded calm nothing can rattle"});
 
   // ---------- How Strong scale ----------
   (function(){
@@ -306,7 +316,7 @@ button{font-family:inherit;cursor:pointer}
     var status = document.getElementById('sort-status');
     var continue2 = document.getElementById('continue2');
     var selectedChip = null;
-    var correctMap = {"Anger": "synonym", "Irritability": "synonym", "Composure": "antonym", "Equanimity": "antonym"};
+    var correctMap = {"anger": "synonym", "irritability": "synonym", "composure": "antonym", "equanimity": "antonym"};
 
     function allPlaced(){
       return document.querySelectorAll('#sort-pool .sort-chip').length === 0;

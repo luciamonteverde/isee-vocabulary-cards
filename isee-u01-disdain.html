@@ -41,18 +41,19 @@ button{font-family:inherit;cursor:pointer}
 @keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
 .shake{animation:shake .5s}
 
-/* Synonym/antonym chips */
+/* Synonym/antonym chips — shared callout below the row (Fix 5) */
 .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
-.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink)}
+.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink);text-transform:lowercase}
 .chip.tappable{cursor:pointer}
 .chip.tappable:hover{border-color:var(--accent)}
 .chip.tappable.open{background:var(--accent);color:#04231e;border-color:var(--accent)}
 .chip.static{opacity:.95}
-.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:8px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:10px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout[hidden]{display:none}
 
 /* How Strong scale */
 .scale-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0}
-.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent}
+.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent;text-transform:lowercase}
 .scale-word:hover{border-color:var(--accent)}
 .scale-word.active{border-color:var(--accent)}
 .scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
@@ -60,7 +61,7 @@ button{font-family:inherit;cursor:pointer}
 
 /* Sorting activity */
 .sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
-.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);text-transform:lowercase}
 .sort-chip.selected{border-color:var(--accent);background:#1e3a35}
 .sort-columns{display:flex;gap:12px;margin:10px 0}
 .sort-col{flex:1;background:#232941;border:2px dashed #3a4155;border-radius:10px;padding:10px;min-height:80px}
@@ -98,7 +99,7 @@ button{font-family:inherit;cursor:pointer}
     <div style="font-size:32px;font-weight:bold;font-family:Georgia,serif;">Disdain</div>
     <p style="color:var(--muted);margin:4px 0 0 0;">/dis-DAYN/ — rhymes with rain <span class="tag">noun</span></p>
     <div class="lbl" style="margin-top:14px;">Hear It</div>
-    <audio controls="controls" src="">Audio not available</audio>
+    <audio controls="controls" src="https://commons.wikimedia.org/wiki/Special:FilePath/En-us-disdain.ogg">Audio not available</audio>
   </div>
 
   <div class="card">
@@ -121,10 +122,10 @@ button{font-family:inherit;cursor:pointer}
       <div class="lbl" style="color:var(--warn);margin-bottom:6px;">Your Turn</div>
       <p style="margin:0 0 10px 0;">Which sentence uses disdain correctly?</p>
       <div id="yourturn-mcq">
-        <button class="mcq-opt" type="button" data-letter="A">A. She viewed the tabloid&#x27;s claims with open disdain.</button>
-        <button class="mcq-opt" type="button" data-letter="B">B. He poured a cup of disdain and drank it slowly.</button>
-        <button class="mcq-opt" type="button" data-letter="C">C. She planted disdain in neat rows behind the house.</button>
-        <button class="mcq-opt" type="button" data-letter="D">D. The mechanic replaced the disdain in the engine.</button>
+        <button class="mcq-opt" type="button" data-letter="A">A. Marcus felt a deep disdain for his grandmother&#x27;s stories and begged her to tell them again every night.</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. The volunteers watched with disdain as the rescued sea turtles they had cared for finally swam out to freedom.</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. The food critic pushed the microwaved appetizer aside with disdain, declaring it unworthy of a serious restaurant.</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. Filled with disdain, the young violinist thanked her teacher for believing in her when no one else did.</button>
       </div>
       <p class="mcq-feedback" id="yourturn-feedback" hidden></p>
     </div>
@@ -137,35 +138,37 @@ button{font-family:inherit;cursor:pointer}
     <div class="card">
       <div class="lbl">Synonyms <span class="sub">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
       <div class="chip-row" id="synonym-chips">
-        <span class="chip tappable" tabindex="0">disrespect</span><p class="callout" hidden>rude treatment that ignores someone&#x27;s worth</p>
-        <span class="chip tappable" tabindex="0">arrogance</span><p class="callout" hidden>an inflated belief in your own superiority</p>
-        <span class="chip tappable" tabindex="0">condescension</span><p class="callout" hidden>talking down to people you consider inferior</p>
+        <span class="chip tappable" tabindex="0" data-key="disrespect">disrespect</span>
+        <span class="chip tappable" tabindex="0" data-key="arrogance">arrogance</span>
+        <span class="chip tappable" tabindex="0" data-key="condescension">condescension</span>
       </div>
+      <p class="callout" id="synonym-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">Antonyms <span class="sub">&#183; opposites</span></div>
-      <div class="chip-row">
-        <span class="chip static">Respect</span>
-        <span class="chip static">Admiration</span>
+      <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="antonym-chips">
+        <span class="chip tappable" tabindex="0" data-key="respect">respect</span>
+        <span class="chip tappable" tabindex="0" data-key="admiration">admiration</span>
       </div>
+      <p class="callout" id="antonym-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to Disdain</span></div>
+      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to disdain</span></div>
       <div class="scale-row" id="strength-scale">
         <span class="scale-word tappable" data-key="dislike">dislike</span><span class="scale-arrow">&#8594;</span>
         <span class="scale-word tappable" data-key="disapproval">disapproval</span><span class="scale-arrow">&#8594;</span>
         <span class="scale-word tappable" data-key="contempt">contempt</span><span class="scale-arrow">&#8594;</span>
-        <span class="scale-word target">Disdain</span>
+        <span class="scale-word target">disdain</span>
       </div>
       <p class="callout" id="strength-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">Sort It Out <span class="sub">&#183; drag each word into Synonym or Antonym</span></div>
+      <div class="lbl">Sort It Out <span class="sub">&#183; tap a word, then tap a column to place it</span></div>
       <div class="sort-pool" id="sort-pool">
         <span class="sort-chip" data-word="disrespect">disrespect</span>
-        <span class="sort-chip" data-word="Respect">Respect</span>
+        <span class="sort-chip" data-word="respect">respect</span>
         <span class="sort-chip" data-word="arrogance">arrogance</span>
-        <span class="sort-chip" data-word="Admiration">Admiration</span>
+        <span class="sort-chip" data-word="admiration">admiration</span>
       </div>
       <div class="sort-columns">
         <div class="sort-col" data-col="synonym"><p class="sort-col-label">Synonym</p></div>
@@ -183,10 +186,10 @@ button{font-family:inherit;cursor:pointer}
     <div class="card">
       <div class="lbl">Build the Word <span class="sub">&#183; tap each piece to reveal its meaning</span></div>
       <div class="morph-row" id="morpheme-chips">
-        <div class="morph-chip"><span class="type">Prefix</span><span class="form">dis-</span><span class="meaning">opposite of; do the opposite of (Old French des-)</span></div>
-        <div class="morph-chip"><span class="type">Root</span><span class="form">-dain (from dign-)</span><span class="meaning">to deem worthy, from dignus, &#x27;worthy&#x27; (Latin (via Old French desdeignier))</span></div>
+        <div class="morph-chip"><span class="type">Prefix</span><span class="form">dis-</span><span class="meaning">do the opposite of; not (Old French des-)</span></div>
+        <div class="morph-chip"><span class="type">Root</span><span class="form">dain</span><span class="meaning">to treat as worthy — from Latin dignari &#x27;to deem worthy,&#x27; from dignus &#x27;worthy&#x27;; the same root seen in deign and dignity (Latin (via Old French deignier))</span></div>
       </div>
-      <p class="synthesis" id="morpheme-synthesis" hidden>The prefix dis- means &#x27;the opposite of,&#x27; and the root -dain comes from Latin dignari, &#x27;to consider worthy.&#x27; Put together, disdain literally means to treat someone or something as the opposite of worthy — to look down on it with contempt because you believe it is beneath you.</p>
+      <p class="synthesis" id="morpheme-synthesis" hidden>The prefix dis- means &#x27;the opposite of,&#x27; and the root dain comes from Latin dignari, &#x27;to consider worthy&#x27; — the same root as in the English word deign. Put together, disdain literally means to treat someone or something as the opposite of worthy — to look down on it with contempt because you believe it is beneath you.</p>
     </div>
     <div class="card">
       <div class="accordion-header" id="newword-header">Use the root in a new word: <strong>dignity</strong></div>
@@ -233,7 +236,7 @@ button{font-family:inherit;cursor:pointer}
     var container = document.getElementById('yourturn-mcq');
     var feedback = document.getElementById('yourturn-feedback');
     var continueBtn = document.getElementById('continue1');
-    var correctLetter = "A";
+    var correctLetter = "C";
     var solved = false;
     container.querySelectorAll('.mcq-opt').forEach(function(btn){
       btn.addEventListener('click', function(){
@@ -266,23 +269,30 @@ button{font-family:inherit;cursor:pointer}
     post(25);
   });
 
-  // ---------- Synonym chips (tap to reveal/collapse) ----------
-  document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(chip){
-    chip.addEventListener('click', function(){
-      var callout = chip.nextElementSibling;
-      var isOpen = chip.classList.contains('open');
-      // collapse all others
-      document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(c){
-        c.classList.remove('open');
-        var cc = c.nextElementSibling;
-        if (cc && cc.classList.contains('callout')) cc.hidden = true;
+  // ---------- Shared-callout chip row helper (Fix 5) ----------
+  function wireChipRow(rowId, calloutId, meanings){
+    var row = document.getElementById(rowId);
+    var callout = document.getElementById(calloutId);
+    var openChip = null;
+    row.querySelectorAll('.chip.tappable').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        var key = chip.getAttribute('data-key');
+        if (openChip === chip){
+          chip.classList.remove('open');
+          callout.hidden = true;
+          openChip = null;
+        } else {
+          row.querySelectorAll('.chip.tappable').forEach(function(c){ c.classList.remove('open'); });
+          chip.classList.add('open');
+          callout.textContent = meanings[key] || '';
+          callout.hidden = false;
+          openChip = chip;
+        }
       });
-      if (!isOpen){
-        chip.classList.add('open');
-        if (callout && callout.classList.contains('callout')) callout.hidden = false;
-      }
     });
-  });
+  }
+  wireChipRow('synonym-chips', 'synonym-callout', {"disrespect": "rude treatment that ignores someone's worth", "arrogance": "an inflated belief in your own superiority", "condescension": "talking down to people you consider inferior"});
+  wireChipRow('antonym-chips', 'antonym-callout', {"respect": "sincere regard for someone's worth", "admiration": "warm approval of someone you look up to"});
 
   // ---------- How Strong scale ----------
   (function(){
@@ -307,7 +317,7 @@ button{font-family:inherit;cursor:pointer}
     var status = document.getElementById('sort-status');
     var continue2 = document.getElementById('continue2');
     var selectedChip = null;
-    var correctMap = {"disrespect": "synonym", "arrogance": "synonym", "Respect": "antonym", "Admiration": "antonym"};
+    var correctMap = {"disrespect": "synonym", "arrogance": "synonym", "respect": "antonym", "admiration": "antonym"};
 
     function allPlaced(){
       return document.querySelectorAll('#sort-pool .sort-chip').length === 0;

@@ -41,18 +41,19 @@ button{font-family:inherit;cursor:pointer}
 @keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
 .shake{animation:shake .5s}
 
-/* Synonym/antonym chips */
+/* Synonym/antonym chips — shared callout below the row (Fix 5) */
 .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
-.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink)}
+.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink);text-transform:lowercase}
 .chip.tappable{cursor:pointer}
 .chip.tappable:hover{border-color:var(--accent)}
 .chip.tappable.open{background:var(--accent);color:#04231e;border-color:var(--accent)}
 .chip.static{opacity:.95}
-.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:8px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:10px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout[hidden]{display:none}
 
 /* How Strong scale */
 .scale-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0}
-.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent}
+.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent;text-transform:lowercase}
 .scale-word:hover{border-color:var(--accent)}
 .scale-word.active{border-color:var(--accent)}
 .scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
@@ -60,7 +61,7 @@ button{font-family:inherit;cursor:pointer}
 
 /* Sorting activity */
 .sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
-.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);text-transform:lowercase}
 .sort-chip.selected{border-color:var(--accent);background:#1e3a35}
 .sort-columns{display:flex;gap:12px;margin:10px 0}
 .sort-col{flex:1;background:#232941;border:2px dashed #3a4155;border-radius:10px;padding:10px;min-height:80px}
@@ -98,7 +99,7 @@ button{font-family:inherit;cursor:pointer}
     <div style="font-size:32px;font-weight:bold;font-family:Georgia,serif;">Detest</div>
     <p style="color:var(--muted);margin:4px 0 0 0;">/dih-TEST/ — rhymes with protest <span class="tag">verb</span></p>
     <div class="lbl" style="margin-top:14px;">Hear It</div>
-    <audio controls="controls" src="">Audio not available</audio>
+    <audio controls="controls" src="https://commons.wikimedia.org/wiki/Special:FilePath/En-us-detest.ogg">Audio not available</audio>
   </div>
 
   <div class="card">
@@ -121,10 +122,10 @@ button{font-family:inherit;cursor:pointer}
       <div class="lbl" style="color:var(--warn);margin-bottom:6px;">Your Turn</div>
       <p style="margin:0 0 10px 0;">Which sentence uses detest correctly?</p>
       <div id="yourturn-mcq">
-        <button class="mcq-opt" type="button" data-letter="A">A. Many critics detest movies that rely too heavily on special effects instead of story.</button>
-        <button class="mcq-opt" type="button" data-letter="B">B. He detested the screwdriver into the wall to hang the picture.</button>
-        <button class="mcq-opt" type="button" data-letter="C">C. She detested her hair before the party.</button>
-        <button class="mcq-opt" type="button" data-letter="D">D. They detested the trophy on the top shelf.</button>
+        <button class="mcq-opt" type="button" data-letter="A">A. After months of rehearsal, Jordan detested the difficult violin solo flawlessly at the spring recital.</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. Elena detested her grandmother&#x27;s advice, following it faithfully whenever she faced a hard decision.</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. Maya detests the taste of mushrooms, so she picks them off her pizza slice by slice before taking a bite.</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. The volunteers detested the animal shelter by walking the dogs and cleaning the kennels every weekend.</button>
       </div>
       <p class="mcq-feedback" id="yourturn-feedback" hidden></p>
     </div>
@@ -137,35 +138,37 @@ button{font-family:inherit;cursor:pointer}
     <div class="card">
       <div class="lbl">Synonyms <span class="sub">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
       <div class="chip-row" id="synonym-chips">
-        <span class="chip tappable" tabindex="0">hate</span><p class="callout" hidden>the everyday, general word for strong dislike</p>
-        <span class="chip tappable" tabindex="0">abhor</span><p class="callout" hidden>to shrink back from in moral disgust</p>
-        <span class="chip tappable" tabindex="0">loathe</span><p class="callout" hidden>to feel deep, almost physical disgust toward</p>
+        <span class="chip tappable" tabindex="0" data-key="hate">hate</span>
+        <span class="chip tappable" tabindex="0" data-key="abhor">abhor</span>
+        <span class="chip tappable" tabindex="0" data-key="loathe">loathe</span>
       </div>
+      <p class="callout" id="synonym-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">Antonyms <span class="sub">&#183; opposites</span></div>
-      <div class="chip-row">
-        <span class="chip static">Adore</span>
-        <span class="chip static">Cherish</span>
+      <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="antonym-chips">
+        <span class="chip tappable" tabindex="0" data-key="adore">adore</span>
+        <span class="chip tappable" tabindex="0" data-key="cherish">cherish</span>
       </div>
+      <p class="callout" id="antonym-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to Detest</span></div>
+      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to detest</span></div>
       <div class="scale-row" id="strength-scale">
         <span class="scale-word tappable" data-key="dislike">dislike</span><span class="scale-arrow">&#8594;</span>
         <span class="scale-word tappable" data-key="despise">despise</span><span class="scale-arrow">&#8594;</span>
         <span class="scale-word tappable" data-key="abhor">abhor</span><span class="scale-arrow">&#8594;</span>
-        <span class="scale-word target">Detest</span>
+        <span class="scale-word target">detest</span>
       </div>
       <p class="callout" id="strength-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">Sort It Out <span class="sub">&#183; drag each word into Synonym or Antonym</span></div>
+      <div class="lbl">Sort It Out <span class="sub">&#183; tap a word, then tap a column to place it</span></div>
       <div class="sort-pool" id="sort-pool">
         <span class="sort-chip" data-word="hate">hate</span>
-        <span class="sort-chip" data-word="Adore">Adore</span>
+        <span class="sort-chip" data-word="adore">adore</span>
         <span class="sort-chip" data-word="abhor">abhor</span>
-        <span class="sort-chip" data-word="Cherish">Cherish</span>
+        <span class="sort-chip" data-word="cherish">cherish</span>
       </div>
       <div class="sort-columns">
         <div class="sort-col" data-col="synonym"><p class="sort-col-label">Synonym</p></div>
@@ -186,7 +189,7 @@ button{font-family:inherit;cursor:pointer}
         <div class="morph-chip"><span class="type">Prefix</span><span class="form">de-</span><span class="meaning">down; away, against</span></div>
         <div class="morph-chip"><span class="type">Root</span><span class="form">test</span><span class="meaning">witness; to bear witness (Latin)</span></div>
       </div>
-      <p class="synthesis" id="morpheme-synthesis" hidden>In Latin, detestari meant to call down curses on something while solemnly bearing witness against it — de- (down, against) plus test (witness). Denouncing something as if under sworn testimony gradually softened into today&#x27;s meaning: to feel intense dislike or hatred toward it.</p>
+      <p class="synthesis" id="morpheme-synthesis" hidden>In Latin, detestari meant to call down curses on something while solemnly calling the gods to witness — de- (down, against) plus test (witness). Denouncing something as if under sworn testimony gradually softened into today&#x27;s meaning: to feel intense dislike or hatred toward it.</p>
     </div>
     <div class="card">
       <div class="accordion-header" id="newword-header">Use the root in a new word: <strong>testify</strong></div>
@@ -233,7 +236,7 @@ button{font-family:inherit;cursor:pointer}
     var container = document.getElementById('yourturn-mcq');
     var feedback = document.getElementById('yourturn-feedback');
     var continueBtn = document.getElementById('continue1');
-    var correctLetter = "A";
+    var correctLetter = "C";
     var solved = false;
     container.querySelectorAll('.mcq-opt').forEach(function(btn){
       btn.addEventListener('click', function(){
@@ -266,23 +269,30 @@ button{font-family:inherit;cursor:pointer}
     post(25);
   });
 
-  // ---------- Synonym chips (tap to reveal/collapse) ----------
-  document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(chip){
-    chip.addEventListener('click', function(){
-      var callout = chip.nextElementSibling;
-      var isOpen = chip.classList.contains('open');
-      // collapse all others
-      document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(c){
-        c.classList.remove('open');
-        var cc = c.nextElementSibling;
-        if (cc && cc.classList.contains('callout')) cc.hidden = true;
+  // ---------- Shared-callout chip row helper (Fix 5) ----------
+  function wireChipRow(rowId, calloutId, meanings){
+    var row = document.getElementById(rowId);
+    var callout = document.getElementById(calloutId);
+    var openChip = null;
+    row.querySelectorAll('.chip.tappable').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        var key = chip.getAttribute('data-key');
+        if (openChip === chip){
+          chip.classList.remove('open');
+          callout.hidden = true;
+          openChip = null;
+        } else {
+          row.querySelectorAll('.chip.tappable').forEach(function(c){ c.classList.remove('open'); });
+          chip.classList.add('open');
+          callout.textContent = meanings[key] || '';
+          callout.hidden = false;
+          openChip = chip;
+        }
       });
-      if (!isOpen){
-        chip.classList.add('open');
-        if (callout && callout.classList.contains('callout')) callout.hidden = false;
-      }
     });
-  });
+  }
+  wireChipRow('synonym-chips', 'synonym-callout', {"hate": "the everyday, general word for strong dislike", "abhor": "to shrink back from in moral disgust", "loathe": "to feel deep, almost physical disgust toward"});
+  wireChipRow('antonym-chips', 'antonym-callout', {"adore": "to love warmly and with deep delight", "cherish": "to hold dear and protect with care"});
 
   // ---------- How Strong scale ----------
   (function(){
@@ -307,7 +317,7 @@ button{font-family:inherit;cursor:pointer}
     var status = document.getElementById('sort-status');
     var continue2 = document.getElementById('continue2');
     var selectedChip = null;
-    var correctMap = {"hate": "synonym", "abhor": "synonym", "Adore": "antonym", "Cherish": "antonym"};
+    var correctMap = {"hate": "synonym", "abhor": "synonym", "adore": "antonym", "cherish": "antonym"};
 
     function allPlaced(){
       return document.querySelectorAll('#sort-pool .sort-chip').length === 0;

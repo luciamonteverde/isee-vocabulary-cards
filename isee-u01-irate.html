@@ -41,18 +41,19 @@ button{font-family:inherit;cursor:pointer}
 @keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
 .shake{animation:shake .5s}
 
-/* Synonym/antonym chips */
+/* Synonym/antonym chips — shared callout below the row (Fix 5) */
 .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
-.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink)}
+.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink);text-transform:lowercase}
 .chip.tappable{cursor:pointer}
 .chip.tappable:hover{border-color:var(--accent)}
 .chip.tappable.open{background:var(--accent);color:#04231e;border-color:var(--accent)}
 .chip.static{opacity:.95}
-.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:8px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:10px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout[hidden]{display:none}
 
 /* How Strong scale */
 .scale-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0}
-.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent}
+.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent;text-transform:lowercase}
 .scale-word:hover{border-color:var(--accent)}
 .scale-word.active{border-color:var(--accent)}
 .scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
@@ -60,7 +61,7 @@ button{font-family:inherit;cursor:pointer}
 
 /* Sorting activity */
 .sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
-.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);text-transform:lowercase}
 .sort-chip.selected{border-color:var(--accent);background:#1e3a35}
 .sort-columns{display:flex;gap:12px;margin:10px 0}
 .sort-col{flex:1;background:#232941;border:2px dashed #3a4155;border-radius:10px;padding:10px;min-height:80px}
@@ -98,7 +99,7 @@ button{font-family:inherit;cursor:pointer}
     <div style="font-size:32px;font-weight:bold;font-family:Georgia,serif;">Irate</div>
     <p style="color:var(--muted);margin:4px 0 0 0;">/eye-RAYT/ — stress the second syllable <span class="tag">adjective</span></p>
     <div class="lbl" style="margin-top:14px;">Hear It</div>
-    <audio controls="controls" src="">Audio not available</audio>
+    <audio controls="controls" src="https://commons.wikimedia.org/wiki/Special:FilePath/LL-Q1860%20(eng)-Vealhurl-irate.wav">Audio not available</audio>
   </div>
 
   <div class="card">
@@ -121,10 +122,10 @@ button{font-family:inherit;cursor:pointer}
       <div class="lbl" style="color:var(--warn);margin-bottom:6px;">Your Turn</div>
       <p style="margin:0 0 10px 0;">Which sentence uses irate correctly?</p>
       <div id="yourturn-mcq">
-        <button class="mcq-opt" type="button" data-letter="A">A. The irate passengers complained loudly when their flight was delayed for the third time.</button>
-        <button class="mcq-opt" type="button" data-letter="B">B. She wore her favorite irate to the party last night.</button>
-        <button class="mcq-opt" type="button" data-letter="C">C. He sliced the irate into thin pieces for the salad.</button>
-        <button class="mcq-opt" type="button" data-letter="D">D. The museum displayed an ancient irate from the Bronze Age.</button>
+        <button class="mcq-opt" type="button" data-letter="A">A. Maya was irate when her best friend surprised her with tickets to see her favorite band in concert.</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. Grateful for the extra credit, the irate student thanked her teacher warmly after class.</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. The irate coach stormed onto the court, shouting that the referee had missed three obvious fouls.</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. The irate baby drifted off to sleep the moment her mother began humming a gentle lullaby.</button>
       </div>
       <p class="mcq-feedback" id="yourturn-feedback" hidden></p>
     </div>
@@ -137,35 +138,37 @@ button{font-family:inherit;cursor:pointer}
     <div class="card">
       <div class="lbl">Synonyms <span class="sub">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
       <div class="chip-row" id="synonym-chips">
-        <span class="chip tappable" tabindex="0">furious</span><p class="callout" hidden>wildly angry, bursting with stormy energy</p>
-        <span class="chip tappable" tabindex="0">livid</span><p class="callout" hidden>so angry your face changes color</p>
-        <span class="chip tappable" tabindex="0">incensed</span><p class="callout" hidden>burning with anger over an insult</p>
+        <span class="chip tappable" tabindex="0" data-key="furious">furious</span>
+        <span class="chip tappable" tabindex="0" data-key="livid">livid</span>
+        <span class="chip tappable" tabindex="0" data-key="incensed">incensed</span>
       </div>
+      <p class="callout" id="synonym-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">Antonyms <span class="sub">&#183; opposites</span></div>
-      <div class="chip-row">
-        <span class="chip static">Calm</span>
-        <span class="chip static">Placid</span>
+      <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="antonym-chips">
+        <span class="chip tappable" tabindex="0" data-key="calm">calm</span>
+        <span class="chip tappable" tabindex="0" data-key="placid">placid</span>
       </div>
+      <p class="callout" id="antonym-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to Irate</span></div>
+      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to irate</span></div>
       <div class="scale-row" id="strength-scale">
         <span class="scale-word tappable" data-key="annoyed">annoyed</span><span class="scale-arrow">&#8594;</span>
         <span class="scale-word tappable" data-key="angry">angry</span><span class="scale-arrow">&#8594;</span>
         <span class="scale-word tappable" data-key="enraged">enraged</span><span class="scale-arrow">&#8594;</span>
-        <span class="scale-word target">Irate</span>
+        <span class="scale-word target">irate</span>
       </div>
       <p class="callout" id="strength-callout" hidden></p>
     </div>
     <div class="card">
-      <div class="lbl">Sort It Out <span class="sub">&#183; drag each word into Synonym or Antonym</span></div>
+      <div class="lbl">Sort It Out <span class="sub">&#183; tap a word, then tap a column to place it</span></div>
       <div class="sort-pool" id="sort-pool">
         <span class="sort-chip" data-word="furious">furious</span>
-        <span class="sort-chip" data-word="Calm">Calm</span>
+        <span class="sort-chip" data-word="calm">calm</span>
         <span class="sort-chip" data-word="livid">livid</span>
-        <span class="sort-chip" data-word="Placid">Placid</span>
+        <span class="sort-chip" data-word="placid">placid</span>
       </div>
       <div class="sort-columns">
         <div class="sort-col" data-col="synonym"><p class="sort-col-label">Synonym</p></div>
@@ -233,7 +236,7 @@ button{font-family:inherit;cursor:pointer}
     var container = document.getElementById('yourturn-mcq');
     var feedback = document.getElementById('yourturn-feedback');
     var continueBtn = document.getElementById('continue1');
-    var correctLetter = "A";
+    var correctLetter = "C";
     var solved = false;
     container.querySelectorAll('.mcq-opt').forEach(function(btn){
       btn.addEventListener('click', function(){
@@ -266,23 +269,30 @@ button{font-family:inherit;cursor:pointer}
     post(25);
   });
 
-  // ---------- Synonym chips (tap to reveal/collapse) ----------
-  document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(chip){
-    chip.addEventListener('click', function(){
-      var callout = chip.nextElementSibling;
-      var isOpen = chip.classList.contains('open');
-      // collapse all others
-      document.querySelectorAll('#synonym-chips .chip.tappable').forEach(function(c){
-        c.classList.remove('open');
-        var cc = c.nextElementSibling;
-        if (cc && cc.classList.contains('callout')) cc.hidden = true;
+  // ---------- Shared-callout chip row helper (Fix 5) ----------
+  function wireChipRow(rowId, calloutId, meanings){
+    var row = document.getElementById(rowId);
+    var callout = document.getElementById(calloutId);
+    var openChip = null;
+    row.querySelectorAll('.chip.tappable').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        var key = chip.getAttribute('data-key');
+        if (openChip === chip){
+          chip.classList.remove('open');
+          callout.hidden = true;
+          openChip = null;
+        } else {
+          row.querySelectorAll('.chip.tappable').forEach(function(c){ c.classList.remove('open'); });
+          chip.classList.add('open');
+          callout.textContent = meanings[key] || '';
+          callout.hidden = false;
+          openChip = chip;
+        }
       });
-      if (!isOpen){
-        chip.classList.add('open');
-        if (callout && callout.classList.contains('callout')) callout.hidden = false;
-      }
     });
-  });
+  }
+  wireChipRow('synonym-chips', 'synonym-callout', {"furious": "wildly angry, bursting with stormy energy", "livid": "so angry your face changes color", "incensed": "burning with anger over an insult"});
+  wireChipRow('antonym-chips', 'antonym-callout', {"calm": "peaceful and completely free of anger", "placid": "even-tempered, not easily stirred to anger"});
 
   // ---------- How Strong scale ----------
   (function(){
@@ -307,7 +317,7 @@ button{font-family:inherit;cursor:pointer}
     var status = document.getElementById('sort-status');
     var continue2 = document.getElementById('continue2');
     var selectedChip = null;
-    var correctMap = {"furious": "synonym", "livid": "synonym", "Calm": "antonym", "Placid": "antonym"};
+    var correctMap = {"furious": "synonym", "livid": "synonym", "calm": "antonym", "placid": "antonym"};
 
     function allPlaced(){
       return document.querySelectorAll('#sort-pool .sort-chip').length === 0;
