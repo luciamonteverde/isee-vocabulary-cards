@@ -4,7 +4,7 @@
 <title>Vocabulary: Enthusiastic</title>
 <style>
 :root{--paper:#0e1420;--surface:#151d2b;--surface-2:#1b2333;--ink:#e9edf4;--muted:#9aa6ba;
---line:#2a3446;--accent:#46cdbb;--accent-ink:#bdeee7;--ok:#55c283;--no:#e58686;
+--line:#2a3446;--accent:#46cdbb;--accent-ink:#bdeee7;--ok:#55c283;--no:#e58686;--warn:#e8b45a;
 --serif:"Iowan Old Style",Georgia,"Times New Roman",serif;
 --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
@@ -14,188 +14,416 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);l
 padding:clamp(16px,4vw,36px) 16px;display:flex;justify-content:center}
 .lesson{width:100%;max-width:640px;background:var(--surface);border:1px solid var(--line);
 border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
-.lesson > div:first-child{border-radius:var(--r) var(--r) 0 0}
+.card{background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0}
+.card:last-child{margin-bottom:0}
+.lbl{color:var(--accent);font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0}
+.lbl .sub{color:var(--muted);font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none}
 button{font-family:inherit;cursor:pointer}
 .gated[hidden]{display:none}
 .continue-wrap{display:flex;justify-content:center;padding:16px 20px}
 .continue-btn{font:inherit;font-weight:700;font-size:1rem;color:#04231e;background:var(--accent);border:0;border-radius:12px;padding:13px 32px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3)}
-.continue-btn:hover{filter:brightness(1.08)}
-.continue-btn[hidden]{display:none}
+.continue-btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
+.continue-btn:not(:disabled):hover{filter:brightness(1.08)}
 .done-wrap{display:flex;justify-content:center;padding:6px 20px 22px}
 .done-btn{font:inherit;font-weight:800;font-size:1.05rem;color:#04231e;background:var(--accent);border:0;border-radius:12px;padding:14px 30px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3)}
 .done-msg{text-align:center;font-weight:700;color:var(--ok);font-size:1.05rem;margin:0}
 .foot{padding:14px 22px;font-size:.76rem;color:var(--muted);background:var(--surface-2);border-top:1px solid var(--line);text-align:center}
+
+.mcq-opt{display:block;width:100%;text-align:left;background:#232941;border:1px solid #3a4155;border-radius:10px;padding:12px 14px;margin:6px 0;color:var(--ink);font-size:.95rem}
+.mcq-opt:hover{border-color:var(--accent)}
+.mcq-opt.correct{background:#1e3a2c;border-color:var(--ok)}
+.mcq-opt.wrong{background:#3a2020;border-color:var(--no)}
+.mcq-opt[disabled]{cursor:default}
+.mcq-feedback{margin:8px 0 0 0;font-weight:600;font-size:.92rem}
+.mcq-feedback.ok{color:var(--ok)}
+.mcq-feedback.no{color:var(--no)}
+@keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
+.shake{animation:shake .5s}
+
+.chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink);text-transform:lowercase}
+.chip.tappable{cursor:pointer}
+.chip.tappable:hover{border-color:var(--accent)}
+.chip.tappable.open{background:var(--accent);color:#04231e;border-color:var(--accent)}
+.chip.static{opacity:.95}
+.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:10px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout[hidden]{display:none}
+
+.scale-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0}
+.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent;text-transform:lowercase}
+.scale-word:hover{border-color:var(--accent)}
+.scale-word.active{border-color:var(--accent)}
+.scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
+.scale-arrow{color:var(--muted)}
+
+.sort-activity{margin:0}
+.sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
+.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);text-transform:lowercase}
+.sort-chip.selected{border-color:var(--accent);background:#1e3a35}
+.sort-chip.locked{cursor:default;opacity:.85}
+.sort-columns{display:flex;gap:12px;margin:10px 0}
+.sort-col{flex:1;background:#232941;border:2px dashed #3a4155;border-radius:10px;padding:10px;min-height:80px}
+.sort-col-label{font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:0 0 8px 0}
+.sort-col .sort-chip{display:block;margin:4px 0;width:fit-content}
+.check-btn{font:inherit;font-weight:700;background:var(--accent);color:#04231e;border:0;border-radius:10px;padding:10px 24px;margin-top:10px;cursor:pointer}
+.sort-status{margin:8px 0 0 0;font-weight:600;font-size:.9rem}
+.sort-status.ok{color:var(--ok)}
+.sort-status.no{color:var(--no)}
+
+.morph-row{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 12px 0}
+.morph-chip{background:#12324a;border:1px solid #7cc7ff;border-radius:10px;padding:10px 16px;cursor:pointer;min-width:90px;text-align:center}
+.morph-chip .form{font-family:var(--mono);color:#7cc7ff;font-weight:bold;display:block}
+.morph-chip .type{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:2px}
+.morph-chip .meaning{display:none;color:var(--ink);font-size:.85rem;margin-top:6px;font-weight:normal}
+.morph-chip.open .meaning{display:block}
+.morph-chip.open{background:#1a3a52}
+.synthesis{background:#232941;border-radius:10px;padding:14px;margin-top:10px;color:var(--accent-ink)}
+.synthesis[hidden]{display:none}
+
+.accordion-header{cursor:pointer;background:#232941;border-radius:10px;padding:12px 16px;font-weight:600;border:1px solid #3a4155}
+.accordion-header:hover{border-color:var(--accent)}
+.accordion-body{padding:10px 16px 2px 16px;color:var(--muted);font-style:italic}
+.accordion-body[hidden]{display:none}
+
+.tag{background:#2a3040;border-radius:10px;padding:2px 10px;font-size:12px;display:inline-block}
 </style></head>
 <body>
 <main class="lesson" aria-label="Vocabulary lesson: Enthusiastic">
-  <div data-block-id="html-ZE80nNU5kwx4" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
+
+  <div class="card">
     <div style="font-size:32px;font-weight:bold;font-family:Georgia,serif;">Enthusiastic</div>
-    <p style="color:#9aa3b5;margin:4px 0 0 0;">/in-thoo-zee-AS-tik/ — stress on AS &#183; <span style="background:#2a3040;border-radius:10px;padding:2px 10px;font-size:12px;">adjective</span></p>
-    <p style="margin:6px 0 0 0;"><span style="background:#3a2f1e;color:#e8c47a;border-radius:10px;padding:1px 8px;font-size:11px;margin-left:6px;margin-left:0;">REVIEW (Joy, Enthusiasm &amp; Praise)</span></p>
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;margin-top:14px;">Hear It</div>
-     <audio controls="controls" src="https://commons.wikimedia.org/wiki/Special:FilePath/En-us-enthusiastic.ogg">Audio not available</audio>
+    <p style="color:var(--muted);margin:4px 0 0 0;">/in-thoo-zee-AS-tik/ — stress on AS <span class="tag">adjective</span></p>
+    <div class="lbl" style="margin-top:14px;">Hear It</div>
+    <audio controls="controls" src="https://commons.wikimedia.org/wiki/Special:FilePath/En-us-enthusiastic.ogg">Audio not available</audio>
   </div>
-  <div data-block-id="html-Q0KVpfpB5ETF" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;border:1px solid #34406b;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">What It Means</div>
-    <p style="margin:0;">Someone who is <strong style="color:#4fd1c5;">enthusiastic</strong> shows strong excitement and eager interest in something.</p>
+
+  <div class="card">
+    <div class="lbl">What It Means</div>
+    <p style="margin:0;">Someone who is enthusiastic shows strong excitement and eager interest in something.</p>
     <details>
-      <summary style="cursor:pointer;color:#4fd1c5;border:1px solid #4fd1c5;border-radius:10px;padding:8px 14px;display:inline-block;margin-top:8px;">Show it in context</summary>
-      <p style="font-style:italic;margin:10px 0 0 0;">The <strong style="color:#4fd1c5;">enthusiastic</strong> volunteers arrived an hour early with homemade signs.</p>
+      <summary style="cursor:pointer;color:var(--accent);border:1px solid var(--accent);border-radius:10px;padding:8px 14px;display:inline-block;margin-top:8px;">Show it in context</summary>
+      <p style="font-style:italic;margin:10px 0 0 0;">The <strong style="color:var(--accent);">enthusiastic</strong> volunteers arrived an hour early with homemade signs.</p>
     </details>
   </div>
-  <div id="works-block">
-  <div data-block-id="html-4RtdfCwOYbmy" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">See How It Works <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; follow the thinking, then try one</span></div>
-    <p style="margin:0;">Here's how to decide when <strong style="color:#4fd1c5;">enthusiastic</strong> is the exact word.</p>
+
+  <div id="works-block" class="card">
+    <div class="lbl">See How It Works <span class="sub">&#183; a worked example, then try one yourself</span></div>
     <div style="background:#232941;border-radius:10px;padding:14px;margin:10px 0 0 0;">
-      <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Worked Example</div>
+      <div class="lbl" style="margin-bottom:6px;">Worked Example</div>
       <p style="font-style:italic;margin:0 0 8px 0;">The new member raised her hand at every meeting, asked detailed questions, and stayed late to help set up the next event—everyone could see she was enthusiastic about joining the club.</p>
-      <p style="color:#9aa3b5;margin:0;">enthusiast (one full of eager excitement) + -ic (having the characteristic of) = having the excited, eager energy of an enthusiast. Her repeated actions (raising hand, staying late) demonstrate the defining trait of someone passionate and engaged.</p>
+      <p style="color:var(--muted);margin:0;">enthusiast (one full of eager excitement) + -ic (having the characteristic of) = having the excited, eager energy of an enthusiast. Her repeated actions (raising hand, staying late) demonstrate the defining trait of someone passionate and engaged.</p>
     </div>
     <div style="background:#232941;border-radius:10px;padding:14px;margin:10px 0 0 0;">
-      <div style="color:#e8b45a;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Your Turn</div>
-      <p style="font-style:italic;margin:0 0 6px 0;">Marcus attended the concert and sat quietly the whole time without moving or reacting.</p>
-      <p style="margin:0 0 8px 0;"><strong>Would you describe Marcus as <strong style="color:#4fd1c5;">enthusiastic</strong> about the concert, or does the word not fit?</strong></p>
-      <div style="margin-top:8px;">
-        <details style="margin:6px 0;">
-          <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>Enthusiastic</strong></span></summary>
-          <p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#f08080;">Not quite</strong> &#8212; Enthusiastic people show eager excitement and visible energy, but Marcus sat still and silent the entire concert. His behavior shows the opposite of that engaged passion.</p>
-        </details>
-        <details style="margin:6px 0;">
-          <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>Content</strong></span></summary>
-          <p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#6fcf97;">Correct</strong> &#8212; Sitting quietly without reacting suggests he was calmly fine with being there rather than thrilled. 'Content' fits a person who is present and untroubled but not visibly excited.</p>
-        </details>
+      <div class="lbl" style="color:var(--warn);margin-bottom:6px;">Your Turn</div>
+      <p style="margin:0 0 10px 0;">Which sentence uses enthusiastic correctly?</p>
+      <div id="yourturn-mcq">
+        <button class="mcq-opt" type="button" data-letter="A">A. The enthusiastic librarian mumbled that she had never cared much for books.</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. Feeling enthusiastic about the trip, she quietly canceled her ticket and stayed in bed all day.</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. The enthusiastic fans arrived hours before the game, waving banners and chanting the team&#x27;s name.</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. He gave an enthusiastic yawn and drifted off to sleep before the movie even started.</button>
       </div>
+      <p class="mcq-feedback" id="yourturn-feedback" hidden></p>
     </div>
-  </div>
   </div>
   <div class="continue-wrap" id="continue1-wrap">
-    <button class="continue-btn" id="continue1" type="button" hidden>Continue &rarr;</button>
+    <button class="continue-btn" id="continue1" type="button" disabled>Continue &rarr;</button>
   </div>
 
   <div class="gated" id="gated1" hidden>
-  <div id="synonyms-block">
-  <div data-block-id="html-DRfADXiYAt16" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Synonyms <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
-    
-    <details style="margin:6px 0;">
-      <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>eager</strong></span></summary>
-      <p style="color:#9aa3b5;margin:6px 0 4px 4px;">Keen to do something, wanting it badly. Enthusiastic suggests a broader, more energetic and expressive passion; eager can be quieter or more focused.</p>
-    </details>
-    <details style="margin:6px 0;">
-      <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>keen</strong></span></summary>
-      <p style="color:#9aa3b5;margin:6px 0 4px 4px;">Showing strong interest or desire. Keen is more British/formal and can feel more intellectual; enthusiastic is warmer and more openly expressive.</p>
-    </details>
-    <details style="margin:6px 0;">
-      <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>zealous</strong></span></summary>
-      <p style="color:#9aa3b5;margin:6px 0 4px 4px;">Passionate and devoted, sometimes to an extreme. Zealous implies a stronger, more intense commitment than enthusiastic; zealotry can border on fanaticism.</p>
-    </details>
-  </div>
-  </div>
-  <div id="antonyms-block">
-  <div data-block-id="html-DRfADXiYAt16" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-<div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;margin-top:14px;">Antonyms <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; opposites</span></div>
-    <p style="margin:0;"><strong>apathetic</strong> &#8212; Showing no interest or concern. The direct opposite: enthusiastic means full of eager excitement, apathetic means indifferent and unmoved.</p>
-  </div>
-  </div>
-  <div id="strength-block">
-  
-  </div>
-    <div id="build-block">
-    <div data-block-id="html-wbkzTPRnXoN5" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;border:1px solid #145a32;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Build the Word <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; the heart of this unit</span></div>
-    <p style="margin:0 0 6px 0;"><span style="font-family:monospace;color:#4fd1c5;border:1px solid #4fd1c5;border-radius:8px;padding:4px 10px;display:inline-block;margin-right:6px;">enthusiast + ic</span></p>
-    <p style="margin:0;">Built in two steps: enthusiasm (eager excitement) names the feeling; an enthusiast is the person full of it; enthusiast + -ic = having the characteristics of an enthusiast. Bonus story: Greek entheos meant &apos;a god within&apos; — to the ancients, enthusiasm was being so inspired it seemed a god was inside you.</p>
-  </div>
+    <div class="card">
+      <div class="lbl">Synonyms <span class="sub">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="synonym-chips">
+        <span class="chip tappable" tabindex="0" data-key="eager">eager</span>
+        <span class="chip tappable" tabindex="0" data-key="keen">keen</span>
+        <span class="chip tappable" tabindex="0" data-key="zealous">zealous</span>
+      </div>
+      <p class="callout" id="synonym-callout" hidden></p>
+    </div>
+    <div class="card">
+      <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="antonym-chips">
+        <span class="chip tappable" tabindex="0" data-key="apathetic">apathetic</span>
+        <span class="chip tappable" tabindex="0" data-key="indifferent">indifferent</span>
+      </div>
+      <p class="callout" id="antonym-callout" hidden></p>
+    </div>
+    <div class="card">
+      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to enthusiastic</span></div>
+      <div class="scale-row" id="strength-scale">
+        <span class="scale-word tappable" data-key="willing">willing</span><span class="scale-arrow">&#8594;</span>
+        <span class="scale-word tappable" data-key="interested">interested</span><span class="scale-arrow">&#8594;</span>
+        <span class="scale-word tappable" data-key="eager">eager</span><span class="scale-arrow">&#8594;</span>
+        <span class="scale-word target">enthusiastic</span>
+      </div>
+      <p class="callout" id="strength-callout" hidden></p>
+    </div>
+    <div class="card sort-activity" id="sort-activity-root">
+      <div class="lbl">Sort It Out <span class="sub">&#183; tap a word, then tap a column to place it</span></div>
+      <div class="sort-pool" id="sort-pool">
+        <span class="sort-chip" data-word="eager">eager</span>
+        <span class="sort-chip" data-word="apathetic">apathetic</span>
+        <span class="sort-chip" data-word="indifferent">indifferent</span>
+        <span class="sort-chip" data-word="keen">keen</span>
+      </div>
+      <div class="sort-columns">
+        <div class="sort-col" data-col="synonym"><p class="sort-col-label">Synonym</p></div>
+        <div class="sort-col" data-col="antonym"><p class="sort-col-label">Antonym</p></div>
+      </div>
+      <button class="check-btn" id="sort-check-btn" type="button" hidden>Check</button>
+      <p class="sort-status" id="sort-status" hidden></p>
     </div>
     <div class="continue-wrap" id="continue2-wrap">
-      <button class="continue-btn" id="continue2" type="button" hidden>Continue &rarr;</button>
+      <button class="continue-btn" id="continue2" type="button" disabled>Continue &rarr;</button>
     </div>
   </div>
 
   <div class="gated" id="gated2" hidden>
-    <div data-block-id="html-mfir54YCCtBM" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Word Choice <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; its tone, and when to use it</span></div>
-    <p style="margin:0 0 6px 0;"><span style="background:#2a3040;border-radius:10px;padding:2px 10px;font-size:12px;">positive/informal</span></p>
-    <p style="margin:0;">Reach for <strong style="color:#4fd1c5;">enthusiastic</strong> when someone shows visible, energetic excitement and engaged interest — through actions, words, or body language. It&apos;s warmer and more openly expressive than synonyms like &apos;keen&apos; and suggests genuine, infectious passion.</p>
+    <div class="card">
+      <div class="lbl">Build the Word <span class="sub">&#183; tap each piece to reveal its meaning</span></div>
+      <div class="morph-row" id="morpheme-chips">
+        <div class="morph-chip"><span class="type">Root</span><span class="form">enthusiast</span><span class="meaning">a person filled with eager excitement — built in two steps from enthusiasm (the feeling) to enthusiast (the person who feels it); ultimately from Greek enthous, &#x27;possessed by a god&#x27; (en, &#x27;in&#x27; + theos, &#x27;god&#x27;) (Greek)</span></div>
+        <div class="morph-chip"><span class="type">Suffix</span><span class="form">-ic</span><span class="meaning">characteristic of; having the nature of (Greek (via Latin -icus))</span></div>
+      </div>
+      <p class="synthesis" id="morpheme-synthesis" hidden>This word is built in a two-step chain: enthusiasm (eager excitement) names the feeling, an enthusiast is the person who feels it, and enthusiast + -ic = characteristic of an enthusiast. Deep inside sits Greek en + theos, &#x27;a god within&#x27; — the ancient Greeks thought an enthusiastic person was literally inspired by a god.</p>
+    </div>
+    <div class="card">
+      <div class="accordion-header" id="newword-header">Use the root in a new word: <strong>enthusiast</strong></div>
+      <p class="accordion-body" id="newword-body" hidden>My uncle is a model-train enthusiast who spends every weekend adding tiny buildings to his basement railway.</p>
+    </div>
+    
+    <div class="continue-wrap" id="continue3-wrap">
+      <button class="continue-btn" id="continue3" type="button" disabled>Continue &rarr;</button>
+    </div>
   </div>
+
+  <div class="gated" id="gated3" hidden>
+    <div class="card">
+      <div class="lbl">Word Choice <span class="sub">&#183; its tone, and when to use it</span></div>
+      <p style="margin:0 0 6px 0;"><span class="tag">positive/informal</span></p>
+      <p style="margin:0;">Reach for enthusiastic when someone shows visible, energetic excitement and engaged interest — through actions, words, or body language. It&#x27;s warmer and more openly expressive than synonyms like &#x27;keen&#x27; and suggests genuine, infectious passion.</p>
+    </div>
     <div class="done-wrap">
       <button class="done-btn" id="done-btn" type="button">Done</button>
     </div>
   </div>
 
-  <p class="foot">ISEE Upper Vocabulary &middot; Morpheme Unit M7: Suffix -ic &middot; Enthusiastic</p>
+  <p class="foot">ISEE Upper Vocabulary &middot; Morpheme Unit M7 · Suffix -ic (characteristic of) &middot; Enthusiastic</p>
 </main>
 <script>
 (function(){
-  var t0 = Date.now();
-  // Dynamic height reporting — eliminates double-scroll in TimeBack iframe
-  function notifyResize() {
-    var h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-    window.parent.postMessage({ type: 'RESIZE', height: h }, '*');
+  function post(pct){
+    try { if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'progress', percent: pct }, '*'); } catch(e) {}
   }
-  document.addEventListener('DOMContentLoaded', notifyResize);
-  window.addEventListener('load', notifyResize);
-  if (window.ResizeObserver) {
-    new ResizeObserver(function() { notifyResize(); }).observe(document.body);
-  }
-  function post(msg){
-    try { if (window.parent && window.parent !== window) window.parent.postMessage(msg, '*'); } catch(e) {}
-  }
-  function runningTime(){ return Math.round((Date.now() - t0) / 1000); }
-  function sendState(pct, completed, ready){
-    post({ type: 'CONTENT_STATE_CHANGE', contentSummary: {
-      isCompleted: completed, isReadyToAdvance: ready,
-      progressPercentage: pct, runningTimeSeconds: runningTime()
-    }});
-  }
+  post(0);
 
-  post({ type: 'CONTENT_READY' });
-  sendState(0, false, false);
-
-  function wireGate(containerId, continueBtnId){
-    var box = document.getElementById(containerId);
-    var btn = document.getElementById(continueBtnId);
-    if (!box || !btn) return;
-    var unlocked = false;
-    var quizDetails = [];
-    box.querySelectorAll('details').forEach(function(det){
-      var summary = det.querySelector('summary');
-      if (!summary || !summary.querySelector('span')) return; // skip non-quiz reveals (e.g. context toggle, root-connection)
-      quizDetails.push(det);
+  (function(){
+    var container = document.getElementById('yourturn-mcq');
+    var feedback = document.getElementById('yourturn-feedback');
+    var continueBtn = document.getElementById('continue1');
+    var correctLetter = "C";
+    var solved = false;
+    container.querySelectorAll('.mcq-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if (solved) return;
+        var letter = btn.getAttribute('data-letter');
+        if (letter === correctLetter){
+          btn.classList.add('correct');
+          feedback.textContent = 'Correct!';
+          feedback.className = 'mcq-feedback ok';
+          feedback.hidden = false;
+          solved = true;
+          continueBtn.disabled = false;
+          container.querySelectorAll('.mcq-opt').forEach(function(b){ b.disabled = true; });
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          feedback.textContent = 'Not quite — try again.';
+          feedback.className = 'mcq-feedback no';
+          feedback.hidden = false;
+        }
+      });
     });
-    if (quizDetails.length === 0){ btn.hidden = false; return; } // no quiz in this section (e.g. morpheme-unit Build the Word) — don't strand the student
-    quizDetails.forEach(function(det){
-      det.addEventListener('toggle', function(){
-        if (det.open && !unlocked){ unlocked = true; btn.hidden = false; }
+  })();
+
+  document.getElementById('continue1').addEventListener('click', function(){
+    document.getElementById('continue1-wrap').style.display = 'none';
+    var g = document.getElementById('gated1');
+    g.hidden = false;
+    g.scrollIntoView({behavior:'smooth', block:'start'});
+    post(25);
+  });
+
+  function wireChipRow(rowId, calloutId, meanings){
+    var row = document.getElementById(rowId);
+    var callout = document.getElementById(calloutId);
+    var openChip = null;
+    row.querySelectorAll('.chip.tappable').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        var key = chip.getAttribute('data-key');
+        if (openChip === chip){
+          chip.classList.remove('open');
+          callout.hidden = true;
+          openChip = null;
+        } else {
+          row.querySelectorAll('.chip.tappable').forEach(function(c){ c.classList.remove('open'); });
+          chip.classList.add('open');
+          callout.textContent = meanings[key] || '';
+          callout.hidden = false;
+          openChip = chip;
+        }
       });
     });
   }
-  wireGate('works-block', 'continue1');
-  wireGate('build-block', 'continue2');
+  wireChipRow('synonym-chips', 'synonym-callout', {"eager": "impatiently wanting to do or get something", "keen": "strongly interested and quick to get involved", "zealous": "intensely devoted, almost to the point of fanaticism"});
+  wireChipRow('antonym-chips', 'antonym-callout', {"apathetic": "showing no interest, energy, or emotion", "indifferent": "not caring one way or the other"});
 
-  var c1 = document.getElementById('continue1');
-  if (c1) c1.addEventListener('click', function(){
-    document.getElementById('continue1-wrap').style.display = 'none';
-    var g1 = document.getElementById('gated1');
-    g1.hidden = false;
-    g1.scrollIntoView({behavior:'smooth', block:'start'});
-    sendState(33, false, false);
-  });
+  (function(){
+    var callout = document.getElementById('strength-callout');
+    var sentences = {"willing": "A willing helper will do the job if you ask, but an enthusiastic one volunteers before you even finish asking.", "interested": "She was interested enough to read one article about robotics, while her enthusiastic brother spent the summer building a robot in the garage.", "eager": "An eager student raises a hand quickly, but an enthusiastic one stays after class begging for extra projects."};
+    document.querySelectorAll('#strength-scale .scale-word.tappable').forEach(function(w){
+      w.addEventListener('click', function(){
+        document.querySelectorAll('#strength-scale .scale-word').forEach(function(x){ x.classList.remove('active'); });
+        w.classList.add('active');
+        var key = w.getAttribute('data-key');
+        callout.textContent = sentences[key] || '';
+        callout.hidden = false;
+      });
+    });
+  })();
 
-  var c2 = document.getElementById('continue2');
-  if (c2) c2.addEventListener('click', function(){
+  // ---------- Sorting activity (event delegation — no per-chip listener re-attachment) ----------
+  (function(){
+    var root = document.getElementById('sort-activity-root');
+    var pool = document.getElementById('sort-pool');
+    var checkBtn = document.getElementById('sort-check-btn');
+    var status = document.getElementById('sort-status');
+    var continue2 = document.getElementById('continue2');
+    var selectedChip = null;
+    var correctMap = {"eager": "synonym", "keen": "synonym", "apathetic": "antonym", "indifferent": "antonym"};
+
+    function allPlaced(){
+      return pool.querySelectorAll('.sort-chip').length === 0;
+    }
+    function updateCheckVisibility(){
+      checkBtn.hidden = !allPlaced();
+    }
+    function selectChip(chip){
+      if (chip.classList.contains('locked')) return;
+      if (selectedChip && selectedChip !== chip){ selectedChip.classList.remove('selected'); }
+      if (selectedChip === chip){
+        chip.classList.remove('selected');
+        selectedChip = null;
+      } else {
+        chip.classList.add('selected');
+        selectedChip = chip;
+      }
+    }
+
+    root.addEventListener('click', function(e){
+      var chip = e.target.closest('.sort-chip');
+      var col = e.target.closest('.sort-col');
+      if (col){
+        if (chip){
+          selectChip(chip);
+        } else if (selectedChip){
+          col.appendChild(selectedChip);
+          selectedChip.classList.remove('selected');
+          selectedChip = null;
+          updateCheckVisibility();
+        }
+        return;
+      }
+      if (chip){
+        selectChip(chip);
+      }
+    });
+
+    checkBtn.addEventListener('click', function(){
+      var allCorrect = true;
+      document.querySelectorAll('.sort-col').forEach(function(col){
+        var colName = col.getAttribute('data-col');
+        col.querySelectorAll('.sort-chip').forEach(function(chip){
+          var word = chip.getAttribute('data-word');
+          if (correctMap[word] === colName){
+            chip.style.borderColor = 'var(--ok)';
+            chip.classList.add('locked');
+            chip.classList.remove('selected');
+          } else {
+            allCorrect = false;
+            chip.classList.add('shake');
+            if (selectedChip === chip) selectedChip = null;
+            chip.classList.remove('selected');
+            setTimeout(function(){
+              chip.classList.remove('shake');
+              chip.style.borderColor = '';
+              pool.appendChild(chip);
+              updateCheckVisibility();
+            }, 500);
+          }
+        });
+      });
+      if (allCorrect){
+        status.textContent = 'All correct!';
+        status.className = 'sort-status ok';
+        status.hidden = false;
+        checkBtn.hidden = true;
+        continue2.disabled = false;
+      } else {
+        status.textContent = 'Not quite — the highlighted words went back to the pool. Try again.';
+        status.className = 'sort-status no';
+        status.hidden = false;
+      }
+    });
+  })();
+
+  document.getElementById('continue2').addEventListener('click', function(){
     document.getElementById('continue2-wrap').style.display = 'none';
-    var g2 = document.getElementById('gated2');
-    g2.hidden = false;
-    g2.scrollIntoView({behavior:'smooth', block:'start'});
-    sendState(66, false, false);
+    var g = document.getElementById('gated2');
+    g.hidden = false;
+    g.scrollIntoView({behavior:'smooth', block:'start'});
+    post(50);
   });
 
-  var doneBtn = document.getElementById('done-btn');
-  if (doneBtn) doneBtn.addEventListener('click', function(){
-    sendState(100, true, true);
-    var wrap = doneBtn.closest('.done-wrap');
+  (function(){
+    var chips = document.querySelectorAll('#morpheme-chips .morph-chip');
+    var synthesis = document.getElementById('morpheme-synthesis');
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        chip.classList.add('open');
+        var allOpen = true;
+        chips.forEach(function(c){ if (!c.classList.contains('open')) allOpen = false; });
+        if (allOpen) synthesis.hidden = false;
+      });
+    });
+  })();
+
+  var accordionOpened = false;
+  document.getElementById('newword-header').addEventListener('click', function(){
+    var body = document.getElementById('newword-body');
+    body.hidden = !body.hidden;
+    accordionOpened = true;
+    maybeUnlockContinue3();
+  });
+
+  var rootIsProductive = false;
+  var continue3 = document.getElementById('continue3');
+  function maybeUnlockContinue3(){
+    if (!rootIsProductive && accordionOpened) continue3.disabled = false;
+  }
+
+  
+
+  document.getElementById('continue3').addEventListener('click', function(){
+    document.getElementById('continue3-wrap').style.display = 'none';
+    var g = document.getElementById('gated3');
+    g.hidden = false;
+    g.scrollIntoView({behavior:'smooth', block:'start'});
+    post(75);
+  });
+
+  document.getElementById('done-btn').addEventListener('click', function(){
+    post(100);
+    var wrap = document.getElementById('done-btn').closest('.done-wrap');
     wrap.innerHTML = '<p class="done-msg">&#10003; Complete</p>';
   });
 })();
