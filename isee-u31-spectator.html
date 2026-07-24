@@ -4,7 +4,7 @@
 <title>Vocabulary: Spectator</title>
 <style>
 :root{--paper:#0e1420;--surface:#151d2b;--surface-2:#1b2333;--ink:#e9edf4;--muted:#9aa6ba;
---line:#2a3446;--accent:#46cdbb;--accent-ink:#bdeee7;--ok:#55c283;--no:#e58686;
+--line:#2a3446;--accent:#46cdbb;--accent-ink:#bdeee7;--ok:#55c283;--no:#e58686;--warn:#e8b45a;
 --serif:"Iowan Old Style",Georgia,"Times New Roman",serif;
 --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
@@ -14,205 +14,452 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);l
 padding:clamp(16px,4vw,36px) 16px;display:flex;justify-content:center}
 .lesson{width:100%;max-width:640px;background:var(--surface);border:1px solid var(--line);
 border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
-.lesson > div:first-child{border-radius:var(--r) var(--r) 0 0}
+.card{background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0}
+.card:last-child{margin-bottom:0}
+.lbl{color:var(--accent);font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0}
+.lbl .sub{color:var(--muted);font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none}
 button{font-family:inherit;cursor:pointer}
 .gated[hidden]{display:none}
 .continue-wrap{display:flex;justify-content:center;padding:16px 20px}
 .continue-btn{font:inherit;font-weight:700;font-size:1rem;color:#04231e;background:var(--accent);border:0;border-radius:12px;padding:13px 32px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3)}
-.continue-btn:hover{filter:brightness(1.08)}
-.continue-btn[hidden]{display:none}
+.continue-btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
+.continue-btn:not(:disabled):hover{filter:brightness(1.08)}
 .done-wrap{display:flex;justify-content:center;padding:6px 20px 22px}
 .done-btn{font:inherit;font-weight:800;font-size:1.05rem;color:#04231e;background:var(--accent);border:0;border-radius:12px;padding:14px 30px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3)}
 .done-msg{text-align:center;font-weight:700;color:var(--ok);font-size:1.05rem;margin:0}
 .foot{padding:14px 22px;font-size:.76rem;color:var(--muted);background:var(--surface-2);border-top:1px solid var(--line);text-align:center}
+
+.mcq-opt{display:block;width:100%;text-align:left;background:#232941;border:1px solid #3a4155;border-radius:10px;padding:12px 14px;margin:6px 0;color:var(--ink);font-size:.95rem}
+.mcq-opt:hover{border-color:var(--accent)}
+.mcq-opt.correct{background:#1e3a2c;border-color:var(--ok)}
+.mcq-opt.wrong{background:#3a2020;border-color:var(--no)}
+.mcq-opt[disabled]{cursor:default}
+.mcq-feedback{margin:8px 0 0 0;font-weight:600;font-size:.92rem}
+.mcq-feedback.ok{color:var(--ok)}
+.mcq-feedback.no{color:var(--no)}
+@keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
+.shake{animation:shake .5s}
+
+.chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.chip{display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;color:var(--ink);text-transform:lowercase}
+.chip.tappable{cursor:pointer}
+.chip.tappable:hover{border-color:var(--accent)}
+.chip.tappable.open{background:var(--accent);color:#04231e;border-color:var(--accent)}
+.chip.static{opacity:.95}
+.callout{background:#232941;border-radius:10px;padding:12px 14px;margin:10px 0 0 0;color:var(--muted);font-size:.92rem}
+.callout[hidden]{display:none}
+
+.scale-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0}
+.scale-word{background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid transparent;text-transform:lowercase}
+.scale-word:hover{border-color:var(--accent)}
+.scale-word.active{border-color:var(--accent)}
+.scale-word.target{background:var(--accent);color:#0b1020;font-weight:bold;cursor:default}
+.scale-arrow{color:var(--muted)}
+
+.sort-activity{margin:0}
+.sort-pool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;min-height:44px}
+.sort-chip{background:#2a3040;border:2px solid #3a4155;border-radius:14px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);text-transform:lowercase}
+.sort-chip.selected{border-color:var(--accent);background:#1e3a35}
+.sort-chip.locked{cursor:default;opacity:.85}
+.sort-columns{display:flex;gap:12px;margin:10px 0}
+.sort-col{flex:1;background:#232941;border:2px dashed #3a4155;border-radius:10px;padding:10px;min-height:80px}
+.sort-col-label{font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:0 0 8px 0}
+.sort-col .sort-chip{display:block;margin:4px 0;width:fit-content}
+.check-btn{font:inherit;font-weight:700;background:var(--accent);color:#04231e;border:0;border-radius:10px;padding:10px 24px;margin-top:10px;cursor:pointer}
+.sort-status{margin:8px 0 0 0;font-weight:600;font-size:.9rem}
+.sort-status.ok{color:var(--ok)}
+.sort-status.no{color:var(--no)}
+
+.morph-row{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 12px 0}
+.morph-chip{background:#12324a;border:1px solid #7cc7ff;border-radius:10px;padding:10px 16px;cursor:pointer;min-width:90px;text-align:center}
+.morph-chip .form{font-family:var(--mono);color:#7cc7ff;font-weight:bold;display:block}
+.morph-chip .type{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:2px}
+.morph-chip .meaning{display:none;color:var(--ink);font-size:.85rem;margin-top:6px;font-weight:normal}
+.morph-chip.open .meaning{display:block}
+.morph-chip.open{background:#1a3a52}
+.synthesis{background:#232941;border-radius:10px;padding:14px;margin-top:10px;color:var(--accent-ink)}
+.synthesis[hidden]{display:none}
+
+.accordion-header{cursor:pointer;background:#232941;border-radius:10px;padding:12px 16px;font-weight:600;border:1px solid #3a4155}
+.accordion-header:hover{border-color:var(--accent)}
+.accordion-body{padding:10px 16px 2px 16px;color:var(--muted);font-style:italic}
+.accordion-body[hidden]{display:none}
+
+.tag{background:#2a3040;border-radius:10px;padding:2px 10px;font-size:12px;display:inline-block}
 </style></head>
 <body>
 <main class="lesson" aria-label="Vocabulary lesson: Spectator">
-  <div data-block-id="html-jK8r4ftb52I7" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
+
+  <div class="card">
     <div style="font-size:32px;font-weight:bold;font-family:Georgia,serif;">Spectator</div>
-    <p style="color:#9aa3b5;margin:4px 0 0 0;">/spek-TAY-tor/ — stress on second syllable, rhymes with creator &#183; <span style="background:#2a3040;border-radius:10px;padding:2px 10px;font-size:12px;">noun</span></p>
-    
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;margin-top:14px;">Hear It</div>
-     <audio controls="controls" src="https://commons.wikimedia.org/wiki/Special:FilePath/En-us-spectator.ogg">Audio not available</audio>
+    <p style="color:var(--muted);margin:4px 0 0 0;">/spek-TAY-tor/ — stress on second syllable, rhymes with creator <span class="tag">noun</span></p>
+    <div class="lbl" style="margin-top:14px;">Hear It</div>
+    <audio controls="controls" src="https://commons.wikimedia.org/wiki/Special:FilePath/En-us-spectator.ogg">Audio not available</audio>
   </div>
-  <div data-block-id="html-Y08iTLLEcyG2" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;border:1px solid #34406b;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">What It Means</div>
-    <p style="margin:0;">A <strong style="color:#4fd1c5;">spectator</strong> is a person who watches an event happen without taking part in it.</p>
+
+  <div class="card">
+    <div class="lbl">What It Means</div>
+    <p style="margin:0;">A spectator is a person who watches an event happen without taking part in it.</p>
     <details>
-      <summary style="cursor:pointer;color:#4fd1c5;border:1px solid #4fd1c5;border-radius:10px;padding:8px 14px;display:inline-block;margin-top:8px;">Show it in context</summary>
-      <p style="font-style:italic;margin:10px 0 0 0;">A lucky <strong style="color:#4fd1c5;">spectator</strong> caught the home-run ball in one bare hand.</p>
+      <summary style="cursor:pointer;color:var(--accent);border:1px solid var(--accent);border-radius:10px;padding:8px 14px;display:inline-block;margin-top:8px;">Show it in context</summary>
+      <p style="font-style:italic;margin:10px 0 0 0;">A lucky <strong style="color:var(--accent);">spectator</strong> caught the home-run ball in one bare hand.</p>
     </details>
   </div>
-  <div id="works-block">
-  <div data-block-id="html-J_zBiueV9K_q" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">See How It Works <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; follow the thinking, then try one</span></div>
-    <p style="margin:0;">Here's how to decide when <strong style="color:#4fd1c5;">spectator</strong> is the exact word.</p>
+
+  <div id="works-block" class="card">
+    <div class="lbl">See How It Works <span class="sub">&#183; a worked example, then try one yourself</span></div>
     <div style="background:#232941;border-radius:10px;padding:14px;margin:10px 0 0 0;">
-      <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Worked Example</div>
+      <div class="lbl" style="margin-bottom:6px;">Worked Example</div>
       <p style="font-style:italic;margin:0 0 8px 0;">At the championship tennis match, thousands of eager spectators sat in the stands, following every serve and volley with rapt attention.</p>
-      <p style="color:#9aa3b5;margin:0;"><strong style="color:#4fd1c5;">Spectator</strong> precisely captures the role of someone watching a live event without participating. It goes beyond generic words like &apos;viewer&apos; by implying intentional attendance at a live, in-person event. The word is exact because it specifies both the watching role and the active, engaged presence at the venue.</p>
+      <p style="color:var(--muted);margin:0;">Spectator precisely captures the role of someone watching a live event without participating. It goes beyond generic words like &#x27;viewer&#x27; by implying intentional attendance at a live, in-person event. The word is exact because it specifies both the watching role and the active, engaged presence at the venue.</p>
     </div>
     <div style="background:#232941;border-radius:10px;padding:14px;margin:10px 0 0 0;">
-      <div style="color:#e8b45a;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Your Turn</div>
-      <p style="font-style:italic;margin:0 0 6px 0;">Sarah worked as a volunteer coordinator at the fundraising event, checking in donors and organizing the activities.</p>
-      <p style="margin:0 0 8px 0;"><strong>Is &apos;<strong style="color:#4fd1c5;">spectator</strong>&apos; the precise word here, or should it be something else?</strong></p>
-      <div style="margin-top:8px;">
-        <details style="margin:6px 0;">
-          <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>spectator</strong></span></summary>
-          <p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#f08080;">Not quite</strong> &#8212; Sarah is checking in donors and organizing activities, which means she is actively running the event rather than sitting back watching it, so 'spectator' contradicts what she actually does.</p>
-        </details>
-        <details style="margin:6px 0;">
-          <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>volunteer</strong></span></summary>
-          <p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#6fcf97;">Correct</strong> &#8212; Because Sarah is doing hands-on work to make the fundraiser happen, 'volunteer' captures her active role, unlike a spectator who only observes.</p>
-        </details>
+      <div class="lbl" style="color:var(--warn);margin-bottom:6px;">Your Turn</div>
+      <p style="margin:0 0 10px 0;">Which sentence uses spectator correctly?</p>
+      <div id="yourturn-mcq">
+        <button class="mcq-opt" type="button" data-letter="A">A. A friendly spectator refereed the whole match, calling fouls on both teams.</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. The spectator dribbled past two defenders and scored the winning goal.</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. Every spectator in the arena rose to their feet when the gymnast landed her final vault.</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. As the lead spectator in the play, she had more lines than anyone else on stage.</button>
       </div>
+      <p class="mcq-feedback" id="yourturn-feedback" hidden></p>
     </div>
-  </div>
   </div>
   <div class="continue-wrap" id="continue1-wrap">
-    <button class="continue-btn" id="continue1" type="button" hidden>Continue &rarr;</button>
+    <button class="continue-btn" id="continue1" type="button" disabled>Continue &rarr;</button>
   </div>
 
   <div class="gated" id="gated1" hidden>
-  <div id="synonyms-block">
-  <div data-block-id="html-Aw6aXOjvbVsr" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Synonyms <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
-    
-    <details style="margin:6px 0;">
-      <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>viewer</strong></span></summary>
-      <p style="color:#9aa3b5;margin:6px 0 4px 4px;">Someone who watches something (especially TV or media), but lacks spectator&apos;s emphasis on being physically present at a live, in-person event.</p>
-    </details>
-    <details style="margin:6px 0;">
-      <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>onlooker</strong></span></summary>
-      <p style="color:#9aa3b5;margin:6px 0 4px 4px;">Someone watching from nearby or from the sidelines, but suggests accidental presence rather than the intentional attendance and engagement of a spectator.</p>
-    </details>
-    <details style="margin:6px 0;">
-      <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>observer</strong></span></summary>
-      <p style="color:#9aa3b5;margin:6px 0 4px 4px;">Someone who watches and notes details, often with an analytical purpose, rather than simply watching a live event for entertainment or sport.</p>
-    </details>
-  </div>
-  </div>
-  <div id="antonyms-block">
-  <div data-block-id="html-Aw6aXOjvbVsr" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-<div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;margin-top:14px;">Antonyms <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; opposites</span></div>
-    <p style="margin:0;"><strong>participant</strong> &#8212; Someone actively involved and taking part, the direct opposite of a spectator who remains on the sidelines watching.</p>
-  </div>
-  </div>
-  <div id="strength-block">
-  <div data-block-id="html-2nISJh-rmewo" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">How Strong Is It?</div>
-    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0;"><span style="background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;">bystander</span><span style="color:#9aa3b5;">&#8594;</span><span style="background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;">viewer</span><span style="color:#9aa3b5;">&#8594;</span><span style="background:#4fd1c5;color:#0b1020;border-radius:8px;padding:6px 12px;font-weight:bold;">spectator</span><span style="color:#9aa3b5;">&#8594;</span><span style="background:#2a3040;color:#e8eaf0;border-radius:8px;padding:6px 12px;">fan</span></div>
-    <p style="color:#9aa3b5;margin:6px 0 0 0;"><strong style="color:#4fd1c5;">Spectator</strong> — the third of the group: someone who intentionally attends a live event to watch. (our word)</p>
-  </div>
-  </div>
-    <div id="build-block">
-    <div data-block-id="html-LJG6EOzQmrTt" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0 0 14px 0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Build the Word</div>
-    <p style="margin:0 0 6px 0;"><span style="font-family:monospace;color:#4fd1c5;border:1px solid #4fd1c5;border-radius:8px;padding:4px 10px;display:inline-block;margin-right:6px;">spectator</span> Latin: one who looks or watches</p>
-    <p style="margin:0;">The word comes directly from Latin &apos;spectare,&apos; meaning &apos;to look&apos; or &apos;to watch&apos; — a <strong style="color:#4fd1c5;">spectator</strong>&apos;s role is to look and watch.</p>
-    <div style="margin-top:8px;">
-      <p style="font-style:italic;margin:10px 0 6px 0;">One key aspect of good leadership is listening to your team.</p>
-      <p style="margin:0 0 6px 0;">Same root, new word &#8212; what does <strong style="color:#4fd1c5;">aspect</strong> mean here?</p>
-      <details style="margin:6px 0;">
-        <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>a strict rule that must be obeyed</strong></span></summary>
-        <p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#f08080;">Not quite</strong> &#8212; 'Aspect' comes from the 'look' root, so it points to a way of viewing something, not to a rule; 'a strict rule' ignores that root entirely.</p>
-      </details>
-      <details style="margin:6px 0;">
-        <summary style="cursor:pointer;list-style:none;"><span style="display:inline-block;background:#2a3040;border:1px solid #3a4155;border-radius:14px;padding:6px 12px;margin:3px 4px 3px 0;"><strong>a particular side or way of looking at something</strong></span></summary>
-        <p style="color:#9aa3b5;margin:6px 0 4px 4px;"><strong style="color:#6fcf97;">Correct</strong> &#8212; Correct. 'Aspect' shares the specere root ('to look') seen in 'spectator', so it means a particular side or way of looking at something.</p>
-      </details>
-      <details style="margin:10px 0 0 0;"><summary style="cursor:pointer;color:#4fd1c5;border:1px solid #4fd1c5;border-radius:10px;padding:8px 14px;display:inline-block;margin-top:8px;">The root connection &#8594;</summary><p style="margin:8px 0 0 0;color:#9aa3b5;">The Latin specere means 'to look'. A 'spectator' looks on at an event, and an 'aspect' is one way of looking at something; both grow from that same 'look' root.</p></details>
+    <div class="card">
+      <div class="lbl">Synonyms <span class="sub">&#183; words that mean the same &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="synonym-chips">
+        <span class="chip tappable" tabindex="0" data-key="viewer">viewer</span>
+        <span class="chip tappable" tabindex="0" data-key="onlooker">onlooker</span>
+        <span class="chip tappable" tabindex="0" data-key="observer">observer</span>
+      </div>
+      <p class="callout" id="synonym-callout" hidden></p>
     </div>
-  </div>
+    <div class="card">
+      <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
+      <div class="chip-row" id="antonym-chips">
+        <span class="chip tappable" tabindex="0" data-key="participant">participant</span>
+        <span class="chip tappable" tabindex="0" data-key="performer">performer</span>
+      </div>
+      <p class="callout" id="antonym-callout" hidden></p>
+    </div>
+    <div class="card">
+      <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to spectator</span></div>
+      <div class="scale-row" id="strength-scale">
+        <span class="scale-word tappable" data-key="bystander">bystander</span><span class="scale-arrow">&#8594;</span>
+        <span class="scale-word tappable" data-key="viewer">viewer</span><span class="scale-arrow">&#8594;</span>
+        <span class="scale-word tappable" data-key="fan">fan</span><span class="scale-arrow">&#8594;</span>
+        <span class="scale-word target">spectator</span>
+      </div>
+      <p class="callout" id="strength-callout" hidden></p>
+    </div>
+    <div class="card sort-activity" id="sort-activity-root">
+      <div class="lbl">Sort It Out <span class="sub">&#183; tap a word, then tap a column to place it</span></div>
+      <div class="sort-pool" id="sort-pool">
+        <span class="sort-chip" data-word="onlooker">onlooker</span>
+        <span class="sort-chip" data-word="viewer">viewer</span>
+        <span class="sort-chip" data-word="performer">performer</span>
+        <span class="sort-chip" data-word="participant">participant</span>
+      </div>
+      <div class="sort-columns">
+        <div class="sort-col" data-col="synonym"><p class="sort-col-label">Synonym</p></div>
+        <div class="sort-col" data-col="antonym"><p class="sort-col-label">Antonym</p></div>
+      </div>
+      <button class="check-btn" id="sort-check-btn" type="button" hidden>Check</button>
+      <p class="sort-status" id="sort-status" hidden></p>
     </div>
     <div class="continue-wrap" id="continue2-wrap">
-      <button class="continue-btn" id="continue2" type="button" hidden>Continue &rarr;</button>
+      <button class="continue-btn" id="continue2" type="button" disabled>Continue &rarr;</button>
     </div>
   </div>
 
   <div class="gated" id="gated2" hidden>
-    <div data-block-id="html-WnQSO-DdkGvy" style="background:#1a1f2e;border-radius:12px;padding:20px;margin:0;">
-    <div style="color:#4fd1c5;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px 0;">Word Choice <span style="color:#9aa3b5;font-size:12px;font-weight:normal;letter-spacing:0;text-transform:none;">&#183; its tone, and when to use it</span></div>
-    <p style="margin:0 0 6px 0;"><span style="background:#2a3040;border-radius:10px;padding:2px 10px;font-size:12px;">neutral</span></p>
-    <p style="margin:0;"><strong style="color:#4fd1c5;">Spectator</strong> is the right word when you are specifically naming someone who attends an event to watch without participating. It is more precise than &apos;viewer,&apos; which often refers to someone watching TV or videos. Use &apos;spectator&apos; for live events, sports, or performances where the person is physically present and observing. For general watching of media, &apos;viewer&apos; is simpler.</p>
+    <div class="card">
+      <div class="lbl">Build the Word <span class="sub">&#183; tap each piece to reveal its meaning</span></div>
+      <div class="morph-row" id="morpheme-chips">
+        <div class="morph-chip"><span class="type">Root</span><span class="form">spect</span><span class="meaning">to look, watch (Latin)</span></div>
+        <div class="morph-chip"><span class="type">Suffix</span><span class="form">-ator</span><span class="meaning">one who does (the action) (Latin)</span></div>
+      </div>
+      <p class="synthesis" id="morpheme-synthesis" hidden>Spect- means &#x27;to look or watch,&#x27; and -ator names the person who performs the action. A spectator is literally &#x27;one who watches&#x27; — present at the event, but only to look on.</p>
+    </div>
+    <div class="card">
+      <div class="accordion-header" id="newword-header">Use the root in a new word: <strong>perspective</strong></div>
+      <p class="accordion-body" id="newword-body" hidden>Climbing the bell tower gave us a whole new perspective on the city below.</p>
+    </div>
+    <div class="card">
+      <div class="lbl">Root Check</div>
+      <p style="margin:0 0 10px 0;">The root spect means &#x27;to look or watch.&#x27; Which word most likely names a look back at past events?</p>
+      <div id="root-mcq">
+        <button class="mcq-opt" type="button" data-letter="A">A. retract</button>
+        <button class="mcq-opt" type="button" data-letter="B">B. respire</button>
+        <button class="mcq-opt" type="button" data-letter="C">C. resent</button>
+        <button class="mcq-opt" type="button" data-letter="D">D. retrospect</button>
+      </div>
+      <p class="mcq-feedback" id="root-mcq-feedback" hidden></p>
+    </div>
+    <div class="continue-wrap" id="continue3-wrap">
+      <button class="continue-btn" id="continue3" type="button" disabled>Continue &rarr;</button>
+    </div>
   </div>
+
+  <div class="gated" id="gated3" hidden>
+    <div class="card">
+      <div class="lbl">Word Choice <span class="sub">&#183; its tone, and when to use it</span></div>
+      <p style="margin:0 0 6px 0;"><span class="tag">neutral</span></p>
+      <p style="margin:0;">Spectator is the right word when you are specifically naming someone who attends an event to watch without participating. It is more precise than &#x27;viewer,&#x27; which often refers to someone watching TV or videos. Use &#x27;spectator&#x27; for live events, sports, or performances where the person is physically present and observing. For general watching of media, &#x27;viewer&#x27; is simpler.</p>
+    </div>
     <div class="done-wrap">
       <button class="done-btn" id="done-btn" type="button">Done</button>
     </div>
   </div>
 
-  <p class="foot">ISEE Upper Vocabulary &middot; Unit 31: Performance, Strategy & Display &middot; Spectator</p>
+  <p class="foot">ISEE Upper Vocabulary &middot; Unit 31 · Performance, Strategy &amp; Display &middot; Spectator</p>
 </main>
 <script>
 (function(){
-  var t0 = Date.now();
-  // Dynamic height reporting — eliminates double-scroll in TimeBack iframe
-  function notifyResize() {
-    var h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-    window.parent.postMessage({ type: 'RESIZE', height: h }, '*');
+  function post(pct){
+    try { if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'progress', percent: pct }, '*'); } catch(e) {}
   }
-  document.addEventListener('DOMContentLoaded', notifyResize);
-  window.addEventListener('load', notifyResize);
-  if (window.ResizeObserver) {
-    new ResizeObserver(function() { notifyResize(); }).observe(document.body);
-  }
-  function post(msg){
-    try { if (window.parent && window.parent !== window) window.parent.postMessage(msg, '*'); } catch(e) {}
-  }
-  function runningTime(){ return Math.round((Date.now() - t0) / 1000); }
-  function sendState(pct, completed, ready){
-    post({ type: 'CONTENT_STATE_CHANGE', contentSummary: {
-      isCompleted: completed, isReadyToAdvance: ready,
-      progressPercentage: pct, runningTimeSeconds: runningTime()
-    }});
-  }
+  post(0);
 
-  post({ type: 'CONTENT_READY' });
-  sendState(0, false, false);
-
-  function wireGate(containerId, continueBtnId){
-    var box = document.getElementById(containerId);
-    var btn = document.getElementById(continueBtnId);
-    if (!box || !btn) return;
-    var unlocked = false;
-    var quizDetails = [];
-    box.querySelectorAll('details').forEach(function(det){
-      var summary = det.querySelector('summary');
-      if (!summary || !summary.querySelector('span')) return; // skip non-quiz reveals (e.g. context toggle, root-connection)
-      quizDetails.push(det);
+  (function(){
+    var container = document.getElementById('yourturn-mcq');
+    var feedback = document.getElementById('yourturn-feedback');
+    var continueBtn = document.getElementById('continue1');
+    var correctLetter = "C";
+    var solved = false;
+    container.querySelectorAll('.mcq-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if (solved) return;
+        var letter = btn.getAttribute('data-letter');
+        if (letter === correctLetter){
+          btn.classList.add('correct');
+          feedback.textContent = 'Correct!';
+          feedback.className = 'mcq-feedback ok';
+          feedback.hidden = false;
+          solved = true;
+          continueBtn.disabled = false;
+          container.querySelectorAll('.mcq-opt').forEach(function(b){ b.disabled = true; });
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          feedback.textContent = 'Not quite — try again.';
+          feedback.className = 'mcq-feedback no';
+          feedback.hidden = false;
+        }
+      });
     });
-    if (quizDetails.length === 0){ btn.hidden = false; return; } // no quiz in this section (e.g. morpheme-unit Build the Word) — don't strand the student
-    quizDetails.forEach(function(det){
-      det.addEventListener('toggle', function(){
-        if (det.open && !unlocked){ unlocked = true; btn.hidden = false; }
+  })();
+
+  document.getElementById('continue1').addEventListener('click', function(){
+    document.getElementById('continue1-wrap').style.display = 'none';
+    var g = document.getElementById('gated1');
+    g.hidden = false;
+    g.scrollIntoView({behavior:'smooth', block:'start'});
+    post(25);
+  });
+
+  function wireChipRow(rowId, calloutId, meanings){
+    var row = document.getElementById(rowId);
+    var callout = document.getElementById(calloutId);
+    var openChip = null;
+    row.querySelectorAll('.chip.tappable').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        var key = chip.getAttribute('data-key');
+        if (openChip === chip){
+          chip.classList.remove('open');
+          callout.hidden = true;
+          openChip = null;
+        } else {
+          row.querySelectorAll('.chip.tappable').forEach(function(c){ c.classList.remove('open'); });
+          chip.classList.add('open');
+          callout.textContent = meanings[key] || '';
+          callout.hidden = false;
+          openChip = chip;
+        }
       });
     });
   }
-  wireGate('works-block', 'continue1');
-  wireGate('build-block', 'continue2');
+  wireChipRow('synonym-chips', 'synonym-callout', {"viewer": "someone watching, often on a screen", "onlooker": "a person watching by chance nearby", "observer": "someone watching closely to notice details"});
+  wireChipRow('antonym-chips', 'antonym-callout', {"participant": "a person taking part in the action", "performer": "a person putting on the show for others"});
 
-  var c1 = document.getElementById('continue1');
-  if (c1) c1.addEventListener('click', function(){
-    document.getElementById('continue1-wrap').style.display = 'none';
-    var g1 = document.getElementById('gated1');
-    g1.hidden = false;
-    g1.scrollIntoView({behavior:'smooth', block:'start'});
-    sendState(33, false, false);
-  });
+  (function(){
+    var callout = document.getElementById('strength-callout');
+    var sentences = {"bystander": "A bystander just happens to be near the action, but a spectator has come on purpose to watch it.", "viewer": "A viewer may be watching a screen from anywhere, while a spectator is physically present at the live event.", "fan": "A fan is even more invested than a spectator, cheering passionately for one side rather than simply watching."};
+    document.querySelectorAll('#strength-scale .scale-word.tappable').forEach(function(w){
+      w.addEventListener('click', function(){
+        document.querySelectorAll('#strength-scale .scale-word').forEach(function(x){ x.classList.remove('active'); });
+        w.classList.add('active');
+        var key = w.getAttribute('data-key');
+        callout.textContent = sentences[key] || '';
+        callout.hidden = false;
+      });
+    });
+  })();
 
-  var c2 = document.getElementById('continue2');
-  if (c2) c2.addEventListener('click', function(){
+  // ---------- Sorting activity (event delegation — no per-chip listener re-attachment) ----------
+  (function(){
+    var root = document.getElementById('sort-activity-root');
+    var pool = document.getElementById('sort-pool');
+    var checkBtn = document.getElementById('sort-check-btn');
+    var status = document.getElementById('sort-status');
+    var continue2 = document.getElementById('continue2');
+    var selectedChip = null;
+    var correctMap = {"viewer": "synonym", "onlooker": "synonym", "participant": "antonym", "performer": "antonym"};
+
+    function allPlaced(){
+      return pool.querySelectorAll('.sort-chip').length === 0;
+    }
+    function updateCheckVisibility(){
+      checkBtn.hidden = !allPlaced();
+    }
+    function selectChip(chip){
+      if (chip.classList.contains('locked')) return;
+      if (selectedChip && selectedChip !== chip){ selectedChip.classList.remove('selected'); }
+      if (selectedChip === chip){
+        chip.classList.remove('selected');
+        selectedChip = null;
+      } else {
+        chip.classList.add('selected');
+        selectedChip = chip;
+      }
+    }
+
+    root.addEventListener('click', function(e){
+      var chip = e.target.closest('.sort-chip');
+      var col = e.target.closest('.sort-col');
+      if (col){
+        if (chip){
+          selectChip(chip);
+        } else if (selectedChip){
+          col.appendChild(selectedChip);
+          selectedChip.classList.remove('selected');
+          selectedChip = null;
+          updateCheckVisibility();
+        }
+        return;
+      }
+      if (chip){
+        selectChip(chip);
+      }
+    });
+
+    checkBtn.addEventListener('click', function(){
+      var allCorrect = true;
+      document.querySelectorAll('.sort-col').forEach(function(col){
+        var colName = col.getAttribute('data-col');
+        col.querySelectorAll('.sort-chip').forEach(function(chip){
+          var word = chip.getAttribute('data-word');
+          if (correctMap[word] === colName){
+            chip.style.borderColor = 'var(--ok)';
+            chip.classList.add('locked');
+            chip.classList.remove('selected');
+          } else {
+            allCorrect = false;
+            chip.classList.add('shake');
+            if (selectedChip === chip) selectedChip = null;
+            chip.classList.remove('selected');
+            setTimeout(function(){
+              chip.classList.remove('shake');
+              chip.style.borderColor = '';
+              pool.appendChild(chip);
+              updateCheckVisibility();
+            }, 500);
+          }
+        });
+      });
+      if (allCorrect){
+        status.textContent = 'All correct!';
+        status.className = 'sort-status ok';
+        status.hidden = false;
+        checkBtn.hidden = true;
+        continue2.disabled = false;
+      } else {
+        status.textContent = 'Not quite — the highlighted words went back to the pool. Try again.';
+        status.className = 'sort-status no';
+        status.hidden = false;
+      }
+    });
+  })();
+
+  document.getElementById('continue2').addEventListener('click', function(){
     document.getElementById('continue2-wrap').style.display = 'none';
-    var g2 = document.getElementById('gated2');
-    g2.hidden = false;
-    g2.scrollIntoView({behavior:'smooth', block:'start'});
-    sendState(66, false, false);
+    var g = document.getElementById('gated2');
+    g.hidden = false;
+    g.scrollIntoView({behavior:'smooth', block:'start'});
+    post(50);
   });
 
-  var doneBtn = document.getElementById('done-btn');
-  if (doneBtn) doneBtn.addEventListener('click', function(){
-    sendState(100, true, true);
-    var wrap = doneBtn.closest('.done-wrap');
+  (function(){
+    var chips = document.querySelectorAll('#morpheme-chips .morph-chip');
+    var synthesis = document.getElementById('morpheme-synthesis');
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        chip.classList.add('open');
+        var allOpen = true;
+        chips.forEach(function(c){ if (!c.classList.contains('open')) allOpen = false; });
+        if (allOpen) synthesis.hidden = false;
+      });
+    });
+  })();
+
+  var accordionOpened = false;
+  document.getElementById('newword-header').addEventListener('click', function(){
+    var body = document.getElementById('newword-body');
+    body.hidden = !body.hidden;
+    accordionOpened = true;
+    maybeUnlockContinue3();
+  });
+
+  var rootIsProductive = true;
+  var continue3 = document.getElementById('continue3');
+  function maybeUnlockContinue3(){
+    if (!rootIsProductive && accordionOpened) continue3.disabled = false;
+  }
+
+  (function(){
+    var container = document.getElementById('root-mcq');
+    var feedback = document.getElementById('root-mcq-feedback');
+    var correctLetter = "D";
+    var solved = false;
+    container.querySelectorAll('.mcq-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if (solved) return;
+        var letter = btn.getAttribute('data-letter');
+        if (letter === correctLetter){
+          btn.classList.add('correct');
+          feedback.textContent = 'Correct!';
+          feedback.className = 'mcq-feedback ok';
+          feedback.hidden = false;
+          solved = true;
+          continue3.disabled = false;
+          container.querySelectorAll('.mcq-opt').forEach(function(b){ b.disabled = true; });
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          feedback.textContent = 'Not quite — try again.';
+          feedback.className = 'mcq-feedback no';
+          feedback.hidden = false;
+        }
+      });
+    });
+  })();
+
+  document.getElementById('continue3').addEventListener('click', function(){
+    document.getElementById('continue3-wrap').style.display = 'none';
+    var g = document.getElementById('gated3');
+    g.hidden = false;
+    g.scrollIntoView({behavior:'smooth', block:'start'});
+    post(75);
+  });
+
+  document.getElementById('done-btn').addEventListener('click', function(){
+    post(100);
+    var wrap = document.getElementById('done-btn').closest('.done-wrap');
     wrap.innerHTML = '<p class="done-msg">&#10003; Complete</p>';
   });
 })();
