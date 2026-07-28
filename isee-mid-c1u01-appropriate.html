@@ -134,6 +134,7 @@ button{font-family:inherit;cursor:pointer}
       </div>
       <p class="callout" id="synonym-callout" hidden></p>
     </div>
+    
     <div class="card">
       <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
       <div class="chip-row" id="antonym-chips">
@@ -169,9 +170,9 @@ button{font-family:inherit;cursor:pointer}
     <div class="card">
       <div class="lbl">Build the Word <span class="sub">&#183; tap each piece to reveal its meaning</span></div>
       <div class="morph-row" id="morpheme-chips">
-        <div class="morph-chip"><span class="type">prefix</span><span class="form">ad-</span><span class="meaning">to (Latin)</span></div><div class="morph-chip"><span class="type">root</span><span class="form">propri-</span><span class="meaning">one&#x27;s own (Latin (proprius))</span></div>
+        <div class="morph-chip"><span class="type">prefix</span><span class="form">ad-</span><span class="meaning">to (spelled ap- before p) (Latin)</span></div><div class="morph-chip"><span class="type">root</span><span class="form">propri-</span><span class="meaning">one&#x27;s own (Latin (proprius))</span></div><div class="morph-chip"><span class="type">suffix</span><span class="form">-ate</span><span class="meaning">made, characterized by (Latin)</span></div>
       </div>
-      <p class="synthesis" id="morpheme-synthesis" hidden>Ad- (&#x27;to&#x27;) + propri- (&#x27;one&#x27;s own&#x27;): something appropriate fits properly, almost as if it belonged there on its own.</p>
+      <p class="synthesis" id="morpheme-synthesis" hidden>Ad- (&#x27;to,&#x27; spelled ap- before p) + propri- (&#x27;one&#x27;s own&#x27;) + -ate (&#x27;made&#x27;): something appropriate is made to fit properly, almost as if it belonged there on its own.</p>
     </div>
     <div class="card">
       <div class="accordion-header" id="newword-header">Use the root in a new word: <strong>property</strong></div>
@@ -249,6 +250,7 @@ button{font-family:inherit;cursor:pointer}
   function wireChipRow(rowId, calloutId, meanings){
     var row = document.getElementById(rowId);
     var callout = document.getElementById(calloutId);
+    if (!row || !callout) return; // block omitted (e.g. no antonyms exist for this word)
     var openChip = null;
     row.querySelectorAll('.chip.tappable').forEach(function(chip){
       chip.addEventListener('click', function(){

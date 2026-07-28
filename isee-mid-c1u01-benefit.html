@@ -134,6 +134,7 @@ button{font-family:inherit;cursor:pointer}
       </div>
       <p class="callout" id="synonym-callout" hidden></p>
     </div>
+    
     <div class="card">
       <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
       <div class="chip-row" id="antonym-chips">
@@ -169,9 +170,9 @@ button{font-family:inherit;cursor:pointer}
     <div class="card">
       <div class="lbl">Build the Word <span class="sub">&#183; tap each piece to reveal its meaning</span></div>
       <div class="morph-row" id="morpheme-chips">
-        <div class="morph-chip"><span class="type">prefix</span><span class="form">bene-</span><span class="meaning">good, well (Latin)</span></div><div class="morph-chip"><span class="type">root</span><span class="form">fic-</span><span class="meaning">to make or do (Latin (facere))</span></div>
+        <div class="morph-chip"><span class="type">prefix</span><span class="form">bene-</span><span class="meaning">good, well (Latin)</span></div><div class="morph-chip"><span class="type">suffix</span><span class="form">-fit</span><span class="meaning">something done (a worn-down form of the same root as -fic- in beneficial) (Latin (facere), via Old French fait)</span></div>
       </div>
-      <p class="synthesis" id="morpheme-synthesis" hidden>Bene- (&#x27;good, well&#x27;) + fic- (&#x27;to make or do&#x27;): a benefit is something that &#x27;does good&#x27; for you.</p>
+      <p class="synthesis" id="morpheme-synthesis" hidden>Bene- (&#x27;well, good&#x27;) + -fit (&#x27;something done&#x27;): a benefit is something well-done for you -- a good result you gain.</p>
     </div>
     <div class="card">
       <div class="accordion-header" id="newword-header">Use the root in a new word: <strong>beneficial</strong></div>
@@ -179,7 +180,7 @@ button{font-family:inherit;cursor:pointer}
     </div>
     <div class="card">
       <div class="lbl">Root Check</div>
-      <p style="margin:0 0 10px 0;">Benefit shares the root fic- (&#x27;to make or do&#x27;) with beneficial. Something beneficial is...</p>
+      <p style="margin:0 0 10px 0;">Benefit&#x27;s -fit and beneficial&#x27;s -fic- both come from the same Latin root meaning &#x27;to make or do.&#x27; Something beneficial is...</p>
       <div id="root-mcq">
         <button class="mcq-opt" type="button" data-letter="A">A. something loud and annoying</button><button class="mcq-opt" type="button" data-letter="B">B. something helpful and good for someone</button><button class="mcq-opt" type="button" data-letter="C">C. something old and broken</button><button class="mcq-opt" type="button" data-letter="D">D. something expensive and rare</button>
       </div>
@@ -249,6 +250,7 @@ button{font-family:inherit;cursor:pointer}
   function wireChipRow(rowId, calloutId, meanings){
     var row = document.getElementById(rowId);
     var callout = document.getElementById(calloutId);
+    if (!row || !callout) return; // block omitted (e.g. no antonyms exist for this word)
     var openChip = null;
     row.querySelectorAll('.chip.tappable').forEach(function(chip){
       chip.addEventListener('click', function(){

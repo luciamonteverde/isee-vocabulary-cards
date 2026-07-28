@@ -134,8 +134,9 @@ button{font-family:inherit;cursor:pointer}
       </div>
       <p class="callout" id="synonym-callout" hidden></p>
     </div>
+    
     <div class="card">
-      <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
+      <div class="lbl">Contrasts <span class="sub">&#183; not exact opposites, but a different feel &#8212; tap one to see how it differs</span></div>
       <div class="chip-row" id="antonym-chips">
         <span class="chip tappable" tabindex="0" data-key="shared">shared</span><span class="chip tappable" tabindex="0" data-key="common">common</span>
       </div>
@@ -155,7 +156,7 @@ button{font-family:inherit;cursor:pointer}
       </div>
       <div class="sort-columns">
         <div class="sort-col" data-col="synonym"><p class="sort-col-label">Synonym</p></div>
-        <div class="sort-col" data-col="antonym"><p class="sort-col-label">Antonym</p></div>
+        <div class="sort-col" data-col="antonym"><p class="sort-col-label">Contrast</p></div>
       </div>
       <button class="check-btn" id="sort-check-btn" type="button" hidden>Check</button>
       <p class="sort-status" id="sort-status" hidden></p>
@@ -169,9 +170,9 @@ button{font-family:inherit;cursor:pointer}
     <div class="card">
       <div class="lbl">Build the Word <span class="sub">&#183; tap each piece to reveal its meaning</span></div>
       <div class="morph-row" id="morpheme-chips">
-        <div class="morph-chip"><span class="type">prefix</span><span class="form">re-</span><span class="meaning">back (Latin)</span></div><div class="morph-chip"><span class="type">root</span><span class="form">spec-</span><span class="meaning">to look (Latin (specere))</span></div>
+        <div class="morph-chip"><span class="type">prefix</span><span class="form">re-</span><span class="meaning">back (Latin)</span></div><div class="morph-chip"><span class="type">root</span><span class="form">spec-</span><span class="meaning">to look (Latin (specere))</span></div><div class="morph-chip"><span class="type">suffix</span><span class="form">-ive</span><span class="meaning">having the quality of (Latin)</span></div>
       </div>
-      <p class="synthesis" id="morpheme-synthesis" hidden>Re- (&#x27;back&#x27;) + spec- (&#x27;to look&#x27;): being respective means looking back at each one separately, giving each its own attention.</p>
+      <p class="synthesis" id="morpheme-synthesis" hidden>Re- (&#x27;back&#x27;) + spec- (&#x27;to look&#x27;) + -ive (&#x27;having the quality of&#x27;): being respective means having the quality of looking back at each one separately, giving each its own attention.</p>
     </div>
     <div class="card">
       <div class="accordion-header" id="newword-header">Use the root in a new word: <strong>spectator</strong></div>
@@ -249,6 +250,7 @@ button{font-family:inherit;cursor:pointer}
   function wireChipRow(rowId, calloutId, meanings){
     var row = document.getElementById(rowId);
     var callout = document.getElementById(calloutId);
+    if (!row || !callout) return; // block omitted (e.g. no antonyms exist for this word)
     var openChip = null;
     row.querySelectorAll('.chip.tappable').forEach(function(chip){
       chip.addEventListener('click', function(){

@@ -134,13 +134,7 @@ button{font-family:inherit;cursor:pointer}
       </div>
       <p class="callout" id="synonym-callout" hidden></p>
     </div>
-    <div class="card">
-      <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
-      <div class="chip-row" id="antonym-chips">
-        
-      </div>
-      <p class="callout" id="antonym-callout" hidden></p>
-    </div>
+    
     <div class="card">
       <div class="lbl">How Strong Is It? <span class="sub">&#183; tap a word to compare it to effects</span></div>
       <div class="scale-row" id="strength-scale">
@@ -249,6 +243,7 @@ button{font-family:inherit;cursor:pointer}
   function wireChipRow(rowId, calloutId, meanings){
     var row = document.getElementById(rowId);
     var callout = document.getElementById(calloutId);
+    if (!row || !callout) return; // block omitted (e.g. no antonyms exist for this word)
     var openChip = null;
     row.querySelectorAll('.chip.tappable').forEach(function(chip){
       chip.addEventListener('click', function(){

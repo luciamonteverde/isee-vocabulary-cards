@@ -134,6 +134,7 @@ button{font-family:inherit;cursor:pointer}
       </div>
       <p class="callout" id="synonym-callout" hidden></p>
     </div>
+    
     <div class="card">
       <div class="lbl">Antonyms <span class="sub">&#183; opposites &#8212; tap one to see how it differs</span></div>
       <div class="chip-row" id="antonym-chips">
@@ -169,9 +170,9 @@ button{font-family:inherit;cursor:pointer}
     <div class="card">
       <div class="lbl">Build the Word <span class="sub">&#183; tap each piece to reveal its meaning</span></div>
       <div class="morph-row" id="morpheme-chips">
-        <div class="morph-chip"><span class="type">prefix</span><span class="form">con-</span><span class="meaning">together (Latin)</span></div><div class="morph-chip"><span class="type">root</span><span class="form">ven-</span><span class="meaning">to come (Latin (venire))</span></div>
+        <div class="morph-chip"><span class="type">prefix</span><span class="form">con-</span><span class="meaning">together (Latin)</span></div><div class="morph-chip"><span class="type">root</span><span class="form">ven-</span><span class="meaning">to come (Latin (venire))</span></div><div class="morph-chip"><span class="type">suffix</span><span class="form">-ient</span><span class="meaning">tending to, characterized by (Latin)</span></div>
       </div>
-      <p class="synthesis" id="morpheme-synthesis" hidden>Con- (&#x27;together&#x27;) + ven- (&#x27;to come&#x27;): something convenient &#x27;comes together&#x27; neatly with what you need.</p>
+      <p class="synthesis" id="morpheme-synthesis" hidden>Con- (&#x27;together&#x27;) + ven- (&#x27;to come&#x27;) + -ient (&#x27;tending to&#x27;): something convenient &#x27;comes together&#x27; neatly and easily with what you need.</p>
     </div>
     <div class="card">
       <div class="accordion-header" id="newword-header">Use the root in a new word: <strong>avenue</strong></div>
@@ -249,6 +250,7 @@ button{font-family:inherit;cursor:pointer}
   function wireChipRow(rowId, calloutId, meanings){
     var row = document.getElementById(rowId);
     var callout = document.getElementById(calloutId);
+    if (!row || !callout) return; // block omitted (e.g. no antonyms exist for this word)
     var openChip = null;
     row.querySelectorAll('.chip.tappable').forEach(function(chip){
       chip.addEventListener('click', function(){
