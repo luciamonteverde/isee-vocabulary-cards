@@ -20,6 +20,7 @@
   FOUR SEGMENTS, each gated the way the renderer natively supports:
     1. Meaning + worked example -> gated by a QTI item (must answer correctly)
     2. Synonyms / antonyms / strength -> gated by practice-step <details> (must open all)
+                                         AND by Sort It Out (qti-match-interaction)
     3. Build the Word -> gated by practice-step <details> + a QTI root check
     4. Word Choice + the two REAL Quick Check items as a practice group (terminal)
 
@@ -104,6 +105,19 @@
           <details><summary>fury vs. wrath</summary><p>Fury is intense, but wrath is stronger still &mdash; fury is anger boiling over in the moment, while wrath adds a lasting determination to strike back.</p></details>
         </div>
       </div>
+
+      <!-- Sort It Out, as a qti-match-interaction. Confirmed supported 2026-07-31 even
+           though the docs only ever show qti-choice-interaction. Unlike the bespoke
+           sort widget on the production card, this one is scored: it emits
+           QTI_SUBMITTED / QTI_COMPLETED and counts toward accuracyPercentage.
+           This segment now has two gates — open every reveal above AND sort correctly. -->
+      <div class="tb-card tb-expandable tb-interactive">
+        <div class="tb-card-header"><h4>Sort It Out</h4></div>
+        <p class="tb-narration">Now place each word on the right side of wrath.</p>
+        <div class="practice-step">
+          <div class="tb-interaction tb-qti-assessment-item" data-catalog-idref="wrath-sortitout"></div>
+        </div>
+      </div>
     </section>
 
     <!-- ============ SEGMENT 3: etymology, gated by reveals + a QTI root check ============ -->
@@ -171,6 +185,9 @@
   <div class="tb-catalog" hidden>
     <div class="tb-qti-config" id="wrath-yourturn">
       <a href="https://isee-vocabulary-cards.vercel.app/prototype/items/wrath-yourturn.xml" type="application/xml"></a>
+    </div>
+    <div class="tb-qti-config" id="wrath-sortitout">
+      <a href="https://isee-vocabulary-cards.vercel.app/prototype/items/wrath-sortitout.xml" type="application/xml"></a>
     </div>
     <div class="tb-qti-config" id="wrath-rootcheck">
       <a href="https://isee-vocabulary-cards.vercel.app/prototype/items/wrath-rootcheck.xml" type="application/xml"></a>
