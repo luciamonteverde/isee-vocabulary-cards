@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wrath — instructional content renderer prototype</title>
+</head>
+<body>
+<!--
+  PROTOTYPE — ISEE Upper Part 1, Unit 01, word "Wrath", re-authored for the
+  instructional content renderer (content.platform.learnwith.ai).
+
+  Load it with:
+  https://content.platform.learnwith.ai/player?contentUrl=<this file, URL-encoded>
+
+  Compare against the current production card, which is a standalone document
+  with its own bespoke gating JS and no host communication:
+  https://isee-vocabulary-cards.vercel.app/isee-u01-wrath.html
+
+  FOUR SEGMENTS, each gated the way the renderer natively supports:
+    1. Meaning + worked example -> gated by a QTI item (must answer correctly)
+    2. Synonyms / antonyms / strength -> gated by practice-step <details> (must open all)
+    3. Build the Word -> gated by practice-step <details> + a QTI root check
+    4. Word Choice + the two REAL Quick Check items as a practice group (terminal)
+
+  No custom JavaScript anywhere in this file. Every gate is renderer-native.
+-->
+<div class="tb-instructional-content" data-tb-instructional-content-id="isee-u01-wrath">
+  <div class="tb-article-container">
+
+    <!-- ============ SEGMENT 1: meaning, worked example, gating question ============ -->
+    <section class="tb-segment">
+      <h2>Wrath</h2>
+      <p><em>/rath/ — rhymes with math</em> &middot; noun</p>
+
+      <div class="tb-card">
+        <h3>Hear It</h3>
+        <audio controls src="https://upload.wikimedia.org/wikipedia/commons/e/e0/En-us-wrath.ogg">Audio not available</audio>
+      </div>
+
+      <div class="tb-card">
+        <h3>What It Means</h3>
+        <p><strong>Wrath</strong> is intense anger, often with a desire to get back at whoever caused it.</p>
+        <p><em>The king's wrath was so great that his advisors feared even mentioning the failed harvest.</em></p>
+      </div>
+
+      <div class="tb-card">
+        <h3>Worked Example</h3>
+        <p><em>A myth tells of a sea god who discovers that sailors broke their promise, and now gathers a storm to punish their whole fleet.</em></p>
+        <p>The anger here is enormous and aimed at payback &mdash; that vengeful, punishing anger is exactly what wrath names. Because revenge is the whole point of the sentence, wrath is more precise than the plain word &ldquo;anger.&rdquo;</p>
+      </div>
+
+      <!-- GATE 1: QTI item inside .practice-step. Continue stays locked until the
+           item's response processing sets completionStatus = completed, which only
+           happens on the correct answer. -->
+      <div class="tb-card tb-expandable tb-interactive">
+        <div class="tb-card-header"><h3>Your Turn</h3></div>
+        <p class="tb-narration">Answer correctly to continue.</p>
+        <div class="practice-step">
+          <div class="tb-interaction tb-qti-assessment-item" data-catalog-idref="wrath-yourturn"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SEGMENT 2: word relationships, gated by reveals ============ -->
+    <section class="tb-segment">
+      <h3>How Wrath Sits Among Its Neighbors</h3>
+
+      <!-- GATE 2: every <details> inside .practice-step must be opened before
+           Continue enables. The renderer shows "View all practice steps to continue"
+           next to the disabled button. -->
+      <div class="tb-card tb-expandable tb-interactive">
+        <div class="tb-card-header"><h4>Synonyms &mdash; open each to see how it differs</h4></div>
+        <div class="practice-step">
+          <details><summary>anger</summary><p>the ordinary, everyday feeling of being upset</p></details>
+        </div>
+        <div class="practice-step">
+          <details><summary>fury</summary><p>wild, explosive anger that feels out of control</p></details>
+        </div>
+        <div class="practice-step">
+          <details><summary>indignation</summary><p>anger sparked by something unfair or insulting</p></details>
+        </div>
+      </div>
+
+      <div class="tb-card tb-expandable tb-interactive">
+        <div class="tb-card-header"><h4>Antonyms</h4></div>
+        <div class="practice-step">
+          <details><summary>serenity</summary><p>calm, untroubled peace of mind</p></details>
+        </div>
+        <div class="practice-step">
+          <details><summary>forbearance</summary><p>patiently holding back anger or revenge</p></details>
+        </div>
+      </div>
+
+      <div class="tb-card tb-expandable tb-interactive">
+        <div class="tb-card-header"><h4>How Strong Is It? &mdash; annoyance &rarr; anger &rarr; fury &rarr; <strong>wrath</strong></h4></div>
+        <div class="practice-step">
+          <details><summary>annoyance vs. wrath</summary><p>Annoyance is far weaker than wrath: it is the mild irritation of a buzzing fly, nowhere near wrath's fierce, vengeful rage.</p></details>
+        </div>
+        <div class="practice-step">
+          <details><summary>anger vs. wrath</summary><p>Anger is weaker than wrath; anger is the ordinary heat of being upset, while wrath burns hotter and often carries a wish to punish.</p></details>
+        </div>
+        <div class="practice-step">
+          <details><summary>fury vs. wrath</summary><p>Fury is intense, but wrath is stronger still &mdash; fury is anger boiling over in the moment, while wrath adds a lasting determination to strike back.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SEGMENT 3: etymology, gated by reveals + a QTI root check ============ -->
+    <section class="tb-segment">
+      <h3>Build the Word</h3>
+
+      <div class="tb-card tb-expandable tb-interactive">
+        <div class="tb-card-header"><h4>The pieces</h4></div>
+        <div class="practice-step">
+          <details>
+            <summary>Root &mdash; <code>wr&#257;&thorn;</code></summary>
+            <p>angry, furious (Old English)</p>
+          </details>
+        </div>
+        <div class="practice-step">
+          <details>
+            <summary>Put it together</summary>
+            <p>Wrath comes down to us as one solid piece: Old English <em>wr&#257;&thorn;</em>, meaning &lsquo;angry, furious.&rsquo; Dig to its deepest layer and the ancient root meant &lsquo;to twist or bend&rsquo; &mdash; so wrath is anger that twists a person out of shape, bending them toward revenge. There is no prefix or suffix to peel off here; the whole word, all on its own, carries the fury.</p>
+          </details>
+        </div>
+        <div class="practice-step">
+          <details>
+            <summary>Use the root in a new word: <strong>writhe</strong></summary>
+            <p>The injured wrestler began to writhe on the mat, twisting and coiling his body back and forth in pain.</p>
+          </details>
+        </div>
+      </div>
+
+      <!-- GATE 3 -->
+      <div class="tb-card tb-expandable tb-interactive">
+        <div class="tb-card-header"><h4>Root Check</h4></div>
+        <div class="practice-step">
+          <div class="tb-interaction tb-qti-assessment-item" data-catalog-idref="wrath-rootcheck"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SEGMENT 4: register + the real Quick Check, terminal ============ -->
+    <section class="tb-segment">
+      <div class="tb-card">
+        <h3>Word Choice</h3>
+        <p><em>formal / literary</em></p>
+        <p>Wrath is grand, serious anger &mdash; the anger of kings, gods, and storms. Reach for it when the anger is powerful and threatens consequences. For everyday irritation, the plain word &ldquo;anger&rdquo; is the simpler, better choice.</p>
+      </div>
+
+      <!-- The two items below are the SAME two items that today live in a separate
+           "Practice It!: Wrath" question bank linked as a sibling resource. Here they
+           live inside the card. Finishing them emits QTI_GROUP_COMPLETED and then
+           CONTENT_COMPLETED (last segment has no Continue button). -->
+      <div class="tb-independent-grouped-practice">
+        <div class="tb-independent-grouped-practice-content">
+          <h3>Quick Check</h3>
+          <p>Two questions. Use the chips to move between them.</p>
+        </div>
+        <div class="tb-qti-practice-group" id="isee-u01-wrath-quickcheck">
+          <div class="tb-interaction tb-qti-assessment-item" data-catalog-idref="wrath-qc1"></div>
+          <div class="tb-interaction tb-qti-assessment-item" data-catalog-idref="wrath-qc2"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============ HIDDEN CATALOG ============ -->
+  <div class="tb-catalog" hidden>
+    <div class="tb-qti-config" id="wrath-yourturn">
+      <a href="https://isee-vocabulary-cards.vercel.app/prototype/items/wrath-yourturn.xml" type="application/xml"></a>
+    </div>
+    <div class="tb-qti-config" id="wrath-rootcheck">
+      <a href="https://isee-vocabulary-cards.vercel.app/prototype/items/wrath-rootcheck.xml" type="application/xml"></a>
+    </div>
+    <div class="tb-qti-config" id="wrath-qc1">
+      <a href="https://isee-vocabulary-cards.vercel.app/prototype/items/wrath-qc1.xml" type="application/xml"></a>
+    </div>
+    <div class="tb-qti-config" id="wrath-qc2">
+      <a href="https://isee-vocabulary-cards.vercel.app/prototype/items/wrath-qc2.xml" type="application/xml"></a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

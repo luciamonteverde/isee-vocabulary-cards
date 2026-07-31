@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wrath prototype — host harness</title>
+<style>
+  :root{--ink:#12161f;--muted:#5b6577;--line:#dfe3ea;--accent:#1f7a6a;--ok:#1c7c46;--no:#b23b3b}
+  *{box-sizing:border-box}
+  body{margin:0;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:#f6f7f9}
+  header{padding:14px 18px;background:#fff;border-bottom:1px solid var(--line)}
+  h1{margin:0 0 4px;font-size:17px}
+  header p{margin:0;color:var(--muted);font-size:13px}
+  .wrap{display:flex;gap:14px;padding:14px;align-items:flex-start;flex-wrap:wrap}
+  .col-player{flex:1 1 620px;min-width:340px}
+  .col-side{flex:0 1 420px;min-width:320px;position:sticky;top:14px}
+  iframe{width:100%;min-height:78vh;border:1px solid var(--line);border-radius:10px;background:#fff}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:12px}
+  .panel h2{margin:0 0 8px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14px}
+  .kv dt{color:var(--muted)}
+  .kv dd{margin:0;font-variant-numeric:tabular-nums;font-weight:600}
+  .flag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:700}
+  .flag.yes{background:#e2f4e9;color:var(--ok)}
+  .flag.no{background:#fbe6e6;color:var(--no)}
+  #log{margin:0;padding:0;list-style:none;max-height:44vh;overflow:auto;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}
+  #log li{padding:6px 8px;border-bottom:1px solid #eef1f5;white-space:pre-wrap;word-break:break-word}
+  #log li:nth-child(odd){background:#fafbfc}
+  .ev{font-weight:700;color:var(--accent)}
+  .ev.score-1{color:var(--ok)}
+  .ev.score-0{color:var(--no)}
+  .empty{color:var(--muted);font-style:italic;padding:8px}
+  button{font:inherit;padding:6px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer}
+  .next{margin-top:10px;width:100%;padding:11px;font-weight:700;border:0;border-radius:9px;background:#d6dae1;color:#8a93a2;cursor:not-allowed}
+  .next.on{background:var(--accent);color:#fff;cursor:pointer}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Instructional content renderer — gating &amp; XP-signal harness</h1>
+  <p>Lesson: ISEE Upper Part 1 &middot; Unit 01 &middot; <strong>Wrath</strong>. This page plays the role AlphaBuild would play as host: it embeds the player, listens on postMessage, and shows exactly what a host receives.</p>
+</header>
+
+<div class="wrap">
+  <div class="col-player">
+    <iframe id="frame" title="Wrath lesson"></iframe>
+  </div>
+
+  <div class="col-side">
+    <div class="panel">
+      <h2>contentSummary &mdash; the gating channel</h2>
+      <dl class="kv">
+        <dt>progressPercentage</dt><dd id="s-progress">&mdash;</dd>
+        <dt>isCompleted</dt><dd id="s-completed"><span class="flag no">false</span></dd>
+        <dt>isReadyToAdvance</dt><dd id="s-ready"><span class="flag no">false</span></dd>
+        <dt>runningTimeSeconds</dt><dd id="s-time">&mdash;</dd>
+      </dl>
+      <button class="next" id="next" disabled>Next component &rarr;</button>
+      <p style="margin:8px 0 0;color:#5b6577;font-size:12.5px">This button is wired to <code>isReadyToAdvance</code> only. That is the whole gating contract: the renderer decides, the host obeys.</p>
+    </div>
+
+    <div class="panel">
+      <h2>XP signals &mdash; running tally</h2>
+      <dl class="kv">
+        <dt>Items completed</dt><dd id="x-items">0</dd>
+        <dt>Correct first try</dt><dd id="x-first">0</dd>
+        <dt>Total attempts</dt><dd id="x-attempts">0</dd>
+        <dt>Score / max</dt><dd id="x-score">0 / 0</dd>
+        <dt>accuracyPercentage</dt><dd id="x-acc">&mdash;</dd>
+      </dl>
+      <p style="margin:8px 0 0;color:#5b6577;font-size:12.5px">The renderer has no XP concept. These are the fields a host would turn into XP. <code>accuracyPercentage</code> arrives once, on <code>CONTENT_COMPLETED</code>, and is <em>first-attempt</em> accuracy.</p>
+    </div>
+
+    <div class="panel">
+      <h2>Event log <button id="clear" style="float:right;font-size:12px;padding:2px 8px">clear</button></h2>
+      <ul id="log"><li class="empty">Waiting for CONTENT_READY&hellip;</li></ul>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var PLAYER_ORIGIN = 'https://content.platform.learnwith.ai';
+  var LESSON_URL    = 'https://isee-vocabulary-cards.vercel.app/prototype/wrath-renderer.html';
+
+  var frame = document.getElementById('frame');
+  frame.src = PLAYER_ORIGIN + '/player?contentUrl=' + encodeURIComponent(LESSON_URL) + '&theme=indigo';
+
+  var log = document.getElementById('log');
+  var firstLog = true;
+  function write(name, detail, cls) {
+    if (firstLog) { log.innerHTML = ''; firstLog = false; }
+    var li = document.createElement('li');
+    var t = new Date().toLocaleTimeString();
+    li.innerHTML = '<span class="ev ' + (cls || '') + '">' + name + '</span>  ' + t +
+                   (detail ? '\n' + detail : '');
+    log.insertBefore(li, log.firstChild);
+  }
+  document.getElementById('clear').onclick = function () { log.innerHTML = ''; firstLog = true; };
+
+  // ---- gating ----
+  function applySummary(cs) {
+    if (!cs) return;
+    document.getElementById('s-progress').textContent =
+      (cs.progressPercentage != null ? cs.progressPercentage + '%' : '—');
+    document.getElementById('s-time').textContent =
+      (cs.runningTimeSeconds != null ? cs.runningTimeSeconds + 's' : '—');
+    function flag(id, v) {
+      document.getElementById(id).innerHTML =
+        '<span class="flag ' + (v ? 'yes' : 'no') + '">' + (v ? 'true' : 'false') + '</span>';
+    }
+    flag('s-completed', !!cs.isCompleted);
+    flag('s-ready', !!cs.isReadyToAdvance);
+
+    var btn = document.getElementById('next');
+    btn.disabled = !cs.isReadyToAdvance;
+    btn.classList.toggle('on', !!cs.isReadyToAdvance);
+  }
+  document.getElementById('next').onclick = function () {
+    alert('Host would now advance to the next course component.');
+  };
+
+  // ---- XP tally ----
+  var items = 0, firstTry = 0, attempts = 0, score = 0, maxScore = 0;
+  function bump() {
+    document.getElementById('x-items').textContent    = items;
+    document.getElementById('x-first').textContent    = firstTry;
+    document.getElementById('x-attempts').textContent = attempts;
+    document.getElementById('x-score').textContent    = score + ' / ' + maxScore;
+  }
+
+  function onEvent(ev) {
+    var m = ev.metadata || {};
+    var cls = '';
+    var lines = [];
+    if (ev.id) lines.push('id: ' + ev.id);
+
+    if (ev.name === 'QTI_SUBMITTED') {
+      attempts++;
+      cls = m.isCorrect ? 'score-1' : 'score-0';
+      lines.push('isCorrect: ' + m.isCorrect +
+                 '   attempt #' + m.numberOfAttempts +
+                 '   score ' + m.score + '/' + m.maxScore);
+      if (m.isCorrect && m.numberOfAttempts === 1) firstTry++;
+      bump();
+    } else if (ev.name === 'QTI_COMPLETED') {
+      items++;
+      score += (typeof m.score === 'number' ? m.score : 0);
+      maxScore += (typeof m.maxScore === 'number' ? m.maxScore : 0);
+      lines.push('score ' + m.score + '/' + m.maxScore +
+                 (m.activeSeconds != null ? '   ' + m.activeSeconds + 's' : ''));
+      bump();
+    } else if (ev.name === 'QTI_GROUP_COMPLETED') {
+      lines.push('numberCorrect ' + m.numberCorrect + ' of ' + m.numberOfItems);
+    } else if (ev.name === 'CONTENT_COMPLETED') {
+      cls = 'score-1';
+      lines.push('accuracyPercentage: ' + m.accuracyPercentage +
+                 '   questions: ' + m.numberOfQuestions);
+      document.getElementById('x-acc').textContent =
+        (m.accuracyPercentage != null ? m.accuracyPercentage + '%' : '—');
+    } else if (ev.name === 'SECTION_COMPLETED') {
+      lines.push('sectionIndex ' + m.sectionIndex +
+                 (m.activeSeconds != null ? '   ' + m.activeSeconds + 's' : ''));
+    } else if (Object.keys(m).length) {
+      lines.push(JSON.stringify(m));
+    }
+    write(ev.name, lines.join('\n'), cls);
+  }
+
+  window.addEventListener('message', function (e) {
+    if (e.origin !== PLAYER_ORIGIN || e.source !== frame.contentWindow) return;
+    var d = e.data || {};
+    switch (d.type) {
+      case 'CONTENT_READY':
+        write('CONTENT_READY', 'source: ' + (d.payload && d.payload.source));
+        // No CONTENT_LOAD sent: Direct URL keeps the fetched HTML and renders with no
+        // saved state once the player's grace timeout expires. A real host would send
+        // CONTENT_LOAD here with contentState to restore progress.
+        break;
+      case 'CONTENT_RESIZE':
+        if (d.payload && d.payload.height) frame.style.height = d.payload.height + 'px';
+        break;
+      case 'CONTENT_STATE_CHANGE':
+        applySummary(d.payload && d.payload.contentSummary);
+        write('CONTENT_STATE_CHANGE',
+              'contentSummary: ' + JSON.stringify(d.payload && d.payload.contentSummary));
+        break;
+      case 'CONTENT_EVENT':
+        if (d.payload && d.payload.event) onEvent(d.payload.event);
+        break;
+      case 'CONTENT_ERROR':
+        write('CONTENT_ERROR', JSON.stringify(d.payload), 'score-0');
+        break;
+    }
+  });
+})();
+</script>
+</body>
+</html>

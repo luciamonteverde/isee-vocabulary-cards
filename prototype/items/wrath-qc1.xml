@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PROTOTYPE: this is the LIVE AlphaBuild item pcb-item-4329342b25564a4ca9aeb7bb797590f8
+     ("Quick Check: Wrath"), copied verbatim, with exactly three additions marked GATING below.
+     Stem text, choices, correct answer, and both modal-feedback strings are unchanged, so this
+     also tests whether our existing qti-modal-feedback authoring renders in the renderer. -->
+<qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
+  identifier="wrath-qc1" title="Quick Check: Wrath" adaptive="true" time-dependent="false">
+
+  <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
+    <qti-correct-response><qti-value>C</qti-value></qti-correct-response>
+  </qti-response-declaration>
+  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
+    <qti-default-value><qti-value>0</qti-value></qti-default-value>
+  </qti-outcome-declaration>
+  <qti-outcome-declaration identifier="FEEDBACK" cardinality="single" base-type="identifier"/>
+  <!-- GATING (1/3): visibility outcome -->
+  <qti-outcome-declaration identifier="INTERACTION_VISIBILITY" cardinality="single" base-type="identifier">
+    <qti-default-value><qti-value>show_interaction</qti-value></qti-default-value>
+  </qti-outcome-declaration>
+
+  <qti-item-body>
+    <!-- GATING (2/3): interaction wrapped so it hides once completed -->
+    <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
+      <qti-content-body>
+        <p>In which of these sentences is <strong>wrath</strong> used correctly?</p>
+        <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
+          <qti-simple-choice identifier="A">She felt a flash of wrath when her pencil rolled off the desk during the quiz.</qti-simple-choice>
+          <qti-simple-choice identifier="B">His wrath at the slow traffic melted away the moment the light turned green.</qti-simple-choice>
+          <qti-simple-choice identifier="C">The coach's wrath after the betrayal was so fierce that players feared practice for weeks.</qti-simple-choice>
+          <qti-simple-choice identifier="D">The librarian's gentle wrath reminded the students to whisper politely.</qti-simple-choice>
+        </qti-choice-interaction>
+      </qti-content-body>
+    </qti-feedback-block>
+  </qti-item-body>
+
+  <qti-response-processing>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
+        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">CORRECT</qti-base-value></qti-set-outcome-value>
+        <!-- GATING (3/3): only the correct branch completes -->
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+      <qti-response-else>
+        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">INCORRECT</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
+      </qti-response-else>
+    </qti-response-condition>
+  </qti-response-processing>
+
+  <qti-modal-feedback outcome-identifier="FEEDBACK" identifier="CORRECT" show-hide="show">
+    <qti-content-body><p>Correct! Wrath is intense anger, often with a desire to get back at whoever caused it — fierce, lasting, and provoked by a betrayal.</p></qti-content-body>
+  </qti-modal-feedback>
+  <qti-modal-feedback outcome-identifier="FEEDBACK" identifier="INCORRECT" show-hide="show">
+    <qti-content-body><p>Wrath is intense, often vengeful anger. The other sentences use it for feelings that are too mild, too brief, or contradictory ("gentle wrath"). The correct one: "The coach's wrath after the betrayal was so fierce that players feared practice for weeks."</p></qti-content-body>
+  </qti-modal-feedback>
+</qti-assessment-item>
