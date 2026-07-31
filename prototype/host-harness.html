@@ -82,7 +82,10 @@
 <script>
 (function () {
   var PLAYER_ORIGIN = 'https://content.platform.learnwith.ai';
-  var LESSON_URL    = 'https://isee-vocabulary-cards.vercel.app/prototype/wrath-renderer.html';
+  var BASE          = 'https://isee-vocabulary-cards.vercel.app/prototype/';
+  // ?lesson=match-test.html to instrument a different lesson; defaults to the Wrath card.
+  var lessonParam   = new URLSearchParams(location.search).get('lesson');
+  var LESSON_URL    = BASE + (lessonParam || 'wrath-renderer.html');
 
   var frame = document.getElementById('frame');
   frame.src = PLAYER_ORIGIN + '/player?contentUrl=' + encodeURIComponent(LESSON_URL) + '&theme=indigo';

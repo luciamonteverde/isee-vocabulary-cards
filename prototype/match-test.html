@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Does the renderer support qti-match-interaction?</title>
+</head>
+<body>
+<!--
+  ISOLATED TEST — kept separate from wrath-renderer.html so the main prototype stays known-good.
+
+  Question: can the renderer render and grade a qti-match-interaction? The docs only ever
+  show qti-choice-interaction, so this is unverified.
+
+  Experimental design:
+    Segment 1 = CONTROL. A plain choice interaction, already proven to work. If this renders
+                and gates, the page itself is fine.
+    Segment 2 = TEST. The Sort It Out activity as a match interaction. If the control passed
+                and this does not render, the interaction type is the cause.
+
+  Nothing follows segment 2, so a failure here strands nothing.
+-->
+<div class="tb-instructional-content" data-tb-instructional-content-id="match-interaction-test">
+  <div class="tb-article-container">
+
+    <section class="tb-segment">
+      <h2>Control</h2>
+      <p>A plain <code>qti-choice-interaction</code> — the type the docs document, and the type
+         the Wrath prototype already uses successfully. Answer it to prove the page and the
+         gating both work, then press Continue.</p>
+      <div class="tb-card tb-expandable tb-interactive">
+        <div class="tb-card-header"><h3>Control question</h3></div>
+        <div class="practice-step">
+          <div class="tb-interaction tb-qti-assessment-item" data-catalog-idref="wrath-rootcheck"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tb-segment">
+      <h2>Test — Sort It Out as a match interaction</h2>
+      <p>This is the activity missing from the prototype card: four words sorted into
+         Synonym / Antonym. If you can see and use a matching widget below, the renderer
+         supports <code>qti-match-interaction</code> and Sort It Out can go back into the card
+         as a real gated activity. If the block is empty or broken, it cannot — and the
+         fallback options are in the chat.</p>
+      <div class="tb-card tb-expandable tb-interactive">
+        <div class="tb-card-header"><h3>Sort It Out</h3></div>
+        <div class="practice-step">
+          <div class="tb-interaction tb-qti-assessment-item" data-catalog-idref="wrath-sortitout"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="tb-catalog" hidden>
+    <div class="tb-qti-config" id="wrath-rootcheck">
+      <a href="https://isee-vocabulary-cards.vercel.app/prototype/items/wrath-rootcheck.xml" type="application/xml"></a>
+    </div>
+    <div class="tb-qti-config" id="wrath-sortitout">
+      <a href="https://isee-vocabulary-cards.vercel.app/prototype/items/wrath-sortitout.xml" type="application/xml"></a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
