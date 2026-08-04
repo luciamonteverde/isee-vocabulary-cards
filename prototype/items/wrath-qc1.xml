@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- PROTOTYPE: this is the LIVE AlphaBuild item pcb-item-4329342b25564a4ca9aeb7bb797590f8
      ("Quick Check: Wrath"), copied verbatim, with exactly three additions marked GATING below.
-     Stem text, choices, correct answer, and both modal-feedback strings are unchanged, so this
-     also tests whether our existing qti-modal-feedback authoring renders in the renderer. -->
+     Stem text, choices, correct answer, and both feedback strings are unchanged.
+     UPDATE 2026-08-04: feedback converted from qti-modal-feedback to in-body
+     qti-feedback-block per Max — the renderer's docs cover feedback-block only. -->
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
@@ -33,6 +34,16 @@
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
+
+    <!-- Feedback as in-body qti-feedback-block (was qti-modal-feedback; changed per Max
+         2026-08-04 — the renderer documents feedback-block only, modal-feedback appears
+         nowhere in its docs). Strings unchanged from the live AlphaBuild item. -->
+    <qti-feedback-block identifier="CORRECT" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Correct! Wrath is intense anger, often with a desire to get back at whoever caused it — fierce, lasting, and provoked by a betrayal.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="INCORRECT" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Wrath is intense, often vengeful anger. The other sentences use it for feelings that are too mild, too brief, or contradictory ("gentle wrath"). The correct one: "The coach's wrath after the betrayal was so fierce that players feared practice for weeks."</p></qti-content-body>
+    </qti-feedback-block>
   </qti-item-body>
 
   <qti-response-processing>
@@ -52,11 +63,4 @@
       </qti-response-else>
     </qti-response-condition>
   </qti-response-processing>
-
-  <qti-modal-feedback outcome-identifier="FEEDBACK" identifier="CORRECT" show-hide="show">
-    <qti-content-body><p>Correct! Wrath is intense anger, often with a desire to get back at whoever caused it — fierce, lasting, and provoked by a betrayal.</p></qti-content-body>
-  </qti-modal-feedback>
-  <qti-modal-feedback outcome-identifier="FEEDBACK" identifier="INCORRECT" show-hide="show">
-    <qti-content-body><p>Wrath is intense, often vengeful anger. The other sentences use it for feelings that are too mild, too brief, or contradictory ("gentle wrath"). The correct one: "The coach's wrath after the betrayal was so fierce that players feared practice for weeks."</p></qti-content-body>
-  </qti-modal-feedback>
 </qti-assessment-item>
