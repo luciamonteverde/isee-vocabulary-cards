@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
+  identifier="isee-u09-certify-yourturn" title="Your Turn: Certify" adaptive="true" time-dependent="false">
+
+  <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
+    <qti-correct-response><qti-value>C</qti-value></qti-correct-response>
+  </qti-response-declaration>
+  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
+    <qti-default-value><qti-value>0</qti-value></qti-default-value>
+  </qti-outcome-declaration>
+  <qti-outcome-declaration identifier="FEEDBACK" cardinality="single" base-type="identifier"/>
+  <qti-outcome-declaration identifier="INTERACTION_VISIBILITY" cardinality="single" base-type="identifier">
+    <qti-default-value><qti-value>show_interaction</qti-value></qti-default-value>
+  </qti-outcome-declaration>
+
+  <qti-item-body>
+    <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
+      <qti-content-body>
+        <qti-choice-interaction response-identifier="RESPONSE" shuffle="false" max-choices="1">
+          <qti-prompt>Which sentence uses certify correctly?</qti-prompt>
+          <qti-simple-choice identifier="A">The forecaster certified that it might possibly rain sometime late next week.</qti-simple-choice>
+          <qti-simple-choice identifier="B">He certified his opinion loudly during the debate, refusing to listen to anyone else.</qti-simple-choice>
+          <qti-simple-choice identifier="C">An inspector certified that the new bridge met every safety standard before it opened.</qti-simple-choice>
+          <qti-simple-choice identifier="D">Marcus certified that he would probably come to the party if he finished his chores in time.</qti-simple-choice>
+        </qti-choice-interaction>
+      </qti-content-body>
+    </qti-feedback-block>
+
+    <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Correct — an official inspection confirming the bridge meets every safety standard is exactly what certify means: officially verifying something as true or up to standard.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Not quite. Certifying is an official confirmation of fact — vague guesses about the weather, loud personal declarations, and half-promises are all too uncertain to certify anything. Look for the statement backed by real authority and proof.</p></qti-content-body>
+    </qti-feedback-block>
+  </qti-item-body>
+
+  <qti-response-processing>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
+        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">correct</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+      <qti-response-else>
+        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
+      </qti-response-else>
+    </qti-response-condition>
+  </qti-response-processing>
+</qti-assessment-item>

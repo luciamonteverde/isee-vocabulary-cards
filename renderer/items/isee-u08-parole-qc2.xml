@@ -1,0 +1,49 @@
+<qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd" identifier="pcb-item-6a3c19302cc941b19a439480fcaa222f" title="Quick Check: Parole (precision)" adaptive="true" time-dependent="false">
+  <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
+  </qti-response-declaration>
+  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
+    <qti-default-value><qti-value>0</qti-value></qti-default-value>
+  </qti-outcome-declaration>
+  <qti-outcome-declaration identifier="FEEDBACK" cardinality="single" base-type="identifier"/>
+  <qti-outcome-declaration identifier="INTERACTION_VISIBILITY" cardinality="single" base-type="identifier">
+    <qti-default-value><qti-value>show_interaction</qti-value></qti-default-value>
+  </qti-outcome-declaration>
+  <qti-item-body>
+    <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
+      <qti-content-body>
+        <p>Choose the word that best completes the sentence.</p>
+    <p>The judge sentenced the first-time offender to five years of _____ instead of imprisonment, allowing him to work and live at home under supervision.</p>
+    <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
+      <qti-simple-choice identifier="A">parole</qti-simple-choice>
+      <qti-simple-choice identifier="B">release</qti-simple-choice>
+      <qti-simple-choice identifier="C">amnesty</qti-simple-choice>
+      <qti-simple-choice identifier="D">probation</qti-simple-choice>
+    </qti-choice-interaction>
+      </qti-content-body>
+    </qti-feedback-block>
+
+    <qti-feedback-block identifier="CORRECT" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Correct! Probation is the term when a sentence is served in the community without going to prison. Parole refers to early release from an active prison sentence. To parole someone is to release them from prison before their full sentence is served, on the condition that they follow certain rules while being supervised.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="INCORRECT" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>To parole someone is to release them from prison before their full sentence is served, on the condition that they follow certain rules while being supervised. Probation is the term when a sentence is served in the community without going to prison. Parole refers to early release from an active prison sentence. All four words are close in meaning, but the best fit here is: &quot;probation&quot;</p></qti-content-body>
+    </qti-feedback-block>
+  </qti-item-body>
+  <qti-response-processing>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
+        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">CORRECT</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+      <qti-response-else>
+        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">INCORRECT</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
+      </qti-response-else>
+    </qti-response-condition>
+  </qti-response-processing>
+</qti-assessment-item>

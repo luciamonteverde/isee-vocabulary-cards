@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
+  identifier="isee-u08-culpable-yourturn" title="Your Turn: Culpable" adaptive="true" time-dependent="false">
+
+  <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
+    <qti-correct-response><qti-value>B</qti-value></qti-correct-response>
+  </qti-response-declaration>
+  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
+    <qti-default-value><qti-value>0</qti-value></qti-default-value>
+  </qti-outcome-declaration>
+  <qti-outcome-declaration identifier="FEEDBACK" cardinality="single" base-type="identifier"/>
+  <qti-outcome-declaration identifier="INTERACTION_VISIBILITY" cardinality="single" base-type="identifier">
+    <qti-default-value><qti-value>show_interaction</qti-value></qti-default-value>
+  </qti-outcome-declaration>
+
+  <qti-item-body>
+    <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
+      <qti-content-body>
+        <qti-choice-interaction response-identifier="RESPONSE" shuffle="false" max-choices="1">
+          <qti-prompt>Which sentence uses culpable correctly?</qti-prompt>
+          <qti-simple-choice identifier="A">The suspect remained culpable in the county jail for three weeks until his trial finally began.</qti-simple-choice>
+          <qti-simple-choice identifier="B">Because he ignored repeated safety warnings, the site manager was found culpable for the workers' injuries.</qti-simple-choice>
+          <qti-simple-choice identifier="C">After the flood, the volunteers were culpable for saving dozens of stranded pets from the rising water.</qti-simple-choice>
+          <qti-simple-choice identifier="D">Her culpable performance in the school play earned a standing ovation from the entire audience.</qti-simple-choice>
+        </qti-choice-interaction>
+      </qti-content-body>
+    </qti-feedback-block>
+
+    <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Exactly — the manager ignored safety warnings and caused real harm, so he deserves the blame, which is precisely what culpable means.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Not quite. Culpable means deserving blame for wrongdoing — it is not a synonym for jailed, praised, or heroic. Look for the person whose own careless actions genuinely caused the problem.</p></qti-content-body>
+    </qti-feedback-block>
+  </qti-item-body>
+
+  <qti-response-processing>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
+        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">correct</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+      <qti-response-else>
+        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
+      </qti-response-else>
+    </qti-response-condition>
+  </qti-response-processing>
+</qti-assessment-item>

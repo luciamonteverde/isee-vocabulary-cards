@@ -1,0 +1,48 @@
+<qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd" identifier="pcb-item-d4c8805705fc4963a85c06484c803b6f" title="Quick Check: Decor" adaptive="true" time-dependent="false">
+  <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
+    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+  </qti-response-declaration>
+  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
+    <qti-default-value><qti-value>0</qti-value></qti-default-value>
+  </qti-outcome-declaration>
+  <qti-outcome-declaration identifier="FEEDBACK" cardinality="single" base-type="identifier"/>
+  <qti-outcome-declaration identifier="INTERACTION_VISIBILITY" cardinality="single" base-type="identifier">
+    <qti-default-value><qti-value>show_interaction</qti-value></qti-default-value>
+  </qti-outcome-declaration>
+  <qti-item-body>
+    <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
+      <qti-content-body>
+        <p>In which of these sentences is decor used correctly?</p>
+    <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
+      <qti-simple-choice identifier="A">The Mediterranean decor mixed whitewashed walls, terra-cotta tiles, and iron furnishings.</qti-simple-choice>
+      <qti-simple-choice identifier="B">The restaurant decor included a gas stove, three microwaves, and an industrial refrigerator.</qti-simple-choice>
+      <qti-simple-choice identifier="C">The library&apos;s decor was just the countless old books sitting on the wooden shelves.</qti-simple-choice>
+      <qti-simple-choice identifier="D">The museum&apos;s decor displayed ancient artifacts from civilizations in glass cases.</qti-simple-choice>
+    </qti-choice-interaction>
+      </qti-content-body>
+    </qti-feedback-block>
+
+    <qti-feedback-block identifier="CORRECT" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Correct! Decor is the furniture, colors, and decorations used to style the inside of a room or building.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="INCORRECT" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Decor is the furniture, colors, and decorations used to style the inside of a room or building. The other sentences misuse decor — wrong strength, wrong situation, or wrong pairing. The correct one is: &quot;The Mediterranean decor mixed whitewashed walls, terra-cotta tiles, and iron furnishings.&quot;</p></qti-content-body>
+    </qti-feedback-block>
+  </qti-item-body>
+  <qti-response-processing>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
+        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">CORRECT</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+      <qti-response-else>
+        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">INCORRECT</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
+      </qti-response-else>
+    </qti-response-condition>
+  </qti-response-processing>
+</qti-assessment-item>

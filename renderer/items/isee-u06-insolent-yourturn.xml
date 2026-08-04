@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
+  identifier="isee-u06-insolent-yourturn" title="Your Turn: Insolent" adaptive="true" time-dependent="false">
+
+  <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
+    <qti-correct-response><qti-value>C</qti-value></qti-correct-response>
+  </qti-response-declaration>
+  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
+    <qti-default-value><qti-value>0</qti-value></qti-default-value>
+  </qti-outcome-declaration>
+  <qti-outcome-declaration identifier="FEEDBACK" cardinality="single" base-type="identifier"/>
+  <qti-outcome-declaration identifier="INTERACTION_VISIBILITY" cardinality="single" base-type="identifier">
+    <qti-default-value><qti-value>show_interaction</qti-value></qti-default-value>
+  </qti-outcome-declaration>
+
+  <qti-item-body>
+    <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
+      <qti-content-body>
+        <qti-choice-interaction response-identifier="RESPONSE" shuffle="false" max-choices="1">
+          <qti-prompt>Which sentence uses insolent correctly?</qti-prompt>
+          <qti-simple-choice identifier="A">Too insolent to raise his hand, the shy boy whispered the answer to his friend instead.</qti-simple-choice>
+          <qti-simple-choice identifier="B">The insolent volunteer stayed late every evening to help the librarian shelve returned books.</qti-simple-choice>
+          <qti-simple-choice identifier="C">When the principal asked for an explanation, the student gave an insolent shrug and turned away.</qti-simple-choice>
+          <qti-simple-choice identifier="D">Her insolent apology was so sincere and humble that the teacher forgave her at once.</qti-simple-choice>
+        </qti-choice-interaction>
+      </qti-content-body>
+    </qti-feedback-block>
+
+    <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Yes — shrugging off the principal and turning away is bold disrespect toward authority, which is exactly the rude defiance insolent describes.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Not quite. Insolent behavior is boldly rude toward someone who deserves respect — shyness, helpfulness, and sincere apologies are not. Look for the response that openly disrespects an authority figure.</p></qti-content-body>
+    </qti-feedback-block>
+  </qti-item-body>
+
+  <qti-response-processing>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
+        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">correct</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+      <qti-response-else>
+        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
+      </qti-response-else>
+    </qti-response-condition>
+  </qti-response-processing>
+</qti-assessment-item>
