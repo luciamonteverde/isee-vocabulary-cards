@@ -3,7 +3,45 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wrath — instructional content renderer prototype</title>
+<title>Wrath — renderer THEME TEST (custom dark CSS)</title>
+<style>
+/* ===== THEME TEST (2026-08-04) =====
+   Does the renderer preserve a lesson's own CSS? Uses the production Wrath card's
+   real palette so we can judge "can renderer cards look like our current cards?"
+   View this file with &theme=none (renderer theming off) and also with &theme=indigo
+   to see whether renderer CSS overrides ours.
+   Selectors are deliberately doubled up: generic element selectors (which survive
+   even if the renderer rewrites class names) AND .tb-* selectors. */
+:root{
+  --paper:#0e1420; --surface:#151d2b; --surface-2:#1b2333;
+  --ink:#e9edf4; --muted:#9aa6ba; --line:#2a3446;
+  --accent:#46cdbb; --accent-ink:#bdeee7;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --r:14px; --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+}
+html,body{background:var(--paper) !important;color:var(--ink) !important;
+  font-family:var(--sans) !important;line-height:1.55;}
+h1,h2,h3,h4{color:var(--accent-ink) !important;}
+p,li,span,div{color:var(--ink);}
+strong{color:var(--accent-ink) !important;}
+em{color:var(--accent);}
+.tb-segment,section{background:transparent !important;}
+.tb-card,.tb-interaction,details{
+  background:var(--surface) !important;border:1px solid var(--line) !important;
+  border-radius:var(--r) !important;box-shadow:var(--shadow);}
+.tb-card-header,summary{color:var(--accent-ink) !important;}
+summary{cursor:pointer;padding:10px 12px;}
+details p{background:var(--surface-2) !important;border-radius:10px;padding:10px 12px;
+  color:var(--ink) !important;}
+.tb-narration{color:var(--muted) !important;}
+.practice-step{background:transparent !important;}
+/* QTI choices */
+.qti-simple-choice,qti-simple-choice{background:var(--surface-2) !important;
+  color:var(--ink) !important;border:1px solid var(--line) !important;border-radius:10px;}
+button{background:var(--accent) !important;color:#06231f !important;border:none !important;
+  border-radius:10px;font-weight:600;}
+</style>
+
 </head>
 <body>
 <!--
