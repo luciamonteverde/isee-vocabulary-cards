@@ -14,35 +14,60 @@
       <qti-content-body>
         <p>In which of these sentences is deduction used correctly?</p>
     <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-      <qti-simple-choice identifier="A">The cashier pointed out the deduction on the receipt, showing that sales tax had been subtracted from Sarah&apos;s purchase.</qti-simple-choice>
-      <qti-simple-choice identifier="B">Marco&apos;s deduction that the concert would be amazing was nothing more than wishful thinking, since he had never heard them before.</qti-simple-choice>
-      <qti-simple-choice identifier="C">By examining the muddy footprints in the entryway and the broken window latch, the investigator made her deduction: someone had forced their way inside.</qti-simple-choice>
-      <qti-simple-choice identifier="D">The landlord announced a deduction in the building&apos;s water consumption due to the newly installed low-flow fixtures throughout.</qti-simple-choice>
+      <qti-simple-choice identifier="A">The cashier pointed out the deduction on the receipt, showing that sales tax had been subtracted from Sarah's purchase.</qti-simple-choice>
+      <qti-simple-choice identifier="B">Marco's deduction that the concert would be amazing was nothing more than wishful thinking, since he had never heard them before.</qti-simple-choice>
+      <qti-simple-choice identifier="C">When Amir found flour smudges on the counter and the vanilla bottle empty, his deduction took only a moment: his roommate had been baking all afternoon.</qti-simple-choice>
+      <qti-simple-choice identifier="D">The landlord announced a deduction in the building's water consumption due to the newly installed low-flow fixtures throughout.</qti-simple-choice>
     </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
-    <qti-feedback-block identifier="CORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! A deduction is a conclusion you reach by reasoning from evidence or clues rather than being told directly.</p></qti-content-body>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Here deduction is being used in its money sense — an amount subtracted from a total, like a tax deduction on a receipt. This card's deduction is different: a conclusion you reason your way to from clues, not a subtraction.</p></qti-content-body>
     </qti-feedback-block>
-    <qti-feedback-block identifier="INCORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A deduction is a conclusion you reach by reasoning from evidence or clues rather than being told directly. Remember the parts: de + duct + ion. The other sentences misuse deduction — wrong strength, wrong situation, or wrong pairing. The correct one is: &quot;By examining the muddy footprints in the entryway and the broken window latch, the investigator made her deduction: someone had forced their way inside.&quot;</p></qti-content-body>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Marco's belief about a concert he has never heard rests on no clues at all — the sentence itself calls it wishful thinking. That makes it an assumption or a hope, not a deduction, which must be reasoned from real evidence.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Correct. Amir starts from concrete clues — flour smudges, an empty vanilla bottle — and reasons his way to a definite conclusion about what his roommate did. Leading from specific evidence to an answer is exactly what a deduction is.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A drop in water use is a decrease or reduction, not a deduction. Deduction is not a general word for 'less of something': it names a conclusion reached by reasoning from evidence.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
   <qti-response-processing>
     <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
-        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">CORRECT</qti-base-value></qti-set-outcome-value>
-      
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+    
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value></qti-response-if>
-      <qti-response-else>
-        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">INCORRECT</qti-base-value></qti-set-outcome-value>
-      
-        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>
