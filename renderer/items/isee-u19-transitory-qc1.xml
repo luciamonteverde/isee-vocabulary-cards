@@ -16,33 +16,58 @@
     <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
       <qti-simple-choice identifier="A">The transitory job contract guaranteed employment for ten years total.</qti-simple-choice>
       <qti-simple-choice identifier="B">Her transitory anger at the disappointing news vanished in mere moments.</qti-simple-choice>
-      <qti-simple-choice identifier="C">The celebrity&apos;s transitory fame faded after releasing one viral video.</qti-simple-choice>
+      <qti-simple-choice identifier="C">The celebrity's transitory fame faded after releasing one viral video.</qti-simple-choice>
       <qti-simple-choice identifier="D">That transitory bridge has been standing for over one hundred years.</qti-simple-choice>
     </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
-    <qti-feedback-block identifier="CORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! Transitory describes something that lasts only a short time before passing away.</p></qti-content-body>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A contract guaranteeing employment for ten years is long-term security - transitory means lasting only a short time.</p></qti-content-body>
     </qti-feedback-block>
-    <qti-feedback-block identifier="INCORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Transitory describes something that lasts only a short time before passing away. The other sentences misuse transitory — wrong strength, wrong situation, or wrong pairing. The correct one is: &quot;The celebrity&apos;s transitory fame faded after releasing one viral video.&quot;</p></qti-content-body>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Anger that vanishes in mere moments blinks out in an instant - the card teaches transitory for things that fade naturally and gradually, like melting snow, not feelings gone at once.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Correct. Fame from one viral video that soon fades is exactly transitory - short-lived and destined to pass away.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A bridge standing for over one hundred years is enduring - the card's own antonym of transitory.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
   <qti-response-processing>
     <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
-        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">CORRECT</qti-base-value></qti-set-outcome-value>
-      
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+    
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value></qti-response-if>
-      <qti-response-else>
-        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">INCORRECT</qti-base-value></qti-set-outcome-value>
-      
-        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

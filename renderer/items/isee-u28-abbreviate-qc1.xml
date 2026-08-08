@@ -22,27 +22,52 @@
       </qti-content-body>
     </qti-feedback-block>
 
-    <qti-feedback-block identifier="CORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! To abbreviate something is to shorten it, usually by cutting out part of it while keeping it recognizable.</p></qti-content-body>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Deleting entire paragraphs cuts content out of the essays. Abbreviating compresses something into a shorter form that still stands for the whole - like BP for blood pressure - rather than removing whole chunks of it.</p></qti-content-body>
     </qti-feedback-block>
-    <qti-feedback-block identifier="INCORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>To abbreviate something is to shorten it, usually by cutting out part of it while keeping it recognizable. The other sentences misuse abbreviate — wrong strength, wrong situation, or wrong pairing. The correct one is: &quot;The company will abbreviate the title International Business Systems to IBS.&quot;</p></qti-content-body>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Removing every other sentence would leave gibberish, not a recognizable shorter version. Abbreviation shortens something while keeping it recognizable - this mangles the chapter instead.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Correct. Shortening 'International Business Systems' to IBS keeps the name recognizable in compact form - the classic way abbreviate works.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Nothing says abc_func comes from the original name - it simply replaces it. Abbreviating shortens the original into a recognizable compact form; swapping in unrelated letters is renaming.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
   <qti-response-processing>
     <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
-        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">CORRECT</qti-base-value></qti-set-outcome-value>
-      
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+    
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value></qti-response-if>
-      <qti-response-else>
-        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">INCORRECT</qti-base-value></qti-set-outcome-value>
-      
-        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

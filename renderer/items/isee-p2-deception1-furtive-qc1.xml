@@ -2,7 +2,9 @@
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
     <qti-correct-response><qti-value>C</qti-value></qti-correct-response>
   </qti-response-declaration>
-  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float"><qti-default-value><qti-value>0</qti-value></qti-default-value></qti-outcome-declaration>
+  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
+    <qti-default-value><qti-value>0</qti-value></qti-default-value>
+  </qti-outcome-declaration>
   <qti-outcome-declaration identifier="FEEDBACK" cardinality="single" base-type="identifier"/>
   <qti-outcome-declaration identifier="INTERACTION_VISIBILITY" cardinality="single" base-type="identifier">
     <qti-default-value><qti-value>show_interaction</qti-value></qti-default-value>
@@ -12,27 +14,60 @@
       <qti-content-body>
         <p>In which sentence is Furtive used correctly?</p>
     <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-      <qti-simple-choice identifier="A">He gave a furtive toast in front of three hundred wedding guests.</qti-simple-choice><qti-simple-choice identifier="B">The team celebrated with furtive fireworks after their championship win.</qti-simple-choice><qti-simple-choice identifier="C">She kept casting furtive glances at the clock, dreading the moment her boss would ask why the report was late.</qti-simple-choice><qti-simple-choice identifier="D">The billboard delivered its furtive message in glowing letters ten feet tall above the highway.</qti-simple-choice>
+      <qti-simple-choice identifier="A">He gave a furtive toast in front of three hundred wedding guests.</qti-simple-choice>
+      <qti-simple-choice identifier="B">The team celebrated with furtive fireworks after their championship win.</qti-simple-choice>
+      <qti-simple-choice identifier="C">She kept casting furtive glances at the clock, dreading the moment her boss would ask why the report was late.</qti-simple-choice>
+      <qti-simple-choice identifier="D">The billboard delivered its furtive message in glowing letters ten feet tall above the highway.</qti-simple-choice>
     </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
-    <qti-feedback-block identifier="CORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! Nervous, guilty glances toward the clock are exactly what furtive describes.</p></qti-content-body>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A toast 'in front of three hundred wedding guests' is performed for all to see - furtive behavior tries not to be noticed at all.</p></qti-content-body>
     </qti-feedback-block>
-    <qti-feedback-block identifier="INCORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. Look for the sentence describing a small, guilty-looking behavior.</p></qti-content-body>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>'Fireworks after their championship win' are loud and bright by design - nothing set off for a whole town to watch can be sly or secretive.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Correct! Furtive describes small, sly behaviors driven by guilt or fear of being caught - repeatedly sneaking 'glances at the clock' while dreading the boss's question is exactly that.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A message 'in glowing letters ten feet tall above the highway' exists to grab attention - furtive means done quietly in hopes no one notices.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
-  <qti-response-processing><qti-response-condition><qti-response-if>
-    <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
-    <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
-    <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">CORRECT</qti-base-value></qti-set-outcome-value>
-  
+  <qti-response-processing>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+    
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
-        <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value></qti-response-if><qti-response-else>
-    <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
-    <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">INCORRECT</qti-base-value></qti-set-outcome-value>
-  
-        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-else></qti-response-condition></qti-response-processing>
+        <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+  </qti-response-processing>
 </qti-assessment-item>

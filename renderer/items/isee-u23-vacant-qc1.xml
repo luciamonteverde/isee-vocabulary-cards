@@ -14,35 +14,60 @@
       <qti-content-body>
         <p>In which of these sentences is vacant used correctly?</p>
     <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-      <qti-simple-choice identifier="A">The vacant shelf in the pantry needed new supplies.</qti-simple-choice>
+      <qti-simple-choice identifier="A">The waiting room stayed vacant all morning, with every seat taken and a line stretching out the door.</qti-simple-choice>
       <qti-simple-choice identifier="B">The vacant suitcase was stuffed with winter clothing.</qti-simple-choice>
       <qti-simple-choice identifier="C">The vacant lot awaited development into a new park.</qti-simple-choice>
-      <qti-simple-choice identifier="D">The vacant parking space was finally claimed by a car.</qti-simple-choice>
+      <qti-simple-choice identifier="D">The vacant parking garage was so crowded that drivers circled for an hour without finding a single spot.</qti-simple-choice>
     </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
-    <qti-feedback-block identifier="CORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! Vacant describes something empty or not occupied by anyone.</p></qti-content-body>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>This contradicts itself: a vacant waiting room would have no one in it. With every seat taken and a line out the door, the room is packed -- the opposite of vacant.</p></qti-content-body>
     </qti-feedback-block>
-    <qti-feedback-block identifier="INCORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Vacant describes something empty or not occupied by anyone. The other sentences misuse vacant — wrong strength, wrong situation, or wrong pairing. The correct one is: &quot;The vacant lot awaited development into a new park.&quot;</p></qti-content-body>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>This contradicts itself: vacant means empty, with nothing occupying the space. A suitcase stuffed with winter clothing is completely full, so it cannot be vacant.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Correct. A vacant lot is an unoccupied piece of land with nothing built or happening on it yet -- empty and waiting for use, which is exactly what vacant means.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>This contradicts itself: a vacant garage would have plenty of open spaces. A garage so crowded that drivers circle for an hour is full, not vacant.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
   <qti-response-processing>
     <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
-        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">CORRECT</qti-base-value></qti-set-outcome-value>
-      
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+    
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value></qti-response-if>
-      <qti-response-else>
-        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">INCORRECT</qti-base-value></qti-set-outcome-value>
-      
-        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

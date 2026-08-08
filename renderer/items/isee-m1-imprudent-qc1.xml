@@ -12,7 +12,7 @@
   <qti-item-body>
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
-        <p>In which of these sentences is <strong>imprudent</strong> used correctly?</p>
+        <p>In which of these sentences is imprudent used correctly?</p>
     <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
       <qti-simple-choice identifier="A">Skating across the half-frozen pond was an imprudent shortcut home.</qti-simple-choice>
       <qti-simple-choice identifier="B">Her imprudent habit of checking the weather twice saved the whole trip.</qti-simple-choice>
@@ -22,27 +22,52 @@
       </qti-content-body>
     </qti-feedback-block>
 
-    <qti-feedback-block identifier="CORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! im (not) + prudent (careful) — ignoring the risk of thin ice is exactly imprudent.</p></qti-content-body>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Correct. Skating across half-frozen ice ignores an obvious, serious risk - im- (not) + prudent (careful, thinking ahead) - exactly the unwise carelessness imprudent names.</p></qti-content-body>
     </qti-feedback-block>
-    <qti-feedback-block identifier="INCORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Imprudent means unwise or careless about risk: im (not) + prudent. Double-checking weather, buying insurance early, and investing carefully are all PRUDENT actions. The correct one: "Skating across the half-frozen pond was an imprudent shortcut home."</p></qti-content-body>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Double-checking the weather before a trip IS careful planning ahead - that is prudent, the word's own root. Calling the habit imprudent reverses the meaning.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Buying insurance before storm season is thinking ahead about risk - the definition of prudent. The im- prefix means NOT prudent, so this sentence contradicts itself.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Spreading savings carefully across safe funds is cautious and wise. Imprudent means acting without weighing the risks - the opposite of what this investor does.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
   <qti-response-processing>
     <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
-        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">CORRECT</qti-base-value></qti-set-outcome-value>
-      
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+    
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value></qti-response-if>
-      <qti-response-else>
-        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">INCORRECT</qti-base-value></qti-set-outcome-value>
-      
-        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

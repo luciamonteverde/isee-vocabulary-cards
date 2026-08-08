@@ -15,34 +15,59 @@
         <p>In which of these sentences is fabricate used correctly?</p>
     <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
       <qti-simple-choice identifier="A">The defendant fabricated evidence by creating fake documents to hide his involvement in the crime.</qti-simple-choice>
-      <qti-simple-choice identifier="B">The student fabricated her response when she didn&apos;t know the answer to the question.</qti-simple-choice>
-      <qti-simple-choice identifier="C">He fabricated his weekend plans in order to study for exams.</qti-simple-choice>
-      <qti-simple-choice identifier="D">The construction company fabricated steel beams for the new downtown office building.</qti-simple-choice>
+      <qti-simple-choice identifier="B">The student fabricated her answer by copying it word for word out of the official answer key.</qti-simple-choice>
+      <qti-simple-choice identifier="C">He fabricated an account of the accident by describing exactly what he had seen, without changing a single detail.</qti-simple-choice>
+      <qti-simple-choice identifier="D">The reporter fabricated her article by double-checking every fact against three trusted records.</qti-simple-choice>
     </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
-    <qti-feedback-block identifier="CORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! To fabricate something is to invent or make it up in order to deceive people, such as fabricating false evidence or a fake excuse.</p></qti-content-body>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Correct. The defendant invented false documents to deceive investigators -- creating something fake in order to mislead people is exactly what fabricate means.</p></qti-content-body>
     </qti-feedback-block>
-    <qti-feedback-block identifier="INCORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>To fabricate something is to invent or make it up in order to deceive people, such as fabricating false evidence or a fake excuse. The other sentences misuse fabricate — wrong strength, wrong situation, or wrong pairing. The correct one is: &quot;The defendant fabricated evidence by creating fake documents to hide his involvement in the crime.&quot;</p></qti-content-body>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>This contradicts itself: fabricating an answer means inventing it. Copying word for word from the official answer key reproduces something that already exists -- nothing was made up.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>This contradicts itself: to fabricate an account is to invent a false one. Reporting exactly what he saw without changing a detail is truthful description, the opposite of fabrication.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>This contradicts itself: a fabricated article would be an invented, false one. Double-checking every fact against trusted records is careful truth-telling, not making things up.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
   <qti-response-processing>
     <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
-        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">CORRECT</qti-base-value></qti-set-outcome-value>
-      
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+    
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value></qti-response-if>
-      <qti-response-else>
-        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">INCORRECT</qti-base-value></qti-set-outcome-value>
-      
-        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

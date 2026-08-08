@@ -2,7 +2,9 @@
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
     <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
   </qti-response-declaration>
-  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float"><qti-default-value><qti-value>0</qti-value></qti-default-value></qti-outcome-declaration>
+  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
+    <qti-default-value><qti-value>0</qti-value></qti-default-value>
+  </qti-outcome-declaration>
   <qti-outcome-declaration identifier="FEEDBACK" cardinality="single" base-type="identifier"/>
   <qti-outcome-declaration identifier="INTERACTION_VISIBILITY" cardinality="single" base-type="identifier">
     <qti-default-value><qti-value>show_interaction</qti-value></qti-default-value>
@@ -12,27 +14,60 @@
       <qti-content-body>
         <p>In which of these sentences is Malevolent used correctly?</p>
     <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-      <qti-simple-choice identifier="A">Detectives suspected the fire was set by someone malevolent enough to want the whole block to suffer.</qti-simple-choice><qti-simple-choice identifier="B">The malevolent stranger went out of his way to return every lost wallet he found.</qti-simple-choice><qti-simple-choice identifier="C">Her malevolent scheme involved donating her allowance to the animal shelter.</qti-simple-choice><qti-simple-choice identifier="D">The malevolent fairy in the story granted only helpful, generous wishes.</qti-simple-choice>
+      <qti-simple-choice identifier="A">Detectives suspected the fire was set by someone malevolent enough to want the whole block to suffer.</qti-simple-choice>
+      <qti-simple-choice identifier="B">The malevolent stranger went out of his way to return every lost wallet he found.</qti-simple-choice>
+      <qti-simple-choice identifier="C">Her malevolent scheme involved donating her allowance to the animal shelter.</qti-simple-choice>
+      <qti-simple-choice identifier="D">The malevolent fairy in the story granted only helpful, generous wishes.</qti-simple-choice>
     </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
-    <qti-feedback-block identifier="CORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! Someone who wants an entire block to suffer harbors a wish to do evil to others -- malevolent.</p></qti-content-body>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Correct - someone who sets a fire wanting 'the whole block to suffer' is acting on a wish to do others harm, which is exactly what malevolent means.</p></qti-content-body>
     </qti-feedback-block>
-    <qti-feedback-block identifier="INCORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. Malevolent means wishing to do evil to others -- returning lost wallets, donating to a shelter, and granting generous wishes are kind acts.</p></qti-content-body>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Going out of your way to return every lost wallet is benevolent - wishing to do good, the card's own opposite - not malevolent.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Donating an allowance to the animal shelter is kindhearted - there is no wish to harm anyone in it, so calling the scheme malevolent clashes with everything else in the sentence.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A fairy who grants 'only helpful, generous wishes' shows good will toward others - malevolent describes the wish to do evil, the opposite of what this fairy does.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
-  <qti-response-processing><qti-response-condition><qti-response-if>
-    <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
-    <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
-    <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">CORRECT</qti-base-value></qti-set-outcome-value>
-  
+  <qti-response-processing>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+    
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
-        <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value></qti-response-if><qti-response-else>
-    <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
-    <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">INCORRECT</qti-base-value></qti-set-outcome-value>
-  
-        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-else></qti-response-condition></qti-response-processing>
+        <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+  </qti-response-processing>
 </qti-assessment-item>

@@ -2,7 +2,9 @@
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
     <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
-  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float"><qti-default-value><qti-value>0</qti-value></qti-default-value></qti-outcome-declaration>
+  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
+    <qti-default-value><qti-value>0</qti-value></qti-default-value>
+  </qti-outcome-declaration>
   <qti-outcome-declaration identifier="FEEDBACK" cardinality="single" base-type="identifier"/>
   <qti-outcome-declaration identifier="INTERACTION_VISIBILITY" cardinality="single" base-type="identifier">
     <qti-default-value><qti-value>show_interaction</qti-value></qti-default-value>
@@ -12,27 +14,60 @@
       <qti-content-body>
         <p>In which of these sentences is Phenomenon used correctly?</p>
     <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-      <qti-simple-choice identifier="A">The phenomenon was easy to explain, which is why researchers called it one of nature's great mysteries.</qti-simple-choice><qti-simple-choice identifier="B">My habit of brushing my teeth each morning is a phenomenon that stuns scientists worldwide.</qti-simple-choice><qti-simple-choice identifier="C">He patched the phenomenon with duct tape until the plumber arrived.</qti-simple-choice><qti-simple-choice identifier="D">Ball lightning is a rare phenomenon that physicists still struggle to explain.</qti-simple-choice>
+      <qti-simple-choice identifier="A">The phenomenon was easy to explain, which is why researchers called it one of nature's great mysteries.</qti-simple-choice>
+      <qti-simple-choice identifier="B">My habit of brushing my teeth each morning is a phenomenon that stuns scientists worldwide.</qti-simple-choice>
+      <qti-simple-choice identifier="C">He patched the phenomenon with duct tape until the plumber arrived.</qti-simple-choice>
+      <qti-simple-choice identifier="D">Ball lightning is a rare phenomenon that physicists still struggle to explain.</qti-simple-choice>
     </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
-    <qti-feedback-block identifier="CORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Yes — a phenomenon is something observed yet hard to explain, and ball lightning is a classic example.</p></qti-content-body>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>The sentence argues against itself - something 'easy to explain' cannot be 'one of nature's great mysteries.' A phenomenon draws study precisely because it resists easy explanation.</p></qti-content-body>
     </qti-feedback-block>
-    <qti-feedback-block identifier="INCORRECT" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A phenomenon is an observed occurrence that resists easy explanation — not something easily explained, an ordinary habit, or an object you can patch.</p></qti-content-body>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Brushing your teeth each morning is a routine - an ordinary, fully expected happening that stuns no one. A phenomenon is something remarkable and hard to explain, not an everyday habit.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>You cannot patch a phenomenon with duct tape - this sentence treats the word as if it named a leaky pipe. A phenomenon is something observed to happen, not a physical object to repair.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Correct - ball lightning is rare, clearly observed, and still puzzles physicists. Something real yet hard to explain is exactly what a phenomenon is.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
-  <qti-response-processing><qti-response-condition><qti-response-if>
-    <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
-    <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
-    <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">CORRECT</qti-base-value></qti-set-outcome-value>
-  
+  <qti-response-processing>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+    
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+    <qti-response-if>
+      <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+      <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+      <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+    
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
-        <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value></qti-response-if><qti-response-else>
-    <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
-    <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">INCORRECT</qti-base-value></qti-set-outcome-value>
-  
-        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value></qti-response-else></qti-response-condition></qti-response-processing>
+        <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value></qti-response-if>
+    </qti-response-condition>
+  </qti-response-processing>
 </qti-assessment-item>
