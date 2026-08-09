@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
+  identifier="isee-low-c1u01-central-yourturn" title="Your Turn: Central" adaptive="true" time-dependent="false">
+
+  <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
+    <qti-correct-response><qti-value>C</qti-value></qti-correct-response>
+  </qti-response-declaration>
+  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
+    <qti-default-value><qti-value>0</qti-value></qti-default-value>
+  </qti-outcome-declaration>
+  <qti-outcome-declaration identifier="FEEDBACK" cardinality="single" base-type="identifier"/>
+  <qti-outcome-declaration identifier="INTERACTION_VISIBILITY" cardinality="single" base-type="identifier">
+    <qti-default-value><qti-value>show_interaction</qti-value></qti-default-value>
+  </qti-outcome-declaration>
+
+  <qti-item-body>
+    <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
+      <qti-content-body>
+        <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
+          <qti-prompt>Which sentence uses central correctly?</qti-prompt>
+          <qti-simple-choice identifier="A">He slurped his central milkshake at the diner.</qti-simple-choice>
+          <qti-simple-choice identifier="B">My lucky marble glowed central in the dark.</qti-simple-choice>
+          <qti-simple-choice identifier="C">Our meeting spot is the central bench, halfway between both playgrounds.</qti-simple-choice>
+          <qti-simple-choice identifier="D">She won a central teddy bear at the ring toss.</qti-simple-choice>
+        </qti-choice-interaction>
+      </qti-content-body>
+    </qti-feedback-block>
+
+    <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Correct. The bench sits halfway between the two playgrounds, right in the middle. That middle spot is what makes it central: a point that is easy to reach from both sides.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Central tells you where something sits: in or near the middle. Ask yourself: is this sentence about a middle position? A milkshake, a glowing marble, and a prize teddy bear have nothing to do with being in the middle of anything.</p></qti-content-body>
+    </qti-feedback-block>
+  </qti-item-body>
+
+  <qti-response-processing>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-correct identifier="RESPONSE"/></qti-match>
+        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">1</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">completed</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">correct</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="INTERACTION_VISIBILITY"><qti-base-value base-type="identifier">hidden</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+      <qti-response-else>
+        <qti-set-outcome-value identifier="SCORE"><qti-base-value base-type="float">0</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
+      </qti-response-else>
+    </qti-response-condition>
+  </qti-response-processing>
+</qti-assessment-item>
