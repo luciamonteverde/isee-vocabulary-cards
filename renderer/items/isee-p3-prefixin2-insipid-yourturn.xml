@@ -32,6 +32,15 @@
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
       <qti-content-body><p>Careful — chili that sends everyone racing for water is fiery, and dazzling fireworks or a gripping thriller are anything but boring. Insipid needs something with no spark or taste whatsoever.</p></qti-content-body>
     </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Chili that has 'everyone reaching for water' is overpoweringly spicy — bursting with flavor rather than lacking it. Insipid means the opposite problem: no taste, no spark, nothing to notice.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A display that 'dazzled the entire crowd' for twenty minutes is thrilling, and insipid can never describe excitement. It labels things so flat and lifeless that nobody stays interested.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A thriller keeping its audience 'on the edge of their seats' is gripping — the very opposite of dull. Insipid describes flavorless food or bland entertainment with no spark at all.</p></qti-content-body>
+    </qti-feedback-block>
   </qti-item-body>
 
   <qti-response-processing>
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

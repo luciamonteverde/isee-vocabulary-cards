@@ -32,6 +32,15 @@
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
       <qti-content-body><p>A remittance is a sum of money sent to someone, often from a distance. A court's written decision, a mumbled apology, and an insurance plan aren't sums of money being sent -- only the payment customers mail to the publisher's office is a remittance.</p></qti-content-body>
     </qti-feedback-block>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A judge 'explaining exactly how the court had reached its decision' writes an opinion or ruling, not a remittance. A remittance is money sent to someone — no cash changes hands in a court's written reasoning.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>'Mumbled a quick remittance for stepping on her foot' reaches for an apology. A remittance cannot be spoken — it is a sum of money sent to a person or place, usually as payment.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>'Purchased a group remittance' treats the word as an insurance plan. A remittance is not something you buy — it is money on its way to someone, sent as a payment.</p></qti-content-body>
+    </qti-feedback-block>
   </qti-item-body>
 
   <qti-response-processing>
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

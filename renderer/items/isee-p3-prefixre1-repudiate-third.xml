@@ -32,6 +32,15 @@
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
       <qti-content-body><p>Not quite. To repudiate is already a formal, public rejection, and to renounce is an even more total surrender of a claim. Find the word that can happen silently, inside your own head, with nobody ever knowing.</p></qti-content-body>
     </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>To dispute a claim is already open disagreement — you contradict it out loud, on the record. Something on this ladder turns against a claim with far less force than that; an open argument cannot be the mildest move.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Renouncing sits at the heavyweight end of this scale — formally giving up a claim or commitment altogether, often forever. A word that surrenders everything is the strongest turn here, the opposite of the mildest.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Repudiate is a real rung on this ladder, but it names a formal, public rejection — the kind delivered in an official statement. That sits near the top of the scale, well above the gentlest option.</p></qti-content-body>
+    </qti-feedback-block>
   </qti-item-body>
 
   <qti-response-processing>
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

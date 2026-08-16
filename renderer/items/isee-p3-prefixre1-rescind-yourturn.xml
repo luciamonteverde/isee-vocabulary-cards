@@ -32,6 +32,15 @@
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
       <qti-content-body><p>To rescind is to officially cancel something previously put in place -- a policy, an offer, a license. You can't rescind a park into existence, and hauling groceries or stacking chairs has nothing to do with cancellation -- only the state canceling the driver's license uses rescind correctly.</p></qti-content-body>
     </qti-feedback-block>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>'Rescind a brand-new park downtown' with fountains describes building something, but rescinding only ever removes — it cancels a rule or decision already in force. You cannot rescind a thing into existence.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Hauling 'heavy bags of groceries up four flights' is carrying, not canceling. Rescind applies to official acts — policies, offers, permissions — never to lugging things upstairs to a grandmother's apartment.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>'Rescinded the folding chairs after the school assembly' means collected or stacked them. Chairs cannot be rescinded; the word cancels official decisions and permissions, not furniture put back in a closet.</p></qti-content-body>
+    </qti-feedback-block>
   </qti-item-body>
 
   <qti-response-processing>
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

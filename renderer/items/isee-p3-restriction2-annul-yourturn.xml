@@ -32,6 +32,15 @@
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
       <qti-content-body><p>You can't annul a recipe, a rest break, or a day off — those aren't legal arrangements. Look for the sentence where something official is declared invalid, as though it had never happened.</p></qti-content-body>
     </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A 'pinch of salt' seasons a dish; it cannot annul one. Annul is a legal word — declaring something officially invalid, as though it never existed — and recipes are not legal arrangements.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>'An extra rest break' is something given, and annul never works as a verb of giving. It wipes out a formal arrangement's legal force — nothing in this sentence has legal force to lose.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Granting 'a day off' is a favor, not a cancellation. Annul means declaring a formal, legal thing invalid from the start — a coach rewarding the team is doing the opposite of that.</p></qti-content-body>
+    </qti-feedback-block>
   </qti-item-body>
 
   <qti-response-processing>
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

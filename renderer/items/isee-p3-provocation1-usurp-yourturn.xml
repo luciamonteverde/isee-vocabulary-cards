@@ -32,6 +32,15 @@
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
       <qti-content-body><p>Usurp means grabbing power illegitimately. Winning a fair vote, waiting your lawful turn, and declining an offered office all respect the rules. Find the sentence where authority is snatched without any right to it.</p></qti-content-body>
     </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Winning 'the company-wide vote' is the legitimate route to a role, and the sentence even says 'fairly.' Usurp fits only power grabbed without right — a fair election is precisely what usurping is not.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A prince 'patiently waiting his lawful turn' inherits the throne; he seizes nothing. Usurping means snatching a position from its rightful holder, so orderly lawful succession is the word's exact opposite.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Nobody can usurp an office 'by declining it when it was offered' — turning authority down is the reverse of grabbing it. Usurp requires taking a position by force or without any right to it.</p></qti-content-body>
+    </qti-feedback-block>
   </qti-item-body>
 
   <qti-response-processing>
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

@@ -32,6 +32,15 @@
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
       <qti-content-body><p>A recognizance is a formal promise made to a court, usually to appear at a future date. It is not an award certificate, a lost-pet flyer, or a tune to hum -- it belongs in a courtroom, like the promise the defendant broke by skipping his court date.</p></qti-content-body>
     </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A certificate 'framed in the school hallway' is an award for good attendance. A recognizance is not an honor you display — it is a formal promise carrying legal force.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A notice put up 'on every street corner' is a flyer asking neighbors for help. A recognizance cannot be taped to a lamppost — it is a solemn legal pledge, usually a promise to appear later.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Humming 'to the rhythm of the song' misreads recognizance as a melody. It is nothing musical — the word names a formal, binding promise made to a legal authority.</p></qti-content-body>
+    </qti-feedback-block>
   </qti-item-body>
 
   <qti-response-processing>
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>
