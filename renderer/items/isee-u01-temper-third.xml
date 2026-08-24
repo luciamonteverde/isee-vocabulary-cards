@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-u01-temper-third" title="Root Check: Temper" adaptive="true" time-dependent="false">
+  identifier="isee-u01-temper-third" title="Strength Check: Temper" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>The words "temper" and "temperance" share the Latin root 'temperare.' Based on that root, what would a temperance movement most likely encourage people to do?</qti-prompt>
-          <qti-simple-choice identifier="A">Practice moderation and self-restraint</qti-simple-choice>
-          <qti-simple-choice identifier="B">Travel more quickly between faraway cities</qti-simple-choice>
-          <qti-simple-choice identifier="C">Celebrate every occasion as loudly as possible</qti-simple-choice>
-          <qti-simple-choice identifier="D">Predict extreme weather before it strikes</qti-simple-choice>
+          <qti-prompt>All four of these words describe how annoyance shows itself. In which one does annoyance boil over into outbursts the LEAST?</qti-prompt>
+          <qti-simple-choice identifier="A">temper</qti-simple-choice>
+          <qti-simple-choice identifier="B">testiness</qti-simple-choice>
+          <qti-simple-choice identifier="C">irritability</qti-simple-choice>
+          <qti-simple-choice identifier="D">impatience</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Exactly — temperare means 'to mix in the right proportion; to moderate or restrain,' so a temperance movement urges people toward moderation and self-restraint. Losing your temper is what happens when that restraint gives way.</p></qti-content-body>
+      <qti-content-body><p>Right - an impatient person just hates waiting; nothing boils over. From mildest to most explosive, the scale runs: impatience, irritability, testiness, temper - with temper at the top, where annoyance erupts into real, out-of-control anger.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>The root temperare means 'to moderate or restrain.' A temperance movement therefore encourages moderation and self-restraint — it has nothing to do with travel, noise, or the weather.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how fully annoyance boils into outbursts. Rank them from calmest to most explosive and choose the calmest.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Temper tops this scale - a person with a temper truly loses control in flashes of anger, making it the most explosive word here, not the least.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Speedy travel between faraway cities has no link to temperare — the root is about mixing and holding things in balance, not motion. The prompt defines it outright; apply that definition to what a movement would urge people to do.</p></qti-content-body>
+      <qti-content-body><p>Testiness is the second-strongest word here - a testy person snaps grumpily, well above the mildest feeling on this scale.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Celebrating every occasion as loudly as possible is pure excess — the very thing temperare works against. Reread the root's meaning in the prompt and ask what a movement named for it would encourage; it points the opposite way from loudness.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Weather prediction confuses temperance with temperature — the two words do share the root temperare, but a temperance movement is about people, not forecasts. Apply the root's meaning to how people handle their own appetites and impulses.</p></qti-content-body>
+      <qti-content-body><p>Irritability sits in the middle of this scale - small things annoy an irritable person easily, which is already one step past the mildest word here.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

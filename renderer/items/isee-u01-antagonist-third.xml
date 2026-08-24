@@ -3,7 +3,7 @@
   identifier="isee-u01-antagonist-third" title="Root Check: Antagonist" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>The words "antagonist" and "agonize" share the Greek root 'agon.' Based on this root, what is someone doing when they agonize over a difficult decision?</qti-prompt>
-          <qti-simple-choice identifier="A">Struggling painfully back and forth over it</qti-simple-choice>
-          <qti-simple-choice identifier="B">Forgetting about the decision completely</qti-simple-choice>
-          <qti-simple-choice identifier="C">Celebrating it happily with their friends</qti-simple-choice>
-          <qti-simple-choice identifier="D">Calmly writing it down in a private journal</qti-simple-choice>
+          <qti-prompt>The words "antagonist" and "agony" share the Greek root 'agon.' Considering that, what does "agony" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">the leading character a story follows</qti-simple-choice>
+          <qti-simple-choice identifier="B">a bitter opponent who works against you</qti-simple-choice>
+          <qti-simple-choice identifier="C">a public contest held before an audience</qti-simple-choice>
+          <qti-simple-choice identifier="D">intense pain or extreme suffering</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Yes — agon means 'struggle or contest.' To agonize over a decision is to struggle painfully back and forth over it, and an antagonist is literally the one who struggles against the hero.</p></qti-content-body>
+      <qti-content-body><p>Right - agon meant a struggle or contest, and agony is the struggle turned inward: pain so intense the body fights through every second of it, like a runner's final mile.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Go back to the root: agon means 'struggle or contest.' Someone agonizing over a decision is struggling painfully with it — the same struggle that makes an antagonist the character who fights against the hero.</p></qti-content-body>
+      <qti-content-body><p>Not quite. Every option comes from the Greek agon, the struggle - the hero in it, the rival against it, the arena around it. Ask which one you could feel in your own muscles.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>The leading character is the protagonist - protos, 'first,' plus the same struggle root: the one the story's struggle belongs to. Agony is not a person.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Forgetting the decision completely would end the matter — no contest left at all. Yet agon names exactly that: an ongoing fight, and the prompt calls this decision difficult. Ask what someone still locked in a tug-of-war with a hard choice is doing.</p></qti-content-body>
+      <qti-content-body><p>The opponent working against you is the antagonist itself - anti- plus agon, the one who struggles against. The question asks about the struggle's feeling, not its participants.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Celebration happens after a hard choice is settled, not while someone is agonizing. The Greek root agon points to conflict, and a happy party is no contest. Look for what a person still wrestling with a difficult decision would be doing.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>'Calmly' is the giveaway — agon names a contest, and contests are anything but calm. Writing in a private journal is quiet reflection, not a fight. Find the reading where the root's sense of conflict is actually happening to the decision-maker.</p></qti-content-body>
+      <qti-content-body><p>A contest before an audience is what the original Greek agon literally was - athletes and playwrights competed in one. Agony left the arena long ago and moved into the body.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

@@ -3,7 +3,7 @@
   identifier="isee-u24-symbiosis-third" title="Root Check: Symbiosis" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Which word below is built on the same Greek root as symbiosis?</qti-prompt>
-          <qti-simple-choice identifier="A">biography</qti-simple-choice>
-          <qti-simple-choice identifier="B">bicycle</qti-simple-choice>
-          <qti-simple-choice identifier="C">abide</qti-simple-choice>
-          <qti-simple-choice identifier="D">bias</qti-simple-choice>
+          <qti-prompt>The words "symbiosis" and "biology" share the Greek root 'bio.' Considering that, what does "biology" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">the written story of one person's life</qti-simple-choice>
+          <qti-simple-choice identifier="B">a medicine that fights infection by killing germs</qti-simple-choice>
+          <qti-simple-choice identifier="C">the zone of air, land, and water where life exists</qti-simple-choice>
+          <qti-simple-choice identifier="D">the science that studies every kind of living thing</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct. A biography is the written story of a life, from bio, 'life' — the same root that makes symbiosis a state of two different organisms living together.</p></qti-content-body>
+      <qti-content-body><p>Correct - bio means 'life,' and -logy means 'study': biology is the study of life itself, from microbes to whales. Symbiosis is the same root naming two lives lived closely together.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. A bicycle's bi- means 'two,' which is a different word part, and abide only looks similar. Ask which word's meaning is genuinely about life — symbiosis shares that living root.</p></qti-content-body>
+      <qti-content-body><p>Not quite. Life runs through every option here - written down, defended, mapped across the planet. The -logy half of biology is the deciding piece; ask what that ending always names.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>The written story of a life is a biography - bio plus graph, 'to write.' Biology writes no one's life story; check its own ending.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Bicycle breaks into bi- plus cycle, 'two wheels.' Its bi- means 'two' — a different word part that only happens to share letters with bio. Nothing alive is built into it.</p></qti-content-body>
+      <qti-content-body><p>A germ-killing medicine is an antibiotic - anti- setting the life root against tiny invaders. Biology fights nothing; its ending points elsewhere.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Abide comes from Old English abidan, 'to wait or remain' — patience, not life. The resemblance is a couple of letters; find the word whose meaning genuinely concerns life.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Bias slants in from a French word for a diagonal cut or slope. Nothing living hides in it — ask which word truly has life at its core.</p></qti-content-body>
+      <qti-content-body><p>The zone where life exists is the biosphere - life wrapped around a planet. Biology is not a place; the -logy ending names something you do.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

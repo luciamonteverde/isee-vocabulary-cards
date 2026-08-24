@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-u12-destitute-third" title="Root Check: Destitute" adaptive="true" time-dependent="false">
+  identifier="isee-u12-destitute-third" title="Strength Check: Destitute" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Which word shares the root stat/stitut, meaning 'to stand or place'?</qti-prompt>
-          <qti-simple-choice identifier="A">substitute</qti-simple-choice>
-          <qti-simple-choice identifier="B">stutter</qti-simple-choice>
-          <qti-simple-choice identifier="C">destroy</qti-simple-choice>
-          <qti-simple-choice identifier="D">stampede</qti-simple-choice>
+          <qti-prompt>The card ranks these words by how little money someone has left. Which one describes the MILDEST money trouble?</qti-prompt>
+          <qti-simple-choice identifier="A">impoverished</qti-simple-choice>
+          <qti-simple-choice identifier="B">destitute</qti-simple-choice>
+          <qti-simple-choice identifier="C">poor</qti-simple-choice>
+          <qti-simple-choice identifier="D">struggling</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct — a substitute is placed to stand in for someone else, statuere exactly. Destitute uses the same root: set down and abandoned, left standing with nothing at all.</p></qti-content-body>
+      <qti-content-body><p>Right - a struggling family has trouble paying its bills but still has something to pay with, the mildest trouble on this scale. The full ladder runs: struggling, then poor, then impoverished, with destitute at the extreme - nothing left at all.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. Look past the shared letters and test for standing or placing in each word's meaning. Destitute means left standing alone with nothing — its true relative also places people.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words describe money trouble - the question is how deep it goes. Re-rank the four and pick the one at the least severe end of the scale.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Impoverished means drained into real poverty - that places it near the severe end of this ladder, not the mild one.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Stutter mimics the broken sound it names — a Germanic speech word with no Latin statuere behind it. Repeated st- sounds are not the same as standing; test for placing or standing in the meaning.</p></qti-content-body>
+      <qti-content-body><p>Destitute is the most extreme word on this scale - no money and no resources whatsoever. The question asks for the mildest end.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Destroy does share the de- prefix, but its root is Latin struere, 'to pile up or build' — tearing down what was built. No statuere, no standing or placing; the prefix alone is not enough.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A stampede is borrowed from Spanish estampida, a word for a sudden crashing rush — animals bolting, not anything being set or placed. Look for statuere's calm act of putting something in position.</p></qti-content-body>
+      <qti-content-body><p>Poor means having very little money - real hardship, one step more severe than the mildest word here.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-m5-crucial-third" title="Root Check: Crucial" adaptive="true" time-dependent="false">
+  identifier="isee-m5-crucial-third" title="Strength Check: Crucial" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>The Latin root cruc- means 'cross.' Which word means 'the central or most decisive point of an issue'?</qti-prompt>
-          <qti-simple-choice identifier="A">crux</qti-simple-choice>
-          <qti-simple-choice identifier="B">cruise</qti-simple-choice>
-          <qti-simple-choice identifier="C">crust</qti-simple-choice>
-          <qti-simple-choice identifier="D">crude</qti-simple-choice>
+          <qti-prompt>All four of these words describe details that matter to an outcome. On which one does the outcome depend the LEAST?</qti-prompt>
+          <qti-simple-choice identifier="A">crucial</qti-simple-choice>
+          <qti-simple-choice identifier="B">essential</qti-simple-choice>
+          <qti-simple-choice identifier="C">important</qti-simple-choice>
+          <qti-simple-choice identifier="D">relevant</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right — the crux of an argument is its decisive central point, straight from Latin crux, 'cross,' the spot where paths meet. Crucial matters sit at exactly that decision point.</p></qti-content-body>
+      <qti-content-body><p>Right - a relevant detail relates to the problem, but the outcome does not hang on it. From least to most outcome-deciding, the scale runs: relevant, important, essential, crucial - with crucial at the top, the point where everything is won or lost.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. Opening with the same letters proves nothing — crust and crude grew elsewhere. The root pictures a cross, the place where two roads meet and a traveler must decide. Which word names that decisive spot?</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how much the outcome depends on something. Rank them from least to most decisive and choose the least.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Crucial tops this scale - it marks the decisive point the whole result turns on, which makes it the most outcome-deciding word here, not the least.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Here is a twist: cruise genuinely traces back to the same Latin cross-root, through Dutch sailors who crossed the sea to and fro. But the prompt wants the word meaning an issue's decisive central point, and a voyage is not that.</p></qti-content-body>
+      <qti-content-body><p>Essential is the second-strongest word here - something essential cannot be left out, far beyond the mildest word on this scale.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Crust only looks related. It grew from Latin crusta, a hard outer shell — think bread crusts and the earth's crust — with no cross and no decision point in its history. Match the prompt's definition exactly.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Crude descends from Latin crudus, 'raw' — raw oil, rough manners — not from the cross-root. Nothing about rawness names the central, decisive point of an issue, which is the definition you need to match.</p></qti-content-body>
+      <qti-content-body><p>Important sits in the middle of this scale - important means it matters, one step up from the mildest word here.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

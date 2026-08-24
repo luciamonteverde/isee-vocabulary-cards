@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-m3-elusive-third" title="Root Check: Elusive" adaptive="true" time-dependent="false">
+  identifier="isee-m3-elusive-third" title="Strength Check: Elusive" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Elusive comes from elude, built on the Latin root ludere, 'to play.' Which word below shares that same 'play' root?</qti-prompt>
-          <qti-simple-choice identifier="A">prelude</qti-simple-choice>
-          <qti-simple-choice identifier="B">lucid</qti-simple-choice>
-          <qti-simple-choice identifier="C">elongate</qti-simple-choice>
-          <qti-simple-choice identifier="D">delicate</qti-simple-choice>
+          <qti-prompt>All four of these words describe things that are hard to get hold of. Which one describes something that slips out of reach the LEAST actively?</qti-prompt>
+          <qti-simple-choice identifier="A">evasive</qti-simple-choice>
+          <qti-simple-choice identifier="B">elusive</qti-simple-choice>
+          <qti-simple-choice identifier="C">fleeting</qti-simple-choice>
+          <qti-simple-choice identifier="D">rare</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Yes — a prelude is literally 'a play before' the main piece, from ludere, 'to play.' Elusive keeps the same playful root: something that playfully slips away when you try to pin it down.</p></qti-content-body>
+      <qti-content-body><p>Right - something rare is merely hard to come across; it does nothing to escape you. From least to most active escape, the scale runs: rare, fleeting, evasive, elusive - with elusive at the top, seeming to actively slip away from every attempt to pin it down.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. Lucid means clear and delicate means fragile — no play in either. Elusive comes from 'playing away' from capture, so look for the musical word for what is played beforehand.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how actively something slips out of reach. Rank them from most passive to most active and pick the one at the very bottom.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Evasive is one of the strongest words here - an evasive thing deliberately dodges you, which puts it near the top of this scale, not the bottom.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Lucid glows from Latin lucere, 'to shine' — a lucid explanation shines light on its subject. Shining is not playing. Keep hunting for ludere's playful stem, lud-, tucked inside a word.</p></qti-content-body>
+      <qti-content-body><p>Elusive tops this scale - an elusive thing seems to actively slip away whenever you hunt for it, making it the most active escaper here, not the least.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Elongate stretches from Latin longus, 'long' — making something longer, nothing more. The e- opening mimics elude, but no play hides in it. Trace each candidate back to ludere, 'to play.'</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Delicate came to English through a Latin word for daintiness and pampered softness — fragile, fine things, no play anywhere. Go back through the list for ludere, 'to play,' hiding in plain sight.</p></qti-content-body>
+      <qti-content-body><p>Fleeting sits in the lower middle of this scale - a fleeting sight vanishes quickly, but that is still more active than the gentlest word here.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

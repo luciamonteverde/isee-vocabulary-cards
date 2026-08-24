@@ -3,7 +3,7 @@
   identifier="isee-u01-disdain-third" title="Root Check: Disdain" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Disdain and the word dignify share the Latin root dign-. If the mayor's visit was said to dignify the small neighborhood festival, what did her visit do?</qti-prompt>
-          <qti-simple-choice identifier="A">It treated the festival as worthy of honor and importance</qti-simple-choice>
-          <qti-simple-choice identifier="B">It made the festival last much longer than planned</qti-simple-choice>
-          <qti-simple-choice identifier="C">It criticized the festival's organizers in public</qti-simple-choice>
-          <qti-simple-choice identifier="D">It decorated the festival grounds with expensive displays</qti-simple-choice>
+          <qti-prompt>The words "disdain" and "dignity" share the Latin root 'dign.' Considering that, what does "dignity" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">a high-ranking guest at a formal event</qti-simple-choice>
+          <qti-simple-choice identifier="B">the act of stooping to do something you feel is beneath you</qti-simple-choice>
+          <qti-simple-choice identifier="C">scorn for someone you consider beneath you</qti-simple-choice>
+          <qti-simple-choice identifier="D">the quality of being worthy of respect</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right — dign- means worthy, so the mayor's visit dignified the festival: treated it as worthy of honor. Disdain is the opposite move — looking down on someone as beneath your notice.</p></qti-content-body>
+      <qti-content-body><p>Right - dign means worthy, and dignity is worthiness itself: the quality that makes a person deserve respect. Disdain is dis- plus dign, treating someone as worth nothing.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. Decorating or lengthening the festival has nothing to do with dign-. That root sits inside dignity and deign — ask what a mayor's presence says the festival deserves, then flip it for disdain.</p></qti-content-body>
+      <qti-content-body><p>Not quite. Every option turns on worthiness - who has it, who grants it, who denies it. Break dignity into its pieces: dign plus -ity, the same ending that turns other adjectives into qualities.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>The high-ranking guest is a dignitary - a person whose position is deemed worthy of honor. Dignity is not the guest; it is closer to the reason the guest gets the seat.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A longer festival is only a scheduling change — nothing in dign- is about time or duration. Ask what a mayor's visit signals about how the festival deserves to be regarded.</p></qti-content-body>
+      <qti-content-body><p>Stooping to do something beneath you is deigning - the same root, used when someone barely grants a thing their worthiness. That is an action taken once, and dignity is not an action.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Publicly criticizing the organizers would be the opposite of dignifying anything. The mayor's visit cannot be tearing the festival down — ask what her presence raises the festival to instead.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Expensive displays change how the festival looks, but dign- is not about decoration or spending money. The same root sits inside dignity — ask what a mayor's presence, all by itself, tells people the festival deserves.</p></qti-content-body>
+      <qti-content-body><p>Scorn for someone beneath you is disdain itself - the dis- reverses the root, refusing to find any worth. The question asks about the root without the reversal.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

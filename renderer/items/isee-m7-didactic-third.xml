@@ -3,7 +3,7 @@
   identifier="isee-m7-didactic-third" title="Root Check: Didactic" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Which word shares the Greek root didaskein, meaning 'to teach'?</qti-prompt>
-          <qti-simple-choice identifier="A">autodidact</qti-simple-choice>
-          <qti-simple-choice identifier="B">autograph</qti-simple-choice>
-          <qti-simple-choice identifier="C">autopilot</qti-simple-choice>
-          <qti-simple-choice identifier="D">autopsy</qti-simple-choice>
+          <qti-prompt>The words "didactic" and "autodidact" share the Greek root 'didact.' Considering that, what does "autodidact" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">a story written mainly to teach its readers a lesson</qti-simple-choice>
+          <qti-simple-choice identifier="B">a machine that runs entirely on its own</qti-simple-choice>
+          <qti-simple-choice identifier="C">a private tutor hired to teach a single student at home</qti-simple-choice>
+          <qti-simple-choice identifier="D">someone who has taught himself or herself a subject</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right! An autodidact is a self-taught person — the same Greek 'teach' root, didaskein, that makes didactic mean 'meant to teach.'</p></qti-content-body>
+      <qti-content-body><p>Right - didact means teaching, and the auto- in front means 'self,' so an autodidact is a self-teacher. Didactic uses the same root pointed outward: made to teach others.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>The answer is autodidact — a self-taught person. It shares the Greek root didaskein, 'to teach,' with didactic.</p></qti-content-body>
+      <qti-content-body><p>Not quite. Each option involves teaching or a 'self' of some kind, so break the word into its two pieces: auto- tells you who is involved, and didact tells you what is being done.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A story built to teach its readers a lesson is a didactic story - the root with no auto- in front. The question's word adds auto-, 'self,' which changes who is getting taught.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Autograph pairs auto-, meaning 'self,' with graph-, the Greek root for writing — a signature is self-written. Writing is not didaskein, so this word teaches nothing by its parts.</p></qti-content-body>
+      <qti-content-body><p>A machine that runs on its own is an automaton - it borrows auto-, 'self,' but has no didact in it, so no teaching is happening at all.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Autopilot joins auto- to pilot, a steering word that reached English through Italian and French. No didaskein appears anywhere in it — flying a plane by itself is not instructing anyone.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Autopsy combines auto- with opsis, Greek for seeing — literally 'seeing for yourself,' which is why it names a firsthand examination. Sight, not teaching, powers this word.</p></qti-content-body>
+      <qti-content-body><p>A private tutor is still one person teaching another. The auto- at the front of autodidact means 'self' - rethink who the teacher is when that prefix leads the word.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

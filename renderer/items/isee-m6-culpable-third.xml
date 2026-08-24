@@ -3,7 +3,7 @@
   identifier="isee-m6-culpable-third" title="Root Check: Culpable" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Culpable comes from the Latin root culpa ('blame, fault'). Which word below shares this root?</qti-prompt>
-          <qti-simple-choice identifier="A">culprit</qti-simple-choice>
-          <qti-simple-choice identifier="B">sculptor</qti-simple-choice>
-          <qti-simple-choice identifier="C">culinary</qti-simple-choice>
-          <qti-simple-choice identifier="D">cultivate</qti-simple-choice>
+          <qti-prompt>The words "culpable" and "culprit" share the Latin root 'culpa.' Considering that, what does "culprit" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">an admission that a fault is your own</qti-simple-choice>
+          <qti-simple-choice identifier="B">an artist who carves figures from stone</qti-simple-choice>
+          <qti-simple-choice identifier="C">the share of blame a person deserves</qti-simple-choice>
+          <qti-simple-choice identifier="D">the one who committed the wrongdoing</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct — a culprit is the one who carries the culpa, the blame, for a wrongdoing. Culpable means deserving that same blame: 'mea culpa' — my fault.</p></qti-content-body>
+      <qti-content-body><p>Correct - culpa means 'blame, fault,' and the culprit is the person the blame belongs to: the one who left the muddy footprints. Culpable describes anyone who deserves that same blame.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Watch out for sculptor — it hides the full letters c-u-l-p, yet they come from Latin sculpere, to carve, not from blame; culinary belongs to the kitchen. Culpable means deserving blame: test each word against that fault-and-blame picture.</p></qti-content-body>
+      <qti-content-body><p>Not quite. One option here only borrows culpa's letters, and the others each handle blame differently. Ask what, exactly, a detective identifies at the end of a case.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Admitting the fault is yours is a mea culpa - 'my fault,' the root in its most famous phrase. But an admission is words spoken, not something a detective can put handcuffs on.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Sculptor does hide the letters c-u-l-p, but they belong to Latin sculpere, 'to carve' — chisels and stone, no blame anywhere. Test the remaining choices against culpa's fault-and-blame meaning.</p></qti-content-body>
+      <qti-content-body><p>The stone-carver is a sculptor - and its c-u-l-p letters come from sculpere, 'to carve,' not from blame. Chisels, not guilt.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Culinary shares only a sound. It descends from Latin culina, 'kitchen,' which is why culinary school teaches cooking. Kitchens carry no sense of fault — keep looking for the blame word.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Cultivate traces to Latin colere, 'to till or tend' — farmers cultivate fields, people cultivate friendships. Tending and caring have nothing to do with culpa, so this word cannot carry the blame root.</p></qti-content-body>
+      <qti-content-body><p>The share of blame someone deserves is their culpability - a measure, not a person. The detective was not hunting a quantity.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
