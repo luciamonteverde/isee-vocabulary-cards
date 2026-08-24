@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-u01-confrontational-third" title="Root Check: Confrontational" adaptive="true" time-dependent="false">
+  identifier="isee-u01-confrontational-third" title="Word Building: Confrontational" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,20 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>The words 'affront' and 'frontier' grow from the same Latin root as confrontational. If an affront is an insult delivered to someone's face and a frontier is the land that faces unexplored territory, what does their shared root most likely mean?</qti-prompt>
-          <qti-simple-choice identifier="A">a distant journey</qti-simple-choice>
-          <qti-simple-choice identifier="B">an angry argument</qti-simple-choice>
-          <qti-simple-choice identifier="C">a hidden border</qti-simple-choice>
-          <qti-simple-choice identifier="D">forehead or face</qti-simple-choice>
+          <qti-prompt>The prefix non- means 'not.' Based on what you know about confrontational, what does non-confrontational mean?</qti-prompt>
+          <qti-simple-choice identifier="A">calm and peaceable - avoiding arguments rather than looking for them</qti-simple-choice>
+          <qti-simple-choice identifier="B">hostile and eager to argue - always looking for a clash</qti-simple-choice>
+          <qti-simple-choice identifier="C">more aggressive than anyone expects, hunting for the biggest fight it can find</qti-simple-choice>
+          <qti-simple-choice identifier="D">not fighting yet, but on the verge of starting a conflict</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Yes — the root means forehead or face: an affront is an insult delivered to your face, a frontier faces the unknown, and a confrontational person brings their face right up against yours.</p></qti-content-body>
+      <qti-content-body><p>Right - non- simply cancels the word it joins: a non-confrontational person is the opposite of one hunting for a clash, keeping disagreements calm and cooperative.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. Neither insults nor journeys are the root itself. Where exactly does an affront land, and what does a frontier do at the edge of unexplored territory? Both clues point at the same body part.</p></qti-content-body>
+      <qti-content-body><p>Not quite. Non- is the plainest 'not' in English - it does not intensify, delay, or leave the meaning standing. Apply it squarely to what confrontational means.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Hostile and eager to argue is what confrontational already means with no prefix at all. Non- has to change something - ask what a prefix meaning 'not' does to that appetite for a clash.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A prefix meaning 'not' cannot turn the volume up - that job belongs to intensifiers like arch- or over-. Non- works in the opposite direction.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Non- says nothing about timing - it does not mean 'not yet' or 'about to.' It cancels the word it joins outright, with no conflict waiting in the wings.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

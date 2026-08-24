@@ -17,20 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Composite shares the root posit- ('to place') with component. A component is...</qti-prompt>
-          <qti-simple-choice identifier="A">a strong disagreement between two people</qti-simple-choice>
-          <qti-simple-choice identifier="B">a musical performance given on a stage</qti-simple-choice>
-          <qti-simple-choice identifier="C">an empty container with nothing inside</qti-simple-choice>
-          <qti-simple-choice identifier="D">one of the parts that makes up a whole</qti-simple-choice>
+          <qti-prompt>The words "composite" and "deposit" share the Latin root 'posit-.' Considering that, what does "deposit" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">to put something off until a later time</qti-simple-choice>
+          <qti-simple-choice identifier="B">to put an idea forward for others to weigh</qti-simple-choice>
+          <qti-simple-choice identifier="C">to set out an explanation point by point</qti-simple-choice>
+          <qti-simple-choice identifier="D">to place something down for safekeeping</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! A component is one of the parts that makes up a whole, from posit-, 'to place.' A composite is the whole you get when those parts are placed together.</p></qti-content-body>
+      <qti-content-body><p>Right - the root means 'placed,' and de- points down: a deposit is set down where it will stay until it is wanted. Composite is the same root with com-, 'together' - parts placed together into one whole.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>The root posit- means 'to place.' A component is one of the parts placed together to make up a whole -- and a composite is the single thing built from those combined parts.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four options are ponere words - each one describes a kind of placing. The prefix carries the difference: post- places after, pro- places forward, ex- places out, de- places down. Decide which direction deposit takes.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Putting something off until later is postponing - post-, 'after,' plus the placing root: placed after, moved later in time. Deposit's de- points in a different direction.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Placing an idea before an audience is propounding it - pro-, 'forward,' plus the placing root. Deposit handles things, not proposals, and its prefix is not pro-.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Setting an explanation out in full view is expounding it - ex-, 'out,' plus the placing root. Deposit's de- does not spread anything out.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

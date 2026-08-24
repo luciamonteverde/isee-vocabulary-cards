@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-hf-catchall-champion-third" title="Root Check: Champion" adaptive="true" time-dependent="false">
+  identifier="isee-hf-catchall-champion-third" title="Word Building: Champion" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>C</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>B</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,20 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Champion is built on Latin campus, 'field' — the champ- at its start. Campaign grows from that same root. A campaign is...</qti-prompt>
-          <qti-simple-choice identifier="A">a small cooking fire built at a campsite</qti-simple-choice>
-          <qti-simple-choice identifier="B">a locked storage room in the basement</qti-simple-choice>
-          <qti-simple-choice identifier="C">an organized series of actions to achieve a goal</qti-simple-choice>
-          <qti-simple-choice identifier="D">a kind of folk dance performed in a circle</qti-simple-choice>
+          <qti-prompt>The suffix -ship names a state, rank, or condition - membership is the condition of being a member. Based on what you know about champion, what does championship mean?</qti-prompt>
+          <qti-simple-choice identifier="A">a person who steps forward to champion a cause in public</qti-simple-choice>
+          <qti-simple-choice identifier="B">the role of a champion - publicly standing up for a cause</qti-simple-choice>
+          <qti-simple-choice identifier="C">the quiet withdrawal of support from a cause once defended</qti-simple-choice>
+          <qti-simple-choice identifier="D">able to be championed - a cause deserving public support</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! A campaign is an organized series of actions to achieve a goal. Campaign and champion both grow from campus, 'field' -- the field where battles were fought, and the fighter who takes the field for a cause.</p></qti-content-body>
+      <qti-content-body><p>Right - -ship names a state, rank, or condition: championship is the champion's role, the condition of being the one who publicly fights for a cause. The same rank-idea is why the title a winning team holds is also called a championship.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>The root camp- comes from campus, Latin for 'field' -- the field where battles were fought. A campaign is an organized series of actions to achieve a goal, and a champion is the one who takes the field to fight for a cause.</p></qti-content-body>
+      <qti-content-body><p>Not quite. The suffix -ship names a state, rank, or condition - never a person, never 'able to be,' and never the undoing of the base word. Ask what condition someone is in while championing a cause.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A leader and an owner are people, but leadership and ownership are the positions they hold - -ship always moves the word from the person to the position, never the other way.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>That runs champion backward. A suffix changes a word's job, never its direction - whatever championship names, it has to stay on the side of supporting the cause, not dropping it.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>'Able to be' or 'deserving to be' is -able's job - an admirable effort deserves to be admired. -ship builds a noun for a rank or condition, not an adjective about what could be done.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

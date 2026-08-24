@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-hf-catchall-entreat-third" title="Root Check: Entreat" adaptive="true" time-dependent="false">
+  identifier="isee-hf-catchall-entreat-third" title="Word Building: Entreat" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>C</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,20 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Entreat shares the root treat- (Latin tractare, 'to handle, deal with') with treaty. A treaty is...</qti-prompt>
-          <qti-simple-choice identifier="A">a formal agreement worked out between nations</qti-simple-choice>
-          <qti-simple-choice identifier="B">a sudden loud noise that startles everyone</qti-simple-choice>
-          <qti-simple-choice identifier="C">a woven basket for carrying vegetables</qti-simple-choice>
-          <qti-simple-choice identifier="D">a narrow mountain path used by hikers</qti-simple-choice>
+          <qti-prompt>The suffix -y can turn a verb into a noun for the act or its result - a delivery is the act of delivering. Based on what you know about entreat, what is an entreaty?</qti-prompt>
+          <qti-simple-choice identifier="A">the person who begs and pleads whenever they want something</qti-simple-choice>
+          <qti-simple-choice identifier="B">a firm order handed down, expecting instant obedience</qti-simple-choice>
+          <qti-simple-choice identifier="C">an earnest plea - a heartfelt act of begging for something</qti-simple-choice>
+          <qti-simple-choice identifier="D">inclined to plead - describing a voice always close to begging</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! A treaty is a formal agreement worked out between nations, from tractare, 'to handle, deal with.' Entreat shares the root: when you entreat someone, you are dealing with them by pleading.</p></qti-content-body>
+      <qti-content-body><p>Right - this -y turns the verb into a noun for its act: an entreaty is one earnest plea, the heartfelt begging itself put into words, the way a delivery is the act of delivering.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>The root tractare means 'to handle, deal with.' A treaty is a formal agreement worked out between nations -- and when you entreat someone, you are dealing with them by pleading earnestly.</p></qti-content-body>
+      <qti-content-body><p>Not quite. On a verb like entreat, the suffix -y builds a noun for the act itself - not a person, not an adjective, and never the reverse of the base word. Keep entreat's earnest pleading and ask what noun it produces.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A person doing the verb would take -er, the way a builder builds. This -y names the act instead - a delivery is the delivering itself, never the one who delivers.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>That runs entreat backward - the card lists demand and command as its opposites. A suffix changes a word's job, never its direction: whatever an entreaty is, it must still be on the pleading side.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>That treats -y like the ending in rainy or sleepy, which builds adjectives that describe. On entreat it does a different job: it turns the verb into a noun that names the act.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

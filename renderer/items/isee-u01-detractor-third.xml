@@ -3,7 +3,7 @@
   identifier="isee-u01-detractor-third" title="Root Check: Detractor" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>C</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,20 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>The words 'extract' and 'attract' grow from the same Latin root as detractor. If a dentist extracts a tooth by pulling it out and a magnet attracts iron filings by pulling them closer, what does their shared root most likely mean?</qti-prompt>
-          <qti-simple-choice identifier="A">to draw or pull</qti-simple-choice>
-          <qti-simple-choice identifier="B">to repair or heal</qti-simple-choice>
-          <qti-simple-choice identifier="C">to stick together</qti-simple-choice>
-          <qti-simple-choice identifier="D">to push far away</qti-simple-choice>
+          <qti-prompt>The words "detractor" and "extract" share the Latin root 'tract.' Considering that, what does "extract" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">to draw people or attention toward you</qti-simple-choice>
+          <qti-simple-choice identifier="B">to take back something you said</qti-simple-choice>
+          <qti-simple-choice identifier="C">to pull something out, often with effort</qti-simple-choice>
+          <qti-simple-choice identifier="D">to shrink by drawing inward on itself</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Exactly — tract means to draw or pull: a dentist extracts by pulling out, a magnet attracts by pulling closer, and a detractor pulls a reputation down, one public jab at a time.</p></qti-content-body>
+      <qti-content-body><p>Right - tract means to pull, and the ex- in front means 'out': to extract is to pull out, whether it is a tooth, a splinter, or a confession. A detractor pulls people's reputations down instead.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. Healing and sticking both fail the evidence test. Watch the dentist and the magnet in the prompt — their actions are the same motion in opposite directions. Name that motion; a detractor uses it too.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four options are kinds of pulling - tract does the work in every one. The prefixes steer the pull: toward, back, out, or inward. Match ex- to its direction.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Drawing people toward you is attracting them - at- (from ad-), 'toward,' plus the pull. The ex- on extract sends the pull the opposite way.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Taking back your words is retracting them - re-, 'back,' pulling a statement home again. A dentist doing that to a tooth would be no help at all.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Shrinking inward is contracting - the pull aimed at itself, like a muscle tightening. Ex- aims the pull somewhere else entirely.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

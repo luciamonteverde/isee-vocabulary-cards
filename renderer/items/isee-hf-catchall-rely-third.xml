@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-hf-catchall-rely-third" title="Root Check: Rely" adaptive="true" time-dependent="false">
+  identifier="isee-hf-catchall-rely-third" title="Strength Check: Rely" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>B</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,20 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Rely is built on Latin ligare — worn down to the little -ly at its end. Ligament grows from the same root. A ligament is...</qti-prompt>
-          <qti-simple-choice identifier="A">a band of tissue that binds bones together</qti-simple-choice>
-          <qti-simple-choice identifier="B">a bright ceiling light in the front hallway</qti-simple-choice>
-          <qti-simple-choice identifier="C">a short poem written for a special occasion</qti-simple-choice>
-          <qti-simple-choice identifier="D">a spare key tucked under the front doormat</qti-simple-choice>
+          <qti-prompt>All four of these words describe ways of treating someone's support. Which one leans on that support the LEAST?</qti-prompt>
+          <qti-simple-choice identifier="A">depend</qti-simple-choice>
+          <qti-simple-choice identifier="B">disregard</qti-simple-choice>
+          <qti-simple-choice identifier="C">expect</qti-simple-choice>
+          <qti-simple-choice identifier="D">rely</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! A ligament is a band of tissue that binds bones together, from ligare, 'to bind.' Rely shares the root: when you rely on someone, you bind yourself to their support.</p></qti-content-body>
+      <qti-content-body><p>Right - to disregard someone's support is to pay it no attention at all, so you lean on it not one bit. From least to most leaning, the scale runs: disregard, expect, rely, depend - with rely in the upper middle: when you rely on help, you have built your plans around it actually coming.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>The root ligare means 'to bind.' A ligament is the band of tissue that binds bones together -- and when you rely on someone, you bind yourself to their support.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how much you lean on someone's support. Rank them from ignoring it entirely to needing it to manage at all, and pick the one that leans the least.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Depend tops this scale - if you depend on something, you may not manage at all without it - so it leans the hardest of all four, the opposite of what the question asks.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Expect sits second on this scale - to expect help is just to think it will come - but even that gives the support more attention than the lowest word here pays it.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Rely is the second-strongest word on this scale - to rely on help is to build your plans around it - far above the word that leans on support the least.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

@@ -3,7 +3,7 @@
   identifier="isee-u01-abhor-third" title="Root Check: Abhor" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>B</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>C</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,20 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>The words 'horror' and 'horrify' grow from the same Latin root as abhor. If a horror movie makes your skin crawl and grim news can horrify an entire town, what does their shared root most likely mean?</qti-prompt>
-          <qti-simple-choice identifier="A">to watch a film in a dark theater</qti-simple-choice>
-          <qti-simple-choice identifier="B">to shudder with fear or disgust</qti-simple-choice>
-          <qti-simple-choice identifier="C">to spread very quickly through a crowd</qti-simple-choice>
-          <qti-simple-choice identifier="D">to speak in a whisper so no one can hear</qti-simple-choice>
+          <qti-prompt>The words "abhor" and "horrify" share the Latin root 'horrere.' Considering that, what does "horrify" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">to regard something with deep loathing and disgust</qti-simple-choice>
+          <qti-simple-choice identifier="B">to shiver from cold rather than from fear</qti-simple-choice>
+          <qti-simple-choice identifier="C">to fill someone with shock and dread</qti-simple-choice>
+          <qti-simple-choice identifier="D">to startle someone mildly for a moment</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right — the shared root, Latin horrere, means 'to shudder with fear or disgust.' Horror makes your skin crawl, horrify shakes a whole town, and to abhor something is to loathe it so deeply you almost shudder away from it.</p></qti-content-body>
+      <qti-content-body><p>Right - horrere means to shudder, and to horrify someone is to hand them that shudder: they see the thing and recoil. Abhor is the same shudder felt as hatred.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Look at what horror and horrify have in common: both name reactions that make you shudder. Their shared root, Latin horrere, means 'to shudder with fear or disgust' — and abhor keeps that meaning: to loathe something so deeply you almost shudder.</p></qti-content-body>
+      <qti-content-body><p>Not quite. Every option here involves a strong reaction - loathing, shivering, flinching. The root is about the shudder of dread, and the question asks who makes whom feel it.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Deep loathing is what abhor itself means - the ab- pulls you away from what disgusts you. Horrify points the other direction: at something done to the person watching.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Shivering from cold was the root's first, literal job - horrere meant to bristle and shake. Horrify kept the shudder but swapped the cold for something far worse.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A mild startle fades in a second. Horrere is the strongest shudder there is - the mold-covered-walls kind, not the tap-on-the-shoulder kind.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

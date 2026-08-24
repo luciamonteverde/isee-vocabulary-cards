@@ -3,7 +3,7 @@
   identifier="isee-hf-catchall-assurance-third" title="Root Check: Assurance" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>C</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,20 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Assurance shares its root (Latin securus) with secure. Something secure is...</qti-prompt>
-          <qti-simple-choice identifier="A">brand new and never used</qti-simple-choice>
-          <qti-simple-choice identifier="B">extremely expensive to buy</qti-simple-choice>
-          <qti-simple-choice identifier="C">safe and firmly protected</qti-simple-choice>
-          <qti-simple-choice identifier="D">brightly colored and shiny</qti-simple-choice>
+          <qti-prompt>The words "assurance" and "surety" share the Latin root 'sur-' (from securus). Considering that, what does "surety" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">a guarantee that a promise or debt will be honored</qti-simple-choice>
+          <qti-simple-choice identifier="B">freedom from danger, worry, or attack</qti-simple-choice>
+          <qti-simple-choice identifier="C">a payment plan that protects against future loss</qti-simple-choice>
+          <qti-simple-choice identifier="D">comforting words that ease someone's doubts</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! Secure means safe and firmly protected, from Latin securus, 'safe, certain.' Assurance shares that root: a promise meant to make you feel safe and certain.</p></qti-content-body>
+      <qti-content-body><p>Right - securus means 'safe, certain,' and a surety exists to make someone certain: it stands behind a promise or a debt so the other side can rely on it. Assurance is the same root at work - a promise given so someone can feel certain.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Remember the root: Latin securus means 'safe, certain.' Something secure is safe and firmly protected -- and an assurance is a promise meant to make you feel exactly that safe.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four options grow from securus, 'safe, certain' - security, insurance, reassurance, and surety are one family. Each option names a different way of making someone safe or certain; only one of them is what a surety is.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Freedom from danger is security - the root in its plainest form, the state of being safe. A surety is not a state you feel; it is something offered in a deal.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A paid plan that protects against loss is insurance - the same root turned into a contract you buy. A surety is older and simpler, and no purchase is involved.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Comforting words that ease doubt are reassurance - re- plus the same root, making someone feel certain again. A surety has to be worth more than kind words.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>
