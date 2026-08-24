@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p2-catchall4-parody-third" title="Root Check: Parody" adaptive="true" time-dependent="false">
+  identifier="isee-p2-catchall4-parody-third" title="Strength Check: Parody" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>The words "parody" and "melody" share the Greek root '-ody-.' A melody is best described as...</qti-prompt>
-          <qti-simple-choice identifier="A">a tune or sequence of musical notes</qti-simple-choice>
-          <qti-simple-choice identifier="B">a type of dance step performed in pairs</qti-simple-choice>
-          <qti-simple-choice identifier="C">a written script for a stage play</qti-simple-choice>
-          <qti-simple-choice identifier="D">a technique for painting pictures on walls</qti-simple-choice>
+          <qti-prompt>All four of these words name ways of imitating or making fun of something. Which one is the MOST biting?</qti-prompt>
+          <qti-simple-choice identifier="A">impression</qti-simple-choice>
+          <qti-simple-choice identifier="B">parody</qti-simple-choice>
+          <qti-simple-choice identifier="C">spoof</qti-simple-choice>
+          <qti-simple-choice identifier="D">mockery</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right. The root -ody- comes from the Greek word for 'song,' so a melody is a musical thing: a tune, a sequence of notes.</p></qti-content-body>
+      <qti-content-body><p>Right - mockery is harsh, open ridicule, with the least comic craft to soften it. From gentlest to most biting, the scale runs: spoof, impression, parody, mockery.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>The root -ody- (from Greek oide) means 'song.' A melody is a tune, a sequence of musical notes; it is not a dance step, a script, or a way of painting.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how biting the imitation is. Rank them from purely playful up to genuinely harsh, then pick the harshest.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>An impression is a brief imitation of someone's voice or manner, usually done in fun - it sits low on this scale of bite.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A dance step moves the feet in patterns — something performed, not heard. The root -ody- means 'song,' so a melody must be a thing you listen to, not a move done in pairs.</p></qti-content-body>
+      <qti-content-body><p>A parody mocks, but through comic structure and craft - that polish keeps it below the harshest word on this scale.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Scripts belong to the stage: they give actors lines to speak. Nothing in -ody- points toward theater — the prompt glosses the root as 'song,' so ask what kind of thing a melody names.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Wall painting is a visual art, and -ody- lives in the world of sound. A word built on the Greek for 'song' cannot name a technique for making pictures.</p></qti-content-body>
+      <qti-content-body><p>A spoof is one of the gentlest words here - playful imitation with hardly any real sting.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

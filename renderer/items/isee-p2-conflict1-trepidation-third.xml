@@ -3,7 +3,7 @@
   identifier="isee-p2-conflict1-trepidation-third" title="Root Check: Trepidation" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Trepidation shares the root trepid- ('to tremble') with intrepid, a word you met earlier in this course. Someone who is intrepid is...</qti-prompt>
-          <qti-simple-choice identifier="A">fearless, showing no trembling anxiety at all</qti-simple-choice>
-          <qti-simple-choice identifier="B">extremely anxious, shaky, and quick to panic</qti-simple-choice>
-          <qti-simple-choice identifier="C">overly talkative, even in serious situations</qti-simple-choice>
-          <qti-simple-choice identifier="D">easily distracted by anything happening nearby</qti-simple-choice>
+          <qti-prompt>The words "trepidation" and "intrepid" share the Latin root 'trepid-,' from trepidare, 'to tremble.' Since in- means 'not,' what does "intrepid" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">shaky and anxious, quick to panic at the first sign of trouble</qti-simple-choice>
+          <qti-simple-choice identifier="B">careful and slow, weighing every risk twice before moving</qti-simple-choice>
+          <qti-simple-choice identifier="C">good at calming other people's fears in an emergency</qti-simple-choice>
+          <qti-simple-choice identifier="D">fearless, pressing ahead without a tremble</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! Intrepid means fearless -- literally showing none of the trembling (trepid-) anxiety that trepidation names, because the prefix in- means 'not.'</p></qti-content-body>
+      <qti-content-body><p>Correct - trepid- is the trembling and in- cancels it: an intrepid explorer presses ahead without a tremble. Trepidation is the same root with nothing to cancel it, the anxious trembling you feel as something risky approaches.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. The root trepid- means 'to tremble,' and the prefix in- means 'not' -- so someone intrepid does not tremble. Fearless is the answer; anxious and shaky is trepidation's side of the root, and talkativeness or distraction has nothing to do with trembling.</p></qti-content-body>
+      <qti-content-body><p>Not quite. Build the word from its two pieces: trepid- is the trembling, and in- does something to that trembling. Work out what in- does before choosing again - the answer follows from the pieces alone.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Shaky, anxious, and quick to panic is the bare root with no prefix - trembling itself, trepidation's own side of the family. Intrepid carries in-, and the stem tells you what in- does.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>'Extremely anxious, shaky, and quick to panic' is the reading the bare root gives — trepid- alone means trembling. But intrepid is not the bare root: it carries the prefix in-, which changes the meaning. Work out what in- does first.</p></qti-content-body>
+      <qti-content-body><p>Careful and slow is about judgment, not about trembling. The root only measures whether fear shakes you; how many times you weigh a risk is a different question entirely.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Being talkative has nothing to do with trepid-, which the prompt glosses as trembling. How much someone chatters in serious situations is a different dimension entirely. Build your answer from the root's meaning plus its prefix.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Getting distracted is about attention wandering, not about the trembling the root trepid- names. Whether nearby events pull your eyes away has nothing to do with alarm. Rebuild the word from its root and prefix instead.</p></qti-content-body>
+      <qti-content-body><p>Calming other people's fears points the word outward at someone else. Trepid- describes the trembling in your own body - build from in- plus that, and keep the word aimed at its owner.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

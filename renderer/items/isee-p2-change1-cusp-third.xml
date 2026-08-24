@@ -3,7 +3,7 @@
   identifier="isee-p2-change1-cusp-third" title="Root Check: Cusp" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Cusp comes from Latin cuspis, the root of bicuspid. A bicuspid tooth is literally one with...</qti-prompt>
-          <qti-simple-choice identifier="A">two points on its crown</qti-simple-choice>
-          <qti-simple-choice identifier="B">a golden filling</qti-simple-choice>
-          <qti-simple-choice identifier="C">no root at all</qti-simple-choice>
-          <qti-simple-choice identifier="D">an extra-flat surface</qti-simple-choice>
+          <qti-prompt>The words "cusp" and "bicuspid" share the Latin root 'cusp.' Considering that, what does "bicuspid" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">a tooth that comes in twice, first as a baby tooth and then as an adult one</qti-simple-choice>
+          <qti-simple-choice identifier="B">having three points, like one of the valves of the heart</qti-simple-choice>
+          <qti-simple-choice identifier="C">the pointed tip of a crescent moon</qti-simple-choice>
+          <qti-simple-choice identifier="D">a tooth with two pointed tips on its biting surface</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Bi- means two and cuspis means point, so a bicuspid tooth carries two points on its crown. A cusp in life is the same geometry: the sharp point where two stages meet.</p></qti-content-body>
+      <qti-content-body><p>Right - cusp means 'point,' and bi- means 'two,' so a bicuspid is a tooth with two points. Cusp itself keeps the same picture: to be on the cusp of a change is to stand at its very point.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A golden filling is a repair, not a description of the tooth's shape. Split bicuspid into bi- plus cusp, translate each half using the stem's gloss, and the right description follows.</p></qti-content-body>
+      <qti-content-body><p>Not quite. Every option turns on cusp, 'a point, a pointed tip.' Work out exactly what bi- is counting before choosing again.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Bi- does mean 'two,' but nothing in bicuspid speaks of growing in or of baby teeth - the root cusp is about shape, not timing.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A golden filling is a repair a dentist adds later, while bicuspid describes the tooth's own natural shape. Break the word into bi- plus cusp and let the prompt's gloss translate the cusp half.</p></qti-content-body>
+      <qti-content-body><p>Three points is tricuspid - tri-, 'three,' plus the same point root, the name of a heart valve. Check which counting prefix bicuspid actually carries.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>'No root at all' plays on the other sense of root — the anchor below the gum. Bicuspid is built on cuspis, so its literal meaning concerns the visible shape, not what is missing underneath.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>An extra-flat surface contradicts the root itself: cuspis names a sharp feature, and a flattened tooth shows none of it. Re-read the gloss in the prompt and picture a tooth built on that root.</p></qti-content-body>
+      <qti-content-body><p>The pointed tip of a crescent moon is a cusp all by itself - the bare root with no prefix. Bicuspid adds bi-, so it must say more than 'point.'</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

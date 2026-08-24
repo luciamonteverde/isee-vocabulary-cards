@@ -3,7 +3,7 @@
   identifier="isee-p2-abundance1-myriad-third" title="Root Check: Myriad" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Myriad (Greek myrias, 'ten thousand') appears in myriapod, the animal group that includes centipedes and millipedes. A myriapod is literally a creature with...</qti-prompt>
-          <qti-simple-choice identifier="A">'countless' legs -- far too many to bother counting</qti-simple-choice>
-          <qti-simple-choice identifier="B">a deep fear of even numbers and of counting in general</qti-simple-choice>
-          <qti-simple-choice identifier="C">a pair of delicate wings made entirely of spun glass</qti-simple-choice>
-          <qti-simple-choice identifier="D">exactly two legs, both of them left ones, and no more</qti-simple-choice>
+          <qti-prompt>The words "myriad" and "myriapod" share the Greek root 'myri-.' Considering that - and knowing that Greek '-pod' means 'foot' - what does "myriapod" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">a camera stand that balances on three legs</qti-simple-choice>
+          <qti-simple-choice identifier="B">an uncountable swarm of insects flying together</qti-simple-choice>
+          <qti-simple-choice identifier="C">an ancient army unit made up of ten thousand soldiers</qti-simple-choice>
+          <qti-simple-choice identifier="D">a creature, like a centipede, with a great many legs</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! Myrias meant 'ten thousand,' so a myriapod is a creature with 'countless' legs -- the same beyond-counting idea inside myriad.</p></qti-content-body>
+      <qti-content-body><p>Yes - myri- means 'ten thousand, countless,' and -pod means 'foot,' so a myriapod is a creature whose feet seem past counting. Myriad keeps the same idea on its own: a countless number of anything.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>The root myrias means 'ten thousand.' A myriapod -- a centipede or millipede -- is literally a creature with 'countless' legs, far too many to bother counting, just as a myriad is a countless multitude.</p></qti-content-body>
+      <qti-content-body><p>Not quite. The stem hands you both Greek pieces of this word. Check your option against both of them - several options match one piece while missing the other.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A three-legged stand is a tripod - tri-, 'three,' wearing the same -pod. But myri- sits at the far other end of the counting scale from three.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Myrias names a number, not a feeling — a creature cannot be built out of 'a deep fear of even numbers.' The Greek root describes the quantity of a body part a myriapod has, not its phobias.</p></qti-content-body>
+      <qti-content-body><p>A swarm matches the 'countless' half but drops the other piece: -pod, 'foot.' The word is built to describe feet, not a crowd in the air.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Spun-glass wings are fantasy, and 'a pair' means just two — myrias meant 'ten thousand,' the giant number Greek used for hopelessly large amounts. Centipedes are famous for a different body part in extreme quantity.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>'Exactly two legs' points the wrong way entirely: myrias meant 'ten thousand,' the biggest single-word number Greek had. A myriapod's name brags about abundance, the very opposite of 'no more' than two.</p></qti-content-body>
+      <qti-content-body><p>Ten thousand soldiers was in fact the ancient myriad itself - the number word alone, with no -pod attached. The question asks about the longer word.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

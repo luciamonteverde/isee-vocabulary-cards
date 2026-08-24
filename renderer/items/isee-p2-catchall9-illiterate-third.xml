@@ -3,7 +3,7 @@
   identifier="isee-p2-catchall9-illiterate-third" title="Root Check: Illiterate" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>The words "illiterate" and "literature" share the Latin root '-liter-.' Literature is a term for...</qti-prompt>
-          <qti-simple-choice identifier="A">written works, especially those valued for their artistic quality</qti-simple-choice>
-          <qti-simple-choice identifier="B">a collection of unrelated numbers listed in no meaningful order</qti-simple-choice>
-          <qti-simple-choice identifier="C">spoken conversations that leave behind no written record at all</qti-simple-choice>
-          <qti-simple-choice identifier="D">a type of musical instrument played in a marching band</qti-simple-choice>
+          <qti-prompt>The words "illiterate" and "literature" share the Latin root '-liter-.' Considering that, what does "literature" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">the ability to read and to write</qti-simple-choice>
+          <qti-simple-choice identifier="B">meaning exactly what the words say, nothing more</qti-simple-choice>
+          <qti-simple-choice identifier="C">repeating the same starting sound in nearby words</qti-simple-choice>
+          <qti-simple-choice identifier="D">written works, such as stories and poems, valued as art</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! Literature comes from -liter- ('letter'): written works, especially those valued for their artistic quality.</p></qti-content-body>
+      <qti-content-body><p>Right - littera means 'letter,' and literature is the world of letters: stories, poems, plays - writing kept and studied because it is worth keeping. Illiterate is the same root behind il- ('not'): unable to work with letters at all.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. Follow the root: -liter- means 'letter,' so literature is made of letters - written works, especially those valued for their artistic quality.</p></qti-content-body>
+      <qti-content-body><p>Not quite. Letters are inside every option here - littera runs through all four. The -ure ending gathers a whole body of something, the way furniture gathers furnishings. Ask what a whole body of letters would be.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>The ability to read and write is literacy - the root's word for the skill itself, the very thing illiterate says is missing. Literature is not a skill; its -ure ending collects things instead.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Numbers in no meaningful order have nothing to do with -liter-. The root means 'letter' — the alphabet kind — so literature must be built out of letters, not digits.</p></qti-content-body>
+      <qti-content-body><p>Meaning exactly what the words say is being literal - taking the letters at face value. Literature is a noun for something you can put on a shelf, not a way of reading a sentence.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>'No written record at all' rules letters out completely — yet -liter- means 'letter.' Speech that vanishes into the air leaves nothing for the root to describe. Literature has to survive on a page.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Instruments belong to music, a dimension -liter- never touches. Nothing in literature's makeup points to brass or drums — follow the root the prompt glossed instead.</p></qti-content-body>
+      <qti-content-body><p>Repeating a starting sound - 'a dark and dreary day' - is alliteration, letters lined up side by side. Literature is bigger than a sound trick inside one line.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p2-suffixic1-ecstatic-third" title="Root Check: Ecstatic" adaptive="true" time-dependent="false">
+  identifier="isee-p2-suffixic1-ecstatic-third" title="Strength Check: Ecstatic" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Ecstatic contains the root stat ('to stand'), part of the same ancient family as stationary (from Latin stare, 'to stand'). A stationary object is one that...</qti-prompt>
-          <qti-simple-choice identifier="A">stays completely still</qti-simple-choice>
-          <qti-simple-choice identifier="B">spins constantly</qti-simple-choice>
-          <qti-simple-choice identifier="C">glows in the dark</qti-simple-choice>
-          <qti-simple-choice identifier="D">melts in the sun</qti-simple-choice>
+          <qti-prompt>All four of these words describe how a person is feeling. Which one carries the LEAST happiness?</qti-prompt>
+          <qti-simple-choice identifier="A">thrilled</qti-simple-choice>
+          <qti-simple-choice identifier="B">ecstatic</qti-simple-choice>
+          <qti-simple-choice identifier="C">delirious</qti-simple-choice>
+          <qti-simple-choice identifier="D">miserable</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Yes — stationary means staying completely still, from stare, 'to stand.' Ecstatic grew from the same family: ekstasis, 'standing outside oneself,' the state of joy so overwhelming you are beside yourself.</p></qti-content-body>
+      <qti-content-body><p>Right - miserable sits at the very bottom of this scale: deeply unhappy, with no happiness in it at all. From least to most intense happiness, the scale runs: miserable, thrilled, ecstatic, delirious - with delirious at the top: joy so far gone that thought scrambles into a dizzy blur.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Glowing and melting are about light and temperature, nowhere near this root. The question glosses sta for you twice — apply that meaning literally to a parked object and ask which description must follow.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how intense the happiness is. Rank them from no happiness at all to a dizzy overflow of it, and choose the lowest.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Thrilled sits in the middle of this scale - a thrilled winner beams and cheers - which is already far more happiness than the lowest word here carries.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Spinning constantly is never-ending motion. The prompt glosses this root twice — once for stat, once for stare. Hold that meaning next to a spinning top and decide whether the two descriptions can fit the same object.</p></qti-content-body>
+      <qti-content-body><p>Ecstatic is the second-most intense word on this scale - joy overflowing beyond any control - close to the top of this ladder rather than its bottom.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Glowing in the dark is about light, a dimension this root never touches. Stationary comes from stare, and the prompt tells you what that verb means — apply it to an object and choose the description that follows.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Melting in the sun is a change caused by temperature, and nothing in stat or stare speaks of warmth. Re-read the prompt's gloss of the root and ask what a stationary object must be doing.</p></qti-content-body>
+      <qti-content-body><p>Delirious tops this scale - joy so overwhelming that thought scrambles and the celebration turns into a dizzy blur - the most intense word here, the opposite of what the question asks.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

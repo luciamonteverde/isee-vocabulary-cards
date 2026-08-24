@@ -3,7 +3,7 @@
   identifier="isee-p2-joy1-hearty-third" title="Root Check: Hearty" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Hearty is built on heart, the same root as hearten. To hearten a discouraged teammate is to...</qti-prompt>
-          <qti-simple-choice identifier="A">fill them with fresh courage and cheer</qti-simple-choice>
-          <qti-simple-choice identifier="B">assign them extra laps after practice</qti-simple-choice>
-          <qti-simple-choice identifier="C">trade them to another team across town</qti-simple-choice>
-          <qti-simple-choice identifier="D">record their statistics on a clipboard</qti-simple-choice>
+          <qti-prompt>The words "hearty" and "hearten" share the Old English root 'heart.' Considering that, what does it mean to "hearten" a discouraged teammate?</qti-prompt>
+          <qti-simple-choice identifier="A">to check how fast their heart is beating after the drill</qti-simple-choice>
+          <qti-simple-choice identifier="B">to drain away what little confidence they had left</qti-simple-choice>
+          <qti-simple-choice identifier="C">to have them memorize the playbook word for word</qti-simple-choice>
+          <qti-simple-choice identifier="D">to put fresh courage and cheer back into them</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! To hearten a discouraged teammate is to fill them with fresh courage and cheer -- to put heart back into them, the same heart that gives hearty its warm, vigorous force.</p></qti-content-body>
+      <qti-content-body><p>Correct - to hearten someone is to put heart back into them: fresh courage and cheer where the discouragement was. Hearty is the adjective for someone whose heart shows - warmth and cheer at full strength.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Look at the root: heart. To hearten someone is to put heart back into them -- to fill them with fresh courage and cheer -- not to punish them with laps, send them to another team, or write down their statistics.</p></qti-content-body>
+      <qti-content-body><p>Not quite. In this family, heart stands for spirit, not for the organ or for memory. One option would even need the prefix dis- to be true - check which direction hearten moves a discouraged teammate.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Counting heartbeats takes the root as the literal organ - a stethoscope's business, not a teammate's. In hearten, heart stands in for something no monitor can measure.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Extra laps after practice read as punishment, and punishment presses a discouraged player lower. The root is heart — ask what it would mean to put heart back into a teammate.</p></qti-content-body>
+      <qti-content-body><p>Draining away confidence is disheartening - and every bit of that reversal lives in dis-. Hearten has no reversing prefix, so it cannot push a teammate downward.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Sending a teammate to another team across town removes them from the roster — the root heart plays no part in that. To hearten someone is to work on their spirit, not their address.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Recording statistics on a clipboard is bookkeeping. Numbers do not lift anyone's spirit. Hearten is built on heart — think about what a discouraged teammate is missing and what restoring it would do.</p></qti-content-body>
+      <qti-content-body><p>Memorizing word for word is learning something by heart - a different corner of the same root, where heart once stood for memory. Hearten is something you do TO a person, not a way of studying.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

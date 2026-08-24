@@ -3,7 +3,7 @@
   identifier="isee-p2-catchall3-renowned-third" title="Root Check: Renowned" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>The words "renowned" and "nominate" share the root 'nom-.' To nominate someone is to...</qti-prompt>
-          <qti-simple-choice identifier="A">put their name forward for a position or honor</qti-simple-choice>
-          <qti-simple-choice identifier="B">give them a completely new official name or title</qti-simple-choice>
-          <qti-simple-choice identifier="C">call them by a name that does not truly fit them</qti-simple-choice>
-          <qti-simple-choice identifier="D">keep their name hidden so nobody learns who they are</qti-simple-choice>
+          <qti-prompt>The words "renowned" and "nominate" share the Latin root 'nom' (nomen, "name"). Considering that, what does "nominate" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">to call something by a name that does not really fit it</qti-simple-choice>
+          <qti-simple-choice identifier="B">to publish a piece of writing without any name attached</qti-simple-choice>
+          <qti-simple-choice identifier="C">to give a person or place an entirely new name</qti-simple-choice>
+          <qti-simple-choice identifier="D">to put someone's name forward for an honor or position</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct — to nominate is to put a name forward for a position or honor, from nomen (name). Renowned came through Old French renomer, 'to name again and again': named so often that everyone knows you.</p></qti-content-body>
+      <qti-content-body><p>Right - nomen means 'name,' and to nominate is to put a name forward for an office or an award. Renowned uses the same root with re- ('again and again'): a renowned person's name is spoken over and over.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite - every option here does something with a person's name, and all of them ride the same 'name' family, so the root alone cannot separate them. Ask which of these acts a committee performs for a candidate it hopes will be chosen.</p></qti-content-body>
+      <qti-content-body><p>Not quite. Every option here does something with a name, because all four belong to the nomen family. The prefixes and endings decide which is which - think about what a committee does before a winner is ever chosen.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A name that doesn't fit is a misnomer - mis- plus the naming root. Nominating involves no bad fit; it points in a hopeful direction.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Handing someone a brand-new name or title is christening or denominating them - naming acts, and nomen is right there in the second one. But a nomination never renames anyone; no new name is issued at all.</p></qti-content-body>
+      <qti-content-body><p>A work published with no name attached is anonymous - Greek an- ('without') plus the same naming root. Nominate has no 'without' in it; a name is very much present.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A name that does not truly fit is a misnomer - mis- plus the very same nom- root. That word marks a naming gone wrong, though, and nominating someone is a deliberate act done in the person's favor.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Keeping a name out of sight is going anonymous - Greek's own branch of the 'name' family, an- ('without') plus a cousin of nomen. But nominating cannot happen in secret; an act built on a name cannot begin by burying it.</p></qti-content-body>
+      <qti-content-body><p>Giving something a new name is renaming it. Nominate doesn't change anyone's name - think about where the name is being sent instead.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

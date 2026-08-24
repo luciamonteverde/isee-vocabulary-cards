@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p2-skill1-cursory-third" title="Root Check: Cursory" adaptive="true" time-dependent="false">
+  identifier="isee-p2-skill1-cursory-third" title="Strength Check: Cursory" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Cursory shares the Latin root currere ('to run') with cursor -- the little marker that runs across your screen. An excursion, from the same root, is literally...</qti-prompt>
-          <qti-simple-choice identifier="A">a running out -- a short trip away from the usual place</qti-simple-choice>
-          <qti-simple-choice identifier="B">a heavy winter coat worn over everything else</qti-simple-choice>
-          <qti-simple-choice identifier="C">a kind of printed form filled out at the front desk</qti-simple-choice>
-          <qti-simple-choice identifier="D">a musical instrument played in a school band</qti-simple-choice>
+          <qti-prompt>All four of these words describe how much care goes into a piece of work. Which one is done with the MOST care?</qti-prompt>
+          <qti-simple-choice identifier="A">hurried</qti-simple-choice>
+          <qti-simple-choice identifier="B">cursory</qti-simple-choice>
+          <qti-simple-choice identifier="C">perfunctory</qti-simple-choice>
+          <qti-simple-choice identifier="D">painstaking</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right. Currere means 'to run': an ex-cursion is literally a running out -- a short trip away from the usual place, just as a cursory glance runs quickly across a task.</p></qti-content-body>
+      <qti-content-body><p>Right - painstaking work is done with extreme, patient care in every detail. From most careful to most careless, the scale runs: painstaking, hurried, cursory, perfunctory - with cursory in the middle, skimming too fast to be thorough, and perfunctory at the far end, where the person never cared at all.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Follow the root: currere means 'to run,' so an excursion is literally a running out -- a short trip away. A coat, a printed form, and an instrument have nothing to do with running.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how little care goes into the work. Rank them from extreme patience to complete indifference and choose the most careful.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Hurried sits in the middle of this scale - a hurried job might still turn out decent, but the clock has already squeezed out some of the care the question asks for.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>'A heavy winter coat' belongs to clothing, and currere has nothing to do with garments or warmth. The root names a kind of motion — ask what ex- plus that motion would literally give.</p></qti-content-body>
+      <qti-content-body><p>Cursory is the second-most careless word here - a cursory look skims the surface so lightly that things get missed - far from the most careful option on this scale.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>'A kind of printed form' sits at a front desk, motionless. Nothing in currere involves paperwork — recall the root's meaning from the prompt and work out what ex- adds to it.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>'A musical instrument' points to band practice, but currere names movement, not music. Excursion is built from that movement root plus ex- — figure out the prefix's force before you answer.</p></qti-content-body>
+      <qti-content-body><p>Perfunctory is the most careless word on this scale - the person going through the motions never cared whether anything was found at all - the opposite end from what the question asks.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

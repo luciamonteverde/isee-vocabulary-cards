@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p2-suffixous1-insidious-third" title="Root Check: Insidious" adaptive="true" time-dependent="false">
+  identifier="isee-p2-suffixous1-insidious-third" title="Strength Check: Insidious" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Insidious comes from Latin sedere, the root of sediment. In a lake or a jar, sediment is...</qti-prompt>
-          <qti-simple-choice identifier="A">the material that settles and sits on the bottom</qti-simple-choice>
-          <qti-simple-choice identifier="B">the foam that floats on the very surface</qti-simple-choice>
-          <qti-simple-choice identifier="C">the fish swimming through the middle depths</qti-simple-choice>
-          <qti-simple-choice identifier="D">the sound the waves make against the shore</qti-simple-choice>
+          <qti-prompt>All four of these words measure how much hidden harm something carries. Which one carries the LEAST?</qti-prompt>
+          <qti-simple-choice identifier="A">treacherous</qti-simple-choice>
+          <qti-simple-choice identifier="B">creeping</qti-simple-choice>
+          <qti-simple-choice identifier="C">insidious</qti-simple-choice>
+          <qti-simple-choice identifier="D">harmless</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right -- sedere means 'to sit,' so sediment is the material that settles and sits on the bottom, the way an insidious danger sits quietly in wait.</p></qti-content-body>
+      <qti-content-body><p>Right - harmless means causing no damage at all, so it carries none of the hidden harm the others do. From least to most, the scale runs: harmless, creeping, insidious, treacherous - with treacherous at the top, betraying you outright from the very place you trusted most.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Follow the root: sedere means 'to sit.' Sediment is what settles and sits on the bottom -- not foam on the surface, fish in the middle, or the sound of waves.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how much hidden harm something carries. Rank them from no damage at all to a betrayal from where you trusted most, and choose the least.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Treacherous tops this scale - a treacherous danger betrays you outright, striking from the very place you trusted - the most harm of the four, not the least.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Foam rides the very top of the water, always moving with it. Sedere is glossed right in the prompt — ask which part of a jar's contents actually does what that verb says.</p></qti-content-body>
+      <qti-content-body><p>Creeping sits in the lower middle of this scale - it names only a slow, quiet advance, not yet the damage itself - but that still leaves it a rung above the safest word here.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Fish are the lake's swimmers, on the move through the middle depths. A word built on sedere, 'to sit,' names something far stiller than anything that swims.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>The sound of waves against the shore is not a substance you could pour into a jar. Sedere describes what a thing does — look for an option naming something a jar could actually hold.</p></qti-content-body>
+      <qti-content-body><p>Insidious is the second-strongest word on this scale - an insidious danger is already doing real damage while it goes unseen - far from the least harmful option here.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

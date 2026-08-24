@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p2-catchall11-cavalier-third" title="Root Check: Cavalier" adaptive="true" time-dependent="false">
+  identifier="isee-p2-catchall11-cavalier-third" title="Strength Check: Cavalier" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Cavalier shares the root caval- ('horse') with cavalry. Cavalry refers to soldiers who traditionally fight while...</qti-prompt>
-          <qti-simple-choice identifier="A">mounted on horses</qti-simple-choice>
-          <qti-simple-choice identifier="B">hiding underground</qti-simple-choice>
-          <qti-simple-choice identifier="C">flying overhead in aircraft</qti-simple-choice>
-          <qti-simple-choice identifier="D">seated behind a desk</qti-simple-choice>
+          <qti-prompt>All four of these words describe attitudes toward serious matters. Which one risks the MOST harm?</qti-prompt>
+          <qti-simple-choice identifier="A">nonchalant</qti-simple-choice>
+          <qti-simple-choice identifier="B">cavalier</qti-simple-choice>
+          <qti-simple-choice identifier="C">meticulous</qti-simple-choice>
+          <qti-simple-choice identifier="D">dismissive</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Yes — cavalry are soldiers who traditionally fight mounted on horses, from caballus ('horse'). Cavalier began as a swaggering horseman, and that offhand, lordly attitude produced today's sense of careless disregard.</p></qti-content-body>
+      <qti-content-body><p>Right - dismissive is the most pointed attitude here: it waves a real concern or person away entirely, and that is where the harm actually lands. From safest to riskiest, the scale runs: meticulous, nonchalant, cavalier, dismissive - with cavalier one step below the top: careless about serious things that deserve real concern.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Aircraft and desks are centuries away from what caval- names. Re-read the stem's gloss of the root, then picture how a medieval knight actually traveled into a charge.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how much harm the attitude risks. Rank them from most careful to most careless of consequences and choose the riskiest.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Nonchalant sits in the middle of this scale - it means relaxed and unbothered, which risks something, but less than the attitudes that shrug off genuinely serious concerns.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Hiding underground has nothing to do with caval-, which the prompt glosses for you. Soldiers in tunnels are a different arm of the military — match cavalry to the animal its root names.</p></qti-content-body>
+      <qti-content-body><p>Cavalier is the second-strongest word here - a cavalier attitude stays carelessly unconcerned about something serious - but one option on this scale pushes the risk further.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Aircraft arrived many centuries after the word cavalry was coined, so flying overhead cannot be its traditional meaning. The root caval- names an animal — let that gloss guide your choice.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Seated behind a desk describes office work, not combat, and nothing about a desk connects to caval-. Cavalry are fighting soldiers whose name comes from the animal that carried them.</p></qti-content-body>
+      <qti-content-body><p>Meticulous is the bottom of this scale - a meticulous person gives great care and attention to detail, risking the least harm of all four. The question asks for the other end.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

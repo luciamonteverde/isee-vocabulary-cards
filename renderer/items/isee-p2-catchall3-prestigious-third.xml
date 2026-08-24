@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p2-catchall3-prestigious-third" title="Root Check: Prestigious" adaptive="true" time-dependent="false">
+  identifier="isee-p2-catchall3-prestigious-third" title="Strength Check: Prestigious" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Prestigious shares its root with prestige. If a job carries prestige, the job...</qti-prompt>
-          <qti-simple-choice identifier="A">commands respect and admiration from others</qti-simple-choice>
-          <qti-simple-choice identifier="B">pays its workers less than the minimum wage</qti-simple-choice>
-          <qti-simple-choice identifier="C">requires performing magic tricks on a stage</qti-simple-choice>
-          <qti-simple-choice identifier="D">is so easy that almost anyone could get it</qti-simple-choice>
+          <qti-prompt>All four of these words describe standing and reputation. Which one describes fame that has grown the FURTHEST?</qti-prompt>
+          <qti-simple-choice identifier="A">reputable</qti-simple-choice>
+          <qti-simple-choice identifier="B">humble</qti-simple-choice>
+          <qti-simple-choice identifier="C">prestigious</qti-simple-choice>
+          <qti-simple-choice identifier="D">legendary</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct. A job that carries prestige commands respect and admiration from others — prestigious describes whatever has earned that high standing.</p></qti-content-body>
+      <qti-content-body><p>Right - legendary tops this scale: so admired that its fame has become the stuff of stories. From least to greatest fame, the scale runs: humble, reputable, prestigious, legendary - with prestigious one step below the top, ranked among the very best of its kind so that the name alone carries weight.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Prestige is high standing: a job that carries prestige commands respect and admiration from others. Low pay, stage tricks, and jobs anyone could get are the opposite of that special status.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how great the fame has grown. Rank them from ordinary and unknown to famous beyond question and choose the one at the very top.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Reputable sits second from the bottom of this scale - simply trustworthy and decent - respectable, but far short of the fame the question asks about.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Below-minimum-wage pay signals a job nobody values, and prestige points the other way entirely. Think about what kind of standing a job with prestige gives the person who holds it.</p></qti-content-body>
+      <qti-content-body><p>Humble is the bottom of this scale - ordinary and low in status, with no fame attached at all - the opposite end from what the question asks.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Here is the twist: prestige really did begin with a conjurer's dazzling tricks — Latin praestigiae — exactly as this card's word history teaches. But the question asks what prestige means for a job today, and the dazzle moved from stagecraft to reputation centuries ago.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Jobs 'so easy that almost anyone could get' them carry no special distinction — prestige comes precisely from being selective and hard to earn. Ask what an exclusive, sought-after job makes people feel about whoever lands it.</p></qti-content-body>
+      <qti-content-body><p>Prestigious is the second-strongest word on this scale - top-tier admiration whose name alone carries weight - but one option here has passed even that, into the stuff of stories.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

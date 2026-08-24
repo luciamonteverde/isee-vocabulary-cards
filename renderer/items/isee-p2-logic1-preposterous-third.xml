@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p2-logic1-preposterous-third" title="Root Check: Preposterous" adaptive="true" time-dependent="false">
+  identifier="isee-p2-logic1-preposterous-third" title="Strength Check: Preposterous" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Preposterous contains the root poster, the same root as posterity. Posterity means...</qti-prompt>
-          <qti-simple-choice identifier="A">the generations that come after us</qti-simple-choice>
-          <qti-simple-choice identifier="B">a small room at the back of a house</qti-simple-choice>
-          <qti-simple-choice identifier="C">the final page of a book</qti-simple-choice>
-          <qti-simple-choice identifier="D">a photograph taken from behind</qti-simple-choice>
+          <qti-prompt>All four of these words judge how an idea stands up to reason. Which one fails reason the LEAST?</qti-prompt>
+          <qti-simple-choice identifier="A">implausible</qti-simple-choice>
+          <qti-simple-choice identifier="B">absurd</qti-simple-choice>
+          <qti-simple-choice identifier="C">preposterous</qti-simple-choice>
+          <qti-simple-choice identifier="D">reasonable</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Exactly — posterity names the generations that come after us. Preposterous turns the same root into a joke: prae- ('before') welded onto posterus, so the whole idea is arranged back to front.</p></qti-content-body>
+      <qti-content-body><p>Right - a reasonable idea is fair and sensible; it does not fail reason at all. From least to worst failure, the scale runs: reasonable, implausible, preposterous, absurd - with absurd at the top, defying logic itself like a square with three sides.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A back room and a rear-view photograph both treat poster- as a place. The stem's gloss is about time, not position — re-read it, then ask which description deals in people rather than objects.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how badly an idea fails reason. Rank them from fair and sensible to logically impossible, and pick the one at the very bottom.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Implausible sits in the lower middle of this scale - an implausible story is hard to believe but could still turn out true - so it already fails reason more than the mildest option here.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>'A small room at the back of a house' reads poster- as a spot inside a building. The prompt's gloss is about sequence — coming after — not location, so re-test the options against time.</p></qti-content-body>
+      <qti-content-body><p>Absurd tops this scale - an absurd idea defies logic itself - making it the worst failure of the four, the opposite end from what the question asks.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A fair instinct — the final page truly does arrive after all the others, so the sequence idea is sound. But posterity is not a bookbinding term; it names something far larger than one object. Re-read the gloss.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>In Latin, posterus really could point at space as well as sequence, and a rear-view photograph leans on that spatial sense. The prompt's gloss for this item, though, is 'coming after' — re-test with time in mind.</p></qti-content-body>
+      <qti-content-body><p>Preposterous is the second-strongest word here - a preposterous claim collapses against common sense and draws laughter on the spot - far above the bottom of this scale.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

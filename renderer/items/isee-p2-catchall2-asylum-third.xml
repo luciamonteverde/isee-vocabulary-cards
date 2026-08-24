@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p2-catchall2-asylum-third" title="Root Check: Asylum" adaptive="true" time-dependent="false">
+  identifier="isee-p2-catchall2-asylum-third" title="Strength Check: Asylum" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Asylum and atypical are both built with the Greek prefix a-. What does the Greek prefix a- mean?</qti-prompt>
-          <qti-simple-choice identifier="A">not or without</qti-simple-choice>
-          <qti-simple-choice identifier="B">again or repeatedly</qti-simple-choice>
-          <qti-simple-choice identifier="C">toward or against</qti-simple-choice>
-          <qti-simple-choice identifier="D">above or on top of</qti-simple-choice>
+          <qti-prompt>All four of these words name forms of protection. Which one gives the LEAST complete protection?</qti-prompt>
+          <qti-simple-choice identifier="A">immunity</qti-simple-choice>
+          <qti-simple-choice identifier="B">sanctuary</qti-simple-choice>
+          <qti-simple-choice identifier="C">asylum</qti-simple-choice>
+          <qti-simple-choice identifier="D">shelter</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right! The Greek prefix a- means not or without — an asylum was a place where one could not be seized, and atypical means not typical.</p></qti-content-body>
+      <qti-content-body><p>Right - shelter is the weakest of the four: any roof or cover can be a shelter. From least to most complete, the scale runs: shelter, sanctuary, asylum, immunity - with asylum near the top, formal protection from persecution granted by a government, though it protects you only within your place of safety.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. The prefix a- means not or without. Doing something again, moving toward, and sitting above belong to other prefixes — a- negates, which is why atypical means not typical.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how complete the protection is. Rank them from a simple roof overhead to a threat removed entirely, and choose the one at the very bottom.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Immunity tops this scale - it removes a threat entirely and permanently - the most complete protection of the four, the opposite of what the question asks.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Repetition is the work of a different prefix — re-, as in replay and rewrite. Test 'again' against the prompt's own examples: an 'again-typical' word makes no sense. Let the two definitions given there show you what a- contributes.</p></qti-content-body>
+      <qti-content-body><p>A sanctuary sits second from the bottom - a protected place where no one can harm you, but the protection lasts only while you stay inside it - one step above the weakest option here.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Movement toward things, or opposition against them, belongs to prefixes like Latin ad- and Greek anti-. Neither idea matches the examples given: atypical does not mean attacking whatever is typical. Reapply the prompt's two glosses to a-.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Height is the territory of prefixes such as epi- and hyper-, and nothing lofty appears in either example word. 'Above seizure' and 'above typical' fit neither meaning the prompt supplies — reread both glosses and ask what a- is doing in each.</p></qti-content-body>
+      <qti-content-body><p>Asylum is the second-strongest word on this scale - official protection granted by a government to someone fleeing harm - far more than the simple cover the question is looking for.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

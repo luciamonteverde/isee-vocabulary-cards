@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p2-catchall3-competent-third" title="Root Check: Competent" adaptive="true" time-dependent="false">
+  identifier="isee-p2-catchall3-competent-third" title="Word Building: Competent" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Competent shares the root pet- with petition. A petition is...</qti-prompt>
-          <qti-simple-choice identifier="A">a formal written request seeking some action</qti-simple-choice>
-          <qti-simple-choice identifier="B">a small furry animal kept as a household pet</qti-simple-choice>
-          <qti-simple-choice identifier="C">an oval track where runners race each other</qti-simple-choice>
-          <qti-simple-choice identifier="D">a heavy metal pot used for cooking stews</qti-simple-choice>
+          <qti-prompt>The prefix in- often means 'not' - invisible is not visible. Based on what you know about competent, what does incompetent mean?</qti-prompt>
+          <qti-simple-choice identifier="A">having the skill and knowledge to do a job well</qti-simple-choice>
+          <qti-simple-choice identifier="B">exceptionally skilled - far beyond most people</qti-simple-choice>
+          <qti-simple-choice identifier="C">still in training, with the skills on their way</qti-simple-choice>
+          <qti-simple-choice identifier="D">lacking the skill or knowledge to do a job properly</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct. The root pet- means 'to seek' — a petition is a formal written request that seeks some action from an authority.</p></qti-content-body>
+      <qti-content-body><p>Right - in- cancels the word it joins: an incompetent worker lacks exactly the skill and knowledge that a competent one has.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>The root pet- means 'to seek.' A petition seeks something: it is a formal written request asking an authority to act. Pets, racetracks, and cooking pots have nothing to do with seeking.</p></qti-content-body>
+      <qti-content-body><p>Not quite. Here in- is a plain 'not' - it does not strengthen the base word, promise skills later, or leave the meaning standing. Ask what 'not competent' has to mean.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Having the skill to do a job well is what competent already means with no prefix at all. In- has to change something - ask what a prefix meaning 'not' does to that skill.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A household animal only shares three letters with this root. The everyday word 'pet' was never built on Latin petere — the resemblance is accidental. Ask instead what a petition does with the root's meaning, 'to seek.'</p></qti-content-body>
+      <qti-content-body><p>In a few words in- does intensify - invaluable means enormously valuable - but that is the rare exception. With competent it is the ordinary 'not,' and 'not skilled' cannot mean more skilled.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Racing does echo a real pet- cousin — compete comes from Latin competere, 'to strive together' — but a petition is nothing you can run laps around. Ask what someone who starts a petition is hoping it will do.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A cooking pot only sounds close. The word 'pot' was never built on Latin petere, and no amount of stew brings seeking into it. Test each choice against the root's meaning the prompt already gave you.</p></qti-content-body>
+      <qti-content-body><p>In- says nothing about timing - it does not mean 'not yet' or 'in progress.' It reports that the skill is absent, with no promise that training will supply it.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

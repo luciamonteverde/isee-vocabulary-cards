@@ -3,7 +3,7 @@
   identifier="isee-p2-suffixic1-therapeutic-third" title="Root Check: Therapeutic" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Therapeutic shares the Greek root therap ('to treat, take care of') with therapist. A physical therapist mainly helps patients...</qti-prompt>
-          <qti-simple-choice identifier="A">recover movement and strength after an injury</qti-simple-choice>
-          <qti-simple-choice identifier="B">choose new furniture for their living room</qti-simple-choice>
-          <qti-simple-choice identifier="C">file their yearly tax returns on time</qti-simple-choice>
-          <qti-simple-choice identifier="D">memorize long poems word for word</qti-simple-choice>
+          <qti-prompt>The words "therapeutic" and "therapist" share the Greek root 'therapeut-.' Considering that, what does a physical therapist mainly help patients do?</qti-prompt>
+          <qti-simple-choice identifier="A">choose new furniture for their living room</qti-simple-choice>
+          <qti-simple-choice identifier="B">file their yearly tax returns on time</qti-simple-choice>
+          <qti-simple-choice identifier="C">memorize long poems word for word</qti-simple-choice>
+          <qti-simple-choice identifier="D">recover movement and strength after an injury</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right -- therap means 'to treat, take care of,' so a physical therapist treats the body, helping patients recover movement and strength after an injury.</p></qti-content-body>
+      <qti-content-body><p>Right - therapeut- means 'to treat, take care of,' so a physical therapist treats the body, helping patients recover movement and strength after an injury. Therapeutic describes anything that gives that same healing care.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>The root therap means 'to treat, take care of.' A physical therapist treats and cares for the body -- helping patients recover movement and strength -- not their furniture, their taxes, or their memory for poems.</p></qti-content-body>
+      <qti-content-body><p>Not quite. Furniture, taxes, and poems each belong to a different profession. The root therapeut- is about treating and caring for someone - rule out any job with no treating or caring in it.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Choosing furniture is an interior decorator's business. The root therapeut- means 'to treat, take care of,' and a physical therapist directs that care at a patient's body - not at a living room.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Choosing furniture is an interior decorator's business. The root therap means 'to treat, take care of,' and a physical therapist directs that care at a patient's body — not at a living room. Match the job to the root.</p></qti-content-body>
+      <qti-content-body><p>Tax returns belong to an accountant, and nothing in therapeut- points toward paperwork. Match the job to a root that is all about giving care.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Tax returns belong to an accountant, and nothing in therap points toward paperwork. The prompt glosses the root as 'to treat, take care of' — rule out any job with no treating or caring in it.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Memorizing poems word for word trains recall, but a physical therapist's title promises hands-on care of the body. Follow therap, 'to treat, take care of,' and ask which of these tasks counts as actual treatment.</p></qti-content-body>
+      <qti-content-body><p>Memorizing poems word for word trains recall, but a physical therapist's title promises hands-on care of the body. Follow therapeut-, 'to treat, take care of,' and ask which task counts as actual treatment.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

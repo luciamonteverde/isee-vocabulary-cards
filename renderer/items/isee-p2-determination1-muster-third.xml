@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p2-determination1-muster-third" title="Root Check: Muster" adaptive="true" time-dependent="false">
+  identifier="isee-p2-determination1-muster-third" title="Strength Check: Muster" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Muster shares the root monstr with demonstrate. If you demonstrate a skill, you...</qti-prompt>
-          <qti-simple-choice identifier="A">show it clearly for others to see</qti-simple-choice>
-          <qti-simple-choice identifier="B">carefully hide it from everyone</qti-simple-choice>
-          <qti-simple-choice identifier="C">slowly forget how to do it at all</qti-simple-choice>
-          <qti-simple-choice identifier="D">refuse to ever use it in public</qti-simple-choice>
+          <qti-prompt>All four of these words describe bringing things or people together. Which one takes the LEAST effort and purpose?</qti-prompt>
+          <qti-simple-choice identifier="A">summon</qti-simple-choice>
+          <qti-simple-choice identifier="B">muster</qti-simple-choice>
+          <qti-simple-choice identifier="C">assemble</qti-simple-choice>
+          <qti-simple-choice identifier="D">gather</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right -- demonstrate comes from monstr, 'to show': demonstrating a skill means showing it clearly for others to see, just as a muster puts assembled troops on show for review.</p></qti-content-body>
+      <qti-content-body><p>Right - you can gather leaves or gather friends casually, with no particular strain or purpose. From least effort to most, the scale runs: gather, assemble, muster, summon - with muster in the upper middle: pulling things together with real purpose and effort, for a challenge or a task.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>The root monstr means 'to show.' To demonstrate a skill is to show it clearly for others to see -- not to hide it away, forget it, or refuse to use it.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how much effort and purpose the collecting takes. Rank them from casual to commanding and choose the one at the very bottom.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Summon is the top of this scale - summoning courage means calling it up from somewhere deep, almost commanding it to appear - the opposite end from what the question asks for.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Hiding a skill 'from everyone' takes it out of sight completely. Ask whether a verb built on monstrare could possibly mean concealment.</p></qti-content-body>
+      <qti-content-body><p>Muster sits in the upper middle of this scale - it implies purpose and effort, scraping together what you have for a challenge - far more work than the easiest word here.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Forgetting is something that happens inside your own memory. Nothing in monstrare concerns losing an ability — match the verb demonstrate to the root meaning the prompt already supplies.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Refusing means the skill never appears at all, in public or anywhere else. That is the one thing this root cannot build — picture what demonstrating a skill looks like.</p></qti-content-body>
+      <qti-content-body><p>Assemble sits second from the bottom of this scale - it means bringing people or parts together in an organized way, which takes more deliberateness than the most casual word here.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

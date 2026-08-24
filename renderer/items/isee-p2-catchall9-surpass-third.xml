@@ -3,7 +3,7 @@
   identifier="isee-p2-catchall9-surpass-third" title="Root Check: Surpass" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Surpass shares a root with trespass. To trespass means to...</qti-prompt>
-          <qti-simple-choice identifier="A">unlawfully pass onto someone else's property</qti-simple-choice>
-          <qti-simple-choice identifier="B">go around an obstacle instead of through it</qti-simple-choice>
-          <qti-simple-choice identifier="C">hand something along from one person to the next</qti-simple-choice>
-          <qti-simple-choice identifier="D">travel through a narrow route between two places</qti-simple-choice>
+          <qti-prompt>The words "surpass" and "trespass" share the root 'pass.' Considering that, what does "trespass" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">to go around an obstacle instead of through it</qti-simple-choice>
+          <qti-simple-choice identifier="B">to do better than a record or a rival</qti-simple-choice>
+          <qti-simple-choice identifier="C">to reach a point where neither side can move ahead</qti-simple-choice>
+          <qti-simple-choice identifier="D">to enter someone else's land without permission</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Good thinking — trespass means to pass unlawfully onto another person's property, from passus, 'a step.' Surpass keeps that root and adds sur- ('beyond'): stepping past what anyone else has achieved.</p></qti-content-body>
+      <qti-content-body><p>Yes - the root pass means 'to step, to go,' and tres- (from trans-, 'across') makes trespass a stepping-across: over the fence line, onto land that is not yours. Surpass sends the same step over the top instead - sur-, 'beyond.'</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite - but every option takes a real step from passus, 'a step': around like a bypass, along like a relay, through like a passage. The word in the question is the one step that gets warning signs posted against it - re-read the card's fence sentence with that in mind.</p></qti-content-body>
+      <qti-content-body><p>Not quite. Every option here is built on pass - stepping, going, getting through. The front half decides where the step lands; work out what tres- (from trans-, 'across') does to it before answering.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Going around instead of through is bypassing - by- steering the step around the obstacle. Trespass carries tres-, from trans-, which is not about avoiding anything.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Going around instead of through is a bypass - the same stepping root, steered around trouble rather than into it. The word in the question does the opposite: re-read the card's sentence about the fence and ask what the sign is warning against.</p></qti-content-body>
+      <qti-content-body><p>Doing better than a record or a rival is what surpass itself means - the headword, sur- ('beyond') lifting the step over the mark. Trespass wears a different prefix, so it lands somewhere else.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Handing something along is the everyday verb pass at its mildest - one person to the next, and nothing about it ever needs a warning sign. Trespass adds tres-, from Latin trans, 'across,' and that crossing is the whole difference.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Traveling through a narrow route is a passage - the same passus family, and a perfectly ordinary trip. But the card's sentence hangs a warning sign over this word: ask what kind of step a farmer would post a sign against.</p></qti-content-body>
+      <qti-content-body><p>The point where nobody can move ahead is an impasse - im- ('not') blocking the passage entirely. Trespass is a step that very much happens; nothing in it says 'stuck.'</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

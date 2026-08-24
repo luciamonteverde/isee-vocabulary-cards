@@ -3,7 +3,7 @@
   identifier="isee-p2-catchall10-insurgency-third" title="Root Check: Insurgency" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Insurgency shares the root -surg- with surge. A surge of something is best described as a...</qti-prompt>
-          <qti-simple-choice identifier="A">sudden, powerful rise or increase</qti-simple-choice>
-          <qti-simple-choice identifier="B">slow, steady drop or decline</qti-simple-choice>
-          <qti-simple-choice identifier="C">complete stop or total standstill</qti-simple-choice>
-          <qti-simple-choice identifier="D">quiet, brief, unnoticed pause</qti-simple-choice>
+          <qti-prompt>The words "insurgency" and "surge" share the Latin root 'surg.' Considering that, what does "surge" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">a fighter who rises up in revolt against a government</qti-simple-choice>
+          <qti-simple-choice identifier="B">the return to strength of something that had faded away</qti-simple-choice>
+          <qti-simple-choice identifier="C">a slow leak that drains something away over time</qti-simple-choice>
+          <qti-simple-choice identifier="D">a sudden, powerful rising or rushing increase</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct! The root -surg- means 'to rise' - a surge is a sudden, powerful rise or increase, just as an insurgency is an uprising that rises against authority.</p></qti-content-body>
+      <qti-content-body><p>Right - surgere means 'to rise,' and a surge is that rising at full force: sudden and powerful, like floodwater or a crowd swelling up. Insurgency is the same rising aimed against authority.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Remember, the root -surg- means 'to rise.' A surge is a sudden, powerful rise or increase - not a decline, a standstill, or a pause.</p></qti-content-body>
+      <qti-content-body><p>Not quite. Surgere, 'to rise,' runs through three of these options in different costumes. Ask what a bare surge does - no prefix, no politics - and check each option against that.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A person who rises in revolt is an insurgent - in-, 'against,' plus the rising root, and the word names the rebel. A surge is an event, not a person.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A slow, steady drop heads downward — the exact reverse of what -surg- describes. Picture what a surging crowd or a surging river is doing.</p></qti-content-body>
+      <qti-content-body><p>A faded thing rising again is a resurgence - re-, 'again,' does that work. Surge has no re-, so nothing needs to come back.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A complete standstill involves no motion at all, while -surg- is a root of motion, 'to rise.' Whatever a surge may be, it cannot be something standing perfectly still.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Quiet, brief, and unnoticed describes something easy to miss. A surge built on 'to rise' behaves the opposite way — picture floodwater surging over a town and match that energy.</p></qti-content-body>
+      <qti-content-body><p>A slow drain runs against the root itself: surgere means to rise. Whatever a surge is, it cannot be a downward trickle.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

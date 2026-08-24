@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p2-communication1-anecdote-third" title="Root Check: Anecdote" adaptive="true" time-dependent="false">
+  identifier="isee-p2-communication1-anecdote-third" title="Strength Check: Anecdote" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Anecdote shares Greek didonai ('to give') with antidote. An antidote is literally something...</qti-prompt>
-          <qti-simple-choice identifier="A">given against a poison to undo it</qti-simple-choice>
-          <qti-simple-choice identifier="B">written at the end of a letter</qti-simple-choice>
-          <qti-simple-choice identifier="C">sung before a long journey</qti-simple-choice>
-          <qti-simple-choice identifier="D">buried under a doorstep</qti-simple-choice>
+          <qti-prompt>All four of these words name an account of events. Which one is the MOST carefully crafted in the telling?</qti-prompt>
+          <qti-simple-choice identifier="A">recollection</qti-simple-choice>
+          <qti-simple-choice identifier="B">anecdote</qti-simple-choice>
+          <qti-simple-choice identifier="C">story</qti-simple-choice>
+          <qti-simple-choice identifier="D">vignette</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Exactly — an antidote is given to counter a poison, and anecdote hides the same dot- root flipped: 'things NOT given out,' the juicy stories kept off the official record.</p></qti-content-body>
+      <qti-content-body><p>Right - a vignette is polished like a miniature painting, every detail placed on purpose. From least crafted to most, the scale runs: recollection, story, anecdote, vignette - with anecdote one step below the top: a real incident chosen and trimmed to entertain, but told casually rather than polished.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Songs and doorsteps have no link to didonai. Ask what a doctor's antidote actually does for a patient — the stem's own gloss of the root names the action, and anecdote carries the same root with a 'not' in front.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how carefully the telling has been crafted. Rank them from raw report to polished miniature and choose the one at the very top.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Recollection is the bottom of this scale - it is a memory simply called back and put into words, reported rather than shaped.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>'Written at the end of a letter' describes a postscript — a writing habit. Nothing in didonai or in medicine's antidote concerns correspondence. Work from the root's gloss the prompt just gave you.</p></qti-content-body>
+      <qti-content-body><p>Anecdote is second from the top of this scale - one real incident chosen and trimmed short enough to entertain - but one word here is shaped with even more deliberate polish.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Singing 'before a long journey' is a travel ritual, and nothing in didonai is about music or voyages. Ask what a doctor hands a patient in an emergency, then re-read the root's gloss in the prompt.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>'Buried under a doorstep' sounds like a charm from folklore, not a word history. An antidote belongs to medicine, and its name records what didonai says — which no burial ritual matches.</p></qti-content-body>
+      <qti-content-body><p>Story sits low on this scale - any account of events, true or invented, long or short, counts as a story, so the word promises no special craft in the telling.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
