@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p3-anger1-accost-third" title="Root Check: Accost" adaptive="true" time-dependent="false">
+  identifier="isee-p3-anger1-accost-third" title="Strength Check: Accost" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Accost shares its root with the word coast, which you may already know. A coast is...</qti-prompt>
-          <qti-simple-choice identifier="A">the edge of land next to the sea</qti-simple-choice>
-          <qti-simple-choice identifier="B">a formal written apology for a mistake</qti-simple-choice>
-          <qti-simple-choice identifier="C">a type of ancient sailing ship with oars</qti-simple-choice>
-          <qti-simple-choice identifier="D">a legal contract between two businesses</qti-simple-choice>
+          <qti-prompt>All four of these words describe ways of coming up to a person. Which one is the LEAST aggressive?</qti-prompt>
+          <qti-simple-choice identifier="A">accost</qti-simple-choice>
+          <qti-simple-choice identifier="B">assault</qti-simple-choice>
+          <qti-simple-choice identifier="C">approach</qti-simple-choice>
+          <qti-simple-choice identifier="D">greet</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right -- a coast is the edge of land next to the sea, the land's 'side' against the water. Both words trace to Latin costa, 'rib' or 'side': to accost someone is literally to come up alongside them.</p></qti-content-body>
+      <qti-content-body><p>Right - to greet someone is to address them politely on meeting, the friendliest move here, with no aggression in it at all. From least to most aggressive, the scale runs: greet, approach, accost, assault - with accost one step below the top: a sudden, unwelcome, aggressive confrontation.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A coast is the edge of land next to the sea -- the land's 'side' against the water. Both words trace to Latin costa, 'side': to accost someone is literally to come up alongside them, right at their side.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how aggressive the encounter is. Rank them from a polite welcome to a physical attack and pick the mildest.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Accost is the second-most-aggressive word here - to accost someone is to come at them suddenly and unwelcome - far from the mildest option on this scale.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A formal written apology is something you compose to patch things up, and coast has never named a document. Coast is a word you meet on maps and in weather reports, not on stationery.</p></qti-content-body>
+      <qti-content-body><p>Assault is the top of this scale - to assault someone is to physically attack them, a violent and criminal act - the most aggressive word here, not the least.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Coast names no vessel — a ship with oars belongs in a museum's history wing. Recall the card's own example: you can drive along a coast for hours without ever boarding anything.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A legal contract is paperwork binding two businesses, and coast has nothing to do with law. Think about where the word actually shows up — atlases, forecasts, vacation plans — none of which need signatures.</p></qti-content-body>
+      <qti-content-body><p>Approach sits in the middle of this scale - to approach someone is only to come near them, the way a waiter approaches a table - neutral rather than friendly, so one option here is milder still.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

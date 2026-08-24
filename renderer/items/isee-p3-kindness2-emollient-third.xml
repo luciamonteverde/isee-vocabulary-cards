@@ -3,7 +3,7 @@
   identifier="isee-p3-kindness2-emollient-third" title="Root Check: Emollient" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Which word in this same unit shares emollient's Latin root?</qti-prompt>
-          <qti-simple-choice identifier="A">Mollify</qti-simple-choice>
-          <qti-simple-choice identifier="B">Turpitude</qti-simple-choice>
-          <qti-simple-choice identifier="C">Libertine</qti-simple-choice>
-          <qti-simple-choice identifier="D">Cordially</qti-simple-choice>
+          <qti-prompt>The words "emollient" and "mollify" share the Latin root 'molli' (mollis, "soft"). Considering that, what does "mollify" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">to change something in small ways</qti-simple-choice>
+          <qti-simple-choice identifier="B">to cancel something so it no longer counts</qti-simple-choice>
+          <qti-simple-choice identifier="C">to pamper someone and shield them from every difficulty</qti-simple-choice>
+          <qti-simple-choice identifier="D">to soften someone's anger or worry</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Yes. Mollify and emollient both grow from mollis, 'soft': mollify softens someone's anger, while an emollient tone or lotion is 'thoroughly softening,' easing whatever it touches.</p></qti-content-body>
+      <qti-content-body><p>Yes -- molli means 'soft' and -fy means 'to make,' so to mollify is to make soft: you soften a person's anger or worry until it loses its edge. An emollient tone -- from this same unit -- is 'thoroughly softening,' the adjective to mollify's verb.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Careful — Turpitude traces to turpis and Libertine to liber, entirely different roots. Latin roots usually survive in their relatives' spelling, so compare each unit-mate's letters against the root printed in the stem.</p></qti-content-body>
+      <qti-content-body><p>Not quite. The -fy ending only means 'to make'; the letters in front of it decide what gets made. Two of these options borrow that ending with other roots, and one hides a pet name where you would expect Latin.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Small changes are modify's business -- from Latin modus, 'measure': adjusting to the right measure. Its mo- opening is as close to mollis as it ever gets.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Turpitude has no softness in it — it grows from Latin turpis, 'vile, disgraceful,' plus -tude. A different root entirely from mollis, so this unit-mate cannot be the relative.</p></qti-content-body>
+      <qti-content-body><p>Cancelling something is nullify -- built on nullus, 'none': making it count for nothing. Same -fy machinery, completely different root in front.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Libertine descends from Latin liber, 'free' — its story is freedom pushed past all limits, not softness. It was never built on mollis, so this unit-mate fails the shared-root test.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Cordially comes from Latin cor, 'heart' — warmth offered from the heart. Heartfelt is not the same as soft, and cor is a separate root from mollis, so cordially is out.</p></qti-content-body>
+      <qti-content-body><p>Pampering someone is mollycoddling -- and its molly is not mollis at all but an old pet form of the name Mary, joined to coddle. Soft treatment, no Latin root behind it.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

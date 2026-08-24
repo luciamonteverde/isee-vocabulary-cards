@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p3-prefixin2-indolent-third" title="Root Check: Indolent" adaptive="true" time-dependent="false">
+  identifier="isee-p3-prefixin2-indolent-third" title="Strength Check: Indolent" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Indolent's root also survives in which of these words?</qti-prompt>
-          <qti-simple-choice identifier="A">dolorous</qti-simple-choice>
-          <qti-simple-choice identifier="B">domestic</qti-simple-choice>
-          <qti-simple-choice identifier="C">dominant</qti-simple-choice>
-          <qti-simple-choice identifier="D">dozen</qti-simple-choice>
+          <qti-prompt>All four of these words describe how a person treats work. In which one does work get dodged the LEAST routinely?</qti-prompt>
+          <qti-simple-choice identifier="A">indolent</qti-simple-choice>
+          <qti-simple-choice identifier="B">slothful</qti-simple-choice>
+          <qti-simple-choice identifier="C">relaxed</qti-simple-choice>
+          <qti-simple-choice identifier="D">industrious</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Well spotted — dolorous means full of sorrow, keeping dolere's sense of pain alive in English. Indolent began as feeling no pain and slid into today's meaning: too fond of comfort to exert yourself.</p></qti-content-body>
+      <qti-content-body><p>Right - an industrious person is hardworking and diligent, dodging no work at all. From least to most routinely dodged, the scale runs: industrious, relaxed, indolent, slothful - with indolent one step below the top: a settled habit of avoiding effort itself, week after week.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Dozen and domestic share only their opening letters with this root. Hunt for the option that carries the full dol- string from indolent itself, then answer again.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how routinely work gets dodged. Rank them from steady effort to almost total idleness and pick the one that dodges least.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Indolent is the second-strongest word on this scale - an indolent person dodges effort whenever possible, day after day - far from the least work-shy option here.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Domestic comes from Latin domus, 'house' — domestic life is life at home, domestic animals live alongside people. A household word from the start, it was never formed from dolere.</p></qti-content-body>
+      <qti-content-body><p>Slothful is the far end of this scale - the old word for laziness as a vice, condemning an almost total idleness - the most routine dodging of the four, not the least.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Dominant traces to Latin dominus, 'a master', through dominari, 'to rule'. Mastery and control are its inheritance — nothing in that line of descent passes through dolere or the feeling of pain.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Dozen squeezed down from Latin duodecim, 'twelve', through Old French dozeine. It is a counting word, twelve of anything, and its history never touches dolere at any stage.</p></qti-content-body>
+      <qti-content-body><p>Relaxed sits in the middle of this scale - taking one lazy Sunday off is relaxed, not a habit - but even that is more dodging than the busiest word here allows.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

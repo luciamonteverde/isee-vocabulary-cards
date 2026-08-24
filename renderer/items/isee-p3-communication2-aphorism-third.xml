@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p3-communication2-aphorism-third" title="Root Check: Aphorism" adaptive="true" time-dependent="false">
+  identifier="isee-p3-communication2-aphorism-third" title="Strength Check: Aphorism" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Which English word shares aphorism's Greek root?</qti-prompt>
-          <qti-simple-choice identifier="A">horizon</qti-simple-choice>
-          <qti-simple-choice identifier="B">harmony</qti-simple-choice>
-          <qti-simple-choice identifier="C">heroic</qti-simple-choice>
-          <qti-simple-choice identifier="D">hyphen</qti-simple-choice>
+          <qti-prompt>All four of these words name kinds of sayings. Which one is the LEAST crafted and lasting?</qti-prompt>
+          <qti-simple-choice identifier="A">proverb</qti-simple-choice>
+          <qti-simple-choice identifier="B">aphorism</qti-simple-choice>
+          <qti-simple-choice identifier="C">adage</qti-simple-choice>
+          <qti-simple-choice identifier="D">observation</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Yes — the horizon is the line that defines the boundary of everything you can see, horizein made visible. An aphorism draws a boundary too, closing a large truth inside a few words.</p></qti-content-body>
+      <qti-content-body><p>Right - a simple observation just notes something, with no crafting and no staying power. From least to most crafted and lasting, the scale runs: observation, aphorism, adage, proverb - with aphorism the first truly crafted form: a large truth condensed into a short, memorable, quotable line, even one minted this very week.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Harmony grew from a Greek word for a joint or fitting, and heroic from heros — neither involves horizein. Look for the root's own letters hiding almost whole in one of the remaining options.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how crafted and lasting the saying is. Rank them from a passing remark to a saying that outlives its author and choose the least.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Proverb is the far end of this scale - a saying that has outlasted its author entirely, anonymous and passed down for generations - the most lasting form here, not the least.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Harmony grew from Greek harmos, 'a joint or fitting' — parts fitted neatly together, as in music. Horizein, 'to set a boundary,' is a different Greek word entirely and never touched it.</p></qti-content-body>
+      <qti-content-body><p>Aphorism sits second from the bottom of this scale - already a crafted, quotable condensing of a truth - so one option here is plainer and more fleeting still.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Heroic is simply Greek heros, 'hero,' wearing an adjective ending. Take that ending away and only 'hero' remains — there is no boundary-drawing horizein anywhere inside the word.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Hyphen is Greek too, but built from hypo-, 'under,' plus hen, 'one' — literally 'together as one,' since it joins words. Joining is not bounding; horizein plays no role in its makeup.</p></qti-content-body>
+      <qti-content-body><p>Adage is the second-most lasting word here - an old saying repeated for generations until its very age lends it authority - close to the top of this scale, not the bottom.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

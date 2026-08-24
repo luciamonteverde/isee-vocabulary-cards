@@ -3,7 +3,7 @@
   identifier="isee-p3-manner1-supple-third" title="Root Check: Supple" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Supple shares the Latin root plicare ('to fold') with the word duplicate. A duplicate of something is...</qti-prompt>
-          <qti-simple-choice identifier="A">an exact copy of it</qti-simple-choice>
-          <qti-simple-choice identifier="B">a damaged or broken version of it</qti-simple-choice>
-          <qti-simple-choice identifier="C">the very first version ever made</qti-simple-choice>
-          <qti-simple-choice identifier="D">an improved, updated version</qti-simple-choice>
+          <qti-prompt>The words "supple" and "duplicate" share the Latin root 'plicare,' meaning "to fold." Considering that, what does "duplicate" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">a pressed fold sewn into a piece of fabric</qti-simple-choice>
+          <qti-simple-choice identifier="B">tangled, with many parts folded in together</qti-simple-choice>
+          <qti-simple-choice identifier="C">spelled out flat and plain, with nothing left hidden</qti-simple-choice>
+          <qti-simple-choice identifier="D">an exact second copy of something</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Yes — a duplicate is an exact copy, from du- ('two') plus plicare, 'to fold': fold a sheet and you have doubled it. Supple keeps the folding idea, describing whatever bends easily and without strain.</p></qti-content-body>
+      <qti-content-body><p>Yes - du-, 'two,' plus plicare, 'to fold': fold a sheet once and you have doubled it, so a duplicate is the exact second copy. Supple keeps the folding literal - bending easily and smoothly, as if folding came naturally.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Damaged goods and upgrades have nothing to do with plicare. The du- in duplicate means 'two' — ask what the second of those two must look like when set beside the original.</p></qti-content-body>
+      <qti-content-body><p>Not quite. Everything here folds or unfolds - plicare runs through all four options. Only the prefixes differ, and the du- in duplicate is a number: let it do the counting.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>The pressed fold in fabric is a pleat - the root at its plainest, one physical fold. But there is no du- in a pleat, and duplicate's du- must count something.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Nothing in duplicate points to harm — a damaged or broken version would need a word about destruction, and plicare, 'to fold,' carries none. Condition is the wrong dimension; reread the root and think again.</p></qti-content-body>
+      <qti-content-body><p>Many parts folded in together is complicated - com-, 'together,' folds upon folds. True family, wrong prefix: du- counts to exactly two, and a tangle has no count at all.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>The very first version is the one thing a duplicate can never be — the word only exists in relation to an original that came before it. This option describes the original itself, not its duplicate.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Improved and updated mean deliberately changed for the better, and nothing in plicare suggests revision or progress. Folding is not upgrading — drop the idea of improvement and reconsider what a duplicate is.</p></qti-content-body>
+      <qti-content-body><p>Unfolded flat and plain is explicit - ex-, 'out,' the folds opened so everything shows. That prefix undoes the folding; du- does something entirely different with it.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

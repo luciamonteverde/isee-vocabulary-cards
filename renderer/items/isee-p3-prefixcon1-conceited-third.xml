@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p3-prefixcon1-conceited-third" title="Root Check: Conceited" adaptive="true" time-dependent="false">
+  identifier="isee-p3-prefixcon1-conceited-third" title="Strength Check: Conceited" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Conceited comes from the same root as the word perceive. To perceive something means to...</qti-prompt>
-          <qti-simple-choice identifier="A">become aware of it through the senses or mind</qti-simple-choice>
-          <qti-simple-choice identifier="B">completely destroy it beyond any hope of repair</qti-simple-choice>
-          <qti-simple-choice identifier="C">give it away for free to anyone who asks</qti-simple-choice>
-          <qti-simple-choice identifier="D">formally reject it in front of witnesses</qti-simple-choice>
+          <qti-prompt>All four of these words describe how a person sees themselves. In which one has the ego swollen the MOST?</qti-prompt>
+          <qti-simple-choice identifier="A">conceited</qti-simple-choice>
+          <qti-simple-choice identifier="B">humble</qti-simple-choice>
+          <qti-simple-choice identifier="C">confident</qti-simple-choice>
+          <qti-simple-choice identifier="D">narcissistic</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right -- to perceive is to become aware of something through the senses or mind. Perceive and conceited share the same Latin root meaning 'to take in': a conceited person has taken in an inflated picture of themselves.</p></qti-content-body>
+      <qti-content-body><p>Right - narcissistic goes furthest: an all-consuming self-obsession that ignores other people's feelings entirely. From smallest ego to most swollen, the scale runs: humble, confident, conceited, narcissistic - with conceited one step below the top: excessively proud of one's talents, importance, and looks alike.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. To perceive is to become aware of something through the senses or mind -- the shared root means 'to take in,' and a conceited person has taken in an inflated picture of themselves.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how swollen the ego gets. Rank them from a modest self-view to total self-obsession and choose the most extreme.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Conceited is the second-strongest word on this scale - a conceited person advertises and admires themselves in general - but one option here swells past pride into something all-consuming.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Destruction leaves nothing behind, but perceiving something leaves it exactly as it was. In the card's example, the conductor's expression is not damaged when she perceives its smallest change — ask what she gains instead.</p></qti-content-body>
+      <qti-content-body><p>Humble is the bottom of this scale - a humble person keeps a modest view of their own importance, with no swelling at all. The question asks for the other end.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Nothing changes hands when you perceive something — no gift, no handover, no recipient. This reading turns a quiet inward act into a transaction; re-read the card's example and ask what actually reaches her from the stage.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Rejecting something is a verdict you deliver out loud; perceiving carries no judgment at all — you can perceive plenty of things you neither approve nor refuse. It names something quieter that comes before any opinion forms.</p></qti-content-body>
+      <qti-content-body><p>Confident sits in the middle of this scale - confident simply means self-assured, without the excessive pride of the stronger words - though even that is more ego than the most modest option here shows.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

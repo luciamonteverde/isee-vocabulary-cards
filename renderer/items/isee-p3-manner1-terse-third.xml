@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p3-manner1-terse-third" title="Root Check: Terse" adaptive="true" time-dependent="false">
+  identifier="isee-p3-manner1-terse-third" title="Strength Check: Terse" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Terse shares its Latin root tergere ('to wipe') with the word detergent. A detergent is a substance used to...</qti-prompt>
-          <qti-simple-choice identifier="A">clean things by wiping or washing away dirt</qti-simple-choice>
-          <qti-simple-choice identifier="B">measure exact temperatures in a laboratory</qti-simple-choice>
-          <qti-simple-choice identifier="C">hold stacks of documents firmly together</qti-simple-choice>
-          <qti-simple-choice identifier="D">produce electricity for household use</qti-simple-choice>
+          <qti-prompt>All four of these words can describe a short reply. In which one does the shortness feel the LEAST cold?</qti-prompt>
+          <qti-simple-choice identifier="A">terse</qti-simple-choice>
+          <qti-simple-choice identifier="B">curt</qti-simple-choice>
+          <qti-simple-choice identifier="C">brusque</qti-simple-choice>
+          <qti-simple-choice identifier="D">brief</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right -- a detergent cleans things by wiping or washing dirt away, straight from tergere, 'to wipe.' Terse keeps the same idea: language wiped clean of every spare word.</p></qti-content-body>
+      <qti-content-body><p>Right - brief simply means short, with no hint of coldness or impatience at all. From warmest to coldest, the scale runs: brief, terse, brusque, curt - with terse second: stripped to the fewest words, abrupt-seeming but not necessarily rude.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Follow the root: tergere means 'to wipe.' A detergent is a substance used to clean things by wiping or washing away dirt -- not to measure, fasten, or generate anything.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how cold a short reply feels. Rank them from simply short to rudely chilly and pick the gentlest.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Terse sits second on this scale - a terse reply is stripped to the fewest words and can seem abrupt - already a touch colder than the gentlest word here.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Measuring temperature is about taking a reading — a thermometer records a number and changes nothing it touches. Tergere names an action done to a surface, not data collected from one; reread the gloss and match it.</p></qti-content-body>
+      <qti-content-body><p>Curt is the far end of this scale - a curt answer is rudely short, chopped so close it feels like a slap - the coldest of the four, not the least.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Holding stacks of documents together is a fastener's job — grip and pressure, not chemistry. Nothing in tergere concerns binding or attaching; the prompt already states the root's action, so test detergent against that instead.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Producing electricity is a matter of power supply, and tergere has no connection to energy or machinery. The root names a simple physical action — the prompt hands it to you; apply it to what detergent must do.</p></qti-content-body>
+      <qti-content-body><p>Brusque is the second-coldest word on this scale - brusque speech feels gruff and almost rudely unfriendly, far from the gentlest option here.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

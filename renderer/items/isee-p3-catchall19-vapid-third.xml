@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p3-catchall19-vapid-third" title="Root Check: Vapid" adaptive="true" time-dependent="false">
+  identifier="isee-p3-catchall19-vapid-third" title="Strength Check: Vapid" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Vapid is likely related to the everyday word vapor. Vapor is...</qti-prompt>
-          <qti-simple-choice identifier="A">a substance in the form of gas or mist, like steam</qti-simple-choice>
-          <qti-simple-choice identifier="B">a solid block of stone cut from a quarry</qti-simple-choice>
-          <qti-simple-choice identifier="C">a type of ancient currency made from stamped metal</qti-simple-choice>
-          <qti-simple-choice identifier="D">a formal legal document filed with a court</qti-simple-choice>
+          <qti-prompt>All four of these words can describe a speech or an answer. Which one is the MOST empty of real substance?</qti-prompt>
+          <qti-simple-choice identifier="A">bland</qti-simple-choice>
+          <qti-simple-choice identifier="B">stimulating</qti-simple-choice>
+          <qti-simple-choice identifier="C">vapid</qti-simple-choice>
+          <qti-simple-choice identifier="D">insipid</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right -- vapor is a substance in gas or mist form, like steam; something vapid has let its 'vapor' -- its life and flavor -- escape.</p></qti-content-body>
+      <qti-content-body><p>Right - insipid goes furthest: so flat and watery that it actively wears the listener down, like plain water where soup was promised. From fullest to emptiest, the scale runs: stimulating, bland, vapid, insipid - with vapid one step short of the far end: nothing solid at all beneath a pleasant surface.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Vapor is matter in the form of gas or mist, like steam. Vapid likely comes from the same idea: something whose spark has evaporated away, leaving it flat.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how empty the content is. Rank them from thought-provoking to utterly watery and choose the emptiest.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Bland sits in the middle of this scale - a bland speech plays it safe and unexciting but can still carry real information, so it is far from the emptiest word here.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>A quarry block is the hardest, heaviest, most permanent matter around — and vapor is famous for being none of those things. Think of what rises off the card's lake on a cold morning.</p></qti-content-body>
+      <qti-content-body><p>Stimulating is the bottom of this scale - stimulating content excites the mind and provokes thought, the very opposite of empty. The question asks for the other end.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Stamped metal money is a human invention, minted and traded — nothing about it drifts or rises. Vapor is what you watch curl off warm water into cold morning air, no mint required.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>'A formal legal document' belongs to courtrooms and filing cabinets. Vapor belongs to kettles, lakes, and morning air — nature's world, not paperwork. Match vapor to something you could watch rise and fade.</p></qti-content-body>
+      <qti-content-body><p>Vapid is the second-emptiest word here - no real substance beneath the sparkle - but one option on this scale drains away even more, wearing the listener down as it goes.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

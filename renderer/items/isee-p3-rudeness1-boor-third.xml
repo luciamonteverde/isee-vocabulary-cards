@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p3-rudeness1-boor-third" title="Root Check: Boor" adaptive="true" time-dependent="false">
+  identifier="isee-p3-rudeness1-boor-third" title="Word Building: Boor" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Boor comes straight from the Dutch and German word boer, meaning 'farmer' or 'peasant.' Which of these words grew from that very same root?</qti-prompt>
-          <qti-simple-choice identifier="A">Boer</qti-simple-choice>
-          <qti-simple-choice identifier="B">boot</qti-simple-choice>
-          <qti-simple-choice identifier="C">borrow</qti-simple-choice>
-          <qti-simple-choice identifier="D">border</qti-simple-choice>
+          <qti-prompt>The suffix -ish means 'like or typical of' - childish behavior is behavior like a child's. Based on what you know about boor, what does boorish mean?</qti-prompt>
+          <qti-simple-choice identifier="A">a rude person with no sense of manners</qti-simple-choice>
+          <qti-simple-choice identifier="B">only slightly rude, in a way easy to forgive</qti-simple-choice>
+          <qti-simple-choice identifier="C">polished and considerate in company</qti-simple-choice>
+          <qti-simple-choice identifier="D">rude and crude, in the way a boor behaves</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right — the Boers were Dutch-descended farmers who settled in South Africa, carrying the same 'farmer' word that gave English boor. Only boor turned into an insult along the way.</p></qti-content-body>
+      <qti-content-body><p>Right - -ish means 'like or typical of': boorish manners are the manners of a boor - crude, rude, and blind to how they land on other people.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. Boot and borrow only look similar — their histories come from unrelated old words. Re-read the card's accordion for the group of settlers who share boor's farming root.</p></qti-content-body>
+      <qti-content-body><p>Not quite. The suffix -ish builds a describing word out of boor without softening it, reversing it, or naming anyone. Ask what behavior typical of a boor is like.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A rude, unmannered person is what boor already names with no suffix at all. Adding -ish moves the word from naming the person to describing behavior like his.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Boot marched in from Old French bote, a footwear word whose deeper past is murky. Whatever its origin, it was never the Dutch and German farm word — no field or peasant in its history.</p></qti-content-body>
+      <qti-content-body><p>In some words -ish does mean 'somewhat' - greenish is only sort of green - but with a person-word like boor it means 'like that person,' at full strength. Boorish table manners are a boor's own, not mildly off.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Borrow goes back to Old English borgian, built on borg, 'a pledge' — lending and security, not farming. Nothing in its record ever touched the farmer word the prompt describes.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Border comes from Old French bordure, built on bord, 'an edge or side' — the rim of something. An edge word from the start, it grew from no farm or peasant root.</p></qti-content-body>
+      <qti-content-body><p>No suffix flips a word into its opposite - -ish only says 'like' whatever the base names. If the base is a boor, polish and consideration are exactly what the new word rules out.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>

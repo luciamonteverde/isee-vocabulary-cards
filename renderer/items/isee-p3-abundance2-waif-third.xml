@@ -3,7 +3,7 @@
   identifier="isee-p3-abundance2-waif-third" title="Root Check: Waif" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Which word shares the Old Norman French root behind waif, which named unclaimed or abandoned property?</qti-prompt>
-          <qti-simple-choice identifier="A">waive</qti-simple-choice>
-          <qti-simple-choice identifier="B">wail</qti-simple-choice>
-          <qti-simple-choice identifier="C">wander</qti-simple-choice>
-          <qti-simple-choice identifier="D">waft</qti-simple-choice>
+          <qti-prompt>The words "waif" and "waive" grew from the same Old Norman French root, which meant "abandoned or left unclaimed." Considering that, what does "waive" most nearly mean?</qti-prompt>
+          <qti-simple-choice identifier="A">to signal to someone by raising a hand</qti-simple-choice>
+          <qti-simple-choice identifier="B">to postpone a decision until a later meeting</qti-simple-choice>
+          <qti-simple-choice identifier="C">to pass a duty along for someone else to handle</qti-simple-choice>
+          <qti-simple-choice identifier="D">to give up a right or claim on purpose</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Exactly. To waive a right is to abandon it, leaving it unclaimed -- the very idea inside waif, which named ownerless property long before it named an abandoned child.</p></qti-content-body>
+      <qti-content-body><p>Right - in old Norman law a waif was property left behind and unclaimed, and to waive is to leave a right unclaimed on purpose: you had it, and you let it go. One word for the abandoned thing, one for the act of abandoning.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. Crying out and drifting through the air account for two of these words, and neither has a legal past. Think about which word still shows up in contracts, where someone gives something up.</p></qti-content-body>
+      <qti-content-body><p>Not quite. The root is about something left behind with no one holding onto it. Ask which option actually lets something go - and mind the sound-alike spelled without an i.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Hand-raising is wave - spelled without the i, a completely different Old English word. Sound-alikes are the trap this question sets.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Wail is a cry of grief — it came into English from Old Norse, kin to an old exclamation of woe, and it never served as a Norman French property term.</p></qti-content-body>
+      <qti-content-body><p>Postponing keeps your claim alive to use later. The old root is about a claim nobody is keeping at all.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Wander is native English — Old English wandrian, 'to move about aimlessly', from the same Germanic family as wend. It never named abandoned goods in any law court.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Waft belongs to wind and water — it traces back through Dutch and Low German seafaring words, not to the Norman French legal language behind waif.</p></qti-content-body>
+      <qti-content-body><p>Passing a duty along keeps it claimed - just by someone else. Nothing gets abandoned that way.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
