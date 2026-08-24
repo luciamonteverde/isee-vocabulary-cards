@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qti-assessment-item xmlns="http://www.imsglobal.org/xsd/imsqtiasi_v3p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_asiv3p0_v1p0.xsd"
-  identifier="isee-p2-deception1-fawn-third" title="Root Check: Fawn" adaptive="true" time-dependent="false">
+  identifier="isee-p2-deception1-fawn-third" title="Strength Check: Fawn" adaptive="true" time-dependent="false">
 
   <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
-    <qti-correct-response><qti-value>A</qti-value></qti-correct-response>
+    <qti-correct-response><qti-value>D</qti-value></qti-correct-response>
   </qti-response-declaration>
   <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
     <qti-default-value><qti-value>0</qti-value></qti-default-value>
@@ -17,29 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>Fawn grew from Old English faegnian, 'to rejoice, to act glad.' Which of these words comes from that same glad root?</qti-prompt>
-          <qti-simple-choice identifier="A">fain</qti-simple-choice>
-          <qti-simple-choice identifier="B">faint</qti-simple-choice>
-          <qti-simple-choice identifier="C">fang</qti-simple-choice>
-          <qti-simple-choice identifier="D">fable</qti-simple-choice>
+          <qti-prompt>All four of these words describe trying to please someone. In which one do you sink the LEAST low?</qti-prompt>
+          <qti-simple-choice identifier="A">grovel</qti-simple-choice>
+          <qti-simple-choice identifier="B">toady</qti-simple-choice>
+          <qti-simple-choice identifier="C">fawn</qti-simple-choice>
+          <qti-simple-choice identifier="D">flatter</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Yes -- fain is the old word for gladly, as when a knight would fain serve his lord. Fawning kept that glad display but turned it into flattery staged to win favor.</p></qti-content-body>
+      <qti-content-body><p>Right - to flatter can take just one well-aimed compliment, so it sinks the least low of the four. From least to lowest sunk, the scale runs: flatter, toady, fawn, grovel - with fawn near the low end: surrounding someone with exaggerated warmth, laughter, and little services, all aimed at winning their favor.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Not quite. The root faegnian is about gladness, so hunt for the archaic word poets used to mean gladly or willingly -- the sort of word a knight in a ballad might use.</p></qti-content-body>
+      <qti-content-body><p>Not quite. All four words sit on one scale of how low you sink to please someone. Rank them from a single compliment to begging on your knees and pick the mildest.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Grovel is the far end of this scale - groveling abases yourself completely, like begging forgiveness for ten straight minutes - the lowest anyone sinks here, not the least.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Faint slipped into English from Old French feindre, 'to pretend or shirk' — the Latin fingere family, the very root behind feign. It has real history, but its ancestor is pretense, not gladness.</p></qti-content-body>
+      <qti-content-body><p>Toady sits second on this scale - a toadying assistant agrees with every opinion the boss voices, which already sinks lower than the mildest option here.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Fang is Germanic too, but from a different line: an old verb meaning 'to seize or catch.' A fang is literally the catcher — teeth that grip prey — with no rejoicing anywhere in its family.</p></qti-content-body>
-    </qti-feedback-block>
-    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Fable comes from Latin fabula, built on fari, 'to speak' — a fable is a told story. Latin speech-roots and Old English gladness never crossed paths; only the opening f- matches.</p></qti-content-body>
+      <qti-content-body><p>Fawn is the second-strongest word on this scale - fawning pours on heavy, open praise and eager attention to win favor - close to the lowest end, the opposite of what the question asks.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -59,6 +59,12 @@
     </qti-response-condition>
     <qti-response-condition>
       <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
@@ -67,12 +73,6 @@
       <qti-response-if>
         <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
-      </qti-response-if>
-    </qti-response-condition>
-    <qti-response-condition>
-      <qti-response-if>
-        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
-        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
       </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
