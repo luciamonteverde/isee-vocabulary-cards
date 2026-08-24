@@ -17,20 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>What does oath mean?</qti-prompt>
-          <qti-simple-choice identifier="A">a promise told quietly to one friend in private</qti-simple-choice>
-          <qti-simple-choice identifier="B">a formal promise said aloud before others</qti-simple-choice>
-          <qti-simple-choice identifier="C">a written deal you sign and keep in a folder</qti-simple-choice>
-          <qti-simple-choice identifier="D">a funny cheer a team says to make people laugh</qti-simple-choice>
+          <qti-prompt>At bedtime, Lily quietly told her little brother she would help him fix his kite tomorrow. She meant every word, wrote nothing down, and no one else heard her. What did Lily make?</qti-prompt>
+          <qti-simple-choice identifier="A">an oath</qti-simple-choice>
+          <qti-simple-choice identifier="B">a promise</qti-simple-choice>
+          <qti-simple-choice identifier="C">a contract</qti-simple-choice>
+          <qti-simple-choice identifier="D">a joke</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Correct. An oath is a formal promise said out loud in front of other people, like a mayor with one hand raised. Saying it out loud, before everyone, is what makes it an oath.</p></qti-content-body>
+      <qti-content-body><p>Correct. A promise is telling someone you will do something, and it can be quiet and private, like Lily's words to her brother.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
       <qti-content-body><p>Not quite. Picture a new mayor with one hand raised, or a witness in court. Where are they, and who is listening? Keep that picture in mind and read the choices again.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>An oath is a formal promise spoken out loud in front of other people, often at a big ceremony. No one else heard Lily, and bedtime is no ceremony.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A contract is a written deal that people sign. Lily wrote nothing down.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A joke is said to make people laugh. Lily meant every word.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

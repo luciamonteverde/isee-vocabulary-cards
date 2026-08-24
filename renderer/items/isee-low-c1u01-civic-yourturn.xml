@@ -17,20 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>What does civic mean?</qti-prompt>
-          <qti-simple-choice identifier="A">having to do with one family's own home life</qti-simple-choice>
-          <qti-simple-choice identifier="B">having to do with serving the whole country</qti-simple-choice>
-          <qti-simple-choice identifier="C">having to do with helping one friend at a time</qti-simple-choice>
-          <qti-simple-choice identifier="D">having to do with citizens and town life</qti-simple-choice>
+          <qti-prompt>On Saturday, families from every street met to pick up litter and paint the benches in the town park that everyone shares. What kind of work is this?</qti-prompt>
+          <qti-simple-choice identifier="A">private</qti-simple-choice>
+          <qti-simple-choice identifier="B">personal</qti-simple-choice>
+          <qti-simple-choice identifier="C">patriotic</qti-simple-choice>
+          <qti-simple-choice identifier="D">civic</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Yes. Civic means having to do with citizens and the town life they all share. Voting, the public library, and the food drive are civic things because they belong to everyone in town.</p></qti-content-body>
+      <qti-content-body><p>Correct. Civic means having to do with citizens and the shared life of their town, like caring for a park that everyone uses.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
       <qti-content-body><p>Not quite. Think about the words 'civic center' and 'civic duty' - who shares those things? Ask yourself how big that group is - one person, one family, a whole country? - then read the choices again.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Private means belonging to one family or kept away from others. This park is shared by everyone in town, so the work was not private.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Personal means about one person's own life and needs. Families from every street did this work for the whole town, not for one person.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>Patriotic means proud care for your whole country. This work cared for one town's park, so the town word fits better.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

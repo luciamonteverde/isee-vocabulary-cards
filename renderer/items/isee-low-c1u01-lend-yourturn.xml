@@ -17,20 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>What does lend mean?</qti-prompt>
-          <qti-simple-choice identifier="A">to take a thing you must soon give back</qti-simple-choice>
-          <qti-simple-choice identifier="B">to give someone a thing of yours to keep forever</qti-simple-choice>
-          <qti-simple-choice identifier="C">to trade one of your things for a better one</qti-simple-choice>
-          <qti-simple-choice identifier="D">to let someone use your things for a while</qti-simple-choice>
+          <qti-prompt>Noor asked her neighbor, and he said yes, so she is using his rake to clear the leaves in her yard. She gives nothing of her own in return, and she will carry the rake back before dinner. What does Noor do with the rake?</qti-prompt>
+          <qti-simple-choice identifier="A">lends it</qti-simple-choice>
+          <qti-simple-choice identifier="B">keeps it</qti-simple-choice>
+          <qti-simple-choice identifier="C">pays for it</qti-simple-choice>
+          <qti-simple-choice identifier="D">borrows it</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right. To lend is to let someone use something of yours for a while, knowing you will get it back. The thing stays yours the whole time - it just goes visiting.</p></qti-content-body>
+      <qti-content-body><p>Correct. To borrow is to take and use something that belongs to someone else for a while, and then give it back.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
       <qti-content-body><p>Not quite. When you lend a pencil, two things matter: whose pencil it is, and what happens to it in the end. Ask yourself both questions, then pick again.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-A" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>To lend is what the owner does when handing something over for a while. The rake belongs to the neighbor, so he is the one lending.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>To keep something is to hold on to it for good. Noor will carry the rake back before dinner.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>To pay for something is to give money for it. Noor gives nothing of her own in return.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">A</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-A</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>

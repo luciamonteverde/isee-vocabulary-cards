@@ -17,20 +17,29 @@
     <qti-feedback-block identifier="show_interaction" outcome-identifier="INTERACTION_VISIBILITY" show-hide="show" class="qti-margin-0">
       <qti-content-body>
         <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
-          <qti-prompt>What does pledge mean?</qti-prompt>
-          <qti-simple-choice identifier="A">a serious promise to do something</qti-simple-choice>
-          <qti-simple-choice identifier="B">an offer to help you might take back</qti-simple-choice>
-          <qti-simple-choice identifier="C">a guess about what will happen later</qti-simple-choice>
-          <qti-simple-choice identifier="D">a rule a school makes everyone follow</qti-simple-choice>
+          <qti-prompt>Jun signed a form promising to practice his violin twenty minutes every day this winter, and his music teacher kept the form. He chose to do this himself. What did Jun make?</qti-prompt>
+          <qti-simple-choice identifier="A">a pledge</qti-simple-choice>
+          <qti-simple-choice identifier="B">an offer</qti-simple-choice>
+          <qti-simple-choice identifier="C">a guess</qti-simple-choice>
+          <qti-simple-choice identifier="D">a rule</qti-simple-choice>
         </qti-choice-interaction>
       </qti-content-body>
     </qti-feedback-block>
 
     <qti-feedback-block identifier="correct" outcome-identifier="FEEDBACK" show-hide="show">
-      <qti-content-body><p>Right. A pledge is a serious promise to do something, often written down or signed. Signing your name is how you show you truly mean it.</p></qti-content-body>
+      <qti-content-body><p>Correct. A pledge is a serious promise to do something, often written down or signed, just like the form Jun signed.</p></qti-content-body>
     </qti-feedback-block>
     <qti-feedback-block identifier="incorrect" outcome-identifier="FEEDBACK" show-hide="show">
       <qti-content-body><p>Not quite. Think of the Pledge of Allegiance - what are you doing when you put your hand on your heart and say it? Ask yourself that, then look at the choices again.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-B" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>An offer only says you are willing, and you can still take it back. Jun signed a firm promise he must keep.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-C" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A guess is a try at saying what might happen. Jun was not predicting anything. He was promising what he himself will do.</p></qti-content-body>
+    </qti-feedback-block>
+    <qti-feedback-block identifier="FB-D" outcome-identifier="FEEDBACK" show-hide="show">
+      <qti-content-body><p>A rule is something a school or group makes everyone follow. Jun chose this himself, and no one ordered him to do it.</p></qti-content-body>
     </qti-feedback-block>
   </qti-item-body>
 
@@ -47,6 +56,24 @@
         <qti-set-outcome-value identifier="completionStatus"><qti-base-value base-type="identifier">incomplete</qti-base-value></qti-set-outcome-value>
         <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">incorrect</qti-base-value></qti-set-outcome-value>
       </qti-response-else>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">B</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-B</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">C</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-C</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
+    </qti-response-condition>
+    <qti-response-condition>
+      <qti-response-if>
+        <qti-match><qti-variable identifier="RESPONSE"/><qti-base-value base-type="identifier">D</qti-base-value></qti-match>
+        <qti-set-outcome-value identifier="FEEDBACK"><qti-base-value base-type="identifier">FB-D</qti-base-value></qti-set-outcome-value>
+      </qti-response-if>
     </qti-response-condition>
   </qti-response-processing>
 </qti-assessment-item>
