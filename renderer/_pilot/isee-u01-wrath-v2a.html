@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="build" content="535b2b96cbdc">
+<meta name="build" content="99be12596923">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wrath &#8212; ISEE Upper Vocabulary, Unit 01: Anger, Hostility &amp; Rivalry</title>
@@ -56,6 +56,55 @@
   .slot.wrong{border-style:solid;border-color:var(--no-line);
               background:var(--no-bg)}
   .slot .def{display:block;font-size:14px;color:var(--muted)}
+
+  /* ---- section 2 pairwise rows ----
+     The explanation line is a SIBLING of the flex row, not a flex child, so it needs no
+     full-width flex-basis. That matters because build_card.py runs the whole document
+     through percent-formatting and would need the sign doubled, while the preview
+     substitutes this CSS as a value and would need it single. Avoiding percentages in
+     this block removes the trap -- including in this comment, which is itself part of
+     the string being formatted. Keep this block free of the percent sign. */
+  .pwitem{margin:0 0 10px;padding:14px 16px;background:#fff;
+    border:1px solid var(--line);border-radius:12px}
+  .pwrow{display:flex;align-items:stretch;gap:14px}
+  .pwrow .pws{flex:1 1 auto;align-self:center;font-size:16px;line-height:1.55}
+  .pwopts{flex:0 0 auto;display:flex;gap:10px;align-items:center}
+  .pwopts label{position:relative;display:flex;align-items:center;justify-content:center;
+    min-width:118px;min-height:46px;padding:0 14px;border:1px solid var(--line);
+    border-radius:10px;cursor:pointer;font-weight:600;font-size:15px;background:#fbfcfe}
+  .pwopts label:hover{background:var(--brand-soft);border-color:var(--brand)}
+  .pwopts input{position:absolute;opacity:0;width:0;height:0}
+  .pwopts label.sel{border-color:var(--brand);background:var(--brand-soft);
+    box-shadow:inset 0 0 0 1px var(--brand)}
+  .pwopts input:focus-visible+span{outline:3px solid var(--brand);outline-offset:4px;
+    border-radius:4px}
+  .pwopts input:disabled+span{opacity:.75}
+  .pwopts label.locked{cursor:default}
+  .pwn{flex:0 0 auto;align-self:center;width:22px;color:#8b93a7;font-size:13px;
+    font-weight:600;text-align:right}
+
+  /* the graded state of a row, and its explanation line */
+  .pwitem.ok{border-color:var(--ok-line);background:#fbfffd}
+  .pwitem.no{border-color:var(--no-line);background:#fffcfa}
+  .pwitem.ok .pwopts label.sel{border-color:var(--ok-ink);background:var(--ok-bg);
+    box-shadow:inset 0 0 0 1px var(--ok-ink)}
+  .pwitem.no .pwopts label.sel{border-color:var(--no-ink);background:var(--no-bg);
+    box-shadow:inset 0 0 0 1px var(--no-ink)}
+  .pwfb{margin:12px 0 0;padding:10px 13px;border-radius:9px;
+    font-size:15px;line-height:1.5}
+  .pwfb b{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+    margin-bottom:3px;font-weight:800}
+  .pwfb.ok{background:var(--ok-bg);color:var(--ok-ink)}
+  .pwfb.no{background:var(--no-bg);color:var(--no-ink)}
+  .pwfb em{font-style:italic}
+
+  @media (max-width:720px){
+    .pwrow{flex-direction:column;gap:10px}
+    .pwopts label{flex:1 1 0;min-width:0}
+    .pwn{align-self:flex-start;text-align:left}
+    .pwfb{margin-top:10px}
+  }
+
   h4{font-size:15px;margin:0 0 8px;font-weight:700}
   .card{background:var(--panel);border-radius:12px;padding:15px 17px;margin:0 0 12px}
   .card p{margin:0 0 9px} .card p:last-child{margin:0}
@@ -225,13 +274,13 @@
     <div class="quiz" id="s2quiz" hidden style="margin-top:26px">
       <p class="qlab">Which word fits?</p>
       <p class="q" id="s2instr"></p>
-      <p class="lead" style="margin:-6px 0 14px">The comparisons above stay visible
+      <p class="lead" style="margin:-6px 0 14px">All eight must be right to continue. You can
+        only check once every row has an answer. The comparisons above stay visible
         &#8212; you will need them.</p>
-      <table id="grid" role="grid"><tbody></tbody></table>
+      <div id="pw"></div>
       <div class="bar"><button id="s2check" disabled>Check</button>
         <span class="msg" id="s2msg"></span>
         <span class="msg" id="s2count" style="font-weight:400;color:#5b6478"></span></div>
-      <ul class="gfb" id="s2fb"></ul>
     </div>
   </section>
 
@@ -302,7 +351,7 @@
 <script>
 (function () {
   "use strict";
-  var CFG = {"word": "Wrath", "gradeUrl": "https://sat-vocabulary-cards.vercel.app/api/grade", "taskId": "wrath", "minWords": 8, "items": {"s1": {"q": "Which sentence uses wrath correctly?", "opts": {"A": "The teacher's wrath over the squeaky whiteboard marker amounted to a single raised eyebrow and a small sigh before the lesson carried calmly on.", "B": "When the coach learned that a rival team had secretly filmed his players' practices, his wrath drove him to demand the league punish the cheaters.", "C": "Full of wrath over the one-point playoff loss, the captain fumed for a few minutes in the tunnel, then let the whole thing go before the bus ride home.", "D": "Overcome with wrath at the memorial service, the widow wept quietly in the front pew while friends took turns sharing gentle memories."}, "key": "B", "fb": {"correct": "Yes — the coach is furious about the secret filming and demands the league punish the cheaters; anger with that vengeful, get-them-back edge is exactly what wrath names.", "A": "A raised eyebrow over a squeaky marker is the mildest possible reaction. Wrath is anger at full force, carrying the urge to strike back at whatever caused it.", "C": "Fuming for a few minutes in the tunnel and then moving on is disappointment burning off. Wrath stays hot, and it looks for a target to answer for the loss.", "D": "Grief fills this scene — the widow 'wept quietly in the front pew' while friends shared gentle memories. Wrath names explosive anger with a desire for revenge. Sorrow at a memorial calls for a mourning word instead."}}, "s3a": {"q": "Select the answer choice that is most nearly the same in meaning as the word in capital letters.", "opts": {"A": "serenity", "B": "annoyance", "C": "fury", "D": "revenge"}, "key": "C", "fb": {"correct": "Correct. Of these four, fury is the one that names the same thing wrath names: anger at full intensity. The card's ladder puts it one rung below.", "A": "Serenity is the card's own antonym for this word &#8212; calm, untroubled peace of mind. It is the furthest of the four, not the nearest.", "B": "Annoyance sits at the bottom of this card's ladder, the mild irritation of a buzzing fly. Same scale, wrong end.", "D": "A close trap, because wrath usually carries a wish for revenge. But wrath names the <em>anger<\/em>; revenge names the payback it wants. Wanting a thing is not the same as being it."}}, "s3c": {"q": "Choose the word that best completes the sentence.", "opts": {"A": "fury", "B": "spite", "C": "indignation", "D": "wrath"}, "key": "C", "fb": {"correct": "Correct. Indignation is anger sparked by unfairness — a plainly broken rule rewarded with first prize is exactly that spark — and anger that stops at demanding a review is anger at the injustice itself, going no further than protest.", "A": "Fury is anger boiling over in the moment, wild and hard to contain. This anger never boils over — it stays measured and channels itself into a formal protest.", "B": "Spite is a small, petty urge to hurt or annoy someone. The competitors want the decision reviewed, not the winner hurt — the sentence says no one wished the winner any harm — and there is nothing petty about protesting a broken rule.", "D": "Wrath is grand, serious anger that threatens consequences and usually carries a wish to strike back at whoever caused the injury. Here no one threatens anything and no one wishes the winner harm; the anger stays measured and stops at a request for review."}}}, "hint": {"meaning": "<b>A hint.<\/b> Wrath is not just being very angry &#8212; it is anger with a target and a threat behind it. Try letting your sentence show who the anger is aimed at and what it might do about it &#8212; the wish to strike back is what separates wrath from plain anger.", "context": "<b>A hint.<\/b> A reader who did not know this word should be able to work out roughly what it means from your sentence alone. Give the anger a cause and a direction &#8212; something was done, and someone will be made to answer for it.", "control": "<b>A hint.<\/b> Read it back as a single sentence: one main verb, tenses that agree, and <i>wrath<\/i> as a noun (a person <i>feels<\/i> wrath or acts <i>in<\/i> wrath &#8212; there is no verb 'to wrath')."}, "grid": {"words": ["wrath", "indignation", "rage", "spite"], "instructions": "For each sentence, tick the ONE word that fits the gap best. All six must be right to continue.", "rows": [{"s": "When the emperor learned which province had broken the treaty, his ____ took the form of a decree: the city walls would come down stone by stone.", "ks": ["wrath"], "fb": {"indignation": "That word stops at objecting. Here the objection is already over &#8212; a <em>decree<\/em> has been issued and the walls are coming down.", "rage": "That word means anger with the steering wheel gone. This anger is steering: one province, one decree, carried out <em>stone by stone<\/em>.", "spite": "That word is for small, mean jabs. A broken treaty answered by dismantling a city is not small."}}, {"s": "Two years after the sabotage, the shipping magnate's ____ had not cooled: every lawsuit he filed was another blow aimed squarely at the family that had sunk his fleet.", "ks": ["wrath"], "fb": {"rage": "That word cannot hold a course for two years, let alone file paperwork. This anger is <em>aimed squarely<\/em> and has not cooled.", "indignation": "That word runs out at protest. Suing the same family for two years is not protesting.", "spite": "That word means a petty urge to irritate. A sunk fleet answered in court is neither petty nor minor."}}, {"s": "Every parent in the stands felt a flash of ____ when the umpire waved off a goal that half the field had seen cross the line, and several said so loudly before the game carried on.", "ks": ["indignation"], "fb": {"wrath": "That word carries a threat of consequences. Here the feeling is a <em>flash<\/em>, and then <em>the game carried on<\/em>.", "rage": "That word means anger out of control. Shouting from the stands and then letting the game carry on is not that.", "spite": "That word needs someone setting out to hurt or annoy. These parents want a bad call recognized."}}, {"s": "Being asked to show her staff badge for the third time in one morning left the surgeon speechless with ____, though she said nothing to the guard and simply walked on to her rounds.", "ks": ["indignation"], "fb": {"wrath": "That word wants to strike back. She <em>said nothing to the guard<\/em> and went to work.", "rage": "That word means shouting and slamming doors. She is <em>speechless<\/em>, then walks on.", "spite": "That word describes someone trying to needle another person. Nothing here is aimed at the guard."}}, {"s": "By the third hour of the delay the passenger lost all sense, sweeping the counter clear in his ____ and shouting at a clerk who had only just arrived; afterwards he could not say what he had been demanding.", "ks": ["rage"], "fb": {"wrath": "That word is aimed and knows what it wants. Afterwards this man <em>could not say what he had been demanding<\/em>.", "indignation": "That word means objecting to something unfair. Sweeping a counter clear is not an objection.", "spite": "That word needs a chosen target. He shouted at <em>a clerk who had only just arrived<\/em>."}}, {"s": "Passed over for the window desk, she began hiding the office's one working stapler in her drawer each evening, a small act of ____ that cost nobody anything but their patience.", "ks": ["spite"], "fb": {"wrath": "That word is anger on a grand scale, with consequences behind it. A hidden stapler is a small, mean nuisance that <em>cost nobody anything but their patience<\/em>.", "indignation": "That word means objecting out loud to something unfair. She never objects &#8212; she needles.", "rage": "That word means anger out of control. Doing this <em>each evening<\/em> is a decision, repeated."}}]}, "chart": {"instructions": "", "bank": [], "columns": []}};
+  var CFG = {"word": "Wrath", "gradeUrl": "https://sat-vocabulary-cards.vercel.app/api/grade", "taskId": "wrath", "minWords": 8, "items": {"s1": {"q": "Which sentence uses wrath correctly?", "opts": {"A": "The teacher's wrath over the squeaky whiteboard marker amounted to a single raised eyebrow and a small sigh before the lesson carried calmly on.", "B": "When the coach learned that a rival team had secretly filmed his players' practices, his wrath drove him to demand the league punish the cheaters.", "C": "Full of wrath over the one-point playoff loss, the captain fumed for a few minutes in the tunnel, then let the whole thing go before the bus ride home.", "D": "Overcome with wrath at the memorial service, the widow wept quietly in the front pew while friends took turns sharing gentle memories."}, "key": "B", "fb": {"correct": "Yes — the coach is furious about the secret filming and demands the league punish the cheaters; anger with that vengeful, get-them-back edge is exactly what wrath names.", "A": "A raised eyebrow over a squeaky marker is the mildest possible reaction. Wrath is anger at full force, carrying the urge to strike back at whatever caused it.", "C": "Fuming for a few minutes in the tunnel and then moving on is disappointment burning off. Wrath stays hot, and it looks for a target to answer for the loss.", "D": "Grief fills this scene — the widow 'wept quietly in the front pew' while friends shared gentle memories. Wrath names explosive anger with a desire for revenge. Sorrow at a memorial calls for a mourning word instead."}}, "s3a": {"q": "Select the answer choice that is most nearly the same in meaning as the word in capital letters.", "opts": {"A": "serenity", "B": "annoyance", "C": "fury", "D": "revenge"}, "key": "C", "fb": {"correct": "Correct. Of these four, fury is the one that names the same thing wrath names: anger at full intensity. The card's ladder puts it one rung below.", "A": "Serenity is the card's own antonym for this word &#8212; calm, untroubled peace of mind. It is the furthest of the four, not the nearest.", "B": "Annoyance sits at the bottom of this card's ladder, the mild irritation of a buzzing fly. Same scale, wrong end.", "D": "A close trap, because wrath usually carries a wish for revenge. But wrath names the <em>anger<\/em>; revenge names the payback it wants. Wanting a thing is not the same as being it."}}, "s3c": {"q": "Choose the word that best completes the sentence.", "opts": {"A": "fury", "B": "spite", "C": "indignation", "D": "wrath"}, "key": "C", "fb": {"correct": "Correct. Indignation is anger sparked by unfairness — a plainly broken rule rewarded with first prize is exactly that spark — and anger that stops at demanding a review is anger at the injustice itself, going no further than protest.", "A": "Fury is anger boiling over in the moment, wild and hard to contain. This anger never boils over — it stays measured and channels itself into a formal protest.", "B": "Spite is a small, petty urge to hurt or annoy someone. The competitors want the decision reviewed, not the winner hurt — the sentence says no one wished the winner any harm — and there is nothing petty about protesting a broken rule.", "D": "Wrath is grand, serious anger that threatens consequences and usually carries a wish to strike back at whoever caused the injury. Here no one threatens anything and no one wishes the winner harm; the anger stays measured and stops at a request for review."}}}, "hint": {"meaning": "<b>A hint.<\/b> Wrath is not just being very angry &#8212; it is anger with a target and a threat behind it. Try letting your sentence show who the anger is aimed at and what it might do about it &#8212; the wish to strike back is what separates wrath from plain anger.", "context": "<b>A hint.<\/b> A reader who did not know this word should be able to work out roughly what it means from your sentence alone. Give the anger a cause and a direction &#8212; something was done, and someone will be made to answer for it.", "control": "<b>A hint.<\/b> Read it back as a single sentence: one main verb, tenses that agree, and <i>wrath<\/i> as a noun (a person <i>feels<\/i> wrath or acts <i>in<\/i> wrath &#8212; there is no verb 'to wrath')."}, "grid": {"words": [], "instructions": "", "rows": []}, "chart": {"instructions": "", "bank": [], "columns": []}, "pairwise": {"rows": [{"sentence": "When the emperor learned which province had broken the treaty, his ____ took the form of a decree: the city walls would come down stone by stone.", "options": ["wrath", "spite"], "key": "wrath", "pair": "spite", "why_right": "The tell is <em>the city walls would come down stone by stone<\/em> &#8212; a real injury answered with real consequences on a grand scale, the anger of kings and gods.", "why_wrong": "That word is for small, mean jabs. A broken treaty answered by dismantling a city is not small."}, {"sentence": "Two years after the sabotage, the shipping magnate's ____ had not cooled: every lawsuit he filed was another blow aimed squarely at the family that had sunk his fleet.", "options": ["wrath", "rage"], "key": "wrath", "pair": "rage", "why_right": "The tell is <em>every lawsuit he filed was another blow aimed squarely<\/em> &#8212; two years on, this anger still plans consequences and payback and knows exactly where it is driving.", "why_wrong": "That word cannot hold a course for two years, let alone file paperwork. This anger is <em>aimed squarely<\/em> and has not cooled."}, {"sentence": "Every parent in the stands felt a flash of ____ when the umpire waved off a goal that half the field had seen cross the line, and several said so loudly before the game carried on.", "options": ["wrath", "indignation"], "key": "indignation", "pair": "indignation", "why_right": "The tell is <em>several said so loudly before the game carried on<\/em> &#8212; anger sparked by unfairness that stops at protest; nobody plans to strike back at the umpire.", "why_wrong": "That word carries a threat of consequences. Here the feeling is a <em>flash<\/em>, and then <em>the game carried on<\/em>."}, {"sentence": "Being asked to show her staff badge for the third time in one morning left the surgeon speechless with ____, though she said nothing to the guard and simply walked on to her rounds.", "options": ["wrath", "indignation"], "key": "indignation", "pair": "indignation", "why_right": "The tell is <em>she said nothing to the guard and simply walked on<\/em> &#8212; an insult felt as the heat of something simply wrong, with no wish to strike back.", "why_wrong": "That word wants to strike back. She <em>said nothing to the guard<\/em> and went to work."}, {"sentence": "By the third hour of the delay the passenger lost all sense, sweeping the counter clear in his ____ and shouting at a clerk who had only just arrived; afterwards he could not say what he had been demanding.", "options": ["wrath", "rage"], "key": "rage", "pair": "rage", "why_right": "The tell is <em>he could not say what he had been demanding<\/em> &#8212; violent anger with the steering wheel gone; wrath stays aimed and plans its payback.", "why_wrong": "That word is aimed and knows what it wants. Afterwards this man <em>could not say what he had been demanding<\/em>."}, {"sentence": "Passed over for the window desk, she began hiding the office's one working stapler in her drawer each evening, a small act of ____ that cost nobody anything but their patience.", "options": ["wrath", "spite"], "key": "spite", "pair": "spite", "why_right": "The tell is <em>cost nobody anything but their patience<\/em> &#8212; a small, petty way to annoy her colleagues, mean and minor, nothing like anger on a grand scale.", "why_wrong": "That word is anger on a grand scale, with consequences behind it. A hidden stapler is a small, mean nuisance that <em>cost nobody anything but their patience<\/em>."}, {"sentence": "The day the neighboring clan stole his herds, the chieftain's ____ answered theft with conquest: by winter his riders had scattered the thieves' flocks and seized their grazing lands.", "options": ["wrath", "indignation"], "key": "wrath", "pair": "indignation", "why_right": "The tell is <em>answered theft with conquest<\/em> &#8212; anger that wants to strike back at whoever caused the injury, going far past any protest or objection.", "why_wrong": "That word means anger at unfairness that usually stops at protest. Nobody here objects and waits &#8212; the theft is answered with riders, scattered flocks, and seized land."}, {"sentence": "The forged evidence sent her brother to prison, and her ____ drove her for a decade: she did not rest until the men who lied had lost their badges, their pensions, and their names.", "options": ["wrath", "spite"], "key": "wrath", "pair": "spite", "why_right": "The tell is <em>lost their badges, their pensions, and their names<\/em> &#8212; a real injury answered with real consequences, mighty and momentous, nothing small or petty about it.", "why_wrong": "That word means keying a car or hiding the remote &#8212; small jabs that merely annoy. A brother wrongly imprisoned, answered by ruining the liars' careers, is neither small nor minor."}], "display_order": [0, 2, 1, 5, 3, 4, 7, 6], "dimension_order": ["indignation", "rage", "spite"], "dimension_feedback": {"indignation": "Indignation is anger sparked by unfairness or an insult, and it usually stops at protest; wrath goes much further and strikes back at whoever caused the injury.", "rage": "Rage is anger with the steering wheel gone, all heat and no aim; wrath burns just as hot but stays aimed and knows exactly where it is driving.", "spite": "Spite is a small, petty urge to hurt or annoy someone, mean and minor; wrath is anger on a grand scale, answering a real injury with real consequences."}, "instructions": "For each sentence, choose the word that fits the gap. Only one of the two is right for that sentence."}};
 
   // ---- the check ledger -------------------------------------------------
   // 🚨 MAXXP is derived from this list and must EXACTLY equal the resource's
@@ -467,100 +516,148 @@
   mcq("s1", { q: "s1q", opts: "s1opts", btn: "s1check", msg: "s1msg", fb: "s1fb" },
       function () { finishSection("s1"); });
 
+
+  // ---- section 2: pairwise rows -----------------------------------------
+  // Every row is marked and explained on every submit, green or red. See this
+  // module's docstring for why that reverses the original no-reveal design: the
+  // XP is settled after the first failed submit, so what follows is teaching,
+  // not assessment. A correct row also gets an explanation -- confirming WHY it
+  // was right is the half the first design left out entirely.
   $("s2go").addEventListener("click", function () { enterQuiz("s2"); });
   (function () {
-    var cols = shuffled(CFG.grid.words), rows = CFG.grid.rows;
-    var tb = $("grid").querySelector("tbody");
-    var head = document.createElement("tr");
-    head.innerHTML = '<th class="s" scope="col">Sentence</th>';
-    cols.forEach(function (w) {
-      var th = document.createElement("th"); th.scope = "col"; th.textContent = w;
-      head.appendChild(th);
-    });
-    tb.appendChild(head);
-    rows.forEach(function (row, ri) {
-      var tr = document.createElement("tr");
-      var td = document.createElement("td"); td.className = "s"; td.textContent = row.s;
-      tr.appendChild(td);
-      cols.forEach(function (w) {
-        var cell = document.createElement("td"); cell.className = "c";
+    var P = CFG.pairwise, rows = P.rows, order = P.display_order;
+    var host = $("pw");
+    var graded = {};    // ri -> true once that row has been marked correct and locked
+
+    order.forEach(function (ri, slot) {
+      var row = rows[ri];
+      var item = document.createElement("div");
+      item.className = "pwitem";
+      item.id = "pwitem" + ri;
+      var d = document.createElement("div");
+      d.className = "pwrow";
+
+      var n = document.createElement("div");
+      n.className = "pwn"; n.textContent = (slot + 1) + ".";
+      d.appendChild(n);
+
+      var s = document.createElement("div");
+      s.className = "pws"; s.textContent = row.sentence;
+      d.appendChild(s);
+
+      var o = document.createElement("div");
+      o.className = "pwopts";
+      // headword first on every row: it matches the reviewed mock and keeps the
+      // comparison legible. It leaks nothing -- the student already knows which word
+      // the card teaches, and the key alternates between the two sides.
+      row.options.forEach(function (w) {
         var lab = document.createElement("label");
         var inp = document.createElement("input");
-        inp.type = "radio"; inp.name = "g" + ri; inp.value = w;
-        inp.setAttribute("aria-label", w + " for sentence " + (ri + 1));
+        inp.type = "radio"; inp.name = "pw" + ri; inp.value = w;
+        inp.setAttribute("aria-label", w + " for sentence " + (slot + 1));
         var sp = document.createElement("span");
-        sp.className = "box"; sp.textContent = "✓";  // hidden until selected
-        lab.appendChild(inp); lab.appendChild(sp); cell.appendChild(lab);
-        tr.appendChild(cell);
+        sp.textContent = w;
+        lab.appendChild(inp); lab.appendChild(sp);
+        o.appendChild(lab);
       });
-      tb.appendChild(tr);
+      d.appendChild(o);
+      item.appendChild(d);
+
+      var fb = document.createElement("div");
+      fb.className = "pwfb"; fb.id = "pwfb" + ri; fb.hidden = true;
+      fb.setAttribute("role", "status");
+      item.appendChild(fb);
+
+      host.appendChild(item);
     });
-    $("s2instr").textContent = CFG.grid.instructions;
+
+    $("s2instr").textContent = P.instructions;
+
     function picks() {
       return rows.map(function (_, ri) {
-        var e = document.querySelector('input[name="g' + ri + '"]:checked');
+        var e = document.querySelector('input[name="pw' + ri + '"]:checked');
         return e ? e.value : null;
       });
     }
+    function clearRow(ri) {
+      var r = $("pwitem" + ri), f = $("pwfb" + ri);
+      r.classList.remove("ok", "no");
+      f.hidden = true; f.innerHTML = ""; f.className = "pwfb";
+    }
     function repaint() {
-      Array.prototype.forEach.call($("grid").querySelectorAll("label"), function (l) {
+      Array.prototype.forEach.call(host.querySelectorAll("label"), function (l) {
         l.classList.remove("sel");
       });
       picks().forEach(function (v, ri) {
         if (!v) return;
-        var e = document.querySelector('input[name="g' + ri + '"][value="' + v + '"]');
+        var e = document.querySelector('input[name="pw' + ri + '"][value="' + v + '"]');
         if (e) e.parentNode.classList.add("sel");
       });
       var n = picks().filter(Boolean).length;
-      $("s2check").disabled = st.s2.done || n < rows.length;
       $("s2count").textContent = st.s2.done ? "" : n + " of " + rows.length + " answered";
     }
-    $("grid").addEventListener("change", function (e) {
+
+    host.addEventListener("change", function (e) {
       if (st.s2.done || e.target.type !== "radio") return;
-      Array.prototype.forEach.call($("grid").querySelectorAll("label"), function (l) {
-        l.classList.remove("right", "wrong");
-      });
+      // this row's verdict is now stale; drop it and let them check again
+      var ri = parseInt(e.target.name.slice(2), 10);
+      clearRow(ri);
       $("s2msg").textContent = "";
-      $("s2fb").innerHTML = "";   // stale feedback would point at a changed answer
+      $("s2check").disabled = picks().filter(Boolean).length < rows.length;
       repaint();
     });
+
     $("s2check").addEventListener("click", function () {
       if (st.s2.done) return;
       var p = picks();
       if (p.some(function (v) { return !v; })) return;
       st.s2.tries++;
-      var wrong = 0, fbList = $("s2fb");
-      fbList.innerHTML = "";
+
+      var wrong = 0;
       p.forEach(function (v, ri) {
-        var e = document.querySelector('input[name="g' + ri + '"][value="' + v + '"]');
-        e.parentNode.classList.remove("sel");
-        if (rows[ri].ks.indexOf(v) >= 0) { e.parentNode.classList.add("right"); }
-        else {
-          e.parentNode.classList.add("wrong");
+        var row = rows[ri], right = (v === row.key);
+        var d = $("pwitem" + ri), f = $("pwfb" + ri);
+        d.classList.remove("ok", "no");
+        d.classList.add(right ? "ok" : "no");
+        f.className = "pwfb " + (right ? "ok" : "no");
+        f.innerHTML = "<b>" + (right ? "Right &#183; " : "Not " + v + " &#183; ")
+          + CFG.word + " vs " + row.pair + "</b>"
+          + (right ? row.why_right : row.why_wrong);
+        f.hidden = false;
+        if (right) {
+          // lock it: the verdict is already shown, and locking stops a student
+          // changing an answer that was right
+          graded[ri] = true;
+          Array.prototype.forEach.call(
+            d.querySelectorAll('input[name="pw' + ri + '"]'), function (i) {
+              i.disabled = true; i.parentNode.classList.add("locked");
+            });
+        } else {
           wrong++;
-          // ISSUE 4: say WHY the chosen word is wrong, without revealing the right one
-          var li = document.createElement("li");
-          li.innerHTML = "<b>Sentence " + (ri + 1) + " &#183; not " + v + "</b>" +
-            ((rows[ri].fb && rows[ri].fb[v]) ||
-             "That word does not fit this sentence. Re-read the comparisons above.");
-          fbList.appendChild(li);
         }
       });
+
       if (wrong === 0) {
         st.s2.done = true; st.s2.first = st.s2.tries === 1;
         $("s2check").disabled = true;
-        $("s2msg").textContent = "All six right."; $("s2msg").className = "msg ok";
+        $("s2msg").textContent = "All eight right."; $("s2msg").className = "msg ok";
         $("s2count").textContent = "";
         finishSection("s2"); report();
-      } else {
-        $("s2msg").textContent = wrong === 1
-          ? "One is not right yet. Change it and check again."
-          : wrong + " are not right yet. Change them and check again.";
-        $("s2msg").className = "msg no";
+        return;
       }
+
+      // the rows are marked, so an exact figure concedes nothing further
+      $("s2msg").textContent = wrong === 1
+        ? "One is not right yet. Read the note under it and change your answer."
+        : wrong + " are not right yet. Read the notes under them and change your answers.";
+      $("s2msg").className = "msg no";
+      // require a change before another submit, so repeated clicks cannot spend tries
+      $("s2check").disabled = true;
     });
+
     repaint();
   })();
+
 
   // ---- section 3: apply, TWO parts ---------------------------------------
   // The ISEE Upper Verbal Reasoning section is Synonyms plus Sentence Completion,
