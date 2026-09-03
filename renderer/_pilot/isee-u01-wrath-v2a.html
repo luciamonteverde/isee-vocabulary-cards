@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="build" content="af5779a888f1">
+<meta name="build" content="49e57b78b955">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>wrath &#8212; ISEE Upper Vocabulary, Unit 01: Anger, Hostility &amp; Rivalry</title>
@@ -380,15 +380,19 @@
   // SUBS are graded items that are NOT worth a point of their own: Option 2's two
   // Section-2 questions are one check between them, so BOTH pilots hold MAXXP at 5
   // and the A/B comparison is not confounded by a different XP ceiling.
-  var CHECKS = ["s1", "s2", "s3a", "s3c", "s4"];
-  var SUBS = [];
+  var CHECKS = ["s1", "s2", "s3", "s4"];
+  var SUBS = ["s3a", "s3c"];
   var st = {};
   CHECKS.concat(SUBS).forEach(function (k) {
     st[k] = { done: false, first: false, tries: 0 };
   });
-  // Weights copied from SAT's build_card.py, which is live on TimeBack -- not invented here.
-  // They sum to 5, so MAXXP is unchanged and no resource write is needed.
-  var WEIGHT = { s1: 1, s2: 2, s3a: 0.5, s3c: 0.5, s4: 1 };
+  // 🚨 EVERY WEIGHT MUST BE A WHOLE NUMBER. TimeBack does not accept a fractional score, and
+  // the symptom is not a rounding artefact: Lucia reproduced it by getting one Section 3
+  // question right and the other wrong, which made xp() return 4.5, and the Continue button at
+  // the end of a correctly finished card was BLOCKED. So Section 3's two questions are one
+  // check worth 1 (they are SUBS -- graded, but not a point each), rather than 0.5 apiece.
+  // Sums to 5, so MAXXP is unchanged and no resource write is needed.
+  var WEIGHT = { s1: 1, s2: 2, s3: 1, s4: 1 };
   var MAXXP = CHECKS.reduce(function (t, k) { return t + (WEIGHT[k] || 1); }, 0);
 
   function done() { return CHECKS.filter(function (k) { return st[k].done; }).length; }
@@ -812,7 +816,15 @@
   mcq("s3a", { q: "s3aq", opts: "s3aopts", btn: "s3acheck", msg: "s3amsg", fb: "s3afb" },
       function () { $("s3cwrap").hidden = false; });
   mcq("s3c", { q: "s3cq", opts: "s3copts", btn: "s3ccheck", msg: "s3cmsg", fb: "s3cfb" },
-      function () { finishSection("s3"); });
+      function () {
+        // Part A and Part B are graded items but ONE check between them, so the card can never
+        // report a half point. The point is banked only if BOTH were right first time; a
+        // student who missed one still finishes the section and the card, they just do not
+        // earn it -- which is how every other check here behaves.
+        st.s3.done = st.s3a.done && st.s3c.done;
+        st.s3.first = st.s3a.first && st.s3c.first;
+        finishSection("s3");
+      });
 
   // ---- section 4: produce ----------------------------------------------
   // The client checklist MIRRORS the server's, from the spec's own list. Max's
