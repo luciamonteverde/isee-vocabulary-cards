@@ -313,18 +313,26 @@
     report();
   }
 
-  function advance(from) {
+  // Lucia, student view 2026-09-04: on a CORRECT answer the card scrolled straight to the
+  // next section, carrying the student past the green feedback and the "Why that is the
+  // answer" analysis that the same click had just revealed. Unlocking and scrolling were
+  // one function; they are now separate. advance() only unlocks. Scrolling is opt-in and
+  // is used ONLY by the plain Continue buttons, where the student has explicitly asked to
+  // be taken on and there is no feedback to skip past.
+  function advance(from, scroll) {
     var i = SECS.indexOf(from);
     if (i + 1 < SECS.length && reached < i + 2) reached = i + 2;
     render();
-    if (i + 1 < SECS.length) $(SECS[i + 1]).scrollIntoView({ behavior: "smooth", block: "start" });
+    if (scroll && i + 1 < SECS.length) {
+      $(SECS[i + 1]).scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
 
   // ---- plain Continue gates -------------------------------------------
   ["s1", "s2"].forEach(function (id) {
     $(id + "go").addEventListener("click", function () {
       st[id].done = true; st[id].first = true;
-      advance(id);
+      advance(id, true);   // explicit Continue click - scrolling is what the student asked for
     });
   });
 
@@ -397,7 +405,7 @@
           x.querySelector("input").disabled = true;
         });
         $(id + "msg").textContent = "";
-        advance(id);
+        advance(id, false);  // NO scroll - the feedback and analysis are right here
       } else {
         // A real retry: mark only the one they picked, leave the rest selectable, and do
         // NOT reveal the key - the feedback points back to the passage instead.
