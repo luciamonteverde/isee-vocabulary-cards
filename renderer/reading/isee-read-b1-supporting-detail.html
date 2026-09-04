@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supporting Detail: Locate and Match &mdash; ISEE Upper Reading</title>
+<style>
+/* Copied verbatim from sat-vocabulary-cards/renderer/v2/sat-c1-u01-ancestral-v2.html on 2026-09-04.
+   Snapshot, not a live dependency - the reading card shares the SAT v2 visual
+   language (light theme) so the two do not look like different products.
+   Some rules here are for SAT-only structures (the pairwise grid) and are unused;
+   leaving them costs nothing and keeps the diff against the source readable. */
+
+  :root{--ink:#1f2430;--muted:#5b6478;--line:#dfe3ec;--panel:#f5f7fc;
+        --brand:#3b4ee0;--brand-soft:#e9edfd;
+        --ok-bg:#d8f3e3;--ok-ink:#17693c;--ok-line:#7dcfa3;
+        --no-bg:#fdeadb;--no-ink:#a8460f;--no-line:#f0b183}
+  *{box-sizing:border-box}
+  body{margin:0;padding:26px 18px 60px;background:#fff;color:var(--ink);
+       font:16px/1.55 "Segoe UI",system-ui,-apple-system,sans-serif}
+  .wrap{max-width:880px;margin:0 auto}
+  .word{font-size:34px;font-weight:700;margin:0 0 2px}
+  .pron{color:var(--muted);margin:0 0 6px;font-size:15px}
+  .prog{margin:0 0 18px;color:var(--muted);font-size:14px}
+  section{border:1px solid var(--line);border-radius:14px;padding:20px 22px;
+          margin:0 0 16px;background:#fff}
+  h2{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--brand);
+     margin:0 0 4px;font-weight:800}
+  h3{font-size:21px;margin:0 0 4px;font-weight:700}
+  .askq{color:var(--muted);font-style:italic;margin:0 0 14px;font-size:15px}
+  h4{font-size:15px;margin:0 0 8px;font-weight:700}
+  .card{background:var(--panel);border-radius:12px;padding:15px 17px;margin:0 0 12px}
+  .card p{margin:0 0 9px} .card p:last-child{margin:0}
+  .sub{background:var(--panel);border-radius:12px;padding:15px 17px;margin:0 0 12px;
+       border-left:5px solid #c9d0e6}
+  .sub p{margin:0 0 9px;font-size:15px} .sub p:last-child{margin:0}
+  /* colour-coded comparison blocks: green synonyms, red antonyms, blue scale. Tints
+     are kept pale so ordinary black body text stays comfortably readable on them. */
+  .sub.syn{background:#eef8f2;border-left-color:#43a06b}
+  .sub.syn h4{color:#17693c}
+  .sub.ant{background:#fdf0ea;border-left-color:#d9694a}
+  .sub.ant h4{color:#9c3d18}
+  .sub.scale{background:#eef1fd;border-left-color:#5468e8}
+  .sub.scale h4{color:#2c3bb5}
+  .blocknote{background:#eef1fa;border:1px dashed #b9c2e6;border-radius:12px;
+             padding:14px 16px;color:var(--muted);margin:0 0 16px;font-size:15px}
+  audio{width:100%;max-width:320px;margin:4px 0 0}
+  .q{font-weight:600;margin:0 0 12px}
+  .qlab{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--brand);
+        font-weight:800;margin:0 0 4px}
+  .opts{list-style:none;margin:0 0 14px;padding:0}
+  .opts li{margin:0 0 8px}
+  .opts label{display:block;border:1px solid var(--line);border-radius:10px;
+              padding:12px 14px;cursor:pointer;background:#fff}
+  .opts label:hover{background:var(--brand-soft)}
+  .opts input{margin-right:10px}
+  .opts label.sel{border-color:var(--brand);box-shadow:inset 0 0 0 1px var(--brand)}
+  .opts label.right{background:var(--ok-bg);border-color:var(--ok-line)}
+  .opts label.wrong{background:var(--no-bg);border-color:var(--no-line)}
+  .opts input:focus-visible+span{outline:3px solid var(--brand);outline-offset:3px}
+  .passage{border-left:3px solid var(--line);padding:2px 0 2px 16px;margin:0 0 18px;
+           color:#333}
+  table{width:100%;border-collapse:separate;border-spacing:0 8px}
+  th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+     font-weight:700;padding:0 4px 4px;text-align:center}
+  th.s{text-align:left}
+  td.s{background:#fff;border:1px solid var(--line);border-radius:10px;
+       padding:12px 14px;width:44%;font-size:15px}
+  td.c{width:14%;padding:0 3px}
+  td.c label{display:flex;align-items:center;justify-content:center;min-height:54px;
+             background:#fff;border:1px solid var(--line);border-radius:10px;
+             cursor:pointer}
+  td.c label:hover{background:var(--brand-soft)}
+  td.c input{position:absolute;opacity:0;width:0;height:0}
+  /* ISSUE 3 (Lucia): an empty bordered cell gave the student nothing to aim at. Each
+     cell now shows a real tick box. It stays RADIO semantics -- one answer per row, so
+     ticking a second word in a row clears the first -- but it looks like something you
+     tick, which is what the activity is asking for. */
+  .box{width:24px;height:24px;border:2px solid #b9c2d6;border-radius:6px;
+       display:flex;align-items:center;justify-content:center;font-size:17px;
+       line-height:1;color:transparent;background:#fff}
+  td.c label:hover .box{border-color:var(--brand)}
+  td.c label.sel .box{border-color:var(--brand);background:var(--brand);color:#fff}
+  td.c label.sel{border-color:var(--brand);background:var(--brand-soft)}
+  td.c label.right{background:var(--ok-bg);border-color:var(--ok-line)}
+  td.c label.right .box{border-color:var(--ok-ink);background:var(--ok-ink);color:#fff}
+  td.c label.wrong{background:var(--no-bg);border-color:var(--no-line)}
+  td.c label.wrong .box{border-color:var(--no-ink);background:var(--no-ink);color:#fff}
+  td.c input:focus-visible+.box{outline:3px solid var(--brand);outline-offset:3px}
+  /* per-row feedback for wrong choices */
+  .gfb{list-style:none;margin:14px 0 0;padding:0}
+  .gfb li{background:var(--no-bg);color:var(--no-ink);border-radius:10px;
+          padding:11px 14px;margin:0 0 8px;font-size:15px}
+  .gfb li b{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+            margin-bottom:2px}
+  .gfb em{font-style:italic}
+  textarea{width:100%;min-height:96px;border:1px solid var(--line);border-radius:10px;
+           padding:12px 14px;font:inherit;resize:vertical}
+  textarea:focus{outline:2px solid var(--brand);outline-offset:1px}
+  .cl{list-style:none;margin:12px 0 0;padding:0;font-size:15px}
+  .cl li{color:var(--muted);margin:0 0 5px}
+  .cl li.met{color:var(--ok-ink)}
+  .cl li b{display:inline-block;width:20px}
+  .bar{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  button{font:600 16px/1 inherit;padding:12px 24px;border-radius:10px;border:0;
+         background:var(--brand);color:#fff;cursor:pointer}
+  button:disabled{background:#c3c9dc;cursor:not-allowed}
+  .msg{font-weight:600;font-size:15px}
+  .msg.ok{color:var(--ok-ink)} .msg.no{color:var(--no-ink)}
+  .fb{margin-top:12px;padding:13px 15px;border-radius:10px;font-size:15px}
+  .fb.ok{background:var(--ok-bg);color:var(--ok-ink)}
+  .fb.no{background:var(--no-bg);color:var(--no-ink)}
+  .hint{margin-top:12px;padding:13px 15px;border-radius:10px;background:#fff8e1;
+        border:1px solid #f0d78a;font-size:15px}
+  .dims{margin:10px 0 0;padding:0;list-style:none;font-size:14px}
+  .dims li{margin:0 0 4px}
+  .done-all{margin-top:6px;padding:16px 18px;border-radius:12px;background:var(--ok-bg);
+            color:var(--ok-ink);font-weight:700}
+
+  /* ---- section 2 pairwise rows ----
+     The explanation line is a SIBLING of the flex row, not a flex child, so it needs no
+     full-width flex-basis. That matters because build_card.py runs the whole document
+     through percent-formatting and would need the sign doubled, while the preview
+     substitutes this CSS as a value and would need it single. Avoiding percentages in
+     this block removes the trap -- including in this comment, which is itself part of
+     the string being formatted. Keep this block free of the percent sign. */
+  .pwitem{margin:0 0 10px;padding:14px 16px;background:#fff;
+    border:1px solid var(--line);border-radius:12px}
+  .pwrow{display:flex;align-items:stretch;gap:14px}
+  .pwrow .pws{flex:1 1 auto;align-self:center;font-size:16px;line-height:1.55}
+  .pwopts{flex:0 0 auto;display:flex;gap:10px;align-items:center}
+  .pwopts label{position:relative;display:flex;align-items:center;justify-content:center;
+    min-width:118px;min-height:46px;padding:0 14px;border:1px solid var(--line);
+    border-radius:10px;cursor:pointer;font-weight:600;font-size:15px;background:#fbfcfe}
+  .pwopts label:hover{background:var(--brand-soft);border-color:var(--brand)}
+  .pwopts input{position:absolute;opacity:0;width:0;height:0}
+  .pwopts label.sel{border-color:var(--brand);background:var(--brand-soft);
+    box-shadow:inset 0 0 0 1px var(--brand)}
+  .pwopts input:focus-visible+span{outline:3px solid var(--brand);outline-offset:4px;
+    border-radius:4px}
+  .pwopts input:disabled+span{opacity:.75}
+  .pwopts label.locked{cursor:default}
+  .pwn{flex:0 0 auto;align-self:center;width:22px;color:#8b93a7;font-size:13px;
+    font-weight:600;text-align:right}
+
+  /* the graded state of a row, and its explanation line */
+  .pwitem.ok{border-color:var(--ok-line);background:#fbfffd}
+  .pwitem.no{border-color:var(--no-line);background:#fffcfa}
+  .pwitem.ok .pwopts label.sel{border-color:var(--ok-ink);background:var(--ok-bg);
+    box-shadow:inset 0 0 0 1px var(--ok-ink)}
+  .pwitem.no .pwopts label.sel{border-color:var(--no-ink);background:var(--no-bg);
+    box-shadow:inset 0 0 0 1px var(--no-ink)}
+  .pwfb{margin:12px 0 0;padding:10px 13px;border-radius:9px;
+    font-size:15px;line-height:1.5}
+  .pwfb b{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+    margin-bottom:3px;font-weight:800}
+  .pwfb.ok{background:var(--ok-bg);color:var(--ok-ink)}
+  .pwfb.no{background:var(--no-bg);color:var(--no-ink)}
+  .pwfb em{font-style:italic}
+
+  @media (max-width:720px){
+    .pwrow{flex-direction:column;gap:10px}
+    .pwopts label{flex:1 1 0;min-width:0}
+    .pwn{align-self:flex-start;text-align:left}
+    .pwfb{margin-top:10px}
+  }
+
+.passage p { margin: 0 0 10px }
+details.step { margin: 8px 0; padding: 8px 12px; background: var(--panel);
+  border: 1px solid var(--line); border-radius: 8px }
+details.step summary { cursor: pointer; font-weight: 600 }
+details.step[open] summary { display: none }
+.opt.locked { pointer-events: none; opacity: .75 }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="word">Supporting Detail: Locate and Match</p>
+  <p class="prog" id="prog"></p>
+  <section id="s1">
+    <h2>Section 1</h2>
+    <h3>What this question looks like</h3>
+    <div class="teach" id="s1teach">
+      <div class="card">
+        <h4>On the test</h4>
+        <p>&lt;p&gt;A question that asks what the passage says about one specific thing - a person, an event, a reason, a number. It usually begins 'According to the passage' or 'The passage states that'. All four answer choices sound like things the passage could have said. Only one of them is actually written there.&lt;/p&gt;</p>
+        <p>&lt;p&gt;Usually one or two of the first questions after each passage, before the questions about the passage as a whole. The passage is 300 to 400 words long, so the fact you need is somewhere you have to go and find. The question almost never tells you which line to look at - finding the sentence is the skill.&lt;/p&gt;</p>
+      </div>
+      <div class="card">
+        <h4>Ways it gets asked</h4>
+        <ul><li>According to the passage, ...</li><li>The passage states that ...</li><li>According to the author, ...</li><li>The passage indicates that ...</li><li>Which of the following does the passage mention as ...?</li></ul>
+      </div>
+      <div class="card">
+        <h4>The one thing to remember</h4>
+        <p><strong>&lt;p&gt;The answer is already written in the passage, so your job is to find that sentence and pick the choice that says the same thing in different words.&lt;/p&gt;</strong></p>
+      </div>
+    </div>
+    <div class="bar" id="s1bar"><button id="s1go">Continue</button></div>
+  </section>
+  <section id="s2" hidden>
+    <h2>Section 2</h2>
+    <h3>How to do it</h3>
+    <div class="teach" id="s2teach">
+      <div class="card">
+        <p>Open each step.</p>
+        <details class="step"><summary>Step 1. Find the topic of the question</summary><p><strong>Step 1. Find the topic of the question</strong></p><p>&lt;p&gt;&lt;strong&gt;Step 1 - Find the topic of the question.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Before you look at the answer choices, ask what the question is about. Pick out the name or thing it names - 'giant tube worms', 'a careful publisher', 'when the clock finally ran'. That is the word you will hunt for in the passage. You are not hunting for the answer yet, only for the place where the passage talks about this thing.&lt;/p&gt;</p></details>
+        <details class="step"><summary>Step 2. Go back to the passage and find that word</summary><p><strong>Step 2. Go back to the passage and find that word</strong></p><p>&lt;p&gt;&lt;strong&gt;Step 2 - Go back to the passage and find that word.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Run your eye down the passage looking only for your topic word, or a close relative of it. The passage may say 'publishers' where the question says 'publisher', or 'the old man' where the question says 'Adair'. Names, numbers and capital letters are the easiest things to spot. If the word appears more than once, check each place. The first one you find is not always the one the question means.&lt;/p&gt;</p></details>
+        <details class="step"><summary>Step 3. Read the whole sentence before you look at the choices</summary><p><strong>Step 3. Read the whole sentence before you look at the choices</strong></p><p>&lt;p&gt;&lt;strong&gt;Step 3 - Read the whole sentence before you look at the choices.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Read the full sentence around your word, and the one after it if the thought carries on. Then say to yourself, in your own plain words, what it says - 'he kept a secret list of the fake details'. Do this before you read the four choices. If you read the choices first, the one that sounds best will pull your eye, and you will read the passage looking for permission to pick it.&lt;/p&gt;</p></details>
+        <details class="step"><summary>Step 4. Match your sentence to the choice that says the same thing</summary><p><strong>Step 4. Match your sentence to the choice that says the same thing</strong></p><p>&lt;p&gt;&lt;strong&gt;Step 4 - Match your sentence to the choice that says the same thing in different words.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Now read the four choices and look for the one that means what your sentence means. Expect it to use different words. The passage says 'the felt required washing'; the right choice may say 'the cloth needed cleaning'. A choice that copies the passage's exact words is not automatically right - the test writers know you will recognise them.&lt;/p&gt;</p></details>
+        <details class="step"><summary>Step 5. Check that the other three fail for a reason the passage settles</summary><p><strong>Step 5. Check that the other three fail for a reason the passage settles</strong></p><p>&lt;p&gt;&lt;strong&gt;Step 5 - Check that the other three choices are wrong for a reason the passage settles.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Before you choose, hold each of the other three choices against the passage. Each one should fail in a way you can point to. Either the passage says the opposite, or it says this about a different person or thing, or it never says it at all. If you cannot say why a choice is wrong, go back to Step 2 - you may have found the wrong sentence.&lt;/p&gt;</p></details>
+      </div>
+    </div>
+    <div class="bar" id="s2bar"><button id="s2go" disabled>Continue</button></div>
+  </section>
+  <section id="s3" hidden>
+    <h2>Section 3</h2>
+    <h3>Worked example one</h3>
+    <div class="teach" id="s3teach">
+      <div class="card passage">
+<p>A finished map is expensive to produce and inexpensive to appropriate. Surveyors must traverse the territory, measure it, and dispute it, while a copyist need only trace the sheet, alter the coloring, and publish. Because a fact about the world belongs to nobody, the law offered the original publisher little relief.</p><p>Their response was quietly ingenious. Cartographers began to salt their maps with deliberate errors: a thoroughfare that did not exist, a bend the river never made, an elevation granted height it had not earned, a hamlet whose name no resident recognized. An independent surveyor would never reproduce such fictitious details, since the terrain itself would contradict him, so their appearance in a rival atlas amounted to a confession. A careful publisher maintained a private legend of every falsehood, so the evidence could be produced in court.</p><p>The scheme had two weaknesses. Courts in several countries held that a spurious street became a fact the moment it was published, or that a handful of duplicated details demonstrated little, so the traps seldom prevailed in the cases they were designed for. And a fiction published with sufficient authority has a way of becoming true: one imaginary crossroads acquired a general store named after it, and the store, being genuine, eventually earned it a legitimate place on maps that had copied nothing. The mapmakers had set out to protect the truth and had, in the end, contributed a small piece to it.</p>
+      </div>
+    </div>
+    <div class="quiz" id="s3quiz">
+      <p class="qlab">Try it</p>
+      <p class="q" id="s3q"></p>
+      <ul class="opts" id="s3opts"></ul>
+      <div class="bar"><button id="s3check" disabled>Check</button>
+        <span class="msg" id="s3msg"></span></div>
+      <div class="fb" id="s3fb" hidden></div>
+      <div class="card" id="s3analysis" hidden>
+        <h4>Why that is the answer</h4>
+        <p>&lt;p&gt;Step 1: the question is about 'careful publishers', so that is the word to hunt for - not 'errors', not 'court'.&lt;/p&gt;&lt;p&gt;Step 2: 'publisher' appears twice in the passage. The first is in the opening paragraph, 'the original publisher', in a sentence about the law giving him little help. That is not the sentence we need. Keep going, and in the second paragraph you find it: 'A careful publisher maintained a private legend of every falsehood, so the evidence could be produced in court.'&lt;/p&gt;&lt;p&gt;Step 3 is what settles this. Read the whole sentence and put it in plain words before touching the choices. A 'legend' on a map is not a story; it is the small box that lists what the symbols mean. So the sentence says: a careful mapmaker kept a private list of every fake detail he had added, so he could show it in court. If you did not know that meaning of 'legend', the words around it still tell you. A legend 'of every falsehood' that can be 'produced in court' has to be some kind of record.&lt;/p&gt;&lt;p&gt;Step 4: choice B, 'kept a hidden list of their planted errors', says exactly that in different words. Hidden stands for private, list for legend, and planted errors for falsehoods.&lt;/p&gt;&lt;p&gt;Step 5, the other three. Choice A says the publishers checked rival atlases against the real landscape. The passage does talk about checking details against the real ground. But it is the independent surveyor who does that - 'the terrain itself would contradict him'. The right idea, given to the wrong person. Choice C says they printed a copying warning on every sheet. Read the whole passage again if you like: no such warning is ever mentioned, and something the passage never says can never be the answer. Choice D says they usually won their court cases. The third paragraph says the opposite - 'the traps seldom prevailed in the cases they were designed for'.&lt;/p&gt;&lt;p&gt;The shortcut this closes off: 'pick the choice that uses the passage's own words'. Choice A has 'rival atlas' and choice D has 'court', both straight from the text, and both are wrong. The correct choice uses none of the passage's words for the idea itself. Familiar words tell you a choice was built from the passage; they do not tell you it is true.&lt;/p&gt;</p>
+      </div>
+    </div>
+  </section>
+  <section id="s4" hidden>
+    <h2>Section 4</h2>
+    <h3>Worked example two</h3>
+    <div class="teach" id="s4teach">
+      <div class="card passage">
+<p>The summer I turned thirteen, my mother decided I had an excess of idle time. She arranged for me to spend afternoons with Adair, who restored antique clocks in a shop behind the courthouse. I imagined myself at his bench within a week, coaxing some ancient mechanism back to life; what he imagined for me was the broom.</p><p>In June I was permitted three occupations: sweeping filings from the floor, winding the clocks in the window, and carrying cleaned components to the bench on a square of felt. The movements themselves, the trains of wheels and the minute escapements ticking beneath his loupe, remained forbidden to me. When I sighed at the tedium, which was frequently, he did not acknowledge it, so I concluded he was either deaf or indifferent.</p><p>In July a carriage clock arrived whose balance would not run true, and for a week he permitted me to observe. He would adjust one screw by a fraction, set it running, listen with his head inclined, then dismantle it entirely again. He remained unhurried and without complaint, as though the eleventh attempt were as absorbing as the first. When it finally ran, he nodded, wiped his fingers, and observed that the felt required washing.</p><p>I did not become a clockmaker, but I have never since hurried through a tiresome task without hearing that clock, or suspecting that the old man had registered each of my sighs.</p>
+      </div>
+    </div>
+    <div class="quiz" id="s4quiz">
+      <p class="qlab">Try it</p>
+      <p class="q" id="s4q"></p>
+      <ul class="opts" id="s4opts"></ul>
+      <div class="bar"><button id="s4check" disabled>Check</button>
+        <span class="msg" id="s4msg"></span></div>
+      <div class="fb" id="s4fb" hidden></div>
+      <div class="card" id="s4analysis" hidden>
+        <h4>Why that is the answer</h4>
+        <p>&lt;p&gt;Step 1: the question asks what Adair did 'when the carriage clock finally ran'. Two things to hunt for - the clock, and the moment it ran.&lt;/p&gt;&lt;p&gt;Step 2: the carriage clock arrives in the third paragraph. Run your eye down that paragraph for 'ran' or 'running' and you hit 'set it running' first. That is during the week of attempts, not the moment we want, so keep going. 'When it finally ran, he nodded, wiped his fingers, and observed that the felt required washing.' That is the sentence.&lt;/p&gt;&lt;p&gt;Step 3 is what settles this. Read the whole sentence and say it plainly: he nodded, wiped his hands, and said that the cloth needed washing. Two words could trip you. 'Observed' here does not mean watched; it means said, the way you might observe that it looks like rain. And 'felt' is the square of cloth from the second paragraph, not a feeling. Read the sentence as a whole and both meanings become clear.&lt;/p&gt;&lt;p&gt;Step 4: choice C, 'pointed out that the felt needed to be cleaned', is that remark in different words. Pointed out stands for observed, and needed to be cleaned for required washing.&lt;/p&gt;&lt;p&gt;Step 5, the other three. Choice A says he let the narrator try the next repair. Nothing in the passage says so, and the last paragraph begins 'I did not become a clockmaker'. Choice B says he called the eleventh attempt the hardest. The passage says the opposite: he treated the eleventh attempt 'as absorbing as the first' and stayed 'without complaint'. Choice D says he took the clock apart once more. He did dismantle it 'entirely again', but that was part of the week of attempts, before it ran. The question asks about after. Right action, wrong moment.&lt;/p&gt;&lt;p&gt;The shortcut this closes off: 'pick the ending the story seems to be building toward'. Choice A is what the thirteen-year-old wanted and what many stories would give him. Choice B borrows 'eleventh attempt' straight from the passage. Both feel right, and neither is written there. A detail question asks what the passage says happened, not what you expected to happen.&lt;/p&gt;</p>
+      </div>
+    </div>
+  </section>
+  <section id="s5" hidden>
+    <h2>Section 5</h2>
+    <h3>What goes wrong, and your checklist</h3>
+    <div class="teach" id="s5teach">
+      <div class="card"><h4>Where marks get lost</h4><ul><li>&lt;p&gt;&lt;strong&gt;Answering from memory.&lt;/strong&gt; You remember the map passage talked about courts, so 'usually won the court cases' feels right. But the sentence you did not go back to says the traps 'seldom prevailed'. Go back every time, even when you are sure.&lt;/p&gt;</li><li>&lt;p&gt;&lt;strong&gt;Stopping at the first place the topic word appears.&lt;/strong&gt; 'Publisher' shows up in the first paragraph and again in the second. Only the second one answers the question.&lt;/p&gt;</li><li>&lt;p&gt;&lt;strong&gt;Reading half the sentence.&lt;/strong&gt; 'When it finally ran, he nodded' - stop there and you know nothing about the felt. The detail you need often sits at the end of the sentence.&lt;/p&gt;</li><li>&lt;p&gt;&lt;strong&gt;Trusting familiar words.&lt;/strong&gt; 'Rival atlas' and 'court' are lifted straight from the passage, and both sit in wrong choices. The right choice usually says the idea another way.&lt;/p&gt;</li><li>&lt;p&gt;&lt;strong&gt;Picking what you expected to happen.&lt;/strong&gt; Of course a boy who watched for a week hopes to be handed the next repair - but the passage never says he was. What should happen is not what the passage says happened.&lt;/p&gt;</li><li>&lt;p&gt;&lt;strong&gt;Giving up on a word with a strange meaning.&lt;/strong&gt; 'Legend' and 'observed' both mean something unusual here. Read the whole sentence around such a word; the sentence tells you what it must mean, and then the matching choice is easy to see.&lt;/p&gt;</li><li>&lt;p&gt;&lt;strong&gt;Right fact, wrong person or moment.&lt;/strong&gt; Checking the terrain is in the passage - the surveyor does it, not the publisher. Taking the clock apart is in the passage - before it ran, not after.&lt;/p&gt;</li></ul></div>
+      <div class="card"><h4>Do this every time</h4><ol><li>&lt;p&gt;Find the topic word in the question, then find it in the passage.&lt;/p&gt;</li><li>&lt;p&gt;Read the whole sentence - to the end - before you look at the choices.&lt;/p&gt;</li><li>&lt;p&gt;Say it in your own words, then match the choice that means the same thing.&lt;/p&gt;</li><li>&lt;p&gt;Expect the right choice to use different words from the passage.&lt;/p&gt;</li><li>&lt;p&gt;Make sure each wrong choice fails for a reason you can point to in the passage.&lt;/p&gt;</li></ol></div>
+    </div>
+  </section>
+  <p class="done-all" id="doneAll" hidden></p>
+</div>
+<script>
+(function () {
+  "use strict";
+  var CFG = {"s3": {"q": "The passage states that careful publishers", "opts": {"A": "checked each rival atlas against the real landscape", "B": "kept a hidden list of their planted errors", "C": "printed a copying warning on every sheet they sold", "D": "usually won the court cases they brought"}, "key": "B", "fb": {"A": "<p>The passage does talk about checking details against the real ground, but look at who does that checking. It is the independent surveyor in the second paragraph, not the publisher. Find the sentence in the second paragraph that begins 'A careful publisher' and read it to the end.</p>", "B": "<p>Yes. The second paragraph says a careful publisher 'maintained a private legend of every falsehood, so the evidence could be produced in court'. A legend on a map is a key or list. So a private legend of every falsehood is a hidden list of the planted errors - the same idea in different words.</p>", "C": "<p>Look for a warning about copying anywhere in the passage. It is not there - the passage never mentions one, and a choice the passage never states cannot be the answer. Find the sentence in the second paragraph that begins 'A careful publisher' and read it to the end.</p>", "D": "<p>The third paragraph says the traps 'seldom prevailed' in court - that is the opposite of winning most cases. Go back to the second paragraph, find the sentence that begins 'A careful publisher', and read what it says to the end.</p>"}}, "s4": {"q": "According to the passage, when the carriage clock finally ran, Adair", "opts": {"A": "let the narrator try the next repair", "B": "said quietly that the eleventh attempt had been the hardest", "C": "pointed out that the felt needed to be cleaned", "D": "took the clock apart once more to be sure"}, "key": "C", "fb": {"A": "<p>This is what the narrator hoped for back in June, and it is what a story like this seems to promise. But the passage never says it happened. Find the sentence in the third paragraph that begins 'When it finally ran' and take the answer only from what that sentence says.</p>", "B": "<p>The passage does mention an eleventh attempt, but look at what it says about it: Adair treated it 'as absorbing as the first' and stayed 'without complaint'. Nothing says he called it the hardest. Go back to the sentence in the third paragraph that begins 'When it finally ran'.</p>", "C": "<p>Yes. The third paragraph says: 'When it finally ran, he nodded, wiped his fingers, and observed that the felt required washing.' Here 'observed' means said, and the felt is the square of cloth from the second paragraph. 'Pointed out that the felt needed to be cleaned' is that remark in different words.</p>", "D": "<p>Taking the clock apart again does happen in the passage, but as part of the week of attempts, before the clock ran. The question asks what he did once it finally ran. Find that sentence in the third paragraph and read it to the end.</p>"}}};
+
+  // ---- ledger ----------------------------------------------------------
+  // CHECKS decides COMPLETION (all four gates). XPGROUPS decides SCORE, and only the
+  // two questions score. Every xp value is a WHOLE NUMBER: a fractional score makes
+  // TimeBack discard the whole status payload, taking isReadyToAdvance with it, so
+  // the student finishes every gate and Continue stays blocked. Nothing errors.
+  var CHECKS = ["s1", "s2", "s3", "s4"];
+  var XPGROUPS = [{ keys: ["s3"], xp: 1 }, { keys: ["s4"], xp: 1 }];
+  var MAXXP = XPGROUPS.reduce(function (t, g) { return t + g.xp; }, 0);   // derived, never hardcoded
+  var st = {};
+  CHECKS.forEach(function (k) { st[k] = { done: false, first: false, tries: 0 }; });
+
+  function done() { return CHECKS.filter(function (k) { return st[k].done; }).length; }
+  function xp() {
+    return XPGROUPS.reduce(function (t, g) {
+      return g.keys.every(function (k) { return st[k].first; }) ? t + g.xp : t;
+    }, 0);
+  }
+  function $(id) { return document.getElementById(id); }
+
+  // ---- visibility ------------------------------------------------------
+  // NOTE: unlike the SAT card there is NO "blocking" mode. The passage must stay on
+  // screen while the student answers - finding the answer in the text is the skill.
+  var SECS = ["s1", "s2", "s3", "s4", "s5"];
+  var reached = 1;
+
+  function render() {
+    SECS.forEach(function (id, i) { $(id).hidden = (i >= reached); });
+    $("prog").textContent = done() + " of " + CHECKS.length + " done";
+    if (done() === CHECKS.length) {
+      $("doneAll").hidden = false;
+      $("doneAll").textContent = "Card complete - " + xp() + " of " + MAXXP +
+        " earned on first tries.";
+    }
+    report();
+  }
+
+  function advance(from) {
+    var i = SECS.indexOf(from);
+    if (i + 1 < SECS.length && reached < i + 2) reached = i + 2;
+    render();
+    if (i + 1 < SECS.length) $(SECS[i + 1]).scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  // ---- plain Continue gates -------------------------------------------
+  ["s1", "s2"].forEach(function (id) {
+    $(id + "go").addEventListener("click", function () {
+      st[id].done = true; st[id].first = true;
+      advance(id);
+    });
+  });
+
+  // segment 2's Continue unlocks only once every step has been opened
+  var steps = Array.prototype.slice.call(document.querySelectorAll("#s2teach details"));
+  function stepsOpen() { return steps.every(function (d) { return d.dataset.seen === "1"; }); }
+  steps.forEach(function (d) {
+    d.addEventListener("toggle", function () {
+      if (d.open) d.dataset.seen = "1";
+      $("s2go").disabled = !stepsOpen();
+    });
+  });
+  if (!steps.length) $("s2go").disabled = false;
+
+  // ---- the two questions ----------------------------------------------
+  function shuffled(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  ["s3", "s4"].forEach(function (id) {
+    var c = CFG[id], sel = null;
+    $(id + "q").textContent = c.q;
+    var ul = $(id + "opts");
+    shuffled(Object.keys(c.opts)).forEach(function (L) {
+      var li = document.createElement("li");
+      li.className = "opt"; li.textContent = c.opts[L]; li.dataset.L = L;
+      li.addEventListener("click", function () {
+        if (st[id].done) return;
+        Array.prototype.forEach.call(ul.children, function (x) { x.classList.remove("sel"); });
+        li.classList.add("sel"); sel = L; $(id + "check").disabled = false;
+      });
+      ul.appendChild(li);
+    });
+
+    $(id + "check").addEventListener("click", function () {
+      if (!sel || st[id].done) return;
+      st[id].tries++;
+      var right = sel === c.key, fb = $(id + "fb");
+      fb.hidden = false;
+      fb.className = "fb " + (right ? "ok" : "no");
+      // A wrong answer is a REAL retry - the options stay on screen and the feedback
+      // must not name the key. Only a correct answer reveals the analysis.
+      fb.innerHTML = "<p>" + c.fb[right ? "correct" : sel] + "</p>";
+      if (right) {
+        st[id].done = true;
+        if (st[id].tries === 1) st[id].first = true;
+        $(id + "analysis").hidden = false;
+        $(id + "check").disabled = true;
+        Array.prototype.forEach.call(ul.children, function (x) { x.classList.add("locked"); });
+        $(id + "msg").textContent = "";
+        advance(id);
+      } else {
+        $(id + "msg").textContent = "Not quite - look again at the passage.";
+        Array.prototype.forEach.call(ul.children, function (x) { x.classList.remove("sel"); });
+        sel = null; $(id + "check").disabled = true;
+      }
+    });
+  });
+
+  // ---- TimeBack host contract (verbatim from the live SAT v2 card) -----
+  var contentId = new URLSearchParams(location.search).get("contentId") || null;
+  function post(m) { try { parent.postMessage(m, "*"); } catch (e) {} }
+
+  window.addEventListener("message", function (e) {
+    var d = e && e.data;
+    if (d && d.type === "CONTENT_LOAD" && d.payload && d.payload.contentId) {
+      contentId = d.payload.contentId;    // the host's id, never our slug
+      post({ type: "CONTENT_READY" });
+      report();
+    }
+  });
+  post({ type: "CONTENT_READY" });
+
+  function report() {
+    if (!contentId) return;
+    var d = done(), complete = d === CHECKS.length;
+    post({
+      type: "CONTENT_STATE_CHANGE",
+      payload: {
+        contentId: contentId,
+        contentState: JSON.stringify({ done: d, total: CHECKS.length, xp: xp() }),
+        contentSummary: { isCompleted: complete, isReadyToAdvance: complete,
+                          score: xp(), maxScore: MAXXP }
+      }
+    });
+    if (complete) post({ type: "CONTENT_COMPLETED", payload: { contentId: contentId } });
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
