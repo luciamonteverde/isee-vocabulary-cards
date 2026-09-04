@@ -353,6 +353,7 @@
   // label - and this card was emitting a bare `<li class="opt">`, a class the stylesheet
   // does not define at all. So it inherited a margin and nothing else. Emit the markup the
   // stylesheet actually contracts for: li > label > input[radio] + span.
+  var solved = {};   // id -> render the answered state (used by grading AND restore)
   ["s3", "s4"].forEach(function (id) {
     var c = CFG[id], sel = null;
     $(id + "q").textContent = c.q;
@@ -376,6 +377,26 @@
       });
     });
 
+    // The answered state has to be rendered TWICE - once when the student answers
+    // correctly, and once when a completed card is reopened from the exercise's
+    // "Reread article" button. One function for both, so they cannot drift apart.
+    function showSolved() {
+      var fb = $(id + "fb");
+      fb.hidden = false;
+      fb.className = "fb ok";
+      fb.innerHTML = "<p>" + c.fb[c.key] + "</p>";
+      $(id + "analysis").hidden = false;
+      $(id + "check").disabled = true;
+      Array.prototype.forEach.call(ul.querySelectorAll("label"), function (x) {
+        x.classList.remove("sel");
+        x.classList.add("locked");
+        if (x.dataset.L === c.key) x.classList.add("right");
+        x.querySelector("input").disabled = true;
+      });
+      $(id + "msg").textContent = "";
+    }
+    solved[id] = showSolved;
+
     $(id + "check").addEventListener("click", function () {
       if (!sel || st[id].done) return;
       st[id].tries++;
@@ -395,15 +416,7 @@
       if (right) {
         st[id].done = true;
         if (st[id].tries === 1) st[id].first = true;
-        $(id + "analysis").hidden = false;
-        $(id + "check").disabled = true;
-        Array.prototype.forEach.call(labs, function (x) {
-          x.classList.remove("sel");
-          x.classList.add("locked");
-          if (x.dataset.L === c.key) x.classList.add("right");
-          x.querySelector("input").disabled = true;
-        });
-        $(id + "msg").textContent = "";
+        showSolved();
         advance(id, false);  // NO scroll - the feedback and analysis are right here
       } else {
         // A real retry: mark only the one they picked, leave the rest selectable, and do
@@ -424,10 +437,38 @@
   var contentId = new URLSearchParams(location.search).get("contentId") || null;
   function post(m) { try { parent.postMessage(m, "*"); } catch (e) {} }
 
+  // Lucia, student view 2026-09-04: the exercise's "Reread article" button DOES appear, but it
+  // landed the student on the card still GATED at Section 1 - so a reread meant answering both
+  // MCQs again to reach the part they wanted to reread.
+  //
+  // The fix is the host's own documented channel: we already send contentState on every change,
+  // and CONTENT_LOAD hands it back as payload.contentState. Restoring it reopens the card
+  // exactly as the student left it.
+  //
+  // NOT falling back to localStorage, deliberately. localStorage is per BROWSER, not per
+  // student, so on a shared machine it would reopen one student's finished card for the next
+  // one - and since st carries the first-try flags that xp() reads, it would also report XP
+  // the second student never earned. Host state is per student; nothing else available here is.
+  function restore(raw) {
+    var s = null;
+    try { s = JSON.parse(raw); } catch (err) { return false; }
+    if (!s || s.v !== 1 || !s.st) return false;      // absent, older or foreign shape: ignore
+    CHECKS.forEach(function (k) {
+      var v = s.st[k];
+      if (!v) return;
+      st[k].done = !!v.done; st[k].first = !!v.first; st[k].tries = v.tries || 0;
+    });
+    reached = Math.max(1, Math.min(SECS.length, s.reached || 1));
+    ["s3", "s4"].forEach(function (id) { if (st[id].done && solved[id]) solved[id](); });
+    render();
+    return true;
+  }
+
   window.addEventListener("message", function (e) {
     var d = e && e.data;
     if (d && d.type === "CONTENT_LOAD" && d.payload && d.payload.contentId) {
       contentId = d.payload.contentId;    // the host's id, never our slug
+      if (d.payload.contentState) restore(d.payload.contentState);
       post({ type: "CONTENT_READY" });
       report();
     }
@@ -441,7 +482,8 @@
       type: "CONTENT_STATE_CHANGE",
       payload: {
         contentId: contentId,
-        contentState: JSON.stringify({ done: d, total: CHECKS.length, xp: xp() }),
+        contentState: JSON.stringify({ v: 1, done: d, total: CHECKS.length,
+                                       xp: xp(), reached: reached, st: st }),
         contentSummary: { isCompleted: complete, isReadyToAdvance: complete,
                           score: xp(), maxScore: MAXXP }
       }
